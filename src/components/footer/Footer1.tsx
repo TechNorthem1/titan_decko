@@ -57,12 +57,13 @@ const Footer1: FC = () => {
                   fontSize="25px"
                   fontWeight="600"
                 >
-                  About Us
+                  Nosotros
                 </Typography>
 
                 <div>
                   {aboutLinks.map((item, ind) => (
-                    <StyledLink href="/" key={ind}>
+                    
+                    <StyledLink href={`market-2/${item}`} key={ind}>
                       {item}
                     </StyledLink>
                   ))}
@@ -76,7 +77,7 @@ const Footer1: FC = () => {
                   fontSize="25px"
                   fontWeight="600"
                 >
-                  Customer Care
+                  Atención al cliente
                 </Typography>
 
                 <div>
@@ -95,19 +96,19 @@ const Footer1: FC = () => {
                   fontSize="25px"
                   fontWeight="600"
                 >
-                  Contact Us
+                  Contactanos
                 </Typography>
 
                 <Typography py="0.3rem" color="gray.500">
-                  70 Washington Square South, New York, NY 10012, United States
+                  Bogota D.C
                 </Typography>
 
                 <Typography py="0.3rem" color="gray.500">
-                  Email: uilib.help@gmail.com
+                  Email: ventas@titandecko.com.co
                 </Typography>
 
                 <Typography py="0.3rem" mb="1rem" color="gray.500">
-                  Phone: +1 1123 456 780
+                  Phone: +57 3203764679
                 </Typography>
 
                 <FlexBox className="flex" mx="-5px">
@@ -142,30 +143,30 @@ const Footer1: FC = () => {
 };
 
 const aboutLinks = [
-  "Careers",
-  "Our Stores",
-  "Our Cares",
-  "Terms & Conditions",
-  "Privacy Policy",
+  "Jobs",
+  "Nuestra historia",
+  "Terminos y condiciones",
+  "Politica de privacidad",
 ];
 
 const customerCareLinks = [
-  "Help Center",
-  "How to Buy",
-  "Track Your Order",
-  "Corporate & Bulk Purchasing",
-  "Returns & Refunds",
+  "Ayuda",
+  "Como comprar",
+  "Seguir mi orden",
+  "Compras corporativas B2B",
+  "Devoluciones",
+  "Terminos y condiciones",
 ];
 
 const iconList = [
-  { iconName: "facebook", url: "https://www.facebook.com/UILibOfficial" },
+  { iconName: "facebook", url: "https://www.facebook.com/TitanDeckoColombia/" },
   { iconName: "twitter", url: "/" },
   {
     iconName: "youtube",
-    url: "https://www.youtube.com/channel/UCsIyD-TSO1wQFz-n2Y4i3Rg",
+    url: "https://www.youtube.com/@titandecko/videos",
   },
   { iconName: "google", url: "/" },
-  { iconName: "instagram", url: "/" },
+  { iconName: "instagram", url: "https://www.instagram.com/titandecko.com.co/" },
 ];
 
 export default Footer1;

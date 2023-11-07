@@ -12,7 +12,7 @@ const AddNewAddress = () => {
       bg="primary.light"
       onClick={() => router.push("/address/create")}
     >
-      Add New Address
+      Añadir una nueva dirección
     </Button>
   );
 };

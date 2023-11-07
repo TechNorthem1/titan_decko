@@ -63,14 +63,14 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
               textAlign="center"
               maxWidth="200px"
             >
-              Your shopping bag is empty. Start shopping
+              Tu carrito de compras está vacío. Empieza a comprar
             </Paragraph>
           </FlexBox>
         )}
 
         {state.cart.map((item) => (
           <Fragment key={item.id}>
-            <div className="cart-item">
+            <div className="">
               <FlexBox alignItems="center" flexDirection="column">
                 <Button
                   variant="outlined"
@@ -138,7 +138,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
                 className="clear-icon"
                 onClick={handleCartAmountChange(0, item)}
               >
-                close
+                Eliminar
               </Icon>
             </div>
             <Divider />
@@ -156,7 +156,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
               onClick={toggleSidenav}
             >
               <Typography fontWeight={600}>
-                Checkout Now ({currency(getTotalPrice())})
+                Pagar ({currency(getTotalPrice())})
               </Typography>
             </Button>
           </Link>
@@ -168,7 +168,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
               m="0px 1rem 0.75rem"
               onClick={toggleSidenav}
             >
-              <Typography fontWeight={600}>View Cart</Typography>
+              <Typography fontWeight={600}>Ver Carrito</Typography>
             </Button>
           </Link>
         </Fragment>

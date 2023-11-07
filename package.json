@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-native-google-signin/google-signin": "^10.1.0",
     "@styled-system/theme-get": "^5.1.2",
     "axios": "^1.2.1",
     "axios-mock-adapter": "^1.21.2",
     "chart.js": "^4.1.1",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
+    "firebase": "^10.5.2",
     "formik": "^2.2.9",
     "lodash": "^4.17.21",
     "next": "13.4.13",
