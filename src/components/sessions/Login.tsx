@@ -12,18 +12,54 @@ import { FC, useCallback, useState } from "react";
 import { Button, IconButton } from "@component/buttons";
 import { H3, H5, H6, SemiSpan, Small, Span } from "@component/Typography";
 import { StyledSessionCard } from "./styles";
+import App from "@models/firebaseConfig";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+} from "firebase/auth";
 
 const Login: FC = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const router = useRouter();
+  const auth = getAuth(App); // Inicializa la autenticación de Firebase.
+
 
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
   }, []);
 
-  const handleFormSubmit = async (values: any) => {
-    router.push("/profile");
-    console.log(values);
+  const handleFormSubmit = async (values: { email: string; password: string }) => {
+    try {
+      await signInWithEmailAndPassword(auth, values.email, values.password);
+      router.push("/profile");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  const handleFacebookLogin = async () => {
+    const provider = new FacebookAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      router.push("/profile");
+    } catch (error) {
+      console.error(error);
+      // Manejar errores aquí
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      router.push("/profile");
+    } catch (error) {
+      console.error(error);
+      // Manejar errores aquí
+    }
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -37,7 +73,7 @@ const Login: FC = () => {
     <StyledSessionCard mx="auto" my="2rem" boxShadow="large" borderRadius={8}>
       <form className="content" onSubmit={handleSubmit}>
         <H3 textAlign="center" mb="0.5rem">
-          Welcome To Ecommerce
+          Te damos la bienvenida a Titan Decko
         </H3>
 
         <H5
@@ -47,7 +83,7 @@ const Login: FC = () => {
           textAlign="center"
           mb="2.25rem"
         >
-          Log in with email & password
+          Ingresar con email y contraseña
         </H5>
 
         <TextField
@@ -58,8 +94,8 @@ const Login: FC = () => {
           onBlur={handleBlur}
           onChange={handleChange}
           value={values.email || ""}
-          placeholder="exmple@mail.com"
-          label="Email or Phone Number"
+          placeholder="Correo electrónico"
+          label="Email o celular"
           errorText={touched.email && errors.email}
         />
 
@@ -67,7 +103,7 @@ const Login: FC = () => {
           mb="1rem"
           fullwidth
           name="password"
-          label="Password"
+          label="Contraseña"
           autoComplete="on"
           onBlur={handleBlur}
           onChange={handleChange}
@@ -110,6 +146,7 @@ const Login: FC = () => {
         </Box>
 
         <FlexBox
+          onClick={handleFacebookLogin} // Aquí añades el evento onClick
           mb="0.75rem"
           height="40px"
           color="white"
@@ -122,10 +159,11 @@ const Login: FC = () => {
           <Icon variant="small" defaultcolor="auto" mr="0.5rem">
             facebook-filled-white
           </Icon>
-          <Small fontWeight="600">Continue with Facebook</Small>
+          <Small fontWeight="600">Iniciar con Facebook</Small>
         </FlexBox>
 
         <FlexBox
+          onClick={handleGoogleLogin} 
           mb="1.25rem"
           height="40px"
           color="white"
@@ -138,24 +176,24 @@ const Login: FC = () => {
           <Icon variant="small" defaultcolor="auto" mr="0.5rem">
             google-1
           </Icon>
-          <Small fontWeight="600">Continue with Google</Small>
+          <Small fontWeight="600">Iniciar con Google</Small>
         </FlexBox>
 
         <FlexBox justifyContent="center" mb="1.25rem">
-          <SemiSpan>Don’t have account?</SemiSpan>
+          <SemiSpan>Aun no tienes una cuenta?</SemiSpan>
           <Link href="/signup">
             <H6 ml="0.5rem" borderBottom="1px solid" borderColor="gray.900">
-              Sign Up
+              Registarme
             </H6>
           </Link>
         </FlexBox>
       </form>
 
       <FlexBox justifyContent="center" bg="gray.200" py="19px">
-        <SemiSpan>Forgot your password?</SemiSpan>
+        <SemiSpan>Olvidaste tu contraseña?</SemiSpan>
         <Link href="/">
           <H6 ml="0.5rem" borderBottom="1px solid" borderColor="gray.900">
-            Reset It
+            Recuperar contraseña
           </H6>
         </Link>
       </FlexBox>

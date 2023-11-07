@@ -39,7 +39,7 @@ const PaymentForm: FC = () => {
         <Radio
           mb="1.5rem"
           color="secondary"
-          name="credit-card"
+          name="Tarjeta de crédito"
           onChange={handlePaymentMethodChange}
           checked={paymentMethod === "credit-card"}
           label={
@@ -72,7 +72,7 @@ const PaymentForm: FC = () => {
                       <TextField
                         fullwidth
                         name="card_no"
-                        label="Card Number"
+                        label="Numero de tu tarjeta"
                         onBlur={handleBlur}
                         value={values.card_no}
                         onChange={handleChange}
@@ -84,7 +84,7 @@ const PaymentForm: FC = () => {
                       <TextField
                         fullwidth
                         name="exp_date"
-                        label="Exp Date"
+                        label="Fecha de expiración"
                         placeholder="MM/YY"
                         onBlur={handleBlur}
                         onChange={handleChange}
@@ -99,7 +99,7 @@ const PaymentForm: FC = () => {
                         name="name"
                         onBlur={handleBlur}
                         value={values.name}
-                        label="Name on Card"
+                        label="Nombre del titular de la tarjeta"
                         onChange={handleChange}
                         errorText={touched.name && errors.name}
                       />
@@ -111,7 +111,7 @@ const PaymentForm: FC = () => {
                         name="name"
                         onBlur={handleBlur}
                         value={values.name}
-                        label="Name on Card"
+                        label="Nombre del titular de la tarjeta"
                         onChange={handleChange}
                         errorText={touched.name && errors.name}
                       />
@@ -179,7 +179,7 @@ const PaymentForm: FC = () => {
         <Grid item sm={6} xs={12}>
           <Link href="/checkout">
             <Button variant="outlined" color="primary" type="button" fullwidth>
-              Back to checkout details
+              Regresar al checkout
             </Button>
           </Link>
         </Grid>

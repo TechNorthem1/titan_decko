@@ -25,14 +25,14 @@ const AddressItem = ({ item }: { item: Address }) => {
         <Link href={`/address/${item.id}`}>
           <IconButton>
             <Icon variant="small" defaultcolor="currentColor">
-              edit
+              editar
             </Icon>
           </IconButton>
         </Link>
 
         <IconButton onClick={(e) => e.stopPropagation()}>
           <Icon variant="small" defaultcolor="currentColor">
-            delete
+            eliminar
           </Icon>
         </IconButton>
       </Typography>

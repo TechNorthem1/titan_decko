@@ -12,9 +12,15 @@ import TextField from "../text-field";
 import { Button, IconButton } from "../buttons";
 import { H3, H5, H6, SemiSpan, Small, Span } from "../Typography";
 import { StyledSessionCard } from "./styles";
+import App from "@models/firebaseConfig";
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
+
+
 
 const Signup: FC = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const auth = getAuth(App); // Inicializa la autenticación de Firebase.
+
 
   const togglePasswordVisibility = () => {
     setPasswordVisibility((visible) => !visible);
@@ -22,6 +28,35 @@ const Signup: FC = () => {
 
   const handleFormSubmit = async (values: any) => {
     console.log(values);
+  };
+
+  const handleEmailPasswordSignup = async (email, password) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      // Manejo del usuario creado, por ejemplo, guardarlo en el estado o en la base de datos
+    } catch (error) {
+      // Manejo de errores, por ejemplo, mostrar un mensaje al usuario
+    }
+  };
+  
+  const handleGoogleSignup = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      // Puedes obtener la información del usuario de result.user
+    } catch (error) {
+      // Manejo de errores
+    }
+  };
+  
+  const handleFacebookSignup = async () => {
+    const provider = new FacebookAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      // Puedes obtener la información del usuario de result.user
+    } catch (error) {
+      // Manejo de errores
+    }
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -35,7 +70,7 @@ const Signup: FC = () => {
     <StyledSessionCard mx="auto" my="2rem" boxShadow="large" borderRadius={8}>
       <form className="content" onSubmit={handleSubmit}>
         <H3 textAlign="center" mb="0.5rem">
-          Create Your Account
+        Crea tu cuenta
         </H3>
 
         <H5
@@ -45,18 +80,18 @@ const Signup: FC = () => {
           textAlign="center"
           mb="2.25rem"
         >
-          Please fill all forms to continued
+          Por favor complete todos los datos del formulario para continuar
         </H5>
 
         <TextField
           fullwidth
           name="name"
           mb="0.75rem"
-          label="Full Name"
+          label="Nombre completo          "
           onBlur={handleBlur}
           onChange={handleChange}
           value={values.name || ""}
-          placeholder="Ralph Adwards"
+          placeholder="Nombres y apellidos"
           errorText={touched.name && errors.name}
         />
 
@@ -68,8 +103,8 @@ const Signup: FC = () => {
           onBlur={handleBlur}
           onChange={handleChange}
           value={values.email || ""}
-          placeholder="exmple@mail.com"
-          label="Email or Phone Number"
+          placeholder="Correo electronico o numero celular"
+          label="Email o celular"
           errorText={touched.email && errors.email}
         />
 
@@ -77,7 +112,7 @@ const Signup: FC = () => {
           fullwidth
           mb="0.75rem"
           name="password"
-          label="Password"
+          label="Contraseña"
           placeholder="*********"
           onBlur={handleBlur}
           onChange={handleChange}
@@ -103,7 +138,7 @@ const Signup: FC = () => {
           fullwidth
           name="re_password"
           placeholder="*********"
-          label="Confirm Password"
+          label="Confirmar Contraseña"
           onBlur={handleBlur}
           onChange={handleChange}
           value={values.re_password || ""}
@@ -133,10 +168,10 @@ const Signup: FC = () => {
           checked={values.agreement}
           label={
             <FlexBox>
-              <SemiSpan>By signing up, you agree to</SemiSpan>
+              <SemiSpan>Al registrarte, aceptas</SemiSpan>
               <a href="/" target="_blank" rel="noreferrer noopener">
                 <H6 ml="0.5rem" borderBottom="1px solid" borderColor="gray.900">
-                  Terms & Condtion
+                 Términos y condiciones
                 </H6>
               </a>
             </FlexBox>
@@ -149,8 +184,14 @@ const Signup: FC = () => {
           color="primary"
           type="submit"
           fullwidth
+          onClick={(e) => {
+            e.preventDefault(); // Prevenir el comportamiento de envío del formulario
+            const email = values.email; // Suponiendo que `values` es el estado del formulario que contiene el email
+            const password = values.password; // Suponiendo que `values` contiene la contraseña
+            handleEmailPasswordSignup(email, password);
+          }}
         >
-          Create Account
+          Crear cuenta
         </Button>
 
         <Box mb="1rem">
@@ -163,6 +204,7 @@ const Signup: FC = () => {
         </Box>
 
         <FlexBox
+          onClick={handleFacebookSignup} 
           mb="0.75rem"
           height="40px"
           color="white"
@@ -175,10 +217,11 @@ const Signup: FC = () => {
           <Icon variant="small" defaultcolor="auto" mr="0.5rem">
             facebook-filled-white
           </Icon>
-          <Small fontWeight="600">Continue with Facebook</Small>
+          <Small fontWeight="600">Registrarme con Facebook</Small>
         </FlexBox>
 
         <FlexBox
+          onClick={handleGoogleSignup} 
           mb="1.25rem"
           height="40px"
           color="white"
@@ -191,15 +234,15 @@ const Signup: FC = () => {
           <Icon variant="small" defaultcolor="auto" mr="0.5rem">
             google-1
           </Icon>
-          <Small fontWeight="600">Continue with Google</Small>
+          <Small fontWeight="600">Registrame con Google</Small>
         </FlexBox>
       </form>
 
       <FlexBox justifyContent="center" bg="gray.200" py="19px">
-        <SemiSpan>Already have account?</SemiSpan>
+        <SemiSpan>Ya tienes una cuenta?</SemiSpan>
         <Link href="/login">
           <H6 ml="0.5rem" borderBottom="1px solid" borderColor="gray.900">
-            Log in
+            Inicia sesion aquí
           </H6>
         </Link>
       </FlexBox>
@@ -222,7 +265,7 @@ const formSchema = yup.object().shape({
   re_password: yup
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
-    .required("Please re-type password"),
+    .required("Por favor vuelva a escribir la contraseña"),
   agreement: yup
     .bool()
     .test(

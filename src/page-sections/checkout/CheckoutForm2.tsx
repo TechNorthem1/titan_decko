@@ -73,14 +73,14 @@ const CheckoutForm2: FC = () => {
               >
                 1
               </Avatar>
-              <Typography fontSize="20px">Delivery Details</Typography>
+              <Typography fontSize="20px">Detalles de tu envio</Typography>
             </FlexBox>
 
             <Box mb="1.75rem">
               <Grid container spacing={6}>
                 <Grid item sm={6} xs={12}>
                   <Select
-                    label="Delivery Date"
+                    label="Fecha de entrega"
                     options={dateList}
                     value={values.date || ""}
                     onChange={(date) => {
@@ -91,7 +91,7 @@ const CheckoutForm2: FC = () => {
                 </Grid>
                 <Grid item sm={6} xs={12}>
                   <Select
-                    label="Delivery Time"
+                    label="Hora de entrega"
                     options={timeList}
                     value={values.time || ""}
                     onChange={(time) => {
@@ -103,7 +103,7 @@ const CheckoutForm2: FC = () => {
               </Grid>
             </Box>
 
-            <Typography mb="0.75rem">Delivery Address</Typography>
+            <Typography mb="0.75rem">Dirección de entrega</Typography>
             <Grid container spacing={6}>
               {addressList.map((item, ind) => (
                 <Grid item md={4} sm={6} xs={12} key={ind}>
@@ -146,7 +146,7 @@ const CheckoutForm2: FC = () => {
               <Typography fontSize="20px">Personal Details</Typography>
             </FlexBox>
 
-            <Typography mb="0.75rem">Contact Information</Typography>
+            <Typography mb="0.75rem">Información de contacto</Typography>
 
             <Grid container spacing={6}>
               {contactList.map((item) => (
@@ -187,10 +187,10 @@ const CheckoutForm2: FC = () => {
               >
                 3
               </Avatar>
-              <Typography fontSize="20px">Payment Details</Typography>
+              <Typography fontSize="20px">Detalles del pago</Typography>
             </FlexBox>
 
-            <Typography mb="0.75rem">Saved Payment Methods</Typography>
+            <Typography mb="0.75rem">Metodos de pago guardados</Typography>
 
             <Grid container spacing={6}>
               {paymentMethodList.map((item) => (
@@ -243,7 +243,7 @@ const CheckoutForm2: FC = () => {
               lineHeight="1"
               onClick={toggleHasVoucher}
             >
-              I have a voucher.
+              Tengo un cupón.
             </Paragraph>
 
             {hasVoucher && (
@@ -261,7 +261,7 @@ const CheckoutForm2: FC = () => {
                   type="button"
                   ml="1rem"
                 >
-                  Apply
+                  Aplicar
                 </Button>
               </FlexBox>
             )}
@@ -273,7 +273,7 @@ const CheckoutForm2: FC = () => {
               type="submit"
               fullwidth
             >
-              Place Order
+              Realizar pedido
             </Button>
           </Card1>
         </form>

@@ -26,6 +26,7 @@ type NavbarProps = { navListOpen?: boolean };
 
 const Navbar: FC<NavbarProps> = ({ navListOpen }) => {
   const renderNestedNav = (list: any[], isRoot = false) => {
+    console.log(list)
     return list?.map((nav: Nav) => {
       if (isRoot) {
         if (nav.url && nav.extLink)

@@ -31,7 +31,7 @@ const CheckoutSummary2: FC = () => {
       </FlexBox>
 
       <FlexBox justifyContent="space-between" alignItems="center" mb="0.5rem">
-        <Typography color="text.hint">Shipping:</Typography>
+        <Typography color="text.hint">Envío:</Typography>
         <Typography fontWeight="700">-</Typography>
       </FlexBox>
 
@@ -41,7 +41,7 @@ const CheckoutSummary2: FC = () => {
       </FlexBox>
 
       <FlexBox justifyContent="space-between" alignItems="center" mb="1.5rem">
-        <Typography color="text.hint">Discount:</Typography>
+        <Typography color="text.hint">Descuento:</Typography>
         <Typography fontWeight="700">-</Typography>
       </FlexBox>
 

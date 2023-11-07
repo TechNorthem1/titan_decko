@@ -63,14 +63,18 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
               textAlign="center"
               maxWidth="200px"
             >
+<<<<<<< HEAD
               Tu bolsa de compras está vacía. Empieza a comprar
+=======
+              Tu carrito de compras está vacío. Empieza a comprar
+>>>>>>> dbe8c98efb7f4bd2a32ee4ff98cecd1498419720
             </Paragraph>
           </FlexBox>
         )}
 
         {state.cart.map((item) => (
           <Fragment key={item.id}>
-            <div className="cart-item">
+            <div className="">
               <FlexBox alignItems="center" flexDirection="column">
                 <Button
                   variant="outlined"
@@ -138,7 +142,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
                 className="clear-icon"
                 onClick={handleCartAmountChange(0, item)}
               >
-                close
+                Eliminar
               </Icon>
             </div>
             <Divider />
@@ -156,7 +160,11 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
               onClick={toggleSidenav}
             >
               <Typography fontWeight={600}>
+<<<<<<< HEAD
                 Comprar Ahora ({currency(getTotalPrice())})
+=======
+                Pagar ({currency(getTotalPrice())})
+>>>>>>> dbe8c98efb7f4bd2a32ee4ff98cecd1498419720
               </Typography>
             </Button>
           </Link>

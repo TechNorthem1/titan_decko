@@ -25,7 +25,7 @@ const CheckoutSummary: FC = () => {
       </FlexBox>
 
       <FlexBox justifyContent="space-between" alignItems="center" mb="0.5rem">
-        <Typography color="text.hint">Shipping:</Typography>
+        <Typography color="text.hint">Envío:</Typography>
 
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
@@ -35,7 +35,7 @@ const CheckoutSummary: FC = () => {
       </FlexBox>
 
       <FlexBox justifyContent="space-between" alignItems="center" mb="0.5rem">
-        <Typography color="text.hint">Tax:</Typography>
+        <Typography color="text.hint">Impuestos:</Typography>
 
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
@@ -49,7 +49,7 @@ const CheckoutSummary: FC = () => {
       </FlexBox>
 
       <FlexBox justifyContent="space-between" alignItems="center" mb="1rem">
-        <Typography color="text.hint">Discount:</Typography>
+        <Typography color="text.hint">Descuento:</Typography>
 
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
@@ -70,10 +70,10 @@ const CheckoutSummary: FC = () => {
         $2610.00
       </Typography>
 
-      <TextField placeholder="Voucher" fullwidth />
+      <TextField placeholder="Cupón" fullwidth />
 
       <Button variant="outlined" color="primary" mt="1rem" mb="30px" fullwidth>
-        Apply Voucher
+        Aplicar cupón
       </Button>
     </Card1>
   );

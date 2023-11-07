@@ -21,7 +21,7 @@ const CheckoutSummary: FC = () => {
       </FlexBox>
 
       <FlexBox justifyContent="space-between" alignItems="center" mb="0.5rem">
-        <Typography color="text.hint">Shipping:</Typography>
+        <Typography color="text.hint">Envio:</Typography>
 
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
@@ -31,7 +31,7 @@ const CheckoutSummary: FC = () => {
       </FlexBox>
 
       <FlexBox justifyContent="space-between" alignItems="center" mb="0.5rem">
-        <Typography color="text.hint">Tax:</Typography>
+        <Typography color="text.hint">Impuestos:</Typography>
 
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
@@ -44,7 +44,7 @@ const CheckoutSummary: FC = () => {
       </FlexBox>
 
       <FlexBox justifyContent="space-between" alignItems="center" mb="1rem">
-        <Typography color="text.hint">Discount:</Typography>
+        <Typography color="text.hint">Descuento:</Typography>
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
             -
