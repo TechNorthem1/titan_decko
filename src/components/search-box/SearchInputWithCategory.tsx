@@ -13,7 +13,7 @@ import StyledSearchBox from "./styled";
 
 const SearchInputWithCategory: FC = () => {
   const [resultList, setResultList] = useState<string[]>([]);
-  const [category, setCategory] = useState("All Categories");
+  const [category, setCategory] = useState("Categorias");
 
   const handleCategoryChange = (cat: string) => () => setCategory(cat);
 
@@ -47,25 +47,8 @@ const SearchInputWithCategory: FC = () => {
           fullwidth
           onChange={hanldeSearch}
           className="search-field"
-          placeholder="Search and hit enter..."
+          placeholder="Buscar"
         />
-
-        <Menu
-          direction="right"
-          className="category-dropdown"
-          handler={
-            <FlexBox className="dropdown-handler" alignItems="center">
-              <span>{category}</span>
-              <Icon variant="small">chevron-down</Icon>
-            </FlexBox>
-          }
-        >
-          {categories.map((item) => (
-            <MenuItem key={item} onClick={handleCategoryChange(item)}>
-              {item}
-            </MenuItem>
-          ))}
-        </Menu>
       </StyledSearchBox>
 
       {!!resultList.length && (
@@ -91,14 +74,15 @@ const SearchInputWithCategory: FC = () => {
 };
 
 const categories = [
-  "All Categories",
-  "Car",
-  "Clothes",
-  "Electronics",
-  "Laptop",
-  "Desktop",
-  "Camera",
-  "Toys",
+  "Ofertas",
+  "Paredes 3D",
+  "Organizacion",
+  "Paneles decorativos",
+  "Vinilos para vidrios",
+  "Molduras flexibles",
+  "Malla",
+  "Tapetes",
+  "Griferia"
 ];
 
 const dummySearchResult = [

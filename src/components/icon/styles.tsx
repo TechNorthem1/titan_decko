@@ -12,9 +12,9 @@ const StyledIcon = styled(ReactSVG)<IconProps>(
         width: "100%",
         height: "100%",
 
-        path: { fill: color ? `${color}.main` : defaultcolor },
+        path: { fill: color ? `${color}.primary` : defaultcolor },
         polyline: { color: color ? `${color}.main` : defaultcolor },
-        polygon: { color: color ? `${color}.main` : defaultcolor },
+        polygon: { color: color ? `${color}.main` : "white" },
       },
 
       div: { display: "flex", width: size, height: size },

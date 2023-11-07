@@ -11,7 +11,7 @@ export const SyledTextField = styled.input<InputHTMLAttributes<HTMLInputElement>
       padding: "8px 12px",
       height: "40px",
       fontSize: "inherit",
-      color: "body.text",
+      color: "black",
       borderRadius: 5,
       border: "1px solid",
       borderColor: "text.disabled",

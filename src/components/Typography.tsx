@@ -100,7 +100,7 @@ export const Span: FC<CustomProps> = (props) => (
 );
 
 export const SemiSpan: FC<CustomProps> = (props) => (
-  <Typography as="span" fontSize="14px" color="text.muted" {...props} />
+  <Typography as="span" fontSize="14px" color="text.secondary" {...props} />
 );
 
 export const Small: FC<CustomProps> = (props) => (

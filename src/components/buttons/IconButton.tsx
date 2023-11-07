@@ -38,8 +38,8 @@ const StyledIconButton = styled.button<Props>(
     padding: "1rem",
     fontWeight: 600,
     color: "inherit",
-    bg: "body.paper",
-    "&:hover": { bg: "gray.200" },
+    bg: "body.yellow",
+    "&:hover": { bg: "gray.yellow" },
     transition: "all 150ms ease-in-out",
     "&:disabled": { bg: "text.disabled", color: "text.muted" },
   }),
@@ -47,9 +47,9 @@ const StyledIconButton = styled.button<Props>(
     variant({
       prop: "variant",
       variants: {
-        text: { border: "none", color: `${props.color}.main` },
+        text: { border: "none", color: `${props.color}.yellow` },
         outlined: {
-          color: `${props.color}.main`,
+          color: `${props.color}.yellow`,
           border: "2px solid",
           borderColor: `${props.color}.main`,
           "&:focus": {
@@ -62,7 +62,7 @@ const StyledIconButton = styled.button<Props>(
           border: "none",
           color: `${props.color}.text`,
           bg: `${props.color}.main`,
-          "&:hover": { bg: `${props.color}.main` },
+          "&:hover": { bg: `${props.color}.yellow` },
           "&:focus": {
             boxShadow: `0px 1px 4px 0px ${
               props.theme.colors[props.color as any]?.main

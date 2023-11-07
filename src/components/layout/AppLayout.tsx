@@ -1,7 +1,6 @@
 "use client";
 import { FC, ReactElement, ReactNode } from "react";
 import Head from "next/head";
-import Topbar from "@component/topbar";
 import Sticky from "@component/sticky";
 import { Header } from "@component/header";
 import { Footer1 } from "@component/footer";
@@ -18,14 +17,6 @@ const AppLayout: FC<Props> = ({
   title = "React Next.js Ecommerce Template",
 }) => (
   <StyledAppLayout>
-    <Head>
-      <title>{title}</title>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
-
-    <Topbar />
-
     <Sticky fixedOn={0}>
       <Header />
     </Sticky>

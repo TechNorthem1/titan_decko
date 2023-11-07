@@ -32,7 +32,7 @@ const NavLink: FC<NavLinkProps & AnchorHTMLAttributes<HTMLAnchorElement>> = ({
   return (
     <Link href={href}>
       <StyledNavLink
-        // href={href}
+        href={href}
         style={style}
         className={className}
         isCurrentRoute={checkRouteMatch()}

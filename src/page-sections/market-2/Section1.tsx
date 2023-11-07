@@ -50,6 +50,7 @@ type Props = { carouselData: MainCarouselItem[] };
 // ======================================================
 
 const Section1: FC<Props> = ({ carouselData }) => {
+  // banner
   return (
     <Container pt="1.5rem">
       <Grid container spacing={5}>
@@ -92,8 +93,8 @@ const Section1: FC<Props> = ({ carouselData }) => {
                 SALE 20% OFF
               </H4>
 
-              <NavLink href="#" color="dark.main">
-                Shop Now
+              <NavLink href="/prueba" color="dark.main">
+                prueba
               </NavLink>
             </BannerCard3>
 

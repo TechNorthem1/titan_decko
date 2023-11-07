@@ -1,0 +1,114 @@
+:root{
+    --salmon: #FF5D5D;
+    --black: #000000;
+    --white: white;
+    --yellow: #FFCF00;
+    --green: #25D366;
+    --yellow-light: #FFEB94;
+    --blue: #3861FF;
+    --gray: #CFCFCF;
+}
+
+.container-product{
+    padding: 30px 15px;
+    min-height: 700px;
+    margin-top: 20px;
+}
+
+.container_images{
+    width: 100%;
+    max-width: 100%;
+}
+
+.container_images img{
+    display: block;
+    width: 70%;
+    margin-bottom: 10px;
+}
+
+
+.product_image{
+    width: 100%;
+}
+
+.product_image img{
+    width: 98%;
+}
+
+
+.information-product{
+    width: 100%;
+    padding: 10px;
+    border: 0.5px solid var(--gray);
+    border-radius: 8px;
+}
+
+.information div{
+    display: block;
+}
+
+
+.information-product h1{
+    line-height: 35px;
+    margin-top: 0;
+}
+
+.information-product .califications{
+    min-height: 30px;
+    height: 30px;
+}
+
+.information-product .price .price-before {
+    text-decoration: line-through;
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+.information-product .price .price-after{
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+.information-product .info-send .send-free,
+.information-product .info-send .order-text
+{
+    color: var(--salmon);
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.payments h3 {
+    color: var(--blue)
+}
+
+.btns-actions a {
+    margin: 10px auto;
+    display: block;
+    padding: 10px 0;
+    text-align: center;
+    font-weight: bold;
+    text-transform: capitalize;
+    border-radius: 3px;
+}
+
+.btn-whatsapp{
+    background-color: var(--green);
+    color: var(--white);
+    font-size: 14px;
+}
+
+.btn-buy-now{
+    background-color: var(--yellow);
+    color: var(----black);
+    font-size: 18px;
+}
+
+.btn-add-cart{
+    background-color: var(--yellow-light);
+    color: var(--black);
+    font-size: 18px;
+}

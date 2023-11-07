@@ -132,7 +132,7 @@ const Section3: FC<Props> = ({ categories }) => {
 
         <Grid item xs={12}>
           <AdWrapper alignItems="center">
-            <AdTitle1>Black friday sale!</AdTitle1>
+            <AdTitle1> hsjkdhakjshdkjahjksdhajkshdjkahk</AdTitle1>
 
             <Paragraph ellipsis fontSize={28} flex={1} style={{ zIndex: 5 }}>
               <AnimatedText>

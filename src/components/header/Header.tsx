@@ -28,7 +28,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
 
   const CART_HANDLE = (
     <Box ml="20px" position="relative">
-      <IconButton bg="gray.200" p="12px" size="small">
+      <IconButton bg="gray.black" p="12px" size="small">
         <Icon size="20px">bag</Icon>
       </IconButton>
 
@@ -53,7 +53,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
   );
 
   const LOGIN_HANDLE = (
-    <IconButton ml="1rem" bg="gray.200" p="8px">
+    <IconButton ml="1rem" bg="gray.black" p="8px">
       <Icon size="28px">user</Icon>
     </IconButton>
   );
@@ -68,19 +68,8 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
       >
         <FlexBox className="logo" alignItems="center" mr="1rem">
           <Link href="/">
-            <Image src="/assets/images/logo.svg" alt="logo" />
+            <Image src="/assets/images/logo.webp" alt="logo" />
           </Link>
-
-          {isFixed && (
-            <div className="category-holder">
-              <Categories>
-                <FlexBox color="text.hint" alignItems="center" ml="1rem">
-                  <Icon>categories</Icon>
-                  <Icon>arrow-down-filled</Icon>
-                </FlexBox>
-              </Categories>
-            </div>
-          )}
         </FlexBox>
 
         <FlexBox justifyContent="center" flex="1 1 0">

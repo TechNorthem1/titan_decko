@@ -74,14 +74,15 @@ const StyledButton = styled.button<Props>(
           border: "none",
           color: `${color}.main`,
           "&:hover": {
-            bg: color ? `${color}.light` : "gray.100",
+            bg: color ? `${color}.light` : "gray.yellow",
+            color: "gray.black"
           },
         },
         outlined: {
           padding: "10px 16px",
           color: `${color}.main`,
           border: "1px solid",
-          borderColor: color ? `${color}.main` : "text.disabled",
+          borderColor: color ? `${color}.main` : "text.salmon",
 
           "&:enabled svg path": {
             fill: color
@@ -90,7 +91,7 @@ const StyledButton = styled.button<Props>(
           },
           "&:enabled svg polyline, svg polygon": {
             color: color
-              ? `${theme.colors[color]?.main} !important`
+              ? `${theme.colors[color]?.black} !important`
               : "text.primary",
           },
           "&:focus": {
@@ -100,12 +101,12 @@ const StyledButton = styled.button<Props>(
           },
           "&:hover:enabled": {
             bg: color && `${color}.main`,
-            borderColor: color && `${color}.main`,
+            borderColor: color && `${color}.salmon`,
             color: color && `${color}.text`,
             "svg path": {
               fill: color
                 ? `${theme.colors[color]?.text} !important`
-                : "text.primary",
+                : "text.black",
             },
             "svg polyline, svg polygon": {
               color: color

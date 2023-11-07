@@ -3,6 +3,7 @@ import Brand from "models/Brand.model";
 import Product from "models/product.model";
 import Service from "models/service.model";
 import { CategoryBasedProducts, MainCarouselItem } from "models/market-2.model";
+import Prueba from "@models/prueba.models";
 
 const getProducts = async (): Promise<Product[]> => {
   const response = await axios.get("/api/market-2/products");
@@ -23,6 +24,8 @@ const getBrands = async (): Promise<Brand> => {
   const response = await axios.get("/api/market-2/brand");
   return response.data;
 };
+
+
 
 const getMainCarouselData = async (): Promise<MainCarouselItem[]> => {
   const response = await axios.get("/api/market-2/main-carousel");

@@ -150,16 +150,16 @@ const Navbar: FC<NavbarProps> = ({ navListOpen }) => {
         justifyContent="space-between"
       >
         <Categories open={navListOpen}>
-          <Button width="278px" height="40px" bg="body.default" variant="text">
+          <Button width="278px" height="40px" bg="body.paper" variant="text">
             <Icon>categories</Icon>
             <Typography
               ml="10px"
               flex="1 1 0"
               fontWeight="600"
               textAlign="left"
-              color="text.muted"
+              color="text.secondary"
             >
-              Categories
+              Categorias
             </Typography>
 
             <Icon className="dropdown-icon" variant="small">

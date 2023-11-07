@@ -46,7 +46,7 @@ const TextField: FC<
 
   return (
     <TextFieldWrapper
-      color={color || (labelColor && `${labelColor}.main`)}
+      color={color || (labelColor && `black`)}
       fullwidth={props.fullwidth}
       {...spacingProps}
     >

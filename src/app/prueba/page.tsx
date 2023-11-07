@@ -1,10 +1,3 @@
-// import Box from "@component/Box";
-// import Footer from "@sections/landing/Footer";
-// import Section1 from "@sections/landing/Section1";
-// import Section2 from "@sections/landing/Section2";
-// import Section3 from "@sections/landing/Section3";
-// import Section4 from "@sections/landing/Section4";
-// import Section5 from "@sections/landing/Section5";
 import { Fragment } from "react";
 import Box from "@component/Box";
 import api from "@utils/__api__/market-2";
@@ -20,19 +13,26 @@ import Section8 from "@sections/market-2/Section8";
 import Section9 from "@sections/market-2/Section9";
 import Section10 from "@sections/market-2/Section10";
 import { PruebaComponent } from "@component/prueba";
-import { HeaderTitan } from "@component/header_titan";
 
-export default async function Home() {
+const MarketTwo = async () => {
+  const brands = await api.getBrands();
+  const products = await api.getProducts();
+  const serviceList = await api.getServices();
+  const categories = await api.getCategories();
   const mainCarouselData = await api.getMainCarouselData();
-  
+  const menFashionProducts = await api.getMenFashionProducts();
+  const electronicsProducts = await api.getElectronicsProducts();
+  const womenFashionProducts = await api.getWomenFashionProducts();
+
+
   return (
     <Fragment>
+      {/* NAVBAR AREA */}
+      <Navbar />
 
-      <HeaderTitan />
-
-      <Box>
+      <Box bg="#F6F6F6">
         {/* HERO CAROUSEL AREA */}
-        <Section1 carouselData={mainCarouselData} />
+        {/* <Section1 carouselData={mainCarouselData} /> */}
         <PruebaComponent />
 
         {/* SERVICE LIST AREA */}
@@ -45,7 +45,7 @@ export default async function Home() {
         {/* <Section4 products={products} /> */}
 
         {/* NEW ARRIVALS AND BEST SELLER OFFER BANNER AREA */}
-        {/* <Section5 />  */}
+        {/* <Section5 /> */}
 
         {/* ELECTRONICS CATEGORY BASED PRODUCTS AREA */}
         {/* <Section6 data={electronicsProducts} /> */}
@@ -70,4 +70,6 @@ export default async function Home() {
       </Box>
     </Fragment>
   );
-}
+};
+
+export default MarketTwo;

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next build && next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -16,6 +16,9 @@
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "formik": "^2.2.9",
+    "i18next": "^23.6.0",
+    "i18next-browser-languagedetector": "^7.1.0",
+    "i18next-http-backend": "^2.3.1",
     "lodash": "^4.17.21",
     "next": "13.4.13",
     "nprogress": "^0.2.0",
@@ -26,8 +29,10 @@
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
     "react-html-props": "^2.0.3",
+    "react-i18next": "^13.3.1",
     "react-modal": "^3.16.1",
     "react-paginate": "^8.1.4",
+    "react-router-dom": "^6.18.0",
     "react-scroll": "^1.8.9",
     "react-select": "^5.7.0",
     "react-svg": "^15.1.21",

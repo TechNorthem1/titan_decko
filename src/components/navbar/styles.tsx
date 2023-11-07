@@ -44,7 +44,7 @@ const StyledNavbar = styled.div`
   }
 
   .dropdown-icon {
-    color: ${getTheme("colors.text.muted")};
+    color: ${getTheme("colors.text.secondary")};
   }
   @media only screen and (max-width: 900px) {
     display: none;

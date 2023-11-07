@@ -15,8 +15,8 @@ type Section4Props = { products: Product[] };
 // ======================================================================
 
 const Section4: FC<Section4Props> = ({ products }) => {
-  const { visibleSlides } = useVisibleSlide();
-
+  const { visibleSlides } = useVisibleSlide();  
+//  cards 
   return (
     <Container pt="4rem">
       <FlexBox alignItems="center" justifyContent="space-between" mb="1.5rem">
