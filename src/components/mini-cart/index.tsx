@@ -63,11 +63,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
               textAlign="center"
               maxWidth="200px"
             >
-<<<<<<< HEAD
               Tu bolsa de compras está vacía. Empieza a comprar
-=======
-              Tu carrito de compras está vacío. Empieza a comprar
->>>>>>> dbe8c98efb7f4bd2a32ee4ff98cecd1498419720
             </Paragraph>
           </FlexBox>
         )}
@@ -160,11 +156,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
               onClick={toggleSidenav}
             >
               <Typography fontWeight={600}>
-<<<<<<< HEAD
-                Comprar Ahora ({currency(getTotalPrice())})
-=======
                 Pagar ({currency(getTotalPrice())})
->>>>>>> dbe8c98efb7f4bd2a32ee4ff98cecd1498419720
               </Typography>
             </Button>
           </Link>

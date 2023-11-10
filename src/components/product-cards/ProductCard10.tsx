@@ -14,6 +14,7 @@ import { useAppContext } from "@context/AppContext";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { calculateDiscount, currency, getTheme } from "@utils/utils";
 import { FC, Fragment, useCallback, useEffect, useState } from "react";
+import { colors } from "@utils/themeColors";
 
 // styled component
 const Wrapper = styled(Card)`
@@ -114,7 +115,7 @@ type ProductCard10Props = {
 // ======================================================================
 
 const ProductCard10: FC<ProductCard10Props> = (props) => {
-  const { id, off, unit, slug, title, price, imgUrl, images } = props;
+  const { id, off, unit, slug, title, price, imgUrl, images} = props;
 
   const [open, setOpen] = useState(false);
   const [discountPrice, setDiscountPrice] = useState<string>("");
@@ -147,17 +148,18 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
             p="5px 10px"
             fontSize="10px"
             fontWeight="600"
-            bg="primary.main"
+            bg={colors.titan.salmon}
             position="absolute"
-            color="primary.text"
+            color={colors.titan.white}
+            zIndex={1000}
           >
-            {off}% off
+            {off}% Descuento
           </Chip>
         )}
 
         <FlexBox className="extra-icons">
           <Icon
-            color="secondary"
+            style={{"color":colors.titan.salmon}}
             variant="small"
             mb="0.5rem"
             onClick={toggleDialog}
@@ -165,7 +167,11 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
             eye-alt
           </Icon>
 
-          <Icon className="favorite-icon outlined-icon" variant="small">
+          <Icon 
+            className="favorite-icon outlined-icon" 
+            variant="small"
+            style={{"color": colors.titan.salmon}}
+          >
             heart
           </Icon>
         </FlexBox>
@@ -181,7 +187,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
         </Link>
       </div>
 
-      <div className="details">
+      <div className="details" style={{"backgroundColor": colors.titan.bg, "border": `1px solid ${colors.titan.gray}`}}>
         <FlexBox>
           <Box flex="1 1 0" minWidth="0px" mr="0.5rem">
             <Link href={`/product/${slug}`}>
@@ -192,21 +198,22 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
                 textAlign="left"
                 fontWeight="600"
                 className="title"
-                color="text.secondary"
+                color={colors.titan.dark}
+                style={{textTransform: "capitalize"}}
               >
                 {title}
               </H3>
             </Link>
 
-            <SemiSpan>{unit || "300ml"}</SemiSpan>
+            <SemiSpan style={{"color": colors.titan.dark}}>Cantidad: {unit || "300ml"}</SemiSpan>
 
             <FlexBox alignItems="center" mt="6px">
-              <SemiSpan pr="0.5rem" fontWeight="600" color="primary.main">
+              <SemiSpan pr="0.5rem" fontWeight="600" style={{"color": colors.titan.dark}}>
                 {discountPrice}
               </SemiSpan>
 
               {off && (
-                <SemiSpan color="text.muted" fontWeight="600">
+                <SemiSpan style={{"color": colors.primary.dark}} fontWeight="600">
                   <del>{discountAmount}</del>
                 </SemiSpan>
               )}
@@ -224,7 +231,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
               padding="5px"
               color="primary"
               variant="outlined"
-              borderColor="primary.light"
+              borderColor="primary.salmon"
               onClick={handleCartAmountChange((cartItem?.qty || 0) + 1)}
             >
               <Icon variant="small">plus</Icon>
@@ -232,7 +239,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
 
             {cartItem?.qty && (
               <Fragment>
-                <SemiSpan color="text.primary" fontWeight="600">
+                <SemiSpan style={{"color": colors.titan.dark}} fontWeight="600">
                   {cartItem.qty}
                 </SemiSpan>
 

@@ -81,7 +81,7 @@ const Section1: FC<Props> = ({ carouselData }) => {
             <ContentWrapper>
               <Box className="card__inner-box">
                 <H1 maxWidth="280px" mb="0.5rem" lineHeight="1.27">
-                  {item.title}
+                  hola
                 </H1>
 
                 <H6

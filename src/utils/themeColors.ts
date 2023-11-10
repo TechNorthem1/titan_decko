@@ -19,6 +19,17 @@ const textColor = {
   secondary: gray[800],
 };
 
+const titanColor = {
+  yellow: "#FFCF00",
+  yellow_light: "#FFEB94",
+  white: "#FFFFFF",
+  gray: "#CFCFCF",
+  bg: "#f5f5f5",
+  salmon: "#FF5D5D",
+  dark: "#000000"
+}
+
+
 const bodyColor = {
   default: gray[100],
   paper: gray["white"],
@@ -109,4 +120,5 @@ export const colors = {
   default: defaultColor,
   primary: primaryColor,
   secondary: secondaryColor,
+  titan: titanColor
 };

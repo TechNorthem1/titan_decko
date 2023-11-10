@@ -9,7 +9,9 @@ import "../__server__";
 const openSans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Titan Decko"
+  authors: [{name: "Titan decko"}],
+  icons: "/assets/images/icons/icon_titan.webp",
+  title: "Titan Decko",
 };
 
 export default function RootLayout({
@@ -25,6 +27,7 @@ export default function RootLayout({
             <StyledContext>{children}</StyledContext>
           </AppProvider>
         </StyledComponentsRegistry>
+        <script src="https://kit.fontawesome.com/b13e9656a1.js" crossOrigin="anonymous"></script>
       </body>
     </html>
   );

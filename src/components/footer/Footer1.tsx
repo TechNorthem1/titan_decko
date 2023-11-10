@@ -28,7 +28,7 @@ const StyledLink = styled(Link)`
 const Footer1: FC = () => {
   return (
     <footer>
-      <Box bg="#0F3460">
+      <Box bg="#000000">
         <Container p="1rem" color="white">
           <Box py="5rem" overflow="hidden">
             <Grid container spacing={6}>
@@ -37,17 +37,13 @@ const Footer1: FC = () => {
                   <Image
                     alt="logo"
                     mb="1.25rem"
-                    src="/assets/images/logo.svg"
+                    src="/assets/images/logo.webp"
                   />
                 </Link>
 
                 <Paragraph mb="1.25rem" color="gray.500">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Auctor libero id et, in gravida. Sit diam duis mauris nulla
-                  cursus. Erat et lectus vel ut sollicitudin elit at amet.
+                  
                 </Paragraph>
-
-                <AppStore />
               </Grid>
 
               <Grid item lg={2} md={6} sm={6} xs={12}>
@@ -103,12 +99,8 @@ const Footer1: FC = () => {
                   Bogota D.C
                 </Typography>
 
-                <Typography py="0.3rem" color="gray.500">
-                  Email: ventas@titandecko.com.co
-                </Typography>
-
                 <Typography py="0.3rem" mb="1rem" color="gray.500">
-                  Phone: +57 3203764679
+                  Telefono: +57 3203764679
                 </Typography>
 
                 <FlexBox className="flex" mx="-5px">

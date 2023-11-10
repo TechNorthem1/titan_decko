@@ -1,0 +1,21 @@
+:root{
+    --salmon: #FF5D5D;
+    --black: #000000;
+    --white: white;
+    --yellow: #FFCF00;
+    --green: #25D366;
+    --yellow-light: #FFEB94;
+    --blue: #3861FF;
+    --gray: #CFCFCF;
+}
+
+.product_relations{
+    padding: 15px 15px;
+    min-height: 200px;
+}
+
+
+.product_relations h2{
+    color: var(--black);
+    margin: 0 auto 10px;
+}

@@ -21,6 +21,7 @@ import Section9 from "@sections/market-2/Section9";
 import Section10 from "@sections/market-2/Section10";
 import { PruebaComponent } from "@component/prueba";
 import { HeaderTitan } from "@component/header_titan";
+import { Footer1 } from "@component/footer";
 
 export default async function Home() {
   const mainCarouselData = await api.getMainCarouselData();
@@ -68,6 +69,8 @@ export default async function Home() {
         {/* SELECTED PRODUCTS AREA */}
         {/* <Section10 products={products} /> */}
       </Box>
+
+      <Footer1 />
     </Fragment>
   );
 }

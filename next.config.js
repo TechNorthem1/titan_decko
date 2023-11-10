@@ -2,6 +2,9 @@
 
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains : ["titandecko.com.co"]
+  },
   compiler: {
     styledComponents: true,
   },

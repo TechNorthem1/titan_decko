@@ -10,9 +10,13 @@
 }
 
 .container-product{
-    padding: 30px 15px;
+    padding: 30px 15px 15px;
     min-height: 700px;
     margin-top: 20px;
+}
+
+.container-product hr{
+    margin-top: 30px;
 }
 
 .container_images{
@@ -58,6 +62,11 @@
     height: 30px;
 }
 
+.information-product .califications i{
+    color: var(--yellow);
+    cursor: pointer;
+}
+
 .information-product .price .price-before {
     text-decoration: line-through;
     margin-right: 10px;
@@ -83,6 +92,16 @@
 
 .payments h3 {
     color: var(--blue)
+}
+
+.btns-actions .quantity{
+    width: 100%;
+    border: none;
+    outline-color: var(--blue);
+    padding: 10px 10px;
+    border-radius: 3px;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 .btns-actions a {
@@ -111,4 +130,37 @@
     background-color: var(--yellow-light);
     color: var(--black);
     font-size: 18px;
+}
+
+.pay-security{
+    display: block;
+    margin-top:  10px;
+}
+
+.pay-security .pay{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    text-transform: capitalize;
+    height: 80px;
+}
+
+.pay-security .pay i{
+    display: block;
+    width: 100%;
+    font-size: 32px;
+    color: var(--blue);
+    line-height: 80px;
+    text-align: center;
+}
+
+.xpay-security .pay p{
+    font-size: 12.5px;
+}
+
+.pay-security .pay p:first-child{
+    margin-bottom: 0;
+}
+
+.pay-security .pay p:last-child{
+    margin-top: 0;
 }

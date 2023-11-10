@@ -13,6 +13,7 @@ import { colorOptions } from "interfaces";
 import Icon from "../icon/Icon";
 import { IconButton } from "../buttons";
 import { StyledCarousel } from "./styles";
+import { colors } from "@utils/themeColors";
 
 // ====================================================
 export interface CarouselProps {
@@ -111,10 +112,10 @@ const Carousel: FC<CarouselProps> = ({
             as={ButtonBack}
             variant="contained"
             color={arrowButtonColor}
-            style={leftButtonStyle || {}}
+            style={leftButtonStyle || {"backgroundColor": colors.titan.gray}}
             className={`arrow-button left-arrow-class ${arrowButtonClass} ${leftButtonClass}`}
           >
-            <Icon variant="small" defaultcolor="currentColor">
+            <Icon variant="small" defaultcolor="currentColor" >
               arrow-left
             </Icon>
           </IconButton>
@@ -123,7 +124,7 @@ const Carousel: FC<CarouselProps> = ({
             as={ButtonNext}
             variant="contained"
             color={arrowButtonColor}
-            style={rightButtonStyle || {}}
+            style={rightButtonStyle || {"backgroundColor": colors.titan.gray}}
             className={`arrow-button right-arrow-class ${arrowButtonClass} ${rightButtonClass}`}
           >
             <Icon variant="small" defaultcolor="currentColor">

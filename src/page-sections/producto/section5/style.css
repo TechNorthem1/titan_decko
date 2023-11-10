@@ -1,0 +1,14 @@
+:root{
+    --salmon: #FF5D5D;
+    --black: #000000;
+    --white: white;
+    --yellow: #FFCF00;
+    --green: #25D366;
+    --yellow-light: #FFEB94;
+    --blue: #3861FF;
+    --gray: #CFCFCF;
+}
+
+.container_tips{
+    color: var(--black);
+}
