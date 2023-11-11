@@ -164,3 +164,14 @@
 .pay-security .pay p:last-child{
     margin-top: 0;
 }
+
+@media screen and (width < 670px) {
+    .container-product{
+        margin-top: 70px;
+        padding-top: 10px;
+    }
+
+    .container_images{
+        display: none;
+    }
+}

@@ -84,3 +84,10 @@
 .container_guarantee .show{
     margin-top: 20px;
 }
+
+@media screen and (width < 670px) {
+    .container-description .content_description .active{
+        height: 780px;
+        overflow-y: visible;
+    }
+}

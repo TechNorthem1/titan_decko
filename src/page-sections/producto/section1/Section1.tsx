@@ -9,20 +9,20 @@ const Section1 = () => {
   return (
     <Container className='container-product' bg={{background:colors.gray.gray}}>
         <Grid container spacing={3} >
-            <Grid item lg={2} xs={12}>
+            <Grid className='container_images' item lg={2} xs={0}>
                 <div className='container_images'>
-                    <img src="https://titandecko.com.co/wp-content/uploads/2023/02/TIENDA-VIRTUAL-CATALOGO-DE-RODAPE-Molduras-Adhesivas-3D-Para-Paredes-12-100x100.jpg" alt="" />
-                    <img src="https://titandecko.com.co/wp-content/uploads/2023/02/TIENDA-VIRTUAL-CATALOGO-DE-RODAPE-Molduras-Adhesivas-3D-Para-Paredes-13-100x100.jpg" alt="" />
-                    <img src="https://titandecko.com.co/wp-content/uploads/2023/02/Moldura_adhesiva_3D_para_paredes_ranuradas_rollo_--100x100.jpg" alt="" />
+                    <img src="/assets/images/titan/TIENDA-VIRTUAL-CATALOGO-DE-RODAPE-Molduras-Adhesivas-3D-Para-Paredes-12.webp" alt="" />
+                    <img src="/assets/images/titan/TIENDA-VIRTUAL-CATALOGO-DE-RODAPE-Molduras-Adhesivas-3D-Para-Paredes-12.webp" alt="" />
+                    <img src="/assets/images/titan/TIENDA-VIRTUAL-CATALOGO-DE-RODAPE-Molduras-Adhesivas-3D-Para-Paredes-12.webp" alt="" />
                 </div>
             </Grid>
 
-            <Grid item lg={6} xs={6}>
+            <Grid item lg={6} xs={12}>
                 <div className='product_image'>
-                    <img src="https://titandecko.com.co/wp-content/uploads/2023/02/TIENDA-VIRTUAL-CATALOGO-DE-RODAPE-Molduras-Adhesivas-3D-Para-Paredes-12.jpg" alt="" />
+                    <img src="/assets/images/titan/TIENDA-VIRTUAL-CATALOGO-DE-RODAPE-Molduras-Adhesivas-3D-Para-Paredes-12.webp" alt="" />
                 </div>
             </Grid>
-            <Grid item lg={4} xs={6}>
+            <Grid item lg={4} xs={12}>
                 <div className='information-product' style={{color: colors.gray.black}}>
                     <h1 style={{color:colors.gray.black}}>Molduras Flexibles 3D Para Paredes Ranuradas Rollo 7cm X 5mts – RP7-5</h1>
                     <div className="califications">

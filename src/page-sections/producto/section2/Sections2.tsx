@@ -16,13 +16,26 @@ const Sections2 = () => {
 
             <Carousel
                 showDots
-                step={1}
+                step={3}
                 showArrowOnHover={true}
                 arrowButtonColor="inherit"
-                totalSlides={1}
-                visibleSlides={2}
+                totalSlides={2}
+                visibleSlides={3}
             >
-                <Box py="0.25rem" key={1} >
+                <Box py="0.15em" key={1} >
+                    <ProductCard10
+                        id={1}
+                        slug={"panel adesivo"}
+                        unit={"5"}
+                        title={"panel adesivo"}
+                        price={420200}
+                        off={6}
+                        rating={5}
+                        images={["kasdaklsjl"] as string[]}
+                        imgUrl={"https://titandecko.com.co/wp-content/uploads/2022/12/tienda-PANELAUTOADHESIVO-EASYWALL-PAREDESADHESIVAS-PANELADHESIVO-TITANDECKO-VIINILODECORATIVO-PANEL3D-PAREDES3D-PANELES3D-ADHESIVO3D-MURALES3D-MUROS3D_3_08bcefec-6a10-4b8b-bf64-4680771f9097-400x400.jpg"}
+                    />
+                </Box>
+                <Box py="0.15rem" key={1} >
                     <ProductCard10
                         id={1}
                         slug={"panel adesivo"}
@@ -36,7 +49,7 @@ const Sections2 = () => {
                     />
                 </Box>
 
-                <Box py="0.25rem" key={1} >
+                <Box py="0.15rem" key={1} >
                     <ProductCard10
                         id={1}
                         slug={"panel adesivo"}
@@ -51,6 +64,7 @@ const Sections2 = () => {
                 </Box>
 
             </Carousel>
+
                 
         </Container>
     )

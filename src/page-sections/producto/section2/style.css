@@ -19,3 +19,6 @@
     color: var(--black);
     margin: 0 auto 10px;
 }
+
+@media screen and (width < 670px) {
+}
