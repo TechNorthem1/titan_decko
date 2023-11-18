@@ -137,7 +137,7 @@ const PaymentForm: FC = () => {
           checked={paymentMethod === "paypal"}
           label={
             <Typography ml="6px" fontWeight="600" fontSize="18px">
-              Pay with Paypal
+              Pagar con Paypal
             </Typography>
           }
         />
@@ -169,7 +169,7 @@ const PaymentForm: FC = () => {
           onChange={handlePaymentMethodChange}
           label={
             <Typography ml="6px" fontWeight="600" fontSize="18px">
-              Cash On Delivery
+              Pagar al recibir
             </Typography>
           }
         />

@@ -11,7 +11,7 @@ const BackToMethods = () => {
       px="2rem"
       onClick={() => push("/payment-methods")}
     >
-      Back to Payment Methods
+      Volver a metodos de pago
     </Button>
   );
 };
