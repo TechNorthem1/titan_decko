@@ -1,0 +1,326 @@
+:root{
+    --salmon: #FF5D5D;
+    --black: #000000;
+    --white: white;
+    --yellow: #FFCF00;
+    --green: #25D366;
+    --yellow-light: #FFEB94;
+    --blue: #3861FF;
+    --gray: #CFCFCF;
+}
+
+
+.data_send {
+    color: var(--black);
+    width: 100%;
+    min-height: 200px;
+    margin: 30px auto;
+    padding: 15px;
+    border-radius: 6px;
+    background-color: var(--white);
+    box-shadow: 1px -1px 1px var(--gray);
+    display: grid;
+    grid-template-areas: 
+        "title title btn-edit_send btn-edit_send"
+        "line line line line"
+        "form-data_send form-data_send form-data_send form-data_send"
+        "information_send information_send information_send information_send"
+    ;
+
+    /* grid-template-rows: 20px 5px auto auto; */
+}
+
+.data_send .title{
+    grid-area: title;
+    font-size: 14px;
+    margin-top: 0;
+    height: 18px;
+}
+
+.data_send .btn_edit_send{
+    grid-area: btn-edit_send;
+    display: none;
+    width: 100%;
+    text-align: right;
+    color: var(--black);
+    text-transform: capitalize;
+    cursor: pointer;
+    height: 18px;
+    transition: all .3s ease;
+}
+
+.data_send .btn_edit_send:hover{
+    color: var(--gray);
+}
+
+.data_send .line{
+    grid-area: line;
+    width: 100%;
+    height: 0;
+    border: 1px solid var(--gray);
+}
+
+.form-data_send{
+    grid-area: form-data_send;
+    width: 95%;
+    margin: 30px auto;
+    display: grid;
+    grid-template-areas: 
+        "departament departament municipaly municipaly"
+        "address address address address"
+        "address_complete address_complete address_complete address_complete"
+        "methods methods methods methods"
+        "complement_information complement_information complement_information complement_information"
+        "information_additional information_additional information_additional information_additional"
+        "neighborhood neighborhood neighborhood neighborhood"
+        "addresee undefined undefined undefined"
+        "btn_payment btn_payment btn_payment btn_payment"
+    ;
+    gap: 10px;
+}
+
+.form-data_send .form-control,
+.form-data_send .form-action {
+    width: 100%;
+    margin-bottom: 10px;
+    min-height: 30px;
+}
+
+
+.form-data_send .form-control label{
+    display: block;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.form-data_send .form-control input, 
+.form-data_send .form-control select{
+    width: 100%;
+    padding: 8px 10px;
+    border: .5px solid var(--gray);
+    border-radius: 5px;
+    outline: none;
+}
+
+
+.departament{
+    grid-area: departament;
+    width: 100%;
+}
+
+.municipaly{
+    grid-area: municipaly;
+    width: 100%;
+}
+
+.address{
+    width: 100%;
+    grid-area: address;
+
+    display: grid;
+    grid-template-areas:
+        "type type type type type type"
+        "avenida numero1 number numero2 width numero3"
+    ;
+    grid-template-columns: 22% 22% 3% 22% 3% 22%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.address .type{
+    grid-area: type;
+    text-align: left;
+}
+
+.address .avenida{
+    grid-area: avenida;
+}
+
+.address .numero1{
+    grid-area: numero1;
+}
+
+.address .number{
+    grid-area: number;
+}
+
+
+.address .numero2{
+    grid-area: numero2;
+}
+
+.address .width{
+    grid-area: width;
+}
+
+
+.address .numero3{
+    grid-area: numero3;
+}
+
+.address input,
+.address select {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 5px;
+    outline: none;
+    border: .5px solid var(--gray);
+}
+
+.address_complete{
+    grid-area: address_complete;
+}
+
+.form-data_send .methods{
+    grid-area: methods;
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+        "title_method title_method  title_method title_method"
+        "content_method content_method content_method content_method"
+    ;
+}
+
+.form-data_send .methods .title_method{
+    grid-area: title_method;
+    width: 100%;
+    display: block;
+    text-transform: capitalize;
+}
+
+.form-data_send .methods .content_method{
+    grid-area: content_method;
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    flex-grow: 1;
+}
+
+.form-data_send .methods .content_method .method_send{
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 20% 50% 25%;
+    border: .5px solid var(--gray);
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px 10px 0;
+    padding: 10px 8px;
+    border-radius: 5px;
+}
+
+.form-data_send .methods .content_method .method_send input{
+    width: 100%;
+    height: 20px;
+}
+
+.form-data_send .methods .content_method .method_send label {
+    width: 100%;
+    border-right:  1px solid var(--gray);
+}
+
+.form-data_send .methods .content_method .method_send label:last-child {
+    width: 100%;
+    border-right:  none;
+}
+
+.form-data_send .methods .content_method .method_send label span{
+    display: block;
+}
+
+.complement_information{
+    grid-area: complement_information;
+    width: 100%;
+}
+
+.information_additional{
+    grid-area: information_additional;
+    width: 100%;
+}
+
+.neighborhood{
+    grid-area: neighborhood;
+    width: 100%;
+}
+
+.addresee{
+    grid-area: addresee;
+    width: 100%;
+}
+
+.btn_payment{
+    grid-area: btn_payment;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-action button{
+    margin: 0 auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--black);
+    background-color: var(--yellow);
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+
+.form-action button:hover{
+    color: var(--white);
+    background-color: var(--black);
+}
+
+.information_send {
+    grid-area: information_send;
+    display: none;
+    grid-template-columns: 89% 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+.information_send .content-send {
+    border-right: 0.3px solid var(--gray);
+    padding-right: 5px;
+}
+
+.information_send .content-send p {
+    margin: 0 0;
+    color: var(--gray);
+}
+
+.information_send .content-send hr{
+    border: 0.5px solid var(--gray);
+}
+
+.information_send span{
+    display: block;
+    text-align: center;
+    width: 100%;
+    text-transform: capitalize;
+    color: var(--gray);
+}
+
+.activate{
+    display: block;
+}
+
+.activate_grid{
+    display: block;
+    display: grid;
+}
+
+.deactivate{
+    display: none;
+}
+
+.required{
+    color: red;
+}

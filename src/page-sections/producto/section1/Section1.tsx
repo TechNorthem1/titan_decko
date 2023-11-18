@@ -7,7 +7,7 @@ import "./style.css"
 
 const Section1 = () => {
   return (
-    <Container className='container-product' bg={{background:colors.gray.gray}}>
+    <Container className='container-product' style={{background:colors.gray.gray}}>
         <Grid container spacing={3} >
             <Grid className='container_images' item lg={2} xs={0}>
                 <div className='container_images'>
@@ -61,7 +61,7 @@ const Section1 = () => {
                         </select>
                         <a href="" className="btn-add-cart">Añadir Al Carrito</a>
                         <a href="" className="btn-whatsapp">Compra este producto por Whatsapp</a>
-                        <a href="" className="btn-buy-now">Comprar Ahora</a>
+                        <a href="/comprar-ahora" className="btn-buy-now">Comprar Ahora</a>
                     </div>
 
                     <div className="pay-security">

@@ -1,0 +1,179 @@
+:root{
+    --salmon: #FF5D5D;
+    --black: #000000;
+    --white: white;
+    --yellow: #FFCF00;
+    --green: #25D366;
+    --yellow-light: #FFEB94;
+    --blue: #3861FF;
+    --gray: #CFCFCF;
+}
+
+
+.data_purchase_summary {
+    color: var(--black);
+    width: 100%;
+    min-height: 300px;
+    justify-content: center;
+    margin: 30px auto;
+    padding: 15px;
+    border-radius: 6px;
+    background-color: var(--white);
+    border: 1px solid var(--gray);
+    position: sticky;
+    top: 84px;
+    display: grid;
+    grid-template-areas: 
+        "title title title title"
+        "content-product content-product content-product content-product"
+        "detail_buy detail_buy detail_buy detail_buy"
+    ;
+    grid-template-columns: 100%;
+    
+}
+
+.data_purchase_summary .title{
+    grid-area: title;
+    width: 100%;
+    min-height: 40px;
+    font-size: 14px;
+    text-align: center;
+    text-transform: capitalize;
+    padding: 5px 10px;
+}
+
+.data_purchase_summary .content-product{
+    grid-area: content-product;
+    width: 100%;
+    border-top: .5px solid var(--gray);
+    border-bottom: .5px solid var(--gray);
+}
+
+.data_purchase_summary .content-product ul{
+    padding: 0;
+}
+
+.data_purchase_summary .content-product li{
+    grid-area: content-product;
+    width: 100%;
+    margin-bottom: 10px;
+
+    display: grid;
+    grid-template-areas: 
+        "quantity quantity quantity quantity"
+        "image_product image_product description description"
+    ;
+    list-style: none;
+    position: relative;
+}
+
+.quantity{
+    grid-area: quantity;
+    z-index: 1;
+    position: absolute;
+    border-radius: 50%;
+    background-color: var(--salmon);
+    color: var(--white);
+    padding: 7px 10px;
+}
+
+.image_product{
+    grid-area: image_product;
+    width: 100%;
+    border-top-left-radius: 15px;
+}
+
+.description{
+    grid-area: description;
+    padding: 0 10px;
+    margin: 0;
+}
+
+.description span{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.data_purchase_summary .detail_buy{
+    grid-area: detail_buy;
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+        "back back back back"
+        "subtotal subtotal price_subtotal price_subtotal"
+        "total total price_total price_total" 
+    ;
+    grid-template-rows: 20px 20px 20px;
+    padding: 8px 0;
+    align-items: center;
+    
+}
+
+.data_purchase_summary .detail_buy .back{
+    grid-area: back;
+    text-transform: capitalize;
+    display: block;
+    text-align: right;
+    color: var(--black);
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.data_purchase_summary .detail_buy .subtotal{
+    grid-area: subtotal;
+    text-transform: capitalize;
+    display: block;
+    text-align: left;
+    margin: 0;
+    font-weight: bold;
+}
+
+.data_purchase_summary .detail_buy .price_subtotal {
+    grid-area: price_subtotal;
+    text-transform: capitalize;
+    display: block;
+    text-align: right;
+    margin: 0;
+
+}
+
+.data_purchase_summary .detail_buy .total{
+    grid-area: total;
+    text-transform: capitalize;
+    display: block;
+    text-align: left;
+    margin: 0;
+    font-weight: bold;
+}
+
+.data_purchase_summary .detail_buy .price_total{
+    grid-area: price_total;
+    text-transform: capitalize;
+    display: block;
+    text-align: right;
+    margin: 0;
+}
+
+@media screen and (width <= 1024px) {
+    .eTtGGD {
+        margin: 0 auto 20px !important;
+
+    }
+    
+    .hhders{
+        display: flex;
+        justify-content: center;
+    }
+
+    .data_purchase_summary{
+        position: static;
+        top: 0;
+        width: calc(100%, 50%);
+        margin: 0 auto;
+        display: grid;
+        justify-content: center;
+    }
+}
+

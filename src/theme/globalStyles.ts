@@ -1,6 +1,16 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
+  :root{
+    --salmon: #FF5D5D;
+    --black: #000000;
+    --white: white;
+    --yellow: #FFCF00;
+    --green: #25D366;
+    --yellow-light: #FFEB94;
+    --blue: #3861FF;
+    --gray: #CFCFCF;
+  }
   html,
   body {
     margin: 0;
@@ -14,6 +24,31 @@ const GlobalStyles = createGlobalStyle`
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif; */
     
+  }
+
+  body::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  body::-webkit-scrollbar:vertical {
+    width:7px;
+  }
+
+  body::-webkit-scrollbar-button:increment,
+  body::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  body::-webkit-scrollbar:horizontal {
+    height: 10px;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--black);
+  }
+
+  body::-webkit-scrollbar-track {
+    border-radius: 10px;
   }
 
   html {

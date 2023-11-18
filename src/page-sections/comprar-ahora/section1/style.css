@@ -1,0 +1,208 @@
+:root{
+    --salmon: #FF5D5D;
+    --black: #000000;
+    --white: white;
+    --yellow: #FFCF00;
+    --green: #25D366;
+    --yellow-light: #FFEB94;
+    --blue: #3861FF;
+    --gray: #CFCFCF;
+}
+
+
+.data_person {
+    color: var(--black);
+    width: 100%;
+    min-height: 200px;
+    margin: 30px auto;
+    padding: 15px;
+    border-radius: 6px;
+    background-color: var(--white);
+    box-shadow: 1px -1px 1px var(--gray);
+    display: grid;
+    align-items: center;
+    grid-template-areas: 
+        "title title btn_edit btn_edit"
+        "information information information information"
+        "form-data_person form-data_person form-data_person form-data_person"
+        "info_personal info_personal info_personal info_personal"
+    ;
+}
+
+
+
+.data_person .title{
+    grid-area: title;
+    font-size: 14px;
+}
+
+.data_person .btn_edit{
+    grid-area: btn_edit;
+    display: none;
+    width: 100%;
+    text-align: right;
+    cursor: pointer;
+    text-transform: capitalize;
+    color: var(--black);
+    transition: all .3s ease;
+}
+
+.data_person .btn_edit:hover{
+    color: var(--gray);
+}
+
+.data_person .information {
+    grid-area: information;
+    width: 95%;
+    margin: 0 auto;
+    color: var(--gray);
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+
+
+.data_person .information hr{
+    grid-area: information;
+    width: 100%;
+    color: var(--gray);
+    text-transform: capitalize;
+    border: 1px solid var(--gray);
+}
+
+
+.form-data_person{
+    grid-area: form-data_person;
+    width: 95%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas: 
+        "email email email email"
+        "name name lastname lastname"
+        "citizenshipCard citizenshipCard phone phone"
+        "btn btn btn btn"
+    ;
+    gap: 10px;
+
+}
+
+.email,
+.name,
+.lastname,
+.citizenshipCard,
+.phone,
+.btn{
+    width: 100%;
+
+}
+
+.email {
+    grid-area: email;
+}
+
+.name{
+    grid-area: name;
+}
+
+.lastname{
+    grid-area: lastname;
+}
+
+.citizenshipCard{
+    grid-area: citizenshipCard;
+}
+
+.phone {
+    grid-area: phone;
+}
+
+.btn {
+    grid-area: btn;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.form-data_person .form-control,
+.form-data_person .form-actions{
+    width: 100%;
+    margin-bottom: 10px;
+    min-height: 30px;
+}
+
+.form-data_person .form-control label{
+    display: block;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.form-data_person .form-control input{
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: .5px solid var(--gray);
+    outline: none;
+    border-radius: 5px;
+}
+
+.form-data_person .form-control .required{
+    color: red;
+}
+
+.form-data_person .form-actions button{
+    margin: 0 auto;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--black);
+    background-color: var(--yellow);
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.form-data_person .form-actions button:hover{
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.data_person .info_personal {
+    grid-area: info_personal;
+    width: 95%;
+    margin: 0 auto;
+    display: none;
+}
+
+.data_person .info_personal .data_sent{
+    width: 100%;
+}
+
+.data_person .info_personal .data_sent span{
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+    color: var(--gray);
+    text-transform: capitalize;
+}
+
+.data_person .info_personal a{
+    margin-top: 15px;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: var(--black)
+}
+
+.activate{
+    display: block !important;
+}
+
+.deactivate{
+    display: none;
+}
+
+.validate-field{
+    color: red;
+    margin: 0;
+}
