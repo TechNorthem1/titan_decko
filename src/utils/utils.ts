@@ -76,12 +76,12 @@ export function calculateDiscount(price: number, discount: number) {
  * @returns - RETURN PRICE WITH CURRENCY
  */
 
-export function currency(price: number, fraction: number = 2) {
+export function currency(price: number, fraction: number = 0) {
   // const { publicRuntimeConfig } = getConfig();
   // currency: publicRuntimeConfig.currency,
 
-  const formatCurrency = new Intl.NumberFormat(undefined, {
-    currency: "USD",
+  const formatCurrency = new Intl.NumberFormat("es-CO", {
+    currency: "COP",
     style: "currency",
     maximumFractionDigits: fraction,
     minimumFractionDigits: fraction,

@@ -39,7 +39,7 @@ const SearchInputWithCategory: FC = () => {
   return (
     <Box position="relative" flex="1 1 0" maxWidth="670px" mx="auto">
       <StyledSearchBox>
-        <Icon className="search-icon" size="18px">
+        <Icon className="search-icon" size="18px" style={{color: "black"}}>
           search
         </Icon>
 
@@ -47,7 +47,7 @@ const SearchInputWithCategory: FC = () => {
           fullwidth
           onChange={hanldeSearch}
           className="search-field"
-          placeholder="Buscar"
+          placeholder="Buscar en titandecko.com"
         />
       </StyledSearchBox>
 

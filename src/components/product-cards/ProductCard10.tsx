@@ -15,6 +15,7 @@ import ProductQuickView from "@component/products/ProductQuickView";
 import { calculateDiscount, currency, getTheme } from "@utils/utils";
 import { FC, Fragment, useCallback, useEffect, useState } from "react";
 import { colors } from "@utils/themeColors";
+import { disconnect } from "process";
 
 // styled component
 const Wrapper = styled(Card)`
@@ -176,7 +177,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
           </Icon>
         </FlexBox>
 
-        <Link href={`/product/${slug}`}>
+        <Link href={`/producto/${title}/${id}`}>
           <NextImage
             src={imgUrl}
             width={100}
@@ -190,7 +191,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
       <div className="details" style={{"backgroundColor": colors.titan.bg, "border": `1px solid ${colors.titan.gray}`}}>
         <FlexBox>
           <Box flex="1 1 0" minWidth="0px" mr="0.5rem">
-            <Link href={`/product/${slug}`}>
+            <Link href={`/producto/${title}/${id}`}>
               <H3
                 mb="6px"
                 title={title}
@@ -214,7 +215,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
 
               {off && (
                 <SemiSpan style={{"color": colors.primary.dark}} fontWeight="600">
-                  <del>{discountAmount}</del>
+                  <del>$ {price}</del>
                 </SemiSpan>
               )}
             </FlexBox>

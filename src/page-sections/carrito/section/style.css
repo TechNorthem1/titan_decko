@@ -1,0 +1,82 @@
+:root{
+    --salmon: #FF5D5D;
+    --black: #000000;
+    --white: white;
+    --yellow: #FFCF00;
+    --green: #25D366;
+    --yellow-light: #FFEB94;
+    --blue: #3861FF;
+    --gray: #CFCFCF;
+}
+
+
+.content-info-cart{
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background-color: var(--black);
+    min-height: 200px;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.content-info-cart div{
+    min-height: 50px;
+    border-bottom: .3px solid var(--gray);
+    margin-bottom: 20px;
+}
+
+.content-info-cart div:last-child{
+    border-bottom: none;
+}
+
+.content-info-cart .info-header h1{
+    margin: 0;
+    font-size: 23px;
+    text-align: center;
+}
+
+.content-info-cart .info-desc .code-desc{
+    padding: 10px;
+    text-align: center;
+    border-radius: 26px;
+    background-color: var(--gray);
+    line-height: 30px;
+    width: 80%;
+    margin: 0 auto 20px;
+    cursor: pointer;
+}
+
+
+.content-info-cart .info-value-buy{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.content-info-cart .info-value-buy p{
+    text-align: left;
+}
+
+.content-info-cart .info-value-buy p:nth-child(even){
+    text-align: right;
+}
+
+.content-info-cart .btn-actions a{
+    display: block;
+    background-color: var(--yellow);
+    color: var(--black);
+    text-transform: uppercase;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 13px;
+    font-weight: bold;
+    border: none;
+    transition: .3s ease all;
+}
+
+.content-info-cart .btn-actions a:hover{
+    background-color: var(--black);
+    color: var(--white);
+    border: .3px solid var(--white);
+}

@@ -4,13 +4,15 @@ import Grid from "@component/grid/Grid";
 import Pagination from "@component/pagination";
 import { ProductCard1 } from "@component/product-cards";
 import { SemiSpan } from "@component/Typography";
-import Product from "@models/product.model";
+import Helpers from "@helpers/Helpers"
+
+import { colors } from "@utils/themeColors";
 
 // ==========================================================
-type Props = { products: Product[] };
+type Props = { products: any[], totalPage:string };
 // ==========================================================
 
-const ProductCard1List: FC<Props> = ({ products }) => {
+const ProductCard1List: FC<Props> = ({ products, totalPage }) => {
   return (
     <div>
       <Grid container spacing={6}>
@@ -19,26 +21,27 @@ const ProductCard1List: FC<Props> = ({ products }) => {
             <ProductCard1
               id={item.id}
               slug={item.slug}
-              price={item.price}
-              title={item.title}
-              off={item.discount}
-              images={item.images as string[]}
-              imgUrl={item.thumbnail}
-              rating={item.rating || 4}
+              price={item.regular_price}
+              title={item.name}
+              off={Helpers.disscount(item.sale_price, item.regular_price)}
+              images={item.images}
+              imgUrl={item.images[0].src}
+              rating={4}
             />
           </Grid>
         ))}
       </Grid>
-
-      <FlexBox
-        flexWrap="wrap"
-        justifyContent="space-between"
-        alignItems="center"
-        mt="32px"
-      >
-        <SemiSpan>Showing 1-9 of 1.3k Products</SemiSpan>
-        <Pagination pageCount={products.length} />
-      </FlexBox>
+      {parseInt(totalPage)/30 > 1 && (
+        <FlexBox
+          flexWrap="wrap"
+          justifyContent="space-between"
+          alignItems="center"
+          mt="32px"
+        >
+          <SemiSpan color={colors.titan.dark}>Mostrando 1-{Math.ceil(parseInt(totalPage)/30)} de {products.length} Productos</SemiSpan>
+          <Pagination pageCount={parseInt(totalPage)/30} />
+        </FlexBox>
+      )}
     </div>
   );
 };

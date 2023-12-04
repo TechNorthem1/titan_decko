@@ -4,32 +4,28 @@ import "./style.css";
 import { useForm } from "react-hook-form";
 
 
-const Section1 = ({model, setModel, action_continue, show_form_send, handleChange, visibleForm , setVisibleForm}) => {
+const Section1 = ({model, setModel, action_continue, show_form_send, handleChange, visibleForm, setVisibleForm}) => {
 
   const { register, handleSubmit, formState: {errors} } = useForm({
-    defaultValues: {
-      email: model ? model.email : "",
-      name: model ? model.name : "",
-      lastname: model ? model.lastname: "",
-      citizenshipCard: model ? model.citizenshipCard: "",
-      phone: model ? model.phone : ""
-    }
+    
   });
 
 
   const show_form = () => {
-    let btn_edit = document.querySelector(".btn_edit");
-    let form = document.querySelector(".form-data_person");
-    let information = document.querySelector(".info_personal");
+    try {
+      let btn_edit = document.querySelector(".btn_edit");
+      let form = document.querySelector(".form-data_person");
+      let information = document.querySelector(".info_personal");
 
-    form.classList.remove("deactivate");
-    btn_edit.classList.remove("activate");
-    information.classList.remove("activate");
+      form.classList.remove("deactivate");
+      btn_edit.classList.remove("activate");
+      information.classList.remove("activate");
+    } catch (error) {
+      error;
+    }
   }
 
   const onSubmit = (data:any) => {
-    setVisibleForm((visibleForm:boolean) => !visibleForm);
-    let datos = JSON.stringify(data);
     setModel({
       ...model,
       email: data.email,
@@ -39,6 +35,8 @@ const Section1 = ({model, setModel, action_continue, show_form_send, handleChang
       phone: data.phone
     });
     localStorage.setItem("info_pago", JSON.stringify(model));
+    setVisibleForm((valor:boolean) => !valor);
+    console.log(visibleForm);
     action_continue();
     show_form_send();
   }
@@ -68,7 +66,7 @@ const Section1 = ({model, setModel, action_continue, show_form_send, handleChang
             name="email" 
             id="email"
             {...register("email", {required: "el campo es requerido", pattern: { value: /\S+@\S+\.\S+/, message: 'Ingrese un correo invalido' }})}
-            value={model && model.email as string}
+            value={model?.email ?? ""}
             onChange={handleChange}
           />
           {errors.email && <p className='validate-field'>{errors.email.message as string}</p>}
@@ -86,10 +84,10 @@ const Section1 = ({model, setModel, action_continue, show_form_send, handleChang
               maxLength: {value: 20, message: "el campo debe tener menos de 20 caracteres"},
               pattern: {value: /^[a-zA-Z\s]*$/, message: "el campo no debe llevar numeros"}
             })} 
-            value={model && model.name as string}
+            value={ model?.name ?? ""}
             onChange={handleChange}
           />
-          {errors.name && <p className='validate-field'>{errors.name.message as string}</p>}
+          {errors.nameUser && <p className='validate-field'>{errors.nameUser.message as string}</p>}
         </div>
 
         <div className="form-control lastname">
@@ -104,7 +102,7 @@ const Section1 = ({model, setModel, action_continue, show_form_send, handleChang
               maxLength: {value: 20, message: "el campo debe tener menos de 20 caracteres"},
               pattern: {value: /^[a-zA-Z\s]*$/, message: "el campo no debe llevar numeros"}
             })} 
-            value={model && model.lastname as string}
+            value={model?.lastname ?? ""}
             onChange={handleChange}
           />
           {errors.lastname && <p className='validate-field'>{errors.lastname.message as string}</p>}
@@ -122,7 +120,7 @@ const Section1 = ({model, setModel, action_continue, show_form_send, handleChang
               maxLength: {value: 10, message: "el campo debe contener menos de 10 numeros"},
               pattern: {value: /^\d*$/, message:"el campo no debe contener caracteres"}
             })} 
-            value={model && model.citizenshipCard as string}
+            value={model?.citizenshipCard ?? ""}
             onChange={handleChange}
           />
 
@@ -141,7 +139,7 @@ const Section1 = ({model, setModel, action_continue, show_form_send, handleChang
               minLength: {value: 10,  message: "el campo debe contener 10 numeros"},
               pattern: {value: /^\d*$/, message:"el campo no debe contener caracteres"}
             })}
-            value={model && model.phone as string}
+            value={model?.phone ?? ""}
             onChange={handleChange}
           />
 

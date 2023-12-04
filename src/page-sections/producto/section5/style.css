@@ -13,3 +13,80 @@
     color: var(--black);
 }
 
+.container_tips .carts-tips {
+    min-height: 200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    /* justify-content: space-between; */
+
+    gap: 10px;
+    margin-bottom: 30px;
+    /* flex-grow: 1; */
+
+}
+
+.container_tips .carts-tips .cart-tip{
+    width: 100%;
+    border: .5px solid var(--gray);
+    position: relative;
+    background-color: var(--white);
+    border-radius: 5px;
+    min-height: 300px;
+    flex-grow: 1;
+}
+
+.container_tips .carts-tips .cart-tip:hover{
+    box-shadow: 0 0 5px var(--gray);
+}
+
+
+.container_tips .carts-tips .cart-tip .mask{
+    height: 200px;
+    overflow-y: hidden;
+}
+
+.container_tips .carts-tips .cart-tip .mask img{
+    width: 100%;
+}
+
+
+.container_tips .carts-tips .cart-tip img.user {
+    position: absolute;
+    border-radius: 50%;
+    height: 60px;
+    top: 166px;
+    left: 30px;
+}
+
+
+.container_tips .carts-tips .cart-tip .content-tip{
+    padding: 0 30px;
+    margin-top: 40px;
+    text-transform: uppercase;
+}
+
+
+.container_tips .carts-tips .cart-tip .content-tip h1{
+    line-height: 30px;
+    margin-bottom: 25px;
+    font-size: 21px;
+
+}
+
+.container_tips .carts-tips .cart-tip .content-tip p{
+    text-transform: capitalize;
+    font-size: 14px;
+    color: #777777;
+
+}
+
+.container_tips .carts-tips .cart-tip .content-tip a{
+    display: block;
+    color: var(--black);
+    text-transform: uppercase;
+    margin: 25px 0 20px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+

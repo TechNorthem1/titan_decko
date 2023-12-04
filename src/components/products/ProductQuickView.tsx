@@ -5,6 +5,7 @@ import Card from "@component/Card";
 import Modal from "@component/Modal";
 import Icon from "@component/icon/Icon";
 import ProductIntro from "./ProductIntro";
+import Helpers from "@helpers/Helpers";
 
 // ===================================================
 type Props = {
@@ -17,12 +18,12 @@ type Props = {
     images: string[];
     id: string | number;
   };
+  salePrice?: number;
 };
 // ===================================================
 
 const ProductQuickView: FC<Props> = (props) => {
-  const { open, onClose, product } = props;
-
+  const { open, onClose, product, salePrice } = props;
   return (
     <Modal open={open} onClose={onClose}>
       <Card
@@ -35,7 +36,7 @@ const ProductQuickView: FC<Props> = (props) => {
         <ProductIntro
           id={product.id}
           title={product.title}
-          price={product.price}
+          price={30000}
           images={product.images}
         />
 

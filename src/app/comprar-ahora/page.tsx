@@ -9,34 +9,55 @@ import Section1 from "@sections/comprar-ahora/section1/"
 import Section2 from "@sections/comprar-ahora/section2/"
 import Section3 from "@sections/comprar-ahora/section3/"
 import Section4 from "@sections/comprar-ahora/section4/"
-import Checkout from '@models/checkout.model';
 
 
 
 export const page = () => {
-    const [model, setModel] = useState<Checkout|undefined>(null);
-    const [visibleForm, setVisibleForm] = useState<boolean>();
+    const [model, setModel] = useState({
+        email: "",
+        name: "",
+        lastname: "",
+        citizenshipCard :"",
+        phone: "",
+        departament: "",
+        municipaly: "",
+        avenue: "",
+        number1: "",
+        number2: "",
+        number3: "",
+        complement_information: "",
+        method: "",
+        information_additional: "",
+        neighborhood: "",
+        addressee: ""
+    });
+
+    const [isVisible, setVisibleForm] = useState(false);
 
     useEffect(() => {
         let data = JSON.parse(localStorage.getItem("info_pago"));
-        if(data !== null) {
-          setModel(data);
-          action_continue();
-          btn_continue_send()
+        if( data !== null && data.name !== "" && data.departament !== ""){
+            setModel(data);
+            action_continue();
+            btn_continue_send();
+        }else if(data !== null && data.name !==""){
+            setModel(data);
+            action_continue();
         }else{
-            btn_continue_send()
+            btn_continue_send();
         }
-        
     }, [])
 
     const action_continue = () => {
+
         let btn_edit = document.querySelector(".btn_edit");
         let form = document.querySelector(".form-data_person");
         let information = document.querySelector(".info_personal");
-      
+    
         form.classList.add("deactivate");
         btn_edit.classList.add("activate");
         information.classList.add("activate");
+
     }
 
     const btn_continue_send = () => {
@@ -80,7 +101,7 @@ export const page = () => {
         <Fragment>
             <HeaderTitan />
 
-            <Box style={{"margin": "50px auto"}}>
+            <Box className='content-box'>
                 <Container style={{"flex": "1"}}>
                     <Grid container spacing={4} style={{"marginBottom": "30px"}}>
                         <Grid item lg={8} xs={12}>
@@ -90,7 +111,7 @@ export const page = () => {
                                 action_continue={action_continue}
                                 show_form_send={show_form_send}
                                 handleChange={handleChange}
-                                visibleForm={visibleForm}
+                                visibleForm={isVisible}
                                 setVisibleForm={setVisibleForm}
                             />
 
@@ -100,7 +121,7 @@ export const page = () => {
                                 btn_continue_send={btn_continue_send}
                                 show_form_send={show_form_send}
                                 handleChange={handleChange}
-                                visibleForm={visibleForm}
+                                visibleForm={isVisible}
                                 setVisibleForm={setVisibleForm}
                             />
 

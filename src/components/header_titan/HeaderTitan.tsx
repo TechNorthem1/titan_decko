@@ -2,13 +2,14 @@ import React, { Fragment } from 'react'
 import Sticky from "@component/sticky";
 import { Header } from "@component/header";
 import Head from "next/head";
-import Navbar from "@component/navbar/Navbar";
-import Menu from '@component/Menu';
+import "./style.css"
+
 
 export const HeaderTitan = () => {
-  return (
+
+    return (
     <Fragment>
-      <Head >
+      <Head>
         <meta charSet="utf-8" />
         <meta name="description" content="Comprueba tu web gratis con el Software SEO y las herramientas de Seobility: sigue los consejos de optimización on page para mejorar tu posicionamiento en Google" />
         <meta name="keywords" content="palabras claves" />
@@ -26,7 +27,6 @@ export const HeaderTitan = () => {
         <Header />
       </Sticky>
       {/* NAVBAR AREA */}
-      <Navbar />
     </Fragment>
   )
 }

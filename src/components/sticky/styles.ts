@@ -12,8 +12,8 @@ const StyledSticky = styled.div<StyledStickyProps>`
   right: 0;
   z-index: 99;
   transition: all 250ms ease-in-out;
-  top: ${(props) => props.fixedOn}px;
-  position: ${(props) => (props.fixed ? "fixed" : "relative")};
+  top: 0;
+  position: ${(props) => (props.fixed ? "sticky" : "sticky")};
 
   & + .section-after-sticky {
     padding-top: ${(props) => (props.fixed ? `${props.componentHeight}px` : "inherit")};

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Box from "@component/Box";
 import Image from "@component/Image";
 import Icon from "@component/icon/Icon";
@@ -16,6 +16,9 @@ import { SearchInputWithCategory } from "@component/search-box";
 import { useAppContext } from "@context/AppContext";
 import StyledHeader from "./styles";
 import UserLoginDialog from "./LoginDialog";
+import Navbar from "@component/navbar/Navbar";
+import Method from "@helpers/Method";
+import CategoriesApi from "@utils/__api__/categories"
 
 // ====================================================================
 type HeaderProps = { isFixed?: boolean; className?: string };
@@ -25,7 +28,36 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
   const { state } = useAppContext();
   const [open, setOpen] = useState(false);
   const toggleSidenav = () => setOpen(!open);
+  const [viewElementHeader, setViewElementHeader] = useState(true);
+  const [categories, setCategories] = useState([]);
 
+  
+
+  useEffect(()=> {
+    let url = window.location.href;
+    let url_comprar_ahora = url.includes("comprar-ahora");
+    let url_cart = url.includes("carrito");
+    
+    if(url_comprar_ahora || url_cart){
+      setViewElementHeader(false)
+    }
+
+    const fetchCategories = async () => {
+      try {
+        const data = await CategoriesApi.getCategoriesSpecific("products/categories/?include=72,163,87,128,173,97,121,78,131,127&per_page=11&orderby=id&order=desc");
+        setCategories(data);
+      } catch (error) {
+        console.error("Failed to fetch categories", error);
+      }
+    };
+    fetchCategories();
+  }, [])
+
+
+  // Separate effect to log categories when it updates
+  useEffect(() => {}, [categories]);
+
+                                                                                                                                      
   const CART_HANDLE = (
     <Box ml="20px" position="relative">
       <IconButton bg="gray.black" p="12px" size="small">
@@ -67,33 +99,44 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
         height="100%"
       >
         <FlexBox className="logo" alignItems="center" mr="1rem">
-          <Link href="/">
+          <Link href={"/"}>
             <Image src="/assets/images/logo.webp" alt="logo" />
           </Link>
         </FlexBox>
+          <FlexBox justifyContent="center" flex="1 1 0">
+            {viewElementHeader &&  
+              <SearchInputWithCategory />
+            }
+          </FlexBox>
 
-        <FlexBox justifyContent="center" flex="1 1 0">
-          <SearchInputWithCategory />
-        </FlexBox>
+          <FlexBox className="header-right" alignItems="center">
+            {viewElementHeader &&
+              <UserLoginDialog handle={LOGIN_HANDLE}>
+                <div>
+                  <Login />
+                </div>
+              </UserLoginDialog>
+            }
 
-        <FlexBox className="header-right" alignItems="center">
-          <UserLoginDialog handle={LOGIN_HANDLE}>
-            <div>
-              <Login />
-            </div>
-          </UserLoginDialog>
+            {viewElementHeader && 
+              <Sidenav
+                open={open}
+                width={380}
+                position="right"
+                handle={CART_HANDLE}
+                toggleSidenav={toggleSidenav}
+              >
+                <MiniCart toggleSidenav={toggleSidenav} />
+              </Sidenav>
+            }
 
-          <Sidenav
-            open={open}
-            width={380}
-            position="right"
-            handle={CART_HANDLE}
-            toggleSidenav={toggleSidenav}
-          >
-            <MiniCart toggleSidenav={toggleSidenav} />
-          </Sidenav>
-        </FlexBox>
+            {!viewElementHeader && 
+              <Link href={"/"} >Seguir Comprando</Link>
+            }
+          </FlexBox>
       </Container>
+      {viewElementHeader && <Navbar categories={categories}/>
+        }
     </StyledHeader>
   );
 };

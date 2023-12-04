@@ -6,6 +6,7 @@ import { Header } from "@component/header";
 import { Footer1 } from "@component/footer";
 import MobileNavigationBar from "@component/mobile-navigation";
 import StyledAppLayout from "./AppLayoutStyle";
+import { HeaderTitan } from "@component/header_titan";
 
 // ===============================================================================
 type Props = { title?: string; navbar?: ReactElement; children: ReactNode };
@@ -18,7 +19,7 @@ const AppLayout: FC<Props> = ({
 }) => (
   <StyledAppLayout>
     <Sticky fixedOn={0}>
-      <Header />
+      <HeaderTitan />
     </Sticky>
 
     {navbar ? <div className="section-after-sticky">{navbar}</div> : null}

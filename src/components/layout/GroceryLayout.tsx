@@ -6,6 +6,8 @@ import { HeaderTwo } from "@component/header";
 import Navbar2 from "@component/navbar/Navbar2";
 import MobileNavigationBar from "@component/mobile-navigation";
 import StyledAppLayout from "./AppLayoutStyle";
+import { HeaderTitan } from "@component/header_titan/HeaderTitan";
+import Box from "@component/Box";
 
 // =========================================================================
 type Props = { title?: string; showNavbar?: boolean; children: ReactNode };
@@ -25,17 +27,11 @@ const GroceryLayout: FC<Props> = ({
 
     {/* HEADER AREA */}
     <Sticky fixedOn={0}>
-      <HeaderTwo />
+      <HeaderTitan />
     </Sticky>
-
-    {/* CONDITIONALLY RENDER NAVBAR AREA */}
-    {showNavbar && (
-      <div className="section-after-sticky">
-        <Navbar2 />
-      </div>
-    )}
-
-    {children}
+    <Box className="content-box">
+      {children}
+    </Box>
 
     {/* SMALLER DEVICE NAVIGATION AREA */}
     <MobileNavigationBar />

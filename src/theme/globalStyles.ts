@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { colors } from "@utils/themeColors";
 
 const GlobalStyles = createGlobalStyle`
   :root{
@@ -134,6 +135,40 @@ const GlobalStyles = createGlobalStyle`
   position: absolute;
 }
 
+.category-dropdown-link:hover {
+  background-color: ${colors.titan.yellow};
+  color: ${colors.titan.dark};
+  font-weight: 600;
+}
+
+.title-product {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.title-product a {
+  display: block;
+  text-align: right;
+  color: var(--black);
+  text-transform: capitalize;
+  transition: .3s ease all;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.title-product a:hover{
+  color: var(--salmon);
+  text-shadow: 0 0 1px var(--gray);
+}
+
+.dEQOgl{
+  position: sticky;
+  margin-top: 80px
+}
+
 @-webkit-keyframes nprogress-spinner {
   0%   { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }
@@ -143,6 +178,20 @@ const GlobalStyles = createGlobalStyle`
   0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.eTtGGD {
+  margin-top: 80px;
+}
+
+.Box-sc-19ecb654-0.Card-sc-c8d26b2e-0.ProductCard9__Wrapper-sc-6b174472-0.bHFmVr.fNEeJc.iInYUD {
+  border-radius: 0.5rem;
+}
+
+.blnLUZ {
+  border-radius: 0; 
+}
+
+
 `;
 
 export default GlobalStyles;

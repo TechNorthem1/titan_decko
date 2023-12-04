@@ -1,25 +1,11 @@
 'use client'
 import Container from '@component/Container';
-import React, { useState } from 'react';
+import React from 'react';
 import "./style.css";
 import { useForm } from 'react-hook-form';
 
 const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleChange, visibleForm, setVisibleForm}) => {
   const { register, handleSubmit, formState: {errors} } = useForm({
-    defaultValues: {
-      departament: model ? model.departament : "",
-      municipaly: model ? model.municipaly: "",
-      avenue: model ? model.avenue: "",
-      number1: model ? model.number: "",
-      number2: model? model.number2 : "",
-      number3: model ? model.number3: "",
-      address_complete: model ? `${model.avenue} ${model.number1} ${model.number2} ${model.number3}`: "",
-      method: model ? model.method: "",
-      complement_information: model ? model.complement_information : "",
-      information_additional: model ? model.information_additional : "",
-      neighborhood: model ? model.neighborhood : "",
-      addressee: model ? model.addressee : ""
-    }
   });
 
 
@@ -41,15 +27,16 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
   }
 
   const isCheckedInput = (value:String) => {
-    let isCheck = model && model.method === value ? true: false;
-    return isCheck;
+    return model && model.method === value;
   }
 
   
   return (
     <Container className="data_send">
-      <h1 className="title">2. Envio</h1>
-      <a className="btn_edit_send" onClick={show_form_send}>editar</a>
+      <h1 className="title">2. Envio {visibleForm}</h1>
+      { model.departament !== "" ? (
+        <a className="btn_edit_send activate" onClick={show_form_send}>editar</a> ): "" 
+      }
       
       <hr className="line" />
       <form className="form-data_send" onSubmit={handleSubmit(onSubmit)}>
@@ -62,8 +49,9 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
               required: {value: true, message: "el campo es requerido"}
             })}
             onChange={handleChange}
-            value={model && model.departament}
+            value={model?.departament ?? ""}
           >
+            <option value="">Seleccione un departamento...</option>
             <option value="Bogotá D.C">Bogotá D.C</option>
           </select>
           {/* {model && <p className='validate-field'>{ errors.departament.message as string }</p>} */}
@@ -78,8 +66,9 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
               required: "el campo es requerido"
             })}
             onChange={handleChange}
-            value={model && model.municipaly}
+            value={model?.municipaly ?? ""}
           >
+            <option value="">Seleccione un municipio</option>
             <option value="Bogotá D.C">Bogotá D.C</option>
           </select>
           {/* {model && <p className='validate-field'>{errors.municipaly.message as string}</p>} */}
@@ -95,7 +84,7 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
               required: "el campo es requerido"
             })}
             onChange={handleChange}
-            value={model && model.avenue}
+            value={model?.avenue ?? ""}
           >
             <option value="Avenida">Avenida</option>
           </select>
@@ -107,7 +96,7 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
             {...register("number1", {
               required: "el campo es requerido"
             })}
-            value={model && model.number3}
+            value={model?.number3 ?? ""}
             onChange={handleChange}
           />
           <span className='number'>#</span>
@@ -120,7 +109,7 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
               required: "el campo es requerido"
             })} 
             onChange={handleChange}
-            value={model && model.number2}
+            value={model?.number2 ?? ""}
           />
           <span className='with'>-</span>
           <input 
@@ -132,7 +121,7 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
               required: "el campo es requerido"
             })}
             onChange={handleChange}
-            value={model && model.number3}
+            value={model?.number3 ?? ""}
           />
         </div>
 
@@ -146,9 +135,8 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
             {...register("address_complete")}
             onChange={handleChange}
             value={
-              model && model.avenue !== undefined && model.number1 !== undefined && model.number2 !== undefined && model.number3 !== undefined 
-              ? `${model.avenue} ${model.number1} # ${model.number2} - ${model.number3}` 
-              : ""}
+              `${model?.avenue} ${model?.number1} # ${model?.number2} - ${model?.number3}` 
+              ?? ""}
           />
         </div>
 
@@ -166,7 +154,7 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
                 })}
                 
                 onChange={handleChange}
-                value={model && model.method === "Normal" ? model.method : "Normal"}
+                value={model?.method === "Normal" ? model.method : "Normal"}
                 checked={isCheckedInput("Normal")}
               />
               <label htmlFor='method1'>
@@ -186,7 +174,7 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
                 })}
                 checked={isCheckedInput("Pago contra entrega")}
                 onChange={handleChange}
-                value={model && model.method === "Pago contra entrega" ? model.method : "Pago contra entrega"}
+                value={model?.method === "Pago contra entrega" ? model.method : "Pago contra entrega"}
               />
               <label htmlFor='method2'>
                 <span>recibe hoy</span>
@@ -205,7 +193,7 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
                   required: "seleccione un metodo de envio"
                 })}
                 onChange={handleChange}
-                value={model && model.method === "otro" ? model.method : "otro" }
+                value={model?.method === "otro" ? model.method : "otro" }
                 checked={isCheckedInput("otro")}
               />
               <label htmlFor='method3'>
@@ -226,7 +214,8 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
             {...register("complement_information", {
               minLength: {value: 7, message: "el campo debe contener mas de 7 caracteres"}
             })}
-            value={model && model.complement_information}
+            onChange={handleChange}
+            value={model?.complement_information ?? ""}
           />
           {/* {model && <p>{errors.complement_information.message as string}</p>} */}
         </div>
@@ -243,7 +232,7 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
                 // Otras validaciones personalizadas pueden ir aquí
               }
             })}
-            value={model && model.information_additional}
+            value={model?.information_additional ?? ""}
             onChange={handleChange}
           />
 
@@ -260,7 +249,7 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
               required: {value: true, message: "el campo es requerido"}
             })}
             onChange={handleChange}
-            value={model && model.neighborhood}
+            value={model?.neighborhood ?? ""}
           />
         </div>
 
@@ -271,7 +260,7 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
             name="addressee" 
             id="addressee"
             disabled
-            value={model && `${model.name} ${model.lastname}`}
+            value={`${model?.name} ${model?.lastname}` ?? ""}
           />
         </div>
         
@@ -280,17 +269,21 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
         </div>
       </form>
       
-      <div className="information_send">
-        <div className="content-send">
-          <p>{ model && `${model.avenue}  ${model.number1} # ${model.number2} - ${model.number3}`}</p>
-          <p>11001 {model && `${model.departament} ${model.municipaly}`}</p>
-          <hr />
-          <p>Envio: en 1 dia habil</p>
-        </div>
-        <span>gratis</span>
-      </div>
-
-    </Container>
+      {/* {
+        model && model.departament !== "" ?
+        ( */}
+          <div className="information_send">
+            <div className="content-send">
+              <p>{ `${model?.avenue}  ${model?.number1} # ${model?.number2} - ${model?.number3}`}</p>
+              <p>11001 {`${model?.departament} ${model?.municipaly}`}</p>
+              <hr />
+              <p>Envio: en 1 dia habil</p>
+            </div>
+            <span>gratis</span>
+          </div>
+        {/* ) : ""
+      }*/}
+    </Container> 
   )
 }
 

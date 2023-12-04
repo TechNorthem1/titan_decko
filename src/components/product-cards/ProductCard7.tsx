@@ -11,6 +11,7 @@ import { Button } from "@component/buttons";
 import Typography from "@component/Typography";
 import { IconButton } from "@component/buttons";
 import { currency, getTheme } from "@utils/utils";
+import { colors }  from "@utils/themeColors";
 
 // styled component
 const Wrapper = styled.div`
@@ -94,6 +95,7 @@ const ProductCard7: FC<ProductCard7Props> = (props) => {
 
         <Box position="absolute" right="1rem" top="1rem">
           <IconButton
+            style={{backgroundColor: colors.titan.dark, color: colors.titan.white}}
             padding="4px"
             ml="12px"
             onClick={handleCartAmountChange(0)}

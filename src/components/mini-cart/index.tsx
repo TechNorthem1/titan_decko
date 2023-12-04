@@ -70,7 +70,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
 
         {state.cart.map((item) => (
           <Fragment key={item.id}>
-            <div className="">
+            <div className="cart-item">
               <FlexBox alignItems="center" flexDirection="column">
                 <Button
                   variant="outlined"
@@ -148,7 +148,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
 
       {!!state.cart.length && (
         <Fragment>
-          <Link href="/checkout">
+          <Link href="/comprar-ahora">
             <Button
               color="primary"
               variant="contained"
@@ -161,7 +161,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
             </Button>
           </Link>
 
-          <Link href="/cart">
+          <Link href="/carrito">
             <Button
               color="primary"
               variant="outlined"

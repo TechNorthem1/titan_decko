@@ -9,29 +9,29 @@ import { StyledCategoryDropdown } from "./styles";
 type CategoryDropdownProps = {
   open: boolean;
   position?: "absolute" | "relative";
+  categories:any[]
 };
 // =========================================
 
 const CategoryDropdown: FC<CategoryDropdownProps> = ({
   open,
   position = "absolute",
+  categories = []
 }) => {
   const megaMenu: any = { MegaMenu1, MegaMenu2 };
 
   return (
     <StyledCategoryDropdown open={open} position={position}>
-      {navigations.map((item) => {
-        let MegaMenu = megaMenu[item.menuComponent];
-
+      {categories.map((item) => {
+        // let MegaMenu = megaMenu[item.menuComponent];
         return (
           <CategoryMenuItem
-            key={item.title}
-            href={item.href}
-            icon={item.icon}
-            title={item.title}
-            caret={!!item.menuData}
+            key={item.id}
+            href={`/categorias/${item.id}`}
+            title={item.name}
+            caret={false}
           >
-            <MegaMenu data={item.menuData || {}} />
+            {/* <MegaMenu data={item.name || {}} /> */}
           </CategoryMenuItem>
         );
       })}

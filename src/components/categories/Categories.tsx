@@ -11,10 +11,10 @@ import CategoryDropdown from "./CategoryDropdown";
 import { StyledCategory } from "./styles";
 
 // =====================================================================
-type CategoriesProps = { open?: boolean; children: ReactElement };
+type CategoriesProps = { open?: boolean; children: ReactElement, categories: any[] };
 // =====================================================================
 
-const Categories: FC<CategoriesProps> = ({ open: isOpen, children }) => {
+const Categories: FC<CategoriesProps> = ({ open: isOpen, children, categories = [] }) => {
   const [open, setOpen] = useState<boolean>(isOpen as boolean);
   const popoverRef = useRef(open);
   popoverRef.current = open;
@@ -40,7 +40,7 @@ const Categories: FC<CategoriesProps> = ({ open: isOpen, children }) => {
         onClick: toggleMenu,
         className: `${children.props.className} cursor-pointer`,
       })}
-      <CategoryDropdown open={open} />
+      <CategoryDropdown open={open} categories={categories}/>
     </StyledCategory>
   );
 };

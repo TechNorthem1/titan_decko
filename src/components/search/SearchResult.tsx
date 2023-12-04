@@ -14,20 +14,21 @@ import ProductFilterCard from "@component/products/ProductFilterCard";
 import ProductCard1List from "@component/products/ProductCard1List";
 import ProductCard9List from "@component/products/ProductCard9List";
 import Card from "@component/Card";
-import db from "@data/db";
 
 type Props = {
   sortOptions: {
     label: string;
     value: string;
-  }[];
+  }[],
+  products:any[],
+  totalPage:string
 };
-const SearchResult = ({ sortOptions }: Props) => {
+const SearchResult = ({ sortOptions, products, totalPage }: Props) => {
   const width: any = useWindowSize();
   const [view, setView] = useState<"grid" | "list">("grid");
-
   const isTablet = width < 1025;
   const toggleView = useCallback((v: any) => () => setView(v), []);
+
 
   return (
     <>
@@ -42,7 +43,7 @@ const SearchResult = ({ sortOptions }: Props) => {
       >
         <div>
           <H5>Searching for “ mobile phone ”</H5>
-          <Paragraph color="text.muted">48 results found</Paragraph>
+          <Paragraph color="text.muted">{products.length} productos encontrados</Paragraph>
         </div>
 
         <FlexBox alignItems="center" flexWrap="wrap">
@@ -59,7 +60,7 @@ const SearchResult = ({ sortOptions }: Props) => {
           </Box>
 
           <Paragraph color="text.muted" mr="0.5rem">
-            View:
+            Ver :
           </Paragraph>
 
           <IconButton onClick={toggleView("grid")}>
@@ -105,9 +106,9 @@ const SearchResult = ({ sortOptions }: Props) => {
 
         <Grid item lg={9} xs={12}>
           {view === "grid" ? (
-            <ProductCard1List products={db.slice(95, 104) as any} />
+            <ProductCard1List products={products} totalPage={totalPage}/>
           ) : (
-            <ProductCard9List products={db.slice(95, 104) as any} />
+            <ProductCard9List products={products} totalPage={totalPage}/>
           )}
         </Grid>
       </Grid>

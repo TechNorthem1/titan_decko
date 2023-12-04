@@ -161,7 +161,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
               color="primary.text"
               zIndex={1}
             >
-              {off}% off
+              {off}% Descuento
             </Chip>
           )}
 
@@ -180,7 +180,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
             </Icon>
           </FlexBox>
 
-          <Link href={`/product/${slug}`}>
+          <Link href={`/producto/${slug}/${id}`}>
             <Image
               alt={title}
               width={100}
@@ -195,7 +195,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
         <div className="details">
           <FlexBox>
             <Box flex="1 1 0" minWidth="0px" mr="0.5rem">
-              <Link href={`/product/${slug}`}>
+              <Link href={`/producto/${slug}/${id}`}>
                 <H3
                   mb="10px"
                   title={title}
@@ -213,7 +213,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
 
               <FlexBox alignItems="center" mt="10px">
                 <SemiSpan pr="0.5rem" fontWeight="600" color="primary.main">
-                  {calculateDiscount(price, off as number)}
+                  {calculateDiscount(price, off)}
                 </SemiSpan>
 
                 {!!off && (

@@ -102,8 +102,9 @@ type ProductCard9Props = {
   rating: number;
   images: string[];
   id: string | number;
-  categories: string[];
+  categories?: string[];
   [key: string]: unknown;
+  salePrice: number;
 };
 // ============================================================================
 
@@ -116,21 +117,22 @@ const ProductCard9: FC<ProductCard9Props> = ({
   imgUrl,
   rating,
   images,
-  categories,
+  salePrice,
+  categories = [],
   ...props
 }) => {
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
   const cartItem = state.cart.find((item) => item.id === id);
-
   const toggleDialog = useCallback(() => setOpen((open) => !open), []);
-
+  console.log(salePrice)
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, imgUrl, id, qty, slug, name: title },
+      payload: {price, imgUrl, id, qty, slug, name: title },
     });
   };
+
 
   return (
     <Wrapper overflow="hidden" width="100%" {...props}>
@@ -182,7 +184,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
                 {categories.map((item) => (
                   <NavLink
                     className="link"
-                    href={`/product/search/${item}`}
+                    href={`/producto/${slug}/${id}`}
                     key={item}
                   >
                     {item}
@@ -191,7 +193,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
               </div>
             )}
 
-            <Link href={`/product/${slug}`}>
+            <Link href={`/producto/${slug}/${id}`}>
               <H5 fontWeight="600" my="0.5rem">
                 {title}
               </H5>

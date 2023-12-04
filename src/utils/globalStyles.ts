@@ -76,6 +76,8 @@ export const GlobalStyles = createGlobalStyle`
   position: fixed;
 }
 
+
+
 #nprogress .spinner-icon {
   width: 18px;
   height: 18px;
