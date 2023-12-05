@@ -103,8 +103,8 @@ type ProductCard9Props = {
   images: string[];
   id: string | number;
   categories?: string[];
+  salePrice?: number;
   [key: string]: unknown;
-  salePrice: number;
 };
 // ============================================================================
 
@@ -125,14 +125,12 @@ const ProductCard9: FC<ProductCard9Props> = ({
   const { state, dispatch } = useAppContext();
   const cartItem = state.cart.find((item) => item.id === id);
   const toggleDialog = useCallback(() => setOpen((open) => !open), []);
-  console.log(salePrice)
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
       payload: {price, imgUrl, id, qty, slug, name: title },
     });
   };
-
 
   return (
     <Wrapper overflow="hidden" width="100%" {...props}>
@@ -317,6 +315,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
         open={open}
         onClose={toggleDialog}
         product={{ id, images, price, title, slug }}
+        salePrice={salePrice}
       />
     </Wrapper>
   );

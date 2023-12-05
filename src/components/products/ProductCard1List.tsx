@@ -9,7 +9,7 @@ import Helpers from "@helpers/Helpers"
 import { colors } from "@utils/themeColors";
 
 // ==========================================================
-type Props = { products: any[], totalPage:string };
+type Props = { products?: any[], totalPage?:string };
 // ==========================================================
 
 const ProductCard1List: FC<Props> = ({ products, totalPage }) => {
@@ -27,6 +27,7 @@ const ProductCard1List: FC<Props> = ({ products, totalPage }) => {
               images={item.images}
               imgUrl={item.images[0].src}
               rating={4}
+              salePrice={item.sale_price}
             />
           </Grid>
         ))}
@@ -39,7 +40,7 @@ const ProductCard1List: FC<Props> = ({ products, totalPage }) => {
           mt="32px"
         >
           <SemiSpan color={colors.titan.dark}>Mostrando 1-{Math.ceil(parseInt(totalPage)/30)} de {products.length} Productos</SemiSpan>
-          <Pagination pageCount={parseInt(totalPage)/30} />
+          <Pagination pageCount={Math.ceil(parseInt(totalPage)/30)} />
         </FlexBox>
       )}
     </div>

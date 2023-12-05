@@ -5,10 +5,7 @@ import { useForm } from "react-hook-form";
 
 
 const Section1 = ({model, setModel, action_continue, show_form_send, handleChange, visibleForm, setVisibleForm}) => {
-
-  const { register, handleSubmit, formState: {errors} } = useForm({
-    
-  });
+  const { register, handleSubmit, formState: {errors} } = useForm({});
 
 
   const show_form = () => {

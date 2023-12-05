@@ -20,8 +20,8 @@ type Props = {
     label: string;
     value: string;
   }[],
-  products:any[],
-  totalPage:string
+  products?:any[],
+  totalPage?:string
 };
 const SearchResult = ({ sortOptions, products, totalPage }: Props) => {
   const width: any = useWindowSize();

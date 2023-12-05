@@ -9,6 +9,7 @@ type CategoryMenuItemProps = {
   title: string;
   caret?: boolean;
   children: any;
+  icon?: any;
 };
 // ===============================================================
 

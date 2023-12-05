@@ -2,7 +2,7 @@ import React from 'react';
 
 export const MANUAL_DE_INSTALACIN_EASY_WALL_8211_PANEL_ADHESIVO = () => {
   return (
-    <div dangerouslySetInnerHTML={ __html: ` <div data-elementor-id="5227600425131" data-elementor-post-type="page" data-elementor-type="wp-page">
+    <div dangerouslySetInnerHTML={{ __html: ` <div data-elementor-id="5227600425131" data-elementor-post-type="page" data-elementor-type="wp-page">
 <div className="e-flex e-con-boxed e-con e-parent" data-core-v316-plus="true" data-settings='{"container_type":"flex","content_width":"boxed"}'>
 <div className="e-con-inner">
 <div>
@@ -16,6 +16,6 @@ export const MANUAL_DE_INSTALACIN_EASY_WALL_8211_PANEL_ADHESIVO = () => {
 </div>
 </div>
 </div>
-` } />
+` }} />
   );
 };

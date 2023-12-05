@@ -22,7 +22,7 @@ interface Nav {
   extLink?: boolean;
 }
 
-type NavbarProps = { navListOpen?: boolean, categories:any[] };
+type NavbarProps = { navListOpen?: boolean, categories?:any[] };
 
 const Navbar: FC<NavbarProps> = ({ navListOpen, categories = [] }) => {
   const renderNestedNav = (list: any[], isRoot = false) => {

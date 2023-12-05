@@ -3,7 +3,13 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains : ["titandecko.com.co"]
+
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'titandecko.com.co',
+      },
+    ],
   },
   compiler: {
     styledComponents: true,
