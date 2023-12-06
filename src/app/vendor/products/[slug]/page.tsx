@@ -23,7 +23,7 @@ const ProductDetails = async ({ params }: { params: { slug: string } }) => {
         button={
           <Link href="/vendor/products">
             <Button color="primary" bg="primary.light" px="2rem">
-              Back to Product List
+              Volver a la lsita de productos
             </Button>
           </Link>
         }

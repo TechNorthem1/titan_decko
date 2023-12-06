@@ -11,7 +11,7 @@ const EditProfileButton = () => {
       px="2rem"
       onClick={() => push("/profile/edit")}
     >
-      Edit Profile
+      Editar Perfil
     </Button>
   );
 };

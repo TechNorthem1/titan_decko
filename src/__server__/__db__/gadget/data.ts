@@ -149,13 +149,13 @@ export const carouselProducts = [
 // banners
 export const bannerData = [
   {
-    buttonText: "SHOP NOW",
+    buttonText: "Comprar ahora",
     thumbnail: "/assets/images/products/table.png",
     title: "Big Saves on Home Decoration. Save Upto 80%",
     description: "Easy payment policy, 12 months 0% in interest.",
   },
   {
-    buttonText: "SHOP NOW",
+    buttonText: "Comprar ahora",
     thumbnail: "/assets/images/products/clothes.png",
     title: "Exclusive Men’s Clothes. Save Upto 50%",
     description: "Comfortable, stylish, elegant and long lasting.",

@@ -42,13 +42,13 @@ const SearchResult = ({ sortOptions, products, totalPage }: Props) => {
         justifyContent="space-between"
       >
         <div>
-          <H5>Searching for “ mobile phone ”</H5>
-          <Paragraph color="text.muted">{products.length} productos encontrados</Paragraph>
+          <H5>Resultados para “ mobile phone ”</H5>
+          <Paragraph color="text.muted">{products.length} Productos encontrados</Paragraph>
         </div>
 
         <FlexBox alignItems="center" flexWrap="wrap">
           <Paragraph color="text.muted" mr="1rem">
-            Short by:
+            Ordenar por:
           </Paragraph>
 
           <Box flex="1 1 0" mr="1.75rem" minWidth="150px">
@@ -89,7 +89,7 @@ const SearchResult = ({ sortOptions, products, totalPage }: Props) => {
               scroll={true}
               handle={
                 <IconButton>
-                  <Icon>options</Icon>
+                  <Icon>Optiones</Icon>
                 </IconButton>
               }
             >

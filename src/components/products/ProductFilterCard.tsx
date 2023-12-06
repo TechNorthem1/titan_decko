@@ -27,7 +27,7 @@ const ProductFilterCard: FC = () => {
 
   return (
     <Card p="18px 27px" elevation={5}>
-      <H6 mb="10px">Categories</H6>
+      <H6 mb="10px">Categorías</H6>
 
       {categroyList.map((item) =>
         item.child ? (
@@ -56,7 +56,7 @@ const ProductFilterCard: FC = () => {
       <Divider mt="18px" mb="24px" />
 
       {/* PRICE RANGE FILTER */}
-      <H6 mb="16px">Price Range</H6>
+      <H6 mb="16px">Precio</H6>
       <FlexBox justifyContent="space-between" alignItems="center">
         <TextField placeholder="0" type="number" fullwidth />
 
@@ -70,7 +70,7 @@ const ProductFilterCard: FC = () => {
       <Divider my="24px" />
 
       {/* BRANDS FILTER */}
-      <H6 mb="16px">Brands</H6>
+      <H6 mb="16px">Marcas</H6>
       {brandList.map((item) => (
         <CheckBox
           my="10px"
@@ -101,7 +101,7 @@ const ProductFilterCard: FC = () => {
       <Divider my="24px" />
 
       {/* RATING FILTER */}
-      <H6 mb="16px">Ratings</H6>
+      <H6 mb="16px">Calificación</H6>
       {[5, 4, 3, 2, 1].map((item) => (
         <CheckBox
           my="10px"
@@ -116,7 +116,7 @@ const ProductFilterCard: FC = () => {
       <Divider my="24px" />
 
       {/* COLORS FILTER */}
-      <H6 mb="16px">Colors</H6>
+      <H6 mb="16px">Color</H6>
       <FlexBox mb="1rem">
         {colorList.map((item, ind) => (
           <Avatar

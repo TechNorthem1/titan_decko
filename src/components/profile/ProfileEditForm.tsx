@@ -145,7 +145,7 @@ const ProfileEditForm = ({ user }: { user: User }) => {
             </Box>
 
             <Button type="submit" variant="contained" color="primary">
-              Save Changes
+              Guardar cambios
             </Button>
           </form>
         )}

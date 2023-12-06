@@ -26,7 +26,7 @@ const OrderDetails = ({ params }: { params: { id: string } }) => {
         button={
           <Link href="/vendor/orders">
             <Button color="primary" bg="primary.light" px="2rem">
-              Back to Order List
+              Volver a la lista de pedidos
             </Button>
           </Link>
         }
@@ -207,7 +207,7 @@ const OrderDetails = ({ params }: { params: { id: string } }) => {
           </Card>
 
           <Button variant="contained" color="primary" ml="auto">
-            Save Changes
+            Guardar cambios
           </Button>
         </Grid>
       </Grid>

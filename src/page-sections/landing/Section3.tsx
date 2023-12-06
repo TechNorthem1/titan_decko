@@ -260,7 +260,7 @@ const customerPageList = [
   {
     imgUrl: "/assets/images/landing/customer/page-6.png",
     previewUrl: "/profile/edit",
-    title: "Edit Profile",
+    title: "Editar Perfil",
     new: false,
   },
   {

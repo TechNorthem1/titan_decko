@@ -13,10 +13,10 @@ const ProductSearchResult = async({params}) => {
 };
 
 const sortOptions = [
-  { label: "Relevance", value: "Relevance" },
-  { label: "Date", value: "Date" },
-  { label: "Price Low to High", value: "Price Low to High" },
-  { label: "Price High to Low", value: "Price High to Low" },
+  { label: "Relevancia", value: "Relevance" },
+  { label: "Fecha", value: "Date" },
+  { label: "Precio de menor a mayor", value: "Price Low to High" },
+  { label: "Precio de mayor q menor", value: "Price High to Low" },
 ];
 
 

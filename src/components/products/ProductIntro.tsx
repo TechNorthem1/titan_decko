@@ -97,12 +97,12 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
           <H1 mb="1rem">{title}</H1>
 
           <FlexBox alignItems="center" mb="1rem">
-            <SemiSpan>Brand:</SemiSpan>
-            <H6 ml="8px">Ziaomi</H6>
+            <SemiSpan>Marca:</SemiSpan>
+            <H6 ml="8px">Titan Decko</H6>
           </FlexBox>
 
           <FlexBox alignItems="center" mb="1rem">
-            <SemiSpan>Rated:</SemiSpan>
+            <SemiSpan>Calificaciones:</SemiSpan>
             <Box ml="8px" mr="8px">
               <Rating color="warn" value={4} outof={5} />
             </Box>
@@ -114,7 +114,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
               {currency(price)}
             </H2>
 
-            <SemiSpan color="inherit">Stock Available</SemiSpan>
+            <SemiSpan color="inherit"></SemiSpan>
           </Box>
 
           {!cartItem?.qty ? (
@@ -125,7 +125,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
               variant="contained"
               onClick={handleCartAmountChange(1)}
             >
-              Add to Cart
+              Agrgar al carrito
             </Button>
           ) : (
             <FlexBox alignItems="center" mb="36px">
@@ -156,7 +156,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
           )}
 
           <FlexBox alignItems="center" mb="1rem">
-            <SemiSpan>Sold By:</SemiSpan>
+            <SemiSpan>Vendido por</SemiSpan>
             <Link href="/shops/scarlett-beauty">
               <H6 lineHeight="1" ml="8px">
                 Mobile Store

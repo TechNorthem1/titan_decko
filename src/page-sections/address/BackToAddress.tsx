@@ -11,7 +11,7 @@ const BackToAddress = () => {
       bg="primary.light"
       onClick={() => push("/address")}
     >
-      Back to Address
+      Volver a mi dirección
     </Button>
   );
 };
