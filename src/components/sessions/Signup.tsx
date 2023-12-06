@@ -14,13 +14,15 @@ import { H3, H5, H6, SemiSpan, Small, Span } from "../Typography";
 import { StyledSessionCard } from "./styles";
 import App from "@models/firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
-
+import {colors} from "@utils/themeColors"
 
 
 const Signup: FC = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const auth = getAuth(App); // Inicializa la autenticación de Firebase.
-
+  const [message, setMessage] = useState("");
+  const [visibility, setVisibility] = useState(false);
+  const [color, setColor] = useState("");
 
   const togglePasswordVisibility = () => {
     setPasswordVisibility((visible) => !visible);
@@ -30,13 +32,28 @@ const Signup: FC = () => {
     console.log(values);
   };
 
-  const handleEmailPasswordSignup = async (email, password) => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      // Manejo del usuario creado, por ejemplo, guardarlo en el estado o en la base de datos
-    } catch (error) {
-      // Manejo de errores, por ejemplo, mostrar un mensaje al usuario
-    }
+  const handleEmailPasswordSignup = async (email:string, password:string) => {
+    await createUserWithEmailAndPassword(auth, email, password)
+    .then((item:any) => {
+      const user = item.user.reloadUserInfo
+      // console.log(`email: ${user.email}, passowrd: ${user.passwordHash}`)
+      setMessage("El Usuario ha sido registrado correctamente");
+      setVisibility(true);
+      setColor(colors.titan.success)
+      setTimeout(() => {
+        setMessage("");
+        setVisibility(false);
+      }, 3000);
+    })
+    .catch((error:any) => {
+      setMessage("El Usuario ya se encuntra registrado");
+      setVisibility(true);
+      setColor(colors.titan.salmon)
+      setTimeout(() => {
+        setMessage("");
+        setVisibility(false);
+      }, 3000);
+    });
   };
   
   const handleGoogleSignup = async () => {
@@ -66,9 +83,23 @@ const Signup: FC = () => {
       validationSchema: formSchema,
     });
 
+
   return (
     <StyledSessionCard mx="auto" my="2rem" boxShadow="large" borderRadius={8}>
       <form className="content" onSubmit={handleSubmit}>
+      {visibility && (
+      <H5 
+        fontWeight="600" 
+        fontSize="12px" 
+        textAlign="center" 
+        mb="0.5rem"
+        color={`${color}`}
+      >
+        {message}
+      </H5>
+    )}
+
+
         <H3 textAlign="center" mb="0.5rem">
         Crea tu cuenta
         </H3>
@@ -132,6 +163,7 @@ const Signup: FC = () => {
               </Icon>
             </IconButton>
           }
+          autocomplete="new-password"
         />
         <TextField
           mb="1rem"
@@ -158,6 +190,7 @@ const Signup: FC = () => {
               </Icon>
             </IconButton>
           }
+          autocomplete="new-password"
         />
 
         <CheckBox

@@ -22,9 +22,9 @@ interface Nav {
   extLink?: boolean;
 }
 
-type NavbarProps = { navListOpen?: boolean, categories?:any[] };
+type NavbarProps = { navListOpen?: boolean, categories?:any[], user:any };
 
-const Navbar: FC<NavbarProps> = ({ navListOpen, categories = [] }) => {
+const Navbar: FC<NavbarProps> = ({ navListOpen, categories = [], user }) => {
   const renderNestedNav = (list: any[], isRoot = false) => {
     return list?.map((nav: Nav) => {
       if (isRoot) {
@@ -168,9 +168,11 @@ const Navbar: FC<NavbarProps> = ({ navListOpen, categories = [] }) => {
           </Button>
         </Categories>
 
-        <FlexBox style={{ gap: 32 }}>
-          {renderNestedNav(navbarNavigations, true)}
-        </FlexBox>
+        {user && 
+          <FlexBox style={{ gap: 32 }}>
+            {renderNestedNav(navbarNavigations, true)}
+          </FlexBox>
+        }
       </Container>
     </StyledNavbar>
   );

@@ -16,9 +16,9 @@ import { SearchInputWithCategory } from "@component/search-box";
 import { useAppContext } from "@context/AppContext";
 import StyledHeader from "./styles";
 import UserLoginDialog from "./LoginDialog";
-import Navbar from "@component/navbar/Navbar";
-import Method from "@helpers/Method";
+import Navbar from "@component/navbar/Navbar";import Method from "@helpers/Method";
 import CategoriesApi from "@utils/__api__/categories"
+import Authentication from "@helpers/Autentication";
 
 // ====================================================================
 type HeaderProps = { isFixed?: boolean; className?: string };
@@ -30,6 +30,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
   const toggleSidenav = () => setOpen(!open);
   const [viewElementHeader, setViewElementHeader] = useState(true);
   const [categories, setCategories] = useState([]);
+  const [user, setUser] = useState({});
 
   
 
@@ -51,11 +52,19 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
       }
     };
     fetchCategories();
+    getDataUser();
   }, [])
 
 
   // Separate effect to log categories when it updates
   useEffect(() => {}, [categories]);
+  useEffect(() => {}, [user]);
+
+  // obtain data of the localstorage
+  const getDataUser = ()=> {
+    let user = Authentication.desencrypt();
+    setUser(user);
+  }
 
                                                                                                                                       
   const CART_HANDLE = (
@@ -110,13 +119,15 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
           </FlexBox>
 
           <FlexBox className="header-right" alignItems="center">
-            {viewElementHeader &&
+            {viewElementHeader && !user &&
               <UserLoginDialog handle={LOGIN_HANDLE}>
                 <div>
                   <Login />
                 </div>
               </UserLoginDialog>
             }
+
+            {user && "salir"}
 
             {viewElementHeader && 
               <Sidenav
@@ -135,7 +146,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
             }
           </FlexBox>
       </Container>
-      {viewElementHeader && <Navbar categories={categories}/>
+      {viewElementHeader && <Navbar categories={categories} user={user}/>
         }
     </StyledHeader>
   );

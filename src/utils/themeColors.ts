@@ -26,7 +26,8 @@ const titanColor = {
   gray: "#CFCFCF",
   bg: "#f5f5f5",
   salmon: "#FF5D5D",
-  dark: "#000000"
+  dark: "#000000",
+  success: "#5cb85c"
 }
 
 

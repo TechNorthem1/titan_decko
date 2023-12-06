@@ -20,31 +20,49 @@ import {
   FacebookAuthProvider,
   GoogleAuthProvider,
 } from "firebase/auth";
+import { colors } from "@utils/themeColors";
+import Authentication from "@helpers/Autentication";
+
 
 const Login: FC = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const router = useRouter();
   const auth = getAuth(App); // Inicializa la autenticación de Firebase.
-
+  const [message, setMessage] = useState("");
+  const [visibility, setVisibility] = useState(false);
+  const [color, setColor] = useState("");
 
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
   }, []);
 
   const handleFormSubmit = async (values: { email: string; password: string }) => {
-    try {
-      await signInWithEmailAndPassword(auth, values.email, values.password);
-      router.push("/profile");
-    } catch (error) {
-      console.error(error);
-    }
+
+    await signInWithEmailAndPassword(auth, values.email, values.password)
+    .then((data:any) =>{
+      const user = JSON.stringify(data.user.reloadUserInfo);
+      let {key, param} = Authentication.encryp(user);
+      localStorage.setItem(key, param);
+      router.push(`/perfil`);
+    })
+    .catch((error: any) => {
+      setVisibility(true);
+      setMessage("Las credenciales son incorrectas");
+      setColor(colors.titan.salmon)
+      setTimeout(() => {
+        setVisibility(false);
+        setMessage("");
+      }, 3000);
+    });
+
+
   };
   
   const handleFacebookLogin = async () => {
     const provider = new FacebookAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      router.push("/profile");
+      router.push("/perfil");
     } catch (error) {
       console.error(error);
       // Manejar errores aquí
@@ -55,7 +73,7 @@ const Login: FC = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      router.push("/profile");
+      router.push("/perfil");
     } catch (error) {
       console.error(error);
       // Manejar errores aquí
@@ -72,6 +90,18 @@ const Login: FC = () => {
   return (
     <StyledSessionCard mx="auto" my="2rem" boxShadow="large" borderRadius={8}>
       <form className="content" onSubmit={handleSubmit}>
+        { visibility &&
+          <H5
+            fontWeight="600"
+            fontSize="12px"
+            color={color}
+            textAlign="center"
+            mb=".5rem"
+          >
+            {message}
+          </H5>
+        }
+
         <H3 textAlign="center" mb="0.5rem">
           Te damos la bienvenida a Titan Decko
         </H3>
