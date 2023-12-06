@@ -111,6 +111,7 @@ const Section1: FC<Props> = ({ carouselData }) => {
                   objectFit="contain"
                   src={item.imgUrl}
                   alt="bonik"
+                  priority
                 />
               </Box>
             </ContentWrapper>

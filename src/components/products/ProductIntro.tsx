@@ -18,7 +18,7 @@ import { currency } from "@utils/utils";
 type ProductIntroProps = {
   price: number;
   title: string;
-  images: string[];
+  images: any[];
   id: string | number;
 };
 // ========================================

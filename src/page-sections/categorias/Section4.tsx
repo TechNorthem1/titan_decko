@@ -49,6 +49,7 @@ const Section4: FC<Props> = ({ title, products, params} ) => {
                 rating={item.rating}
                 images={item.images as string[]}
                 imgUrl={item.images[0].src}
+                salePrice={item.sale_price}
               />
             </Box>
           ))}

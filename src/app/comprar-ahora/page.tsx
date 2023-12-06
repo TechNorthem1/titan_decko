@@ -12,7 +12,7 @@ import Section4 from "@sections/comprar-ahora/section4/"
 
 
 
-export const page = () => {
+const page = () => {
     const [model, setModel] = useState({
         email: "",
         name: "",
@@ -49,14 +49,17 @@ export const page = () => {
     }, [])
 
     const action_continue = () => {
-
-        let btn_edit = document.querySelector(".btn_edit");
-        let form = document.querySelector(".form-data_person");
-        let information = document.querySelector(".info_personal");
-    
-        form.classList.add("deactivate");
-        btn_edit.classList.add("activate");
-        information.classList.add("activate");
+        try{
+            let btn_edit = document.querySelector(".btn_edit");
+            let form = document.querySelector(".form-data_person");
+            let information = document.querySelector(".info_personal");
+            
+            form.classList.add("deactivate");
+            btn_edit.classList.add("activate");
+            information.classList.add("activate");
+        }catch(error){
+            error;
+        }
 
     }
 
@@ -88,7 +91,7 @@ export const page = () => {
         }
     }
 
-    const handleChange = (event) => {
+    const handleChange = (event:any) => {
         const { name, value } = event.target;
         setModel({
           ...model,

@@ -24,11 +24,11 @@ const ProductCard9List: FC<Props> = ({ products, totalPage }) => {
           slug={item.slug}
           title={item.name}
           price={item.regular_price}
-          salePrice={4000}
           imgUrl={item.images[0].src}
           images={item.images}
           rating={item.rating}
-          categories={item.categories}
+          salePrice={item.sale_price}
+          // categories={item.categories}
         />
       ))}
       {parseInt(totalPage)/30 > 1 && (
@@ -39,7 +39,7 @@ const ProductCard9List: FC<Props> = ({ products, totalPage }) => {
           mt="32px"
         >
           <SemiSpan color={colors.titan.dark}>Mostrando 1-{Math.ceil(parseInt(totalPage)/30)} de {products.length} Productos</SemiSpan>
-          <Pagination pageCount={parseInt(totalPage)/30} />
+          <Pagination pageCount={Math.ceil(parseInt(totalPage)/30)} />
         </FlexBox>
       )}
     </Fragment>

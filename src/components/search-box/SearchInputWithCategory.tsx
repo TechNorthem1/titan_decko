@@ -2,26 +2,24 @@ import { FC, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { debounce } from "lodash";
 import Box from "../Box";
-import Menu from "../Menu";
 import Card from "../Card";
 import Icon from "../icon/Icon";
-import FlexBox from "../FlexBox";
 import MenuItem from "../MenuItem";
 import { Span } from "../Typography";
 import TextField from "../text-field";
 import StyledSearchBox from "./styled";
+import Products from "@utils/__api__/productos"
+
 
 const SearchInputWithCategory: FC = () => {
-  const [resultList, setResultList] = useState<string[]>([]);
+  const [resultList, setResultList] = useState<any[]>([]);
   const [category, setCategory] = useState("Categorias");
-
   const handleCategoryChange = (cat: string) => () => setCategory(cat);
-
-  const search = debounce((e) => {
+  const search = debounce(async (e) => {
     const value = e.target?.value;
-
-    if (!value) setResultList([]);
-    else setResultList(dummySearchResult);
+    const products = await Products.productsBySearched(`products?search=${value}&per_page=9`);
+    if (!value) setResultList(products);
+    else setResultList(products);
   }, 200);
 
   const hanldeSearch = useCallback((event: any) => {
@@ -37,7 +35,7 @@ const SearchInputWithCategory: FC = () => {
   }, []);
 
   return (
-    <Box position="relative" flex="1 1 0" maxWidth="670px" mx="auto">
+    <Box style={{position: "relative", flex: "1 1 0", maxWidth: "670px"}} mx="auto">
       <StyledSearchBox>
         <Icon className="search-icon" size="18px" style={{color: "black"}}>
           search
@@ -61,9 +59,9 @@ const SearchInputWithCategory: FC = () => {
           zIndex={99}
         >
           {resultList.map((item) => (
-            <Link href={`/product/search/${item}`} key={item}>
-              <MenuItem key={item}>
-                <Span fontSize="14px">{item}</Span>
+            <Link href={`/producto/${item.name}/${item.id}`} key={item.id}>
+              <MenuItem key={item.id}>
+                <Span fontSize="14px">{item.name}</Span>
               </MenuItem>
             </Link>
           ))}
@@ -72,24 +70,5 @@ const SearchInputWithCategory: FC = () => {
     </Box>
   );
 };
-
-const categories = [
-  "Ofertas",
-  "Paredes 3D",
-  "Organizacion",
-  "Paneles decorativos",
-  "Vinilos para vidrios",
-  "Molduras flexibles",
-  "Malla",
-  "Tapetes",
-  "Griferia"
-];
-
-const dummySearchResult = [
-  "Macbook Air 13",
-  "Ksus K555LA",
-  "Acer Aspire X453",
-  "iPad Mini 3",
-];
 
 export default SearchInputWithCategory;

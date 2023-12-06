@@ -111,6 +111,7 @@ interface ProductCard1Props extends CardProps {
   rating: number;
   images: string[];
   id?: string | number;
+  salePrice?:number;
 }
 // =======================================================================
 
@@ -123,6 +124,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
   imgUrl,
   images,
   rating = 4,
+  salePrice,
   ...props
 }) => {
   const [open, setOpen] = useState(false);
@@ -130,7 +132,6 @@ const ProductCard1: FC<ProductCard1Props> = ({
   const cartItem = state.cart.find((item) => item.id === id);
 
   const toggleDialog = useCallback(() => setOpen((open) => !open), []);
-
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
@@ -188,6 +189,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
               height={100}
               objectFit="cover"
               layout="responsive"
+              priority
             />
           </Link>
         </div>
@@ -268,6 +270,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
         open={open}
         onClose={toggleDialog}
         product={{ images, title, price, id: id as number | string, slug }}
+        salePrice={salePrice}
       />
     </>
   );

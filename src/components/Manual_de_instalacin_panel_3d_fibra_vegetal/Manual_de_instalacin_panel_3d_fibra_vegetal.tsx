@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Manual_de_instalacin_panel_3d_fibra_vegetal = () => {
   return (
-    <div dangerouslySetInnerHTML={ __html: ` <div data-elementor-id="5227600425202" data-elementor-post-type="page" data-elementor-type="wp-page">
+    <div dangerouslySetInnerHTML={ {__html: ` <div data-elementor-id="5227600425202" data-elementor-post-type="page" data-elementor-type="wp-page">
 <div className="e-flex e-con-boxed e-con e-parent" data-core-v316-plus="true" data-settings='{"container_type":"flex","content_width":"boxed"}'>
 <div className="e-con-inner">
 <div>
@@ -17,6 +17,6 @@ export const Manual_de_instalacin_panel_3d_fibra_vegetal = () => {
 </div>
 </div>
 </div>
-` } />
+` }} />
   );
 };

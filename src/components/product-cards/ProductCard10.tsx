@@ -112,11 +112,12 @@ type ProductCard10Props = {
   rating: number;
   images: string[];
   id: string | number;
+  salePrice?: number;
 };
 // ======================================================================
 
 const ProductCard10: FC<ProductCard10Props> = (props) => {
-  const { id, off, unit, slug, title, price, imgUrl, images} = props;
+  const { id, off, unit, slug, title, price, imgUrl, images, salePrice} = props;
 
   const [open, setOpen] = useState(false);
   const [discountPrice, setDiscountPrice] = useState<string>("");
@@ -138,7 +139,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
       payload: { price, imgUrl, id, qty, slug, name: title },
     });
   };
-
+  
   return (
     <Wrapper borderRadius={8}>
       <div className="image-holder">
@@ -184,6 +185,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
             height={100}
             layout="responsive"
             alt={title}
+            priority
           />
         </Link>
       </div>
@@ -264,6 +266,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
         open={open}
         onClose={toggleDialog}
         product={{ id, images, slug, price, title }}
+        salePrice={salePrice}
       />
     </Wrapper>
   );

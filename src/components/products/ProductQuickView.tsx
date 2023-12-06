@@ -24,6 +24,7 @@ type Props = {
 
 const ProductQuickView: FC<Props> = (props) => {
   const { open, onClose, product, salePrice } = props;
+  
   return (
     <Modal open={open} onClose={onClose}>
       <Card
@@ -36,7 +37,7 @@ const ProductQuickView: FC<Props> = (props) => {
         <ProductIntro
           id={product.id}
           title={product.title}
-          price={30000}
+          price={Helpers.totalDisscount(salePrice, product.price)}
           images={product.images}
         />
 

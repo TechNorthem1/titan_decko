@@ -12,6 +12,11 @@ class Productos {
         return response;
     }
 
+    static productsBySearched = async (url:string):Promise<any[]> => {
+        const response = await Method.all(url);
+        return await response.json()
+    }
+
 }
 
 
