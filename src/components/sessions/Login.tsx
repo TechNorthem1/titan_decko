@@ -23,8 +23,11 @@ import {
 import { colors } from "@utils/themeColors";
 import Authentication from "@helpers/Autentication";
 
+interface LoginProps {
+  redirect: any;
+}
 
-const Login: FC = (redirect) => {
+const Login: FC<LoginProps> = ({redirect}) => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const router = useRouter();
   const auth = getAuth(App); // Inicializa la autenticación de Firebase.
