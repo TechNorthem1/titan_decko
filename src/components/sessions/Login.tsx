@@ -24,7 +24,7 @@ import { colors } from "@utils/themeColors";
 import Authentication from "@helpers/Autentication";
 
 interface LoginProps {
-  redirect: any;
+  redirect?: any;
 }
 
 const Login: FC<LoginProps> = ({redirect}) => {
