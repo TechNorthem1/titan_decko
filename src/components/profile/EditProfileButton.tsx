@@ -1,13 +1,14 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { Button } from "@component/buttons";
+import { colors } from "@utils/themeColors";
+
 
 const EditProfileButton = () => {
   const { push } = useRouter();
   return (
     <Button
-      color="primary"
-      bg="primary.light"
+      style={{color: colors.titan.dark, backgroundColor: colors.titan.yellow}}
       px="2rem"
       onClick={() => push("/profile/edit")}
     >

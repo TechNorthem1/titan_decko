@@ -49,17 +49,17 @@ const navbarNavigations = [
     title: "Perfil",
     child: [
       {
-        title: "Orders",
+        title: "Ordenes",
         child: [
           { title: "Order List", url: "/orders" },
           { title: "Order Details", url: "/orders/f0ba538b-c8f3-45ce-b6c1-209cf07ba5f8" },
         ],
       },
       {
-        title: "Profile",
+        title: "Perfil",
         child: [
-          { title: "View Profile", url: "/profile" },
-          { title: "Edit Profile", url: "/profile/edit" },
+          { title: "Ver Perfil", url: "/perfil" },
+          { title: "Editar Perfil", url: "/perfil/edit" },
         ],
       },
       {

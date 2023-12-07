@@ -1,3 +1,4 @@
+"use client"
 import React, { Fragment } from 'react'
 import Sticky from "@component/sticky";
 import { Header } from "@component/header";

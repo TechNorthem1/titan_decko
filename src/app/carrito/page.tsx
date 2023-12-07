@@ -1,5 +1,5 @@
 "use client";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Button } from "@component/buttons";
 import { Card1 } from "@component/Card1";
 import { currency } from "@utils/utils";
@@ -16,11 +16,17 @@ import TextField from "@component/text-field";
 import Typography from "@component/Typography";
 import countryList from "@data/countryList";
 import Section1 from "@sections/carrito/section";
+import Helpers from "@helpers/Helpers";
 
 
 const Cart = () => {
   const { state } = useAppContext();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  useEffect(() => {
+    let Authenticated = Helpers.isAuthenticated();
+    setIsAuthenticated(Authenticated);
+  }, [])
   const getTotalPrice = () => {
     return (
       state.cart.reduce(
@@ -49,7 +55,7 @@ const Cart = () => {
         </Grid>
 
         <Grid item lg={4} md={4} xs={12}>
-          <Section1 />
+          <Section1 isAuthenticated={isAuthenticated}/>
         </Grid>
       </Grid>
     </Fragment>

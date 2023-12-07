@@ -14,6 +14,7 @@ import Categories from "../categories/Categories";
 import StyledNavbar from "./styles";
 import navbarNavigations from "@data/navbarNavigations";
 
+
 interface Nav {
   url: string;
   child: Nav[];
@@ -22,9 +23,9 @@ interface Nav {
   extLink?: boolean;
 }
 
-type NavbarProps = { navListOpen?: boolean, categories?:any[], user:any };
+type NavbarProps = { navListOpen?: boolean, categories?:any[], isAuthenticated?:any };
 
-const Navbar: FC<NavbarProps> = ({ navListOpen, categories = [], user }) => {
+const Navbar: FC<NavbarProps> = ({ navListOpen, categories = [], isAuthenticated }) => {
   const renderNestedNav = (list: any[], isRoot = false) => {
     return list?.map((nav: Nav) => {
       if (isRoot) {
@@ -168,7 +169,7 @@ const Navbar: FC<NavbarProps> = ({ navListOpen, categories = [], user }) => {
           </Button>
         </Categories>
 
-        {user && 
+        {isAuthenticated && 
           <FlexBox style={{ gap: 32 }}>
             {renderNestedNav(navbarNavigations, true)}
           </FlexBox>

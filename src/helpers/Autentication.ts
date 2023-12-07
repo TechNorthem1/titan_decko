@@ -11,9 +11,13 @@ class Authentication {
     }
 
     static desencrypt = () => {
-        let key:string = Authentication.encriptKey();
-        let user = localStorage.getItem(key) === undefined ? null : localStorage.getItem(key);
-        return  user === null ? null : JSON.parse(Crypto.AES.decrypt(user, key).toString(Crypto.enc.Utf8));
+        try{
+            let key:string = Authentication.encriptKey();
+            let user = localStorage.getItem(key) === undefined ? null : localStorage.getItem(key);
+            return  user === null ? null : JSON.parse(Crypto.AES.decrypt(user, key).toString(Crypto.enc.Utf8));
+        }catch(error){
+            error;
+        }
     }
 
     static encriptKey = () => {

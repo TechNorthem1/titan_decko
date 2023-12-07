@@ -8,7 +8,7 @@ import Divider from "@component/Divider";
 import FlexBox from "@component/FlexBox";
 import { useRouter } from "next/navigation";
 import TextField from "@component/text-field";
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { Button, IconButton } from "@component/buttons";
 import { H3, H5, H6, SemiSpan, Small, Span } from "@component/Typography";
 import { StyledSessionCard } from "./styles";
@@ -24,7 +24,7 @@ import { colors } from "@utils/themeColors";
 import Authentication from "@helpers/Autentication";
 
 
-const Login: FC = () => {
+const Login: FC = (redirect) => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const router = useRouter();
   const auth = getAuth(App); // Inicializa la autenticación de Firebase.
@@ -37,13 +37,13 @@ const Login: FC = () => {
   }, []);
 
   const handleFormSubmit = async (values: { email: string; password: string }) => {
-
+    let url:any = redirect
     await signInWithEmailAndPassword(auth, values.email, values.password)
     .then((data:any) =>{
       const user = JSON.stringify(data.user.reloadUserInfo);
       let {key, param} = Authentication.encryp(user);
       localStorage.setItem(key, param);
-      router.push(`/perfil`);
+      router.push(url.redirect);
     })
     .catch((error: any) => {
       setVisibility(true);

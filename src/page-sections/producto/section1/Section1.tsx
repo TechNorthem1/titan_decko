@@ -1,39 +1,58 @@
+"use client"
 import Container from "@component/Container"
 import Grid from "@component/grid/Grid";
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { colors } from "theme/colors";
 import Whatsapp from "@component/whatsapp";
 import "./style.css"
 import Link from "next/link";
 import { calculateDiscount } from "@utils/utils";
 import Helpers from "@helpers/Helpers";
+import api from "@utils/__api__/productos";
+import UserLoginDialog from "@component/header/LoginDialog";
+import { Button } from "@component/buttons";
+import {colors as color} from "@utils/themeColors";
+import Login from "@component/sessions/Login";
 
-const Section1 = ({product, url}) => {
+const Section1 = ({params, url, isAuthenticated}) => {
+    const [product, setProduct] = useState<any>({});
+    useEffect(()=> {getProduct()}, []);
+    useEffect(()=> {}, [product]);
+
+    const getProduct = async () => {
+        let data = await api.getProduct(`products/${params.id}`);
+        setProduct(data)
+    }
+
     const off = Helpers.disscount(product.sale_price, product.regular_price);
     const price = calculateDiscount(product.regular_price, off);
     const images = product.images;
     const quantitys = []
     for (let index = 1; index <= product.stock_quantity; index++) {
-        quantitys.push(<option value={index}>{index}</option>);
+        quantitys.push(<option key={index} value={index}>{index}</option>);
     }
+
+    const LOGIN_HANDLE = (
+        <Button ml="1rem" bg="gray.black" p="8px" style={{width:"100%", backgroundColor:color.titan.yellow, color: color.titan.dark, marginLeft: "0", marginBottom: "10px"}}>
+          Comprar Ahora
+        </Button>
+    );
 
     return (
         <Container className="container-product" style={{background:colors.gray.gray}}>
             <Grid container spacing={3} >
                 <Grid className="container_images" item lg={2} xs={0}>
                     <div className="container_images">
-                        {images.map((image:any) => (
-                            <img src={image.src} alt={image.name} />
+                        {images != undefined && images.map((image:any) => (
+                            <img key={image.id} src={image.src} alt={image.name} />
                         ))}
-                        
-                        {/* <img src="/assets/images/titan/TIENDA-VIRTUAL-CATALOGO-DE-RODAPE-Molduras-Adhesivas-3D-Para-Paredes-12.webp" alt="" />
-                        <img src="/assets/images/titan/TIENDA-VIRTUAL-CATALOGO-DE-RODAPE-Molduras-Adhesivas-3D-Para-Paredes-12.webp" alt="" /> */}
+
                     </div>
                 </Grid>
 
                 <Grid item lg={6} xs={12}>
                     <div className="product_image">
-                        <img src={images[0].src} alt={images[0].name} />
+                        {images !== undefined && <img key={images[0].id} src={images[0].src} alt={images[0].name} />}
                     </div>
                 </Grid>
                 <Grid item lg={4} xs={12}>
@@ -75,7 +94,15 @@ const Section1 = ({product, url}) => {
                             </select>
                             <a href="" className="btn-add-cart">Añadir Al Carrito</a>
                             <Whatsapp title={product.name} price={price} url={url}/>
-                            <Link href={"/comprar-ahora"} className="btn-buy-now">Comprar Ahora</Link>
+                            
+                            {!isAuthenticated && <Link href={"/comprar-ahora"} className="btn-buy-now">Comprar Ahora</Link>}
+                            {isAuthenticated &&  
+                                <UserLoginDialog handle={LOGIN_HANDLE}>
+                                <div>
+                                    <Login redirect="/comprar-ahora"/>
+                                </div>
+                                </UserLoginDialog>
+                            }
                         </div>
 
                         <div className="pay-security">

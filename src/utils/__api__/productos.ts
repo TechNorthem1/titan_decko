@@ -7,7 +7,7 @@ class Productos {
         return {products:await response.json(), totalPage: response.headers.get("X-WP-Total")};
     }
 
-    static getProduct = async (url:string): Promise <any[]> => {
+    static getProduct = async (url:string): Promise <any> => {
         const response = await Method.getOne(url);
         return response;
     }

@@ -9,10 +9,14 @@ import Section1 from "@sections/comprar-ahora/section1/"
 import Section2 from "@sections/comprar-ahora/section2/"
 import Section3 from "@sections/comprar-ahora/section3/"
 import Section4 from "@sections/comprar-ahora/section4/"
+import Authentication from '@helpers/Autentication';
+import { useRouter } from 'next/navigation'
 
 
 
 const page = () => {
+    const [user, setUser] = useState({});
+    const router = useRouter();
     const [model, setModel] = useState({
         email: "",
         name: "",
@@ -32,6 +36,8 @@ const page = () => {
         addressee: ""
     });
 
+
+
     const [isVisible, setVisibleForm] = useState(false);
 
     useEffect(() => {
@@ -45,6 +51,13 @@ const page = () => {
             action_continue();
         }else{
             btn_continue_send();
+        }
+
+        let dataUser = Authentication.desencrypt();
+        if (dataUser=== null){
+            router.push("/");
+        }else{
+            setUser(dataUser);
         }
     }, [])
 

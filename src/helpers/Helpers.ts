@@ -1,3 +1,5 @@
+import Authentication from "./Autentication";
+
 class Helpers {
 
     static disscount = (sale_price:number, regular_price:number):number => {
@@ -15,6 +17,12 @@ class Helpers {
         let total = regular_price - regular_price * off; 
         return  total;
     }
+
+    static isAuthenticated = () => {
+        let data = Authentication.desencrypt();
+        return data === null;
+    }
+
 }
 
 export default Helpers;

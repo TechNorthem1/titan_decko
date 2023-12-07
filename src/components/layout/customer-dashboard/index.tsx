@@ -7,14 +7,15 @@ import Container from "@component/Container";
 import Navbar from "@component/navbar/Navbar";
 import DashboardNavigation from "../DashboardNavigation";
 
+
 // ======================================================
 type Props = { children: ReactNode };
 // ======================================================
 
 const CustomerDashboardLayout: FC<Props> = ({ children }) => {
   return (
-    <AppLayout navbar={<Navbar />}>
-      <Container my="2rem">
+    <AppLayout>
+      <Container my="2rem" marginTop={"20px"}>
         <Grid container spacing={6}>
           <Hidden as={Grid} item lg={3} xs={12} down={1024}>
             <DashboardNavigation />

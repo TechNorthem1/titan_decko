@@ -1,17 +1,18 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { Button } from "@component/buttons";
+import { colors } from "@utils/themeColors";
 
 const BackToProfileButton = () => {
   const { push } = useRouter();
   return (
     <Button
-      color="primary"
-      bg="primary.light"
+      style={{color: colors.titan.dark, backgroundColor: colors.titan.yellow}}
+      
       px="2rem"
-      onClick={() => push("/profile")}
+      onClick={() => push("/perfil")}
     >
-      Back to Profile
+      Ver Perfil
     </Button>
   );
 };

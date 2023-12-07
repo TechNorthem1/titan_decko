@@ -191,6 +191,11 @@ const GlobalStyles = createGlobalStyle`
   border-radius: 0; 
 }
 
+.euBaoC + .section-after-sticky {
+  padding-top: inherit;
+  margin-top: 6rem;
+}
+
 
 `;
 

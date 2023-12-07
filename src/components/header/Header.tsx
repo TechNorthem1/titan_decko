@@ -9,7 +9,7 @@ import MiniCart from "@component/mini-cart";
 import Container from "@component/Container";
 import { Tiny } from "@component/Typography";
 import Login from "@component/sessions/Login";
-import { IconButton } from "@component/buttons";
+import { Button, IconButton } from "@component/buttons";
 import Sidenav from "@component/sidenav/Sidenav";
 import Categories from "@component/categories/Categories";
 import { SearchInputWithCategory } from "@component/search-box";
@@ -19,6 +19,10 @@ import UserLoginDialog from "./LoginDialog";
 import Navbar from "@component/navbar/Navbar";import Method from "@helpers/Method";
 import CategoriesApi from "@utils/__api__/categories"
 import Authentication from "@helpers/Autentication";
+import { usePathname, useRouter } from "next/navigation";
+import Helpers from "@helpers/Helpers";
+
+
 
 // ====================================================================
 type HeaderProps = { isFixed?: boolean; className?: string };
@@ -30,8 +34,8 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
   const toggleSidenav = () => setOpen(!open);
   const [viewElementHeader, setViewElementHeader] = useState(true);
   const [categories, setCategories] = useState([]);
-  const [user, setUser] = useState({});
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
   
 
   useEffect(()=> {
@@ -58,12 +62,18 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
 
   // Separate effect to log categories when it updates
   useEffect(() => {}, [categories]);
-  useEffect(() => {}, [user]);
+  useEffect(() => {}, [isAuthenticated]);
 
   // obtain data of the localstorage
   const getDataUser = ()=> {
-    let user = Authentication.desencrypt();
-    setUser(user);
+    let authenticated = Helpers.isAuthenticated();
+    setIsAuthenticated(authenticated);
+  }
+
+  const close = () => {
+    let key:string = Authentication.encriptKey();
+    localStorage.removeItem(key);
+    router.push("/");
   }
 
                                                                                                                                       
@@ -99,6 +109,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
     </IconButton>
   );
 
+
   return (
     <StyledHeader className={className}>
       <Container
@@ -119,15 +130,13 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
           </FlexBox>
 
           <FlexBox className="header-right" alignItems="center">
-            {viewElementHeader && !user &&
+            {viewElementHeader && isAuthenticated &&
               <UserLoginDialog handle={LOGIN_HANDLE}>
                 <div>
-                  <Login />
+                  <Login redirect="/" />
                 </div>
               </UserLoginDialog>
             }
-
-            {user && "salir"}
 
             {viewElementHeader && 
               <Sidenav
@@ -144,9 +153,16 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
             {!viewElementHeader && 
               <Link href={"/"} >Seguir Comprando</Link>
             }
+
+
+            {!isAuthenticated && 
+              <IconButton ml="1rem" bg="gray.black" p="8px" onClick={close}>
+                <Icon size="28px">closed</Icon>
+              </IconButton>
+            }
           </FlexBox>
       </Container>
-      {viewElementHeader && <Navbar categories={categories} user={user}/>
+      {viewElementHeader && <Navbar categories={categories} isAuthenticated={!isAuthenticated}/>
         }
     </StyledHeader>
   );

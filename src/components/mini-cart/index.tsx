@@ -5,16 +5,21 @@ import Icon from "@component/icon/Icon";
 import Divider from "@component/Divider";
 import FlexBox from "@component/FlexBox";
 import Avatar from "@component/avatar";
-import { Button } from "@component/buttons";
+import { Button, IconButton } from "@component/buttons";
 import Typography, { H5, Paragraph, Tiny } from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
 import { StyledMiniCart } from "./styles";
 import { currency } from "@utils/utils";
+import Helper from "@helpers/Helpers";
+import UserLoginDialog from "@component/header/LoginDialog";
+import Login from "@component/sessions/Login";
+import { colors } from "@utils/themeColors";
+
 
 type MiniCartProps = { toggleSidenav?: () => void };
-
 const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
   const { state, dispatch } = useAppContext();
+  const isAuthenticated = Helper.isAuthenticated();
 
   const handleCartAmountChange = (amount: number, product: any) => () => {
     dispatch({
@@ -31,6 +36,12 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
       ) || 0
     );
   };
+
+  const LOGIN_HANDLE = (
+    <Button ml="1rem" bg="gray.black" p="8px" style={{width:"50%", backgroundColor:colors.titan.yellow, color: colors.titan.dark, marginBottom: "10px"}}>
+      Comprar Ahora
+    </Button>
+  );
 
   return (
     <StyledMiniCart>
@@ -148,18 +159,31 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
 
       {!!state.cart.length && (
         <Fragment>
-          <Link href="/comprar-ahora">
-            <Button
-              color="primary"
-              variant="contained"
-              m="1rem 1rem 0.75rem"
-              onClick={toggleSidenav}
-            >
-              <Typography fontWeight={600}>
-                Pagar ({currency(getTotalPrice())})
-              </Typography>
-            </Button>
-          </Link>
+          {!isAuthenticated &&
+            <Link href="/comprar-ahora">
+              <Button
+                color="primary"
+                variant="contained"
+                m="1rem 1rem 0.75rem"
+                onClick={toggleSidenav}
+              >
+                
+                  <Typography fontWeight={600}>
+                    Pagar ({currency(getTotalPrice())})
+                  </Typography>
+              </Button>
+            </Link>
+          }
+
+          {isAuthenticated &&
+              <UserLoginDialog handle={LOGIN_HANDLE}>
+               <div>
+                 <Login  redirect="/comprar-ahora"/>
+               </div>
+             </UserLoginDialog>
+             
+          }
+
 
           <Link href="/carrito">
             <Button

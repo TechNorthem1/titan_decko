@@ -1,5 +1,5 @@
 "use client"
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Box from "@component/Box";
 import { format } from "date-fns";
 import Card from "@component/Card";
@@ -11,11 +11,11 @@ import TableRow from "@component/TableRow";
 import Typography, { H3, H5, Small } from "@component/Typography";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import EditProfileButton from "@component/profile/EditProfileButton";
-import Authentication from "@helpers/Autentication";
+import { useRouter } from "next/navigation";
 
 const Profile = () => {
-  const user: any = User.getUser();
-
+  const [user, setUser] = useState<any>({});
+  const router = useRouter();
   const infoList = [
     { title: "16", subtitle: "All Orders" },
     { title: "02", subtitle: "Awaiting Payments" },
@@ -23,7 +23,16 @@ const Profile = () => {
     { title: "01", subtitle: "Awaiting Delivery" },
   ];
 
-  
+  useEffect(()=> {
+    let data = User.getUser();
+    if (data === null){
+      router.push("/");
+    }else{
+      setUser(data);
+    }
+  }, [])
+
+  useEffect(() => {}, [user])
 
   return (
     <Fragment>
