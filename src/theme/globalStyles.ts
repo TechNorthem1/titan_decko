@@ -196,6 +196,10 @@ const GlobalStyles = createGlobalStyle`
   margin-top: 6rem;
 }
 
+.bwtVwD + .section-after-sticky {
+  padding-top: 20px !important;
+}
+
 
 `;
 

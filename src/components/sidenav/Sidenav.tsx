@@ -15,7 +15,7 @@ export interface SidenavProps {
   open?: boolean;
   width?: number;
   scroll?: boolean;
-  children: ReactNode;
+  children?: ReactNode;
   handle: ReactElement;
   position?: "left" | "right";
   toggleSidenav?: () => void;

@@ -24,7 +24,7 @@ const Cart = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    let Authenticated = Helpers.isAuthenticated();
+    let Authenticated = Helpers.isAuthenticated("dataUser");
     setIsAuthenticated(Authenticated);
   }, [])
   const getTotalPrice = () => {

@@ -15,7 +15,10 @@ import { StyledSessionCard } from "./styles";
 import App from "@models/firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
 import {colors} from "@utils/themeColors"
-
+import Image from "@component/Image";
+import Authentication from "@helpers/Autentication";
+import Client from "@models/Client.model";
+import FirebaseService from "@services/FirebaseService";
 
 const Signup: FC = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -32,20 +35,48 @@ const Signup: FC = () => {
     console.log(values);
   };
 
-  const handleEmailPasswordSignup = async (email:string, password:string) => {
-    await createUserWithEmailAndPassword(auth, email, password)
-    .then((item:any) => {
-      const user = item.user.reloadUserInfo
-      // console.log(`email: ${user.email}, passowrd: ${user.passwordHash}`)
+  const getDataForm = (e:any, values:any) => {
+    let client = Authentication.register(e, values);
+    handleEmailPasswordSignup(client);
+  }
+
+  const handleEmailPasswordSignup = async (client:Client) => {
+    try {
+      let user = await FirebaseService.getUser(client.email);
+      if (user.length >= 1){
+        setMessage("El usuario ya se encuntra registrado");
+        setVisibility(true);
+        setColor(colors.titan.salmon)
+        setTimeout(() => {
+          setMessage("");
+          setVisibility(false);
+        }, 3000);
+        return false;
+      }
+
+      let saveUser = await FirebaseService.createUser(client);
+
+      if (!saveUser){
+        setMessage("El usuario ya se encuntra registrado");
+        setVisibility(true);
+        setColor(colors.titan.salmon)
+        setTimeout(() => {
+          setMessage("");
+          setVisibility(false);
+        }, 3000);
+        return false;
+      }
+
+
+      await createUserWithEmailAndPassword(auth, client.email, client.password);
       setMessage("El Usuario ha sido registrado correctamente");
       setVisibility(true);
-      setColor(colors.titan.success)
+      setColor(colors.titan.success);
       setTimeout(() => {
         setMessage("");
         setVisibility(false);
       }, 3000);
-    })
-    .catch((error:any) => {
+    } catch (error) {
       setMessage("El Usuario ya se encuntra registrado");
       setVisibility(true);
       setColor(colors.titan.salmon)
@@ -53,7 +84,8 @@ const Signup: FC = () => {
         setMessage("");
         setVisibility(false);
       }, 3000);
-    });
+      console.log(error)
+    }
   };
   
   const handleGoogleSignup = async () => {
@@ -87,18 +119,23 @@ const Signup: FC = () => {
   return (
     <StyledSessionCard mx="auto" my="2rem" boxShadow="large" borderRadius={8}>
       <form className="content" onSubmit={handleSubmit}>
-      {visibility && (
-      <H5 
-        fontWeight="600" 
-        fontSize="12px" 
-        textAlign="center" 
-        mb="0.5rem"
-        color={`${color}`}
-      >
-        {message}
-      </H5>
-    )}
+        {visibility && (
+          <H5 
+            fontWeight="600" 
+            fontSize="12px" 
+            textAlign="center" 
+            mb="0.5rem"
+            color={`${color}`}
+          >
+            {message}
+          </H5>
+        )}
 
+        <FlexBox className="logo" alignItems="center" justifyContent="center">
+          <Link href={"/"}>
+            <Image src="/assets/images/logo.webp" alt="logo" />
+          </Link>
+        </FlexBox>
 
         <H3 textAlign="center" mb="0.5rem">
         Crea tu cuenta
@@ -114,84 +151,109 @@ const Signup: FC = () => {
           Por favor complete todos los datos del formulario para continuar
         </H5>
 
-        <TextField
-          fullwidth
-          name="name"
-          mb="0.75rem"
-          label="Nombre completo          "
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={values.name || ""}
-          placeholder="Nombres y apellidos"
-          errorText={touched.name && errors.name}
-        />
+        <div className="content-form-control" style={{display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap:"10px"}}>
+          <TextField
+            fullwidth
+            name="name"
+            mb="0.75rem"
+            label="Nombres completo"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.name || ""}
+            placeholder="Nombres Completos"
+            errorText={touched.name && errors.name}
+          />
+          <TextField
+            fullwidth
+            name="lastname"
+            mb="0.75rem"
+            label="Apellidos completo"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.lastname || ""}
+            placeholder="Apellidos Completos"
+            errorText={touched.lastname && errors.lastname}
+          />
 
-        <TextField
-          fullwidth
-          mb="0.75rem"
-          name="email"
-          type="email"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={values.email || ""}
-          placeholder="Correo electronico o numero celular"
-          label="Email o celular"
-          errorText={touched.email && errors.email}
-        />
+          <TextField
+            fullwidth
+            mb="0.75rem"
+            name="phone"
+            type="tel"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.phone || ""}
+            placeholder="Numero celular"
+            label="Numero celular"
+            errorText={touched.phone && errors.phone}
+          />
 
-        <TextField
-          fullwidth
-          mb="0.75rem"
-          name="password"
-          label="Contraseña"
-          placeholder="*********"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={values.password || ""}
-          errorText={touched.password && errors.password}
-          type={passwordVisibility ? "text" : "password"}
-          endAdornment={
-            <IconButton
-              p="0.25rem"
-              mr="0.25rem"
-              type="button"
-              color={passwordVisibility ? "gray.700" : "gray.600"}
-              onClick={togglePasswordVisibility}
-            >
-              <Icon variant="small" defaultcolor="currentColor">
-                {passwordVisibility ? "eye-alt" : "eye"}
-              </Icon>
-            </IconButton>
-          }
-          autocomplete="new-password"
-        />
-        <TextField
-          mb="1rem"
-          fullwidth
-          name="re_password"
-          placeholder="*********"
-          label="Confirmar Contraseña"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          value={values.re_password || ""}
-          type={passwordVisibility ? "text" : "password"}
-          errorText={touched.re_password && errors.re_password}
-          endAdornment={
-            <IconButton
-              p="0.25rem"
-              size="small"
-              mr="0.25rem"
-              type="button"
-              onClick={togglePasswordVisibility}
-              color={passwordVisibility ? "gray.700" : "gray.600"}
-            >
-              <Icon variant="small" defaultcolor="currentColor">
-                {passwordVisibility ? "eye-alt" : "eye"}
-              </Icon>
-            </IconButton>
-          }
-          autocomplete="new-password"
-        />
+          <TextField
+            fullwidth
+            mb="0.75rem"
+            name="email"
+            type="email"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.email || ""}
+            placeholder="Correo electronico"
+            label="Correo electronico"
+            errorText={touched.email && errors.email}
+          />
+          <TextField
+            fullwidth
+            mb="0.75rem"
+            name="password"
+            label="Contraseña"
+            placeholder="*********"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.password || ""}
+            errorText={touched.password && errors.password}
+            type={passwordVisibility ? "text" : "password"}
+            endAdornment={
+              <IconButton
+                p="0.25rem"
+                mr="0.25rem"
+                type="button"
+                color={passwordVisibility ? "gray.700" : "gray.600"}
+                onClick={togglePasswordVisibility}
+              >
+                <Icon variant="small" defaultcolor="currentColor">
+                  {passwordVisibility ? "eye-alt" : "eye"}
+                </Icon>
+              </IconButton>
+            }
+          />
+
+          <TextField
+            mb="1rem"
+            fullwidth
+            name="re_password"
+            placeholder="*********"
+            label="Confirmar Contraseña"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.re_password || ""}
+            type={passwordVisibility ? "text" : "password"}
+            errorText={touched.re_password && errors.re_password}
+            endAdornment={
+              <IconButton
+                p="0.25rem"
+                size="small"
+                mr="0.25rem"
+                type="button"
+                onClick={togglePasswordVisibility}
+                color={passwordVisibility ? "gray.700" : "gray.600"}
+              >
+                <Icon variant="small" defaultcolor="currentColor">
+                  {passwordVisibility ? "eye-alt" : "eye"}
+                </Icon>
+              </IconButton>
+            }
+            autocomplete="new-password"
+          />
+        </div>
 
         <CheckBox
           mb="1.75rem"
@@ -217,12 +279,7 @@ const Signup: FC = () => {
           color="primary"
           type="submit"
           fullwidth
-          onClick={(e) => {
-            e.preventDefault(); // Prevenir el comportamiento de envío del formulario
-            const email = values.email; // Suponiendo que `values` es el estado del formulario que contiene el email
-            const password = values.password; // Suponiendo que `values` contiene la contraseña
-            handleEmailPasswordSignup(email, password);
-          }}
+          onClick={(e) => { getDataForm(e, values) }}
         >
           Crear cuenta
         </Button>
@@ -285,16 +342,20 @@ const Signup: FC = () => {
 
 const initialValues = {
   name: "",
+  lastname: "",
   email: "",
+  phone: "",
   password: "",
   re_password: "",
   agreement: false,
 };
 
 const formSchema = yup.object().shape({
-  name: yup.string().required("${path} is required"),
-  email: yup.string().email("invalid email").required("${path} is required"),
-  password: yup.string().required("${path} is required"),
+  name: yup.string().required("${path} es requerido"),
+  lastname: yup.string().required("${path} es requerido"),
+  phone: yup.string().required("${path} es requerido"),
+  email: yup.string().email("invalid email").required("${path} es requerido"),
+  password: yup.string().required("${path} es requerido"),
   re_password: yup
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
@@ -310,3 +371,26 @@ const formSchema = yup.object().shape({
 });
 
 export default Signup;
+
+
+// const handleEmailPasswordSignup = async (client:Client) => {
+//   await createUserWithEmailAndPassword(auth, client.email, client.password)
+//   .then((item:any) => {      
+//     setMessage("El Usuario ha sido registrado correctamente");
+//     setVisibility(true);
+//     setColor(colors.titan.success);
+//     setTimeout(() => {
+//       setMessage("");
+//       setVisibility(false);
+//     }, 3000);
+//   })
+//   .catch((error:any) => {
+//     setMessage("El Usuario ya se encuntra registrado");
+//     setVisibility(true);
+//     setColor(colors.titan.salmon)
+//     setTimeout(() => {
+//       setMessage("");
+//       setVisibility(false);
+//     }, 3000);
+//   });
+// };

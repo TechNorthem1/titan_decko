@@ -10,7 +10,7 @@ const EditProfileButton = () => {
     <Button
       style={{color: colors.titan.dark, backgroundColor: colors.titan.yellow}}
       px="2rem"
-      onClick={() => push("/profile/edit")}
+      onClick={() => push("/perfil/edit")}
     >
       Editar Perfil
     </Button>

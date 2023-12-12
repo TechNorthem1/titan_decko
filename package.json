@@ -12,6 +12,7 @@
     "@mercadopago/sdk-react": "^0.0.15",
     "@react-native-google-signin/google-signin": "^10.1.0",
     "@styled-system/theme-get": "^5.1.2",
+    "@types/crypto-js": "^4.2.1",
     "axios": "^1.2.1",
     "axios-mock-adapter": "^1.21.2",
     "chart.js": "^4.1.1",

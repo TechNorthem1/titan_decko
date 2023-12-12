@@ -14,7 +14,7 @@ type Props = { children: ReactNode };
 
 const CustomerDashboardLayout: FC<Props> = ({ children }) => {
   return (
-    <AppLayout>
+    <AppLayout >
       <Container my="2rem" marginTop={"20px"}>
         <Grid container spacing={6}>
           <Hidden as={Grid} item lg={3} xs={12} down={1024}>

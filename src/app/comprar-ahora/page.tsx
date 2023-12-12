@@ -11,11 +11,13 @@ import Section3 from "@sections/comprar-ahora/section3/"
 import Section4 from "@sections/comprar-ahora/section4/"
 import Authentication from '@helpers/Autentication';
 import { useRouter } from 'next/navigation'
+import User from '@utils/__api__/user'
+
 
 
 
 const page = () => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState<any>();
     const router = useRouter();
     const [model, setModel] = useState({
         email: "",
@@ -41,25 +43,23 @@ const page = () => {
     const [isVisible, setVisibleForm] = useState(false);
 
     useEffect(() => {
-        let data = JSON.parse(localStorage.getItem("info_pago"));
-        if( data !== null && data.name !== "" && data.departament !== ""){
-            setModel(data);
+        let data = User.getUser("dataUser");
+        if( data !== null && data.name.strinValue !== ""){
+            // setModel(data);
             action_continue();
             btn_continue_send();
-        }else if(data !== null && data.name !==""){
-            setModel(data);
+        }else if(data !== null && data.name.stringValue !==""){
+            // setModel(data);
             action_continue();
         }else{
             btn_continue_send();
         }
-
-        let dataUser = Authentication.desencrypt();
-        if (dataUser=== null){
-            router.push("/");
-        }else{
-            setUser(dataUser);
-        }
+       
+        setUser(data);
     }, [])
+
+    useEffect(()=> {}, [user]);
+    console.log(user);
 
     const action_continue = () => {
         try{
@@ -121,6 +121,7 @@ const page = () => {
                 <Container style={{"flex": "1"}}>
                     <Grid container spacing={4} style={{"marginBottom": "30px"}}>
                         <Grid item lg={8} xs={12}>
+                            {user &&
                             <Section1 
                                 model={model} 
                                 setModel={setModel} 
@@ -129,7 +130,8 @@ const page = () => {
                                 handleChange={handleChange}
                                 visibleForm={isVisible}
                                 setVisibleForm={setVisibleForm}
-                            />
+                                user={user}
+                            />}
 
                             <Section2 
                                 model={model} 

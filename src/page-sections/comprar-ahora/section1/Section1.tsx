@@ -4,7 +4,7 @@ import "./style.css";
 import { useForm } from "react-hook-form";
 
 
-const Section1 = ({model, setModel, action_continue, show_form_send, handleChange, visibleForm, setVisibleForm}) => {
+const Section1 = ({user,model, setModel, action_continue, show_form_send, handleChange, visibleForm, setVisibleForm}) => {
   const { register, handleSubmit, formState: {errors} } = useForm({});
 
 
@@ -63,7 +63,7 @@ const Section1 = ({model, setModel, action_continue, show_form_send, handleChang
             name="email" 
             id="email"
             {...register("email", {required: "el campo es requerido", pattern: { value: /\S+@\S+\.\S+/, message: 'Ingrese un correo invalido' }})}
-            value={model?.email ?? ""}
+            value={user.email.stringValue ?? ""}
             onChange={handleChange}
           />
           {errors.email && <p className='validate-field'>{errors.email.message as string}</p>}
@@ -81,7 +81,7 @@ const Section1 = ({model, setModel, action_continue, show_form_send, handleChang
               maxLength: {value: 20, message: "el campo debe tener menos de 20 caracteres"},
               pattern: {value: /^[a-zA-Z\s]*$/, message: "el campo no debe llevar numeros"}
             })} 
-            value={ model?.name ?? ""}
+            value={ user.name.stringValue ?? ""}
             onChange={handleChange}
           />
           {errors.nameUser && <p className='validate-field'>{errors.nameUser.message as string}</p>}
@@ -99,7 +99,7 @@ const Section1 = ({model, setModel, action_continue, show_form_send, handleChang
               maxLength: {value: 20, message: "el campo debe tener menos de 20 caracteres"},
               pattern: {value: /^[a-zA-Z\s]*$/, message: "el campo no debe llevar numeros"}
             })} 
-            value={model?.lastname ?? ""}
+            value={user.lastname.stringValue ?? ""}
             onChange={handleChange}
           />
           {errors.lastname && <p className='validate-field'>{errors.lastname.message as string}</p>}
@@ -136,7 +136,7 @@ const Section1 = ({model, setModel, action_continue, show_form_send, handleChang
               minLength: {value: 10,  message: "el campo debe contener 10 numeros"},
               pattern: {value: /^\d*$/, message:"el campo no debe contener caracteres"}
             })}
-            value={model?.phone ?? ""}
+            value={user.phone.stringValue ?? ""}
             onChange={handleChange}
           />
 
@@ -150,9 +150,9 @@ const Section1 = ({model, setModel, action_continue, show_form_send, handleChang
 
       <div className="info_personal">
         <div className="data_sent">
-          <span>correo: {model && model.email }</span>
-          <span>nombre: {model && model.name} {model && model.lastname}</span>
-          <span>telefono / movil: {model && model.phone}</span>
+          <span>correo: {user && user.email.stringValue }</span>
+          <span>nombre: {user && user.name.stringValue} {model && model.lastname}</span>
+          <span>telefono / movil: {user && user.phone.stringValue}</span>
         </div>
         <a>no soy yo, cerrar sesion</a>
       </div>

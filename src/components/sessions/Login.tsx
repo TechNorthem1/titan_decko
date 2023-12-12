@@ -22,6 +22,8 @@ import {
 } from "firebase/auth";
 import { colors } from "@utils/themeColors";
 import Authentication from "@helpers/Autentication";
+import Image from "@component/Image";
+import FirebaseService from "@services/FirebaseService";
 
 interface LoginProps {
   redirect?: any;
@@ -40,15 +42,30 @@ const Login: FC<LoginProps> = ({redirect}) => {
   }, []);
 
   const handleFormSubmit = async (values: { email: string; password: string }) => {
-    let url:any = redirect
-    await signInWithEmailAndPassword(auth, values.email, values.password)
-    .then((data:any) =>{
-      const user = JSON.stringify(data.user.reloadUserInfo);
-      let {key, param} = Authentication.encryp(user);
+    try{
+      let user:any = await FirebaseService.getUser(values.email);
+      if(user.length == 0){
+        setVisibility(true);
+        setMessage("Las credenciales son incorrectas");
+        setColor(colors.titan.salmon)
+        setTimeout(() => {
+          setVisibility(false);
+          setMessage("");
+        }, 3000);
+        return false;
+      }
+      
+      let request:any = await signInWithEmailAndPassword(auth, values.email, values.password);
+      let data = JSON.stringify(user[0]._document.data.value.mapValue.fields);
+      let token = JSON.stringify(request.user.accessToken);
+
+
+      let {key, param} = Authentication.encryp("dataUser", data);
+      let {keyToken, tokenEcrypt} = Authentication.encriptToken(token);
       localStorage.setItem(key, param);
-      router.push(url.redirect);
-    })
-    .catch((error: any) => {
+      // localStorage.setItem(keyToken, tokenEcrypt);
+      router.push(redirect);
+    }catch(e){
       setVisibility(true);
       setMessage("Las credenciales son incorrectas");
       setColor(colors.titan.salmon)
@@ -56,9 +73,7 @@ const Login: FC<LoginProps> = ({redirect}) => {
         setVisibility(false);
         setMessage("");
       }, 3000);
-    });
-
-
+    }
   };
   
   const handleFacebookLogin = async () => {
@@ -104,7 +119,11 @@ const Login: FC<LoginProps> = ({redirect}) => {
             {message}
           </H5>
         }
-
+        <FlexBox className="logo" alignItems="center" justifyContent="center">
+          <Link href={"/"}>
+            <Image src="/assets/images/logo.webp" alt="logo" />
+          </Link>
+        </FlexBox>
         <H3 textAlign="center" mb="0.5rem">
           Te damos la bienvenida a Titan Decko
         </H3>

@@ -17,7 +17,7 @@ const Producto = ({params}) => {
   const url = `http://localhost:3000/producto/${params.slug}/${params.id}`;
 
   useEffect(() => {
-    let authenticated = Helpers.isAuthenticated();
+    let authenticated = Helpers.isAuthenticated("dataUser");
     setIsAuthenticated(authenticated)
   }, [])
 

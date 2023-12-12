@@ -46,6 +46,14 @@ const Section1 = ({isAuthenticated}) => {
                         </div>
                     </UserLoginDialog>
                 }
+
+                {!isAuthenticated && 
+                    <Link href={"/comprar-ahora"} >
+                        <Button ml="1rem" bg="gray.black" p="8px" style={{width: "100%",backgroundColor:colors.titan.yellow, color: colors.titan.dark, marginLeft: "0"}}>
+                            Comprar Ahora
+                        </Button>
+                    </Link>
+                }
             </div>
         </div>
     </>

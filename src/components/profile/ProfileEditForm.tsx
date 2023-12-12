@@ -9,16 +9,18 @@ import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
 import Grid from "@component/grid/Grid";
 import TextField from "@component/text-field";
-import User from "@models/user.model";
-import { format } from "date-fns";
 
-const ProfileEditForm = ({ user }: { user: User }) => {
+interface ProfileEditFormProps {
+  user:any
+}
+const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user }) => {
+
   const INITIAL_VALUES = {
-    first_name: user.name.firstName || "",
-    last_name: user.name.lastName || "",
-    email: user.email || "",
-    contact: user.phone || "",
-    birth_date: format(new Date(user.dateOfBirth), "yyyy-MM-dd") || "",
+    first_name: user.name?.stringValue || "",
+    last_name: user.lastname?.stringValue || "",
+    email: user.email?.stringValue || "",
+    phone: user.phone?.stringValue || "",
+    address: user.address?.stringValue || "",
   };
 
   const VALIDATION_SCHEMA = yup.object().shape({
@@ -83,8 +85,8 @@ const ProfileEditForm = ({ user }: { user: User }) => {
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullwidth
-                    name="first_name"
-                    label="First Name"
+                    name="name"
+                    label="Nombres"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.first_name}
@@ -95,8 +97,8 @@ const ProfileEditForm = ({ user }: { user: User }) => {
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullwidth
-                    name="last_name"
-                    label="Last Name"
+                    name="lastname"
+                    label="Apellidos"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     value={values.last_name}
@@ -109,7 +111,7 @@ const ProfileEditForm = ({ user }: { user: User }) => {
                     fullwidth
                     name="email"
                     type="email"
-                    label="Email"
+                    label="Correo Electronico"
                     onBlur={handleBlur}
                     value={values.email}
                     onChange={handleChange}
@@ -120,25 +122,25 @@ const ProfileEditForm = ({ user }: { user: User }) => {
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullwidth
-                    label="Phone"
-                    name="contact"
+                    label="Telefono"
+                    name="phone"
                     onBlur={handleBlur}
-                    value={values.contact}
+                    value={values.phone}
                     onChange={handleChange}
-                    errorText={touched.contact && errors.contact}
+                    errorText={touched.phone && errors.phone}
                   />
                 </Grid>
 
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullwidth
-                    type="date"
-                    name="birth_date"
-                    label="Birth Date"
+                    type="text"
+                    name="address"
+                    label="Direccion"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    value={values.birth_date}
-                    errorText={touched.birth_date && errors.birth_date}
+                    value={values.address}
+                    errorText={touched.address && errors.address}
                   />
                 </Grid>
               </Grid>

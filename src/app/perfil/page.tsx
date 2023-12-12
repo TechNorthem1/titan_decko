@@ -12,9 +12,10 @@ import Typography, { H3, H5, Small } from "@component/Typography";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import EditProfileButton from "@component/profile/EditProfileButton";
 import { useRouter } from "next/navigation";
+import { colors } from "@utils/themeColors";
 
 const Profile = () => {
-  const [user, setUser] = useState<any>({});
+  const [user, setUser] = useState<any>();
   const router = useRouter();
   const infoList = [
     { title: "16", subtitle: "All Orders" },
@@ -24,7 +25,7 @@ const Profile = () => {
   ];
 
   useEffect(()=> {
-    let data = User.getUser();
+    let data:any = User.getUser("dataUser");
     if (data === null){
       router.push("/");
     }else{
@@ -32,15 +33,18 @@ const Profile = () => {
     }
   }, [])
 
-  useEffect(() => {}, [user])
 
+  useEffect(() => {}, [user])
+  
   return (
     <Fragment>
-      <DashboardPageHeader
-        iconName="user_filled"
-        title={user.email}
-        button={<EditProfileButton />}
-      />
+      {user !== undefined &&
+        <DashboardPageHeader
+          iconName="user_filled"
+          title={user.email.stringValue}
+          button={<EditProfileButton />}
+        />
+      }
 
       <Box mb="30px">
         <Grid container spacing={6}>
@@ -61,7 +65,7 @@ const Profile = () => {
                   alignItems="center"
                 >
                   <div>
-                    {/* <H5 my="0px">{`${user.name.firstName} ${user.name.lastName}`}</H5> */}
+                    {user && <H5 my="0px">{`${user.name.stringValue} ${user.lastname.stringValue}`}</H5>}
 
                     <FlexBox alignItems="center">
                       <Typography fontSize="14px" color="text.hint">
@@ -116,45 +120,43 @@ const Profile = () => {
 
       <TableRow p="0.75rem 1.5rem">
         <FlexBox flexDirection="column" p="0.5rem">
-          <Small color="text.muted" mb="4px" textAlign="left">
+          <Small color={`${colors.titan.salmon}`} mb="4px" textAlign="left">
             First Name
           </Small>
 
-          {/* <span>{user.name.firstName}</span> */}
+          {user && <span style={{color:colors.titan.dark}}>{user.name.stringValue}</span>}
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
-          <Small color="text.muted" mb="4px" textAlign="left">
+          <Small color={`${colors.titan.salmon}`} mb="4px" textAlign="left">
             Last Name
           </Small>
 
-          {/* <span>{user.name.lastName}</span> */}
+          {user && <span style={{color:colors.titan.dark}}>{user.lastname.stringValue}</span>}
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
-          <Small color="text.muted" mb="4px" textAlign="left">
+          <Small color={`${colors.titan.salmon}`} mb="4px" textAlign="left">
             Email
           </Small>
 
-          <span>{user.email}</span>
+          { user &&<span style={{color:colors.titan.dark}}>{user.email.stringValue}</span>}
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
-          <Small color="text.muted" mb="4px" textAlign="left">
+          <Small color={`${colors.titan.salmon}`} mb="4px" textAlign="left">
             Phone
           </Small>
 
-          <span>{user.phone}</span>
+          {user && <span style={{color:colors.titan.dark}}>{user.phone.stringValue}</span>}
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
-          <Small color="text.muted" mb="4px">
-            Birth date
+          <Small color={`${colors.titan.salmon}`} mb="4px">
+            Direccion
           </Small>
 
-          {/* <span className="pre">
-            {format(new Date(user.dateOfBirth), "dd MMM, yyyy")}
-          </span> */}
+          {user && <span style={{color:colors.titan.dark}}>{user.address.stringValue}</span>}
         </FlexBox>
       </TableRow>
     </Fragment>

@@ -88,7 +88,7 @@ const linkList = [
   {
     title: "DASHBOARD",
     list: [
-      { href: "/orders", title: "Orders", iconName: "bag", count: 5 },
+      { href: "/ordenes", title: "Ordenes", iconName: "bag", count: 5 },
       { href: "/wish-list", title: "Wishlist", iconName: "heart", count: 19 },
       {
         href: "/support-tickets",
@@ -99,13 +99,13 @@ const linkList = [
     ],
   },
   {
-    title: "ACCOUNT SETTINGS",
+    title: "CONFIGURACION DE LA CUENTA",
     list: [
-      { href: "/profile", title: "Profile Info", iconName: "user", count: 3 },
-      { href: "/address", title: "Addresses", iconName: "pin", count: 16 },
+      { href: "/perfil", title: "Informacion del perfil", iconName: "user", count: 3 },
+      { href: "/direcciones", title: "Direcciones", iconName: "pin", count: 16 },
       {
-        href: "/payment-methods",
-        title: "Payment Methods",
+        href: "/metodos-de-pago",
+        title: "Metodos de Pago",
         iconName: "credit-card",
         count: 4,
       },

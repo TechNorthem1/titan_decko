@@ -17,6 +17,7 @@ import {
   SpaceProps,
   variant,
 } from "styled-system";
+import {colors as titanColor } from "@utils/themeColors";
 
 interface ButtonProps {
   fullwidth?: boolean;
@@ -46,7 +47,7 @@ const StyledButton = styled.button<Props>(
       fontSize: "1rem",
       fontWeight: 600,
       fontFamily: "inherit",
-      color: color ? `${color}.main` : "body.text",
+      color: color ? `${titanColor.titan.yellow}` : "body.text",
       background: "transparent",
       transition: "all 150ms ease-in-out",
       lineHeight: 1,
@@ -80,7 +81,7 @@ const StyledButton = styled.button<Props>(
         },
         outlined: {
           padding: "10px 16px",
-          color: `${color}.main`,
+          color: `${titanColor.titan.yellow}`,
           border: "1px solid",
           borderColor: color ? `${color}.main` : "text.salmon",
 
@@ -119,7 +120,7 @@ const StyledButton = styled.button<Props>(
         contained: {
           border: "none",
           color: `${color}.text`,
-          bg: `${color}.main`,
+          bg: `${titanColor.titan.yellow}`,
           "&:focus": {
             boxShadow: `0px 1px 4px 0px ${
               theme.colors[color ? color : ""]?.light

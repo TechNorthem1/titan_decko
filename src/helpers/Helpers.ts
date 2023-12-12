@@ -18,9 +18,26 @@ class Helpers {
         return  total;
     }
 
-    static isAuthenticated = () => {
-        let data = Authentication.desencrypt();
+    static isAuthenticated = (keyUser:string) => {
+        let data = Authentication.desencrypt(keyUser);
         return data === null;
+    }
+
+    static routesPrivates = () => {
+        let validate = true;
+        const routesPrivates = ["perfil", "ordenes", "wishlist", "support ticket", "direcciones", "metodos de pago", "edit", "comprar-ahora"];
+        const url = window.location.href;
+        const isAuthenticated = Helpers.isAuthenticated("dataUser");
+        for (let i = 0; i < routesPrivates.length; i++) {
+           
+            if(url.includes(routesPrivates[i]) && isAuthenticated){
+                validate = true;
+                break;
+            }else{
+                validate = false;
+            }
+        }
+        return validate;
     }
 
 }

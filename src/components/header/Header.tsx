@@ -8,18 +8,15 @@ import FlexBox from "@component/FlexBox";
 import MiniCart from "@component/mini-cart";
 import Container from "@component/Container";
 import { Tiny } from "@component/Typography";
-import Login from "@component/sessions/Login";
-import { Button, IconButton } from "@component/buttons";
+import { IconButton } from "@component/buttons";
 import Sidenav from "@component/sidenav/Sidenav";
-import Categories from "@component/categories/Categories";
 import { SearchInputWithCategory } from "@component/search-box";
 import { useAppContext } from "@context/AppContext";
 import StyledHeader from "./styles";
-import UserLoginDialog from "./LoginDialog";
 import Navbar from "@component/navbar/Navbar";import Method from "@helpers/Method";
 import CategoriesApi from "@utils/__api__/categories"
 import Authentication from "@helpers/Autentication";
-import { usePathname, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import Helpers from "@helpers/Helpers";
 
 
@@ -57,6 +54,10 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
     };
     fetchCategories();
     getDataUser();
+    let routePrivate = Helpers.routesPrivates();
+    if (routePrivate){
+      router.push("/");
+    }
   }, [])
 
 
@@ -66,13 +67,14 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
 
   // obtain data of the localstorage
   const getDataUser = ()=> {
-    let authenticated = Helpers.isAuthenticated();
+    let authenticated = Helpers.isAuthenticated("dataUser");
     setIsAuthenticated(authenticated);
   }
 
   const close = () => {
-    let key:string = Authentication.encriptKey();
+    let key:string = Authentication.encriptKey("dataUser");
     localStorage.removeItem(key);
+    setIsAuthenticated(true);
     router.push("/");
   }
 
@@ -109,6 +111,12 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
     </IconButton>
   );
 
+  const LOGOUT_HANDLE = ( 
+    <IconButton ml="1rem" bg="gray.black" p="8px">
+      <Icon size="28px">closed</Icon>
+    </IconButton>
+  );
+
 
   return (
     <StyledHeader className={className}>
@@ -131,11 +139,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
 
           <FlexBox className="header-right" alignItems="center">
             {viewElementHeader && isAuthenticated &&
-              <UserLoginDialog handle={LOGIN_HANDLE}>
-                <div>
-                  <Login redirect="/" />
-                </div>
-              </UserLoginDialog>
+              <Link href={"/login"}>{LOGIN_HANDLE}</Link>
             }
 
             {viewElementHeader && 
@@ -156,9 +160,13 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
 
 
             {!isAuthenticated && 
-              <IconButton ml="1rem" bg="gray.black" p="8px" onClick={close}>
-                <Icon size="28px">closed</Icon>
-              </IconButton>
+
+              <Sidenav
+                width={380}
+                handle={LOGOUT_HANDLE}
+                toggleSidenav={close}
+              >
+              </Sidenav>
             }
           </FlexBox>
       </Container>

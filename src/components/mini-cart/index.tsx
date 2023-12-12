@@ -19,7 +19,7 @@ import { colors } from "@utils/themeColors";
 type MiniCartProps = { toggleSidenav?: () => void };
 const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
   const { state, dispatch } = useAppContext();
-  const isAuthenticated = Helper.isAuthenticated();
+  const isAuthenticated = Helper.isAuthenticated("dataUser");
 
   const handleCartAmountChange = (amount: number, product: any) => () => {
     dispatch({
