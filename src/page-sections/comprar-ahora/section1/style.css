@@ -206,3 +206,7 @@
     color: red;
     margin: 0;
 }
+
+.close-a{
+    cursor: pointer;
+}

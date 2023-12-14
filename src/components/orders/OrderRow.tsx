@@ -11,6 +11,7 @@ import { IconButton } from "@component/buttons";
 import Typography, { H5, Small } from "@component/Typography";
 import { currency } from "@utils/utils";
 import Order from "@models/order.model";
+import {colors} from "@utils/themeColors";
 
 // =================================================
 type OrderRowProps = { order: Order };
@@ -35,7 +36,7 @@ const OrderRow: FC<OrderRowProps> = ({ order }) => {
   return (
     <Link href={`/orders/${order.id}`} passHref>
       <TableRow my="1rem" padding="6px 18px">
-        <H5 m="6px" textAlign="left">
+        <H5 m="6px" textAlign="left" color={colors.titan.dark}>
           #{order.id.substring(0, 8)}
         </H5>
 
@@ -47,17 +48,17 @@ const OrderRow: FC<OrderRowProps> = ({ order }) => {
           </Chip>
         </Box>
 
-        <Typography className="flex-grow pre" m="6px" textAlign="left">
+        <Typography className="flex-grow pre" m="6px" textAlign="left" color={colors.titan.dark}>
           {format(new Date(order.createdAt), "MMM dd, yyyy")}
         </Typography>
 
-        <Typography m="6px" textAlign="left">
+        <Typography m="6px" textAlign="left" color={colors.titan.dark}>
           {currency(order.totalPrice)}
         </Typography>
 
         <Hidden flex="0 0 0 !important" down={769}>
-          <Typography textAlign="center" color="text.muted">
-            <IconButton>
+          <Typography textAlign="center" color={colors.titan.white}>
+            <IconButton color={colors.titan.dark}>
               <Icon variant="small" defaultcolor="currentColor">
                 arrow-right
               </Icon>

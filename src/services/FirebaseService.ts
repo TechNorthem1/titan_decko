@@ -1,7 +1,9 @@
-import { getFirestore } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
+import { getFirestore, updateDoc } from "firebase/firestore";
+import { initializeApp, } from "firebase/app";
 import { collection, getDocs, query, where, addDoc} from "firebase/firestore";
+import { getAuth, signOut } from "firebase/auth";
 import Client from "@models/Client.model";
+
 
 
 
@@ -36,8 +38,10 @@ class FirebaseService {
             const user = querySnapshot.docs;
             return user;
         } catch (error) {
+            console.log(error)
             throw new Error("se ha generado un error al obtener los usuarios");
         }
+        console.log(email)
     }
 
     static createUser = async (client:Client) => {
@@ -48,6 +52,61 @@ class FirebaseService {
        } catch (error) {
         console.log(error)
        }
+    }
+
+    static updatedUser = async (client:Client, email:string) => {
+        try {
+            //obtener la conexion a firestore
+            const db = FirebaseService.initialize();
+
+            // obtener los datos del usuairo a actualizar
+            const docRef = collection(db, "users");
+            const q = query(docRef, where("email", "==", email));
+            const querySnapshot = await getDocs(q);
+            const document =  querySnapshot.docs[0].ref;
+
+            // realizar la actualizacion con los nuevos datos
+            await updateDoc(document, client.toFirestore());            
+            return true;
+
+        } catch (error) {
+            return false;
+        }
+
+
+        return true;
+    }
+
+    static updatedUserAddress = async (client:Client, email:string) => {
+        try {
+            //obtener la conexion a firestore
+            const db = FirebaseService.initialize();
+
+            // obtener los datos del usuairo a actualizar
+            const docRef = collection(db, "users");
+            const q = query(docRef, where("email", "==", email));
+            const querySnapshot = await getDocs(q);
+            const document =  querySnapshot.docs[0].ref;
+
+            // realizar la actualizacion con los nuevos datos
+            await updateDoc(document, client.toFirestoreAdress());            
+            return true;
+
+        } catch (error) {
+            console.log(error)
+            return false;
+        }
+    }
+
+
+    static logout = () => {
+        const auth = getAuth(); 
+        signOut(auth).then(() => {
+            
+        })
+        .catch((error) => {
+            error;
+        })
     }
 }
 

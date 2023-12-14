@@ -28,8 +28,9 @@ class Authentication {
 
 
     static encriptToken = (keyUser?:string, token?:string) => {
-        let keyToken:string = Authentication.encriptKey();;
-        let tokenEcrypt:string = Crypto.AES.encrypt(token, Authentication.KEY).toString();
+        let keyAuthentication = Authentication.encriptKey(Authentication.KEY);
+        let keyToken:string = Authentication.encriptKey(keyUser);
+        let tokenEcrypt:string = Crypto.AES.encrypt(token, keyAuthentication).toString();
         return {
             keyToken,
             tokenEcrypt
@@ -41,12 +42,16 @@ class Authentication {
         let client = new Client();
         client.name = values.name;
         client.lastname = values.lastname;
+        client.document = "";
         client.email = values.email;
         client.phone = values.phone;
         client.password = values.password;
         client.address = "";
         return client;
     }
+
+
+    
 }
 
 export default Authentication;

@@ -1,60 +1,81 @@
 'use client'
 import Container from '@component/Container';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "./style.css";
-import { useForm } from 'react-hook-form';
-
-const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleChange, visibleForm, setVisibleForm}) => {
-  const { register, handleSubmit, formState: {errors} } = useForm({
-  });
-
+import useForm from '@hooks/useForm';
+import Authentication from '@helpers/Autentication';
+import Client from '@models/Client.model';
+import FirebaseService from '@services/FirebaseService';
 
 
-  const onSubmit = (data:any) => {
-    setModel({
-      ...model, 
-      departament: data.departament,
-      municipaly: data.municipaly,
-      avenue: data.avenue,
-      address_complete: data.address_complete,
-      method: data.method,
-      complement_information: data.complement_information,
-      information_additional: data.information_additional,
-      neighborhood: data.neighborhood
-    })
-    localStorage.setItem("info_pago", JSON.stringify(model));
-    btn_continue_send()
+
+const Section2 = ({user, setUser}) => {
+  const {form, changed} = useForm({});
+  const [isVisible, setVisible] = useState(false)
+
+  useEffect(()=>{
+    if(user.lastname?.stringValue?.length === 0){
+      setVisible(false)
+    }else if(user.departament?.stringValue?.length > 0){
+      setVisible(false)
+    }
+    else{
+      setVisible(true)
+    }
+  }, [])
+
+  const save = async (e:any) => {
+    e.preventDefault();
+    let client:Client = new Client(
+      user.name?.stringValue, user.lastname?.stringValue, user.document?.stringValue, user.email?.stringValue, user.phone?.stringValue, user.address?.stringValue, "", 
+      form["departament"], form["municipaly"], form["avenue"], form["address1"], form["address2"], form["address3"], form["method"], form["complement_information"], 
+      form["information_aditional"], form["neighborhood"]
+    );
+    let updateuser:boolean = await FirebaseService.updatedUserAddress(client, user?.email?.stringValue);
+    if(updateuser){
+      let dataUser = await FirebaseService.getUser(user?.email?.stringValue);
+      setUser(dataUser) 
+      setVisible(false);
+    }
+    setVisible(updateuser)
   }
-
-  const isCheckedInput = (value:String) => {
-    return model && model.method === value;
-  }
-
   
+  const INITIAL_VALUE = {
+    departament: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.departament?.stringValue,
+    municipaly: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.municipaly?.stringValue,
+    avenue: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.avenue?.stringValue,
+    address1: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.address1?.stringValue,
+    address2: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.address2?.stringValue,
+    address3: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.address3?.stringValue,
+    method: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "1" : user.method?.stringValue,
+    method2: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "2" : user.method?.stringValue,
+    method3: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "3" : user.method?.stringValue,
+    complement_information: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.complement_information?.stringValue,
+    information_aditional: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.information_aditional?.stringValue,
+    neighborhood: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.neighborhood?.stringValue
+  }
+
+  useEffect(() => {}, [isVisible, user])
+
   return (
     <Container className="data_send">
-      <h1 className="title">2. Envio {visibleForm}</h1>
-      { model.departament !== "" ? (
-        <a className="btn_edit_send activate" onClick={show_form_send}>editar</a> ): "" 
-      }
-      
-      <hr className="line" />
-      <form className="form-data_send" onSubmit={handleSubmit(onSubmit)}>
+      <h1 className="title">2. Envio</h1>
+     {!isVisible && <a className="btn_edit_send activate" onClick={() => setVisible(true)}>editar</a>}
+
+      <hr className="line" /> 
+      {isVisible &&
+        <form className="form-data_send" onSubmit={save}>
         <div className="form-control departament">
           <label htmlFor="departament">Departamento</label>
           <select 
             name="departament" 
             id="departament"
-            {...register("departament", {
-              required: {value: true, message: "el campo es requerido"}
-            })}
-            onChange={handleChange}
-            value={model?.departament ?? ""}
+            onChange={changed}
+            
           >
-            <option value="">Seleccione un departamento...</option>
+            <option selected disabled>Seleccione un departamento...</option>
             <option value="Bogotá D.C">Bogotá D.C</option>
           </select>
-          {/* {model && <p className='validate-field'>{ errors.departament.message as string }</p>} */}
         </div>
 
         <div className="form-control municipaly">
@@ -62,16 +83,12 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
           <select 
             name="municipaly" 
             id="municipaly"
-            {...register("municipaly",  {
-              required: "el campo es requerido"
-            })}
-            onChange={handleChange}
-            value={model?.municipaly ?? ""}
+            onChange={changed}
+            
           >
-            <option value="">Seleccione un municipio</option>
+            <option disabled selected>Seleccione un municipio</option>
             <option value="Bogotá D.C">Bogotá D.C</option>
           </select>
-          {/* {model && <p className='validate-field'>{errors.municipaly.message as string}</p>} */}
         </div>
 
         <div className="form-control-address address">
@@ -79,49 +96,38 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
           <select 
             name="avenue" 
             id="avenue" 
-            className='avenida'
-            {...register("avenue", {
-              required: "el campo es requerido"
-            })}
-            onChange={handleChange}
-            value={model?.avenue ?? ""}
+            className='avenida' 
+            onChange={changed}
+
           >
+            <option disabled selected>Selecione tipo de via</option>
             <option value="Avenida">Avenida</option>
           </select>
           <input 
             type="text" 
-            name="number1" 
-            id="number1" 
+            name="address1" 
+            id="address1" 
             className='numero1'
-            {...register("number1", {
-              required: "el campo es requerido"
-            })}
-            value={model?.number3 ?? ""}
-            onChange={handleChange}
+            onChange={changed}
+            defaultValue={INITIAL_VALUE.address1}
           />
           <span className='number'>#</span>
           <input 
             type="text" 
-            name="number2" 
-            id="number2" 
+            name="address2" 
+            id="address2" 
             className='numero2'
-            {...register("number2", {
-              required: "el campo es requerido"
-            })} 
-            onChange={handleChange}
-            value={model?.number2 ?? ""}
+            onChange={changed}
+            defaultValue={INITIAL_VALUE.address2}
           />
           <span className='with'>-</span>
           <input 
             type="text" 
-            name="number3" 
-            id="number3" 
+            name="address3" 
+            id="address3" 
             className='numero3'
-            {...register("number3", {
-              required: "el campo es requerido"
-            })}
-            onChange={handleChange}
-            value={model?.number3 ?? ""}
+            onChange={changed}
+            defaultValue={INITIAL_VALUE.address3}
           />
         </div>
 
@@ -132,11 +138,6 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
             className='address_complete'
             readOnly
             disabled
-            {...register("address_complete")}
-            onChange={handleChange}
-            value={
-              `${model?.avenue} ${model?.number1} # ${model?.number2} - ${model?.number3}` 
-              ?? ""}
           />
         </div>
 
@@ -149,13 +150,9 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
                 type="radio" 
                 name="method"
                 id="method1"
-                {...register("method", {
-                  required: "seleccione un metodo de envio"
-                })}
-                
-                onChange={handleChange}
-                value={model?.method === "Normal" ? model.method : "Normal"}
-                checked={isCheckedInput("Normal")}
+                onChange={changed}
+                value={INITIAL_VALUE.method}
+                defaultChecked={INITIAL_VALUE.method === user.method?.stringValue}
               />
               <label htmlFor='method1'>
                 <span>recibe hoy</span>
@@ -168,13 +165,10 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
               <input 
                 type="radio"
                 name="method" 
-                id="method2" 
-                {...register("method", {
-                  required: "seleccione un metodo de envio"
-                })}
-                checked={isCheckedInput("Pago contra entrega")}
-                onChange={handleChange}
-                value={model?.method === "Pago contra entrega" ? model.method : "Pago contra entrega"}
+                id="method2"
+                onChange={changed}
+                value={INITIAL_VALUE.method2}
+                defaultChecked={INITIAL_VALUE.method2 === user.method?.stringValue}
               />
               <label htmlFor='method2'>
                 <span>recibe hoy</span>
@@ -188,13 +182,9 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
                 className='text_input' 
                 type="radio" 
                 name="method" 
-                id="method3" 
-                {...register("method", {
-                  required: "seleccione un metodo de envio"
-                })}
-                onChange={handleChange}
-                value={model?.method === "otro" ? model.method : "otro" }
-                checked={isCheckedInput("otro")}
+                onChange={changed}
+                value={INITIAL_VALUE.method3}
+                defaultChecked={INITIAL_VALUE.method3 === user.method?.stringValue}
               />
               <label htmlFor='method3'>
                 <span>recibe hoy</span>
@@ -210,33 +200,21 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
           <input 
             type="text"
             name="complement_information"
-            id="complement_information" 
-            {...register("complement_information", {
-              minLength: {value: 7, message: "el campo debe contener mas de 7 caracteres"}
-            })}
-            onChange={handleChange}
-            value={model?.complement_information ?? ""}
+            id="complement_information"
+            onChange={changed}
+            defaultValue={INITIAL_VALUE.complement_information}
           />
-          {/* {model && <p>{errors.complement_information.message as string}</p>} */}
         </div>
 
         <div className="form-control information_additional">
           <label htmlFor="information_additional">informacion adicional (ej: apto, 201)</label>
           <input 
             type="text" 
-            name="information_additional" 
-            id="information_additional" 
-            {...register("information_additional", {
-              validate: {
-                minLength: value => value.length >= 7 || "el campo debe contener mas de 7 caracteres",
-                // Otras validaciones personalizadas pueden ir aquí
-              }
-            })}
-            value={model?.information_additional ?? ""}
-            onChange={handleChange}
+            name="information_aditional" 
+            id="information_aditional"
+            onChange={changed}
+            defaultValue={INITIAL_VALUE.information_aditional}
           />
-
-          {/* {model && <p>{errors.information_additional.message as string}</p>} */}
         </div>
 
         <div className="form-control neighborhood">
@@ -245,11 +223,8 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
             type="text"
             name="neighborhood" 
             id="neighborhood"
-            {...register("neighborhood", {
-              required: {value: true, message: "el campo es requerido"}
-            })}
-            onChange={handleChange}
-            value={model?.neighborhood ?? ""}
+            onChange={changed}
+            defaultValue={INITIAL_VALUE.neighborhood}
           />
         </div>
 
@@ -260,29 +235,28 @@ const Section2 = ({model, setModel, btn_continue_send, show_form_send, handleCha
             name="addressee" 
             id="addressee"
             disabled
-            value={`${model?.name} ${model?.lastname}` ?? ""}
           />
         </div>
         
         <div className="form-action btn_payment">
           <button>ir para el pago</button>
         </div>
-      </form>
+        </form>
+      }
       
-      {/* {
-        model && model.departament !== "" ?
-        ( */}
-          <div className="information_send">
-            <div className="content-send">
-              <p>{ `${model?.avenue}  ${model?.number1} # ${model?.number2} - ${model?.number3}`}</p>
-              <p>11001 {`${model?.departament} ${model?.municipaly}`}</p>
-              <hr />
-              <p>Envio: en 1 dia habil</p>
-            </div>
-            <span>gratis</span>
-          </div>
-        {/* ) : ""
-      }*/}
+
+      {!isVisible && 
+        <div className="information_send activate">
+        <div className="content-send">
+          <p></p>
+          <p>11001</p>
+          <hr />
+          <p>Envio: en 1 dia habil</p>
+        </div>
+        <span>gratis</span>
+        </div>
+      }
+
     </Container> 
   )
 }

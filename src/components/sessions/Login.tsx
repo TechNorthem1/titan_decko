@@ -24,6 +24,7 @@ import { colors } from "@utils/themeColors";
 import Authentication from "@helpers/Autentication";
 import Image from "@component/Image";
 import FirebaseService from "@services/FirebaseService";
+import Client from "@models/Client.model";
 
 interface LoginProps {
   redirect?: any;
@@ -56,14 +57,9 @@ const Login: FC<LoginProps> = ({redirect}) => {
       }
       
       let request:any = await signInWithEmailAndPassword(auth, values.email, values.password);
-      let data = JSON.stringify(user[0]._document.data.value.mapValue.fields);
-      let token = JSON.stringify(request.user.accessToken);
-
-
+      let data = JSON.stringify(request._tokenResponse);
       let {key, param} = Authentication.encryp("dataUser", data);
-      let {keyToken, tokenEcrypt} = Authentication.encriptToken(token);
       localStorage.setItem(key, param);
-      // localStorage.setItem(keyToken, tokenEcrypt);
       router.push(redirect);
     }catch(e){
       setVisibility(true);
@@ -89,13 +85,17 @@ const Login: FC<LoginProps> = ({redirect}) => {
 
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-      router.push("/perfil");
-    } catch (error) {
-      console.error(error);
-      // Manejar errores aquí
+    let response:any = await signInWithPopup(auth, provider);
+    let userFirebase:any = await FirebaseService.getUser(response.user.email);
+    if (userFirebase.length == 0){
+      let client = new Client(response.user.displayName, "","", response.user.email, "", "", "");
+      FirebaseService.createUser(client);
     }
+    let user:any = JSON.stringify(response._tokenResponse);
+    let {key, param} = Authentication.encryp("dataUser", user);
+    localStorage.setItem(key, param);
+    router.push(redirect)
+  
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =

@@ -13,6 +13,7 @@ import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import EditProfileButton from "@component/profile/EditProfileButton";
 import { useRouter } from "next/navigation";
 import { colors } from "@utils/themeColors";
+import FirebaseService from "@services/FirebaseService";
 
 const Profile = () => {
   const [user, setUser] = useState<any>();
@@ -25,23 +26,36 @@ const Profile = () => {
   ];
 
   useEffect(()=> {
+    loadUser();
+  }, [])
+
+  const loadUser = async () => {
     let data:any = User.getUser("dataUser");
+    let user:any = await FirebaseService.getUser(data.email);
     if (data === null){
       router.push("/");
     }else{
-      setUser(data);
+      setUser(user[0]?._document.data.value.mapValue.fields);
     }
-  }, [])
+  }
 
 
   useEffect(() => {}, [user])
   
+  const INITIAL_VALUES = {
+    name: user?.lastname.stringValue.length === 0 ? "" : user?.name?.stringValue,
+    lastname: user?.lastname.stringValue.length === 0 ? "" : user?.lastname?.stringValue,
+    email: user?.lastname.stringValue.length === 0 ? "" : user?.email?.stringValue,
+    phone: user?.lastname.stringValue.length === 0 ? "" : user?.phone?.stringValue,
+    address: user?.lastname.stringValue.length === 0 ? "" : user?.address?.stringValue
+  }
+
   return (
     <Fragment>
       {user !== undefined &&
         <DashboardPageHeader
           iconName="user_filled"
-          title={user.email.stringValue}
+          title={INITIAL_VALUES.email}
           button={<EditProfileButton />}
         />
       }
@@ -65,7 +79,7 @@ const Profile = () => {
                   alignItems="center"
                 >
                   <div>
-                    {user && <H5 my="0px">{`${user.name.stringValue} ${user.lastname.stringValue}`}</H5>}
+                    {user && <H5 my="0px">{`${INITIAL_VALUES.name} ${INITIAL_VALUES.lastname}`}</H5>}
 
                     <FlexBox alignItems="center">
                       <Typography fontSize="14px" color="text.hint">
@@ -124,7 +138,7 @@ const Profile = () => {
             First Name
           </Small>
 
-          {user && <span style={{color:colors.titan.dark}}>{user.name.stringValue}</span>}
+          {user && <span style={{color:colors.titan.dark}}>{INITIAL_VALUES.name}</span>}
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -132,7 +146,7 @@ const Profile = () => {
             Last Name
           </Small>
 
-          {user && <span style={{color:colors.titan.dark}}>{user.lastname.stringValue}</span>}
+          {user && <span style={{color:colors.titan.dark}}>{INITIAL_VALUES.lastname}</span>}
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -140,7 +154,7 @@ const Profile = () => {
             Email
           </Small>
 
-          { user &&<span style={{color:colors.titan.dark}}>{user.email.stringValue}</span>}
+          { user &&<span style={{color:colors.titan.dark}}>{INITIAL_VALUES.email}</span>}
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -148,7 +162,7 @@ const Profile = () => {
             Phone
           </Small>
 
-          {user && <span style={{color:colors.titan.dark}}>{user.phone.stringValue}</span>}
+          {user && <span style={{color:colors.titan.dark}}>{INITIAL_VALUES.phone}</span>}
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -156,7 +170,7 @@ const Profile = () => {
             Direccion
           </Small>
 
-          {user && <span style={{color:colors.titan.dark}}>{user.address.stringValue}</span>}
+          {user && <span style={{color:colors.titan.dark}}>{INITIAL_VALUES.address}</span>}
         </FlexBox>
       </TableRow>
     </Fragment>

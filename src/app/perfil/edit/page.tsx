@@ -6,14 +6,20 @@ import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import BackToProfileButton from "@component/profile/BackToProfileButton";
 import ProfileEditForm from "@component/profile/ProfileEditForm";
 import User from "@utils/__api__/user";
+import FirebaseService from "@services/FirebaseService";
 
 const ProfileEditor = () => {
   const [user, setUser] = useState<any>();
 
   useEffect(() => {
-    let data = User.getUser("dataUser");
-    setUser(data);
+    loadUser();
   }, [])
+
+  const loadUser = async () => {
+    let data = User.getUser("dataUser");
+    let user:any = await FirebaseService.getUser(data.email);
+    setUser(user[0]._document.data.value.mapValue.fields);
+  }
 
   useEffect(() => {}, [user]);
 

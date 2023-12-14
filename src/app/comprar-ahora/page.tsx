@@ -9,109 +9,29 @@ import Section1 from "@sections/comprar-ahora/section1/"
 import Section2 from "@sections/comprar-ahora/section2/"
 import Section3 from "@sections/comprar-ahora/section3/"
 import Section4 from "@sections/comprar-ahora/section4/"
-import Authentication from '@helpers/Autentication';
 import { useRouter } from 'next/navigation'
 import User from '@utils/__api__/user'
+import FirebaseService from '@services/FirebaseService'
+import { setDefaultResultOrder } from 'dns/promises'
 
 
 
 
 const page = () => {
     const [user, setUser] = useState<any>();
-    const router = useRouter();
-    const [model, setModel] = useState({
-        email: "",
-        name: "",
-        lastname: "",
-        citizenshipCard :"",
-        phone: "",
-        departament: "",
-        municipaly: "",
-        avenue: "",
-        number1: "",
-        number2: "",
-        number3: "",
-        complement_information: "",
-        method: "",
-        information_additional: "",
-        neighborhood: "",
-        addressee: ""
-    });
-
-
-
-    const [isVisible, setVisibleForm] = useState(false);
-
+    
     useEffect(() => {
-        let data = User.getUser("dataUser");
-        if( data !== null && data.name.strinValue !== ""){
-            // setModel(data);
-            action_continue();
-            btn_continue_send();
-        }else if(data !== null && data.name.stringValue !==""){
-            // setModel(data);
-            action_continue();
-        }else{
-            btn_continue_send();
-        }
-       
-        setUser(data);
+        getUser();
     }, [])
 
     useEffect(()=> {}, [user]);
-    console.log(user);
+    
 
-    const action_continue = () => {
-        try{
-            let btn_edit = document.querySelector(".btn_edit");
-            let form = document.querySelector(".form-data_person");
-            let information = document.querySelector(".info_personal");
-            
-            form.classList.add("deactivate");
-            btn_edit.classList.add("activate");
-            information.classList.add("activate");
-        }catch(error){
-            error;
-        }
-
+    const getUser = async () => {
+        let data = User.getUser("dataUser"); 
+        const dataUser:any = await FirebaseService.getUser(data.email);
+        setUser(dataUser[0]._document?.data?.value.mapValue.fields);
     }
-
-    const btn_continue_send = () => {
-        try{
-            let form = document.querySelector(".form-data_send");
-            let btn_edit = document.querySelector(".btn_edit_send");
-            let information_send = document.querySelector(".information_send");
-            
-            form.classList.add("deactivate");
-            btn_edit.classList.add("activate");
-            information_send.classList.add("activate_grid");
-        }catch(error){
-            error
-        }
-    }
-
-    const show_form_send = () => {
-        try{
-          let form = document.querySelector(".form-data_send");
-          let btn_edit = document.querySelector(".btn_edit_send");
-          let information_send = document.querySelector(".information_send");
-          
-          form.classList.remove("deactivate");
-          btn_edit.classList.remove("activate");
-          information_send.classList.remove("activate_grid");
-        }catch(error){
-          error;
-        }
-    }
-
-    const handleChange = (event:any) => {
-        const { name, value } = event.target;
-        setModel({
-          ...model,
-          [name]: value
-        })   
-    };
-
 
     return (
         <Fragment>
@@ -121,27 +41,18 @@ const page = () => {
                 <Container style={{"flex": "1"}}>
                     <Grid container spacing={4} style={{"marginBottom": "30px"}}>
                         <Grid item lg={8} xs={12}>
-                            {user &&
-                            <Section1 
-                                model={model} 
-                                setModel={setModel} 
-                                action_continue={action_continue}
-                                show_form_send={show_form_send}
-                                handleChange={handleChange}
-                                visibleForm={isVisible}
-                                setVisibleForm={setVisibleForm}
+
+                            {user && <Section1 
                                 user={user}
+                                setUser={setUser}
                             />}
 
-                            <Section2 
-                                model={model} 
-                                setModel={setModel}
-                                btn_continue_send={btn_continue_send}
-                                show_form_send={show_form_send}
-                                handleChange={handleChange}
-                                visibleForm={isVisible}
-                                setVisibleForm={setVisibleForm}
-                            />
+                           {user && 
+                                <Section2 
+                                    user={user} 
+                                    setUser={setUser}
+                                />
+                            }
 
                             <Section3 />
                         </Grid>

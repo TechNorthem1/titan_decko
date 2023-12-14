@@ -88,25 +88,6 @@ const Signup: FC = () => {
     }
   };
   
-  const handleGoogleSignup = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      // Puedes obtener la información del usuario de result.user
-    } catch (error) {
-      // Manejo de errores
-    }
-  };
-  
-  const handleFacebookSignup = async () => {
-    const provider = new FacebookAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      // Puedes obtener la información del usuario de result.user
-    } catch (error) {
-      // Manejo de errores
-    }
-  };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -284,48 +265,6 @@ const Signup: FC = () => {
           Crear cuenta
         </Button>
 
-        <Box mb="1rem">
-          <Divider width="200px" mx="auto" />
-          <FlexBox justifyContent="center" mt="-14px">
-            <Span color="text.muted" bg="body.paper" px="1rem">
-              on
-            </Span>
-          </FlexBox>
-        </Box>
-
-        <FlexBox
-          onClick={handleFacebookSignup} 
-          mb="0.75rem"
-          height="40px"
-          color="white"
-          bg="#3B5998"
-          borderRadius={5}
-          cursor="pointer"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Icon variant="small" defaultcolor="auto" mr="0.5rem">
-            facebook-filled-white
-          </Icon>
-          <Small fontWeight="600">Registrarme con Facebook</Small>
-        </FlexBox>
-
-        <FlexBox
-          onClick={handleGoogleSignup} 
-          mb="1.25rem"
-          height="40px"
-          color="white"
-          bg="#4285F4"
-          borderRadius={5}
-          cursor="pointer"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Icon variant="small" defaultcolor="auto" mr="0.5rem">
-            google-1
-          </Icon>
-          <Small fontWeight="600">Registrame con Google</Small>
-        </FlexBox>
       </form>
 
       <FlexBox justifyContent="center" bg="gray.200" py="19px">
@@ -371,26 +310,3 @@ const formSchema = yup.object().shape({
 });
 
 export default Signup;
-
-
-// const handleEmailPasswordSignup = async (client:Client) => {
-//   await createUserWithEmailAndPassword(auth, client.email, client.password)
-//   .then((item:any) => {      
-//     setMessage("El Usuario ha sido registrado correctamente");
-//     setVisibility(true);
-//     setColor(colors.titan.success);
-//     setTimeout(() => {
-//       setMessage("");
-//       setVisibility(false);
-//     }, 3000);
-//   })
-//   .catch((error:any) => {
-//     setMessage("El Usuario ya se encuntra registrado");
-//     setVisibility(true);
-//     setColor(colors.titan.salmon)
-//     setTimeout(() => {
-//       setMessage("");
-//       setVisibility(false);
-//     }, 3000);
-//   });
-// };

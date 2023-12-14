@@ -18,6 +18,7 @@ import CategoriesApi from "@utils/__api__/categories"
 import Authentication from "@helpers/Autentication";
 import {  useRouter } from "next/navigation";
 import Helpers from "@helpers/Helpers";
+import FirebaseService from "@services/FirebaseService";
 
 
 
@@ -72,8 +73,11 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
   }
 
   const close = () => {
-    let key:string = Authentication.encriptKey("dataUser");
-    localStorage.removeItem(key);
+    FirebaseService.logout();
+    let keyUser:string = Authentication.encriptKey("dataUser");
+    let keyToken:string = Authentication.encriptKey("token_user");
+    localStorage.removeItem(keyUser);
+    localStorage.removeItem(keyToken);
     setIsAuthenticated(true);
     router.push("/");
   }

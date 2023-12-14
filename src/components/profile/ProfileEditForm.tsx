@@ -16,19 +16,20 @@ interface ProfileEditFormProps {
 const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user }) => {
 
   const INITIAL_VALUES = {
-    first_name: user.name?.stringValue || "",
-    last_name: user.lastname?.stringValue || "",
-    email: user.email?.stringValue || "",
-    phone: user.phone?.stringValue || "",
-    address: user.address?.stringValue || "",
-  };
+    name: user?.lastname?.stringValue?.length === 0 ? "" : user?.name?.stringValue,
+    lastname: user?.lastname?.stringValue?.length === 0 ? "" : user?.lastname?.stringValue,
+    email: user?.lastname?.stringValue?.length === 0 ? "" : user?.email?.stringValue,
+    phone: user?.lastname?.stringValue?.length === 0 ? "" : user?.phone?.stringValue,
+    address: user?.lastname?.stringValue?.length === 0 ? "" : user?.address?.stringValue,
+    document: user?.lastname?.stringValue?.length === 0 ? "" : user?.document?.stringValue
+  }
 
   const VALIDATION_SCHEMA = yup.object().shape({
-    first_name: yup.string().required("required"),
-    last_name: yup.string().required("required"),
+    name: yup.string().required("required"),
+    lastname: yup.string().required("required"),
     email: yup.string().email("invalid email").required("required"),
     contact: yup.string().required("required"),
-    birth_date: yup.date().required("invalid date"),
+    address: yup.date().required("invalid date"),
   });
 
   const handleFormSubmit = async (values: typeof INITIAL_VALUES) => {
@@ -89,8 +90,8 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user }) => {
                     label="Nombres"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    value={values.first_name}
-                    errorText={touched.first_name && errors.first_name}
+                    value={INITIAL_VALUES.name}
+                    errorText={touched.name && errors.name}
                   />
                 </Grid>
 
@@ -101,8 +102,8 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user }) => {
                     label="Apellidos"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    value={values.last_name}
-                    errorText={touched.last_name && errors.last_name}
+                    value={INITIAL_VALUES.lastname}
+                    errorText={touched.lastname && errors.lastname}
                   />
                 </Grid>
 
@@ -113,7 +114,7 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user }) => {
                     type="email"
                     label="Correo Electronico"
                     onBlur={handleBlur}
-                    value={values.email}
+                    value={INITIAL_VALUES.email}
                     onChange={handleChange}
                     errorText={touched.email && errors.email}
                   />
@@ -125,7 +126,7 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user }) => {
                     label="Telefono"
                     name="phone"
                     onBlur={handleBlur}
-                    value={values.phone}
+                    value={INITIAL_VALUES.phone}
                     onChange={handleChange}
                     errorText={touched.phone && errors.phone}
                   />
@@ -139,7 +140,7 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user }) => {
                     label="Direccion"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    value={values.address}
+                    value={INITIAL_VALUES.address}
                     errorText={touched.address && errors.address}
                   />
                 </Grid>
