@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client";
+import { Fragment, useEffect, useState } from "react";
 import Hidden from "@component/hidden";
 import Grid from "@component/grid/Grid";
 import api from "@utils/__api__/shops";
@@ -7,7 +8,15 @@ import ShopIntroCard from "@sections/shop/ShopIntroCard";
 import ProductDetails from "@component/shop/ProductDetails";
 
 const ShopDetails = async ({ params }: { params: { slug: string } }) => {
-  const shop = await api.getShopBySlug(String(params.slug));
+  const [shop, setShop] = useState<any>({});
+
+  useEffect(() => {getData();}, []);
+
+  const getData = async () => {
+    let shop = await api.getShopBySlug(String(params.slug));
+    setShop(shop);
+  }
+
 
   return (
     <Fragment>

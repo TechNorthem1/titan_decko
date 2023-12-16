@@ -1,13 +1,21 @@
+"use client"
 import axios from "axios";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Hidden from "@component/hidden";
 import TableRow from "@component/TableRow";
 import { H5 } from "@component/Typography";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import OrderList from "@component/vendor/orders/OrderList";
 
-const Orders = async () => {
-  const { data } = await axios.get("/api/admin/orders");
+const Orders = () => {
+  const [data, setData] = useState<any>([]);
+
+  useEffect(() => {getData();}, []);
+
+  const getData = async () => {
+    let { data } = await axios.get("/api/admin/orders");
+    setData(data);
+  }
 
   return (
     <Fragment>

@@ -14,13 +14,13 @@ const Section7: FC<Props> = ({ blogs }) => {
     <CategorySectionCreator>
       <Grid container spacing={6}>
         {blogs.map((item) => (
-          <Grid item md={6} xs={12} key={item.id}>
+          <Grid item md={6} xs={12} key={item?.id}>
             <Card3
-              title={item.title}
-              date={item.createdAt}
-              imgUrl={item.thumbnail}
-              commentCount={item.comments as number}
-              description={item.description as string}
+              title={item?.title}
+              date={item?.createdAt}
+              imgUrl={item?.thumbnail}
+              commentCount={item?.comments as number}
+              description={item?.description as string}
             />
           </Grid>
         ))}

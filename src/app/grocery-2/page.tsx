@@ -1,3 +1,4 @@
+"use client"
 import Box from "@component/Box";
 import api from "@utils/__api__/grocery-2";
 import { Footer2 } from "@component/footer";
@@ -9,18 +10,47 @@ import Section4 from "@sections/grocery-2/Section4";
 import Section6 from "@sections/grocery-2/Section6";
 import Section9 from "@sections/grocery-2/Section9";
 import SidenavBar from "@sections/grocery-2/SidenavBar";
+import { useEffect, useState } from "react";
 
-const GroceryTwo = async () => {
-  const serviceList = await api.getServices();
-  const categories = await api.getCategories();
-  const testimonials = await api.getTestimonials();
-  const dairyProducts = await api.getDairyProducts();
-  const navigationList = await api.getNavigationList();
-  const mainCarouselData = await api.getMainCarousel();
-  const featuredProducts = await api.getFeaturedProducts();
-  const bestHomeProducts = await api.getBestHomeProducts();
-  const bestSellProducts = await api.getBestSellProducts();
-  const discountBanners = await api.getDiscountBannerList();
+const GroceryTwo = () => {
+  const [serviceList, setServiceList] = useState<any>([]);
+  const [categories, setCategories] = useState<any>([]);
+  const [testimonials, setTestimonials] = useState<any>([]);
+  const [dairyProducts, setDairyProducts] = useState<any>([]);
+  const [navigationList, setNavigationList] = useState<any>([]);
+  const [mainCarouselData, setMainCarouselData] = useState<any>([]);
+  const [featuredProducts, setFeaturedProducts] = useState<any>([]);
+  const [bestHomeProducts, setBestHomeProducts] = useState<any>([]);
+  const [bestSellProducts, setBestSellProducts] = useState<any>([]);
+  const [discountBanners, setDiscountBanners] = useState<any>([]);
+  
+  useEffect(() => {
+    getData();
+  }, [])
+
+  const getData = async () => {
+    let serviceList = await api.getServices();
+    let categories = await api.getCategories();
+    let testimonials = await api.getTestimonials();
+    let dairyProducts = await api.getDairyProducts();
+    let navigationList = await api.getNavigationList();
+    let mainCarouselData = await api.getMainCarousel();
+    let featuredProducts = await api.getFeaturedProducts();
+    let bestHomeProducts = await api.getBestHomeProducts();
+    let bestSellProducts = await api.getBestSellProducts();
+    let discountBanners = await api.getDiscountBannerList();
+
+    setServiceList(serviceList);
+    setCategories(categories);
+    setTestimonials(testimonials);
+    setDairyProducts(dairyProducts);
+    setNavigationList(navigationList);
+    setMainCarouselData(mainCarouselData);
+    setFeaturedProducts(featuredProducts);
+    setBestHomeProducts(bestHomeProducts);
+    setBestSellProducts(bestSellProducts);
+    setDiscountBanners(discountBanners);
+  }
 
   return (
     <Wrapper>

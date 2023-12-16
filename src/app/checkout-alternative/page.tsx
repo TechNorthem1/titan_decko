@@ -1,3 +1,4 @@
+"use client"
 import Grid from "@component/grid/Grid";
 import Container from "@component/Container";
 import CheckoutForm2 from "@sections/checkout/CheckoutForm2";

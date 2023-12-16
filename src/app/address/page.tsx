@@ -1,5 +1,6 @@
+"use client"
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Icon from "@component/icon/Icon";
 import api from "@utils/__api__/address";
 import FlexBox from "@component/FlexBox";
@@ -12,8 +13,18 @@ import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import AddressPagination from "@sections/address/AddressPagination";
 import AddressItem from "@sections/address/AddressItem";
 
-const AddressList = async () => {
-  const addressList = await api.getAddressList();
+const AddressList = () => {
+  const [addressList,  setAddressList] = useState([]);
+  
+  useEffect(() => {
+    getAddresList();
+  }, [])
+
+  const getAddresList = async() => {
+
+    let addressList = await api.getAddressList();
+    setAddressList(addressList);
+  }
 
   return (
     <Fragment>

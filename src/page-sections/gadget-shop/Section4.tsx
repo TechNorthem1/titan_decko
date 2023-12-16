@@ -25,14 +25,14 @@ const Section4: FC<Props> = ({ products }) => {
           {products.map((item) => (
             <Box py="0.25rem" key={item.id}>
               <ProductCard1
-                id={item.id}
-                slug={item.slug}
-                title={item.title}
-                price={item.price}
-                off={item.discount}
-                rating={item.rating}
-                images={item.images as string[]}
-                imgUrl={item.thumbnail}
+                id={item?.id}
+                slug={item?.slug}
+                title={item?.title}
+                price={item?.price}
+                off={item?.discount}
+                rating={item?.rating}
+                images={item?.images as string[]}
+                imgUrl={item?.thumbnail}
               />
             </Box>
           ))}

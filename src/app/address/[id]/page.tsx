@@ -1,12 +1,18 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useState } from "react";
 import { Card1 } from "@component/Card1";
 import api from "@utils/__api__/address";
 import AddressForm from "@component/address/AddressForm";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import BackToAddress from "@sections/address/BackToAddress";
 
-const AddressDetails = async ({ params }: { params: { id: string } }) => {
-  const address = await api.getAddress(String(params.id));
+const AddressDetails = ({ params }: { params: { id: string } }) => {
+  const [address, setAddress] = useState<any>();
+
+  const getAddress = async () => {
+    const address = await api.getAddress(String(params.id));
+    setAddress(address);
+  }
 
   return (
     <Fragment>

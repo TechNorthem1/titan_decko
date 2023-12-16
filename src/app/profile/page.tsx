@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import Box from "@component/Box";
 import { format } from "date-fns";
 import Card from "@component/Card";
@@ -11,8 +12,16 @@ import Typography, { H3, H5, Small } from "@component/Typography";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import EditProfileButton from "@component/profile/EditProfileButton";
 
-const Profile = async () => {
-  const user: any = await api.getUser();
+
+const Profile = () => {
+  const [user, setUser] = useState<any>();
+  
+  useEffect(() => {getData();}, [])
+
+  const getData = async () => {
+    let user: any = await api.getUser();
+    setUser(user);
+  }
 
   const infoList = [
     { title: "16", subtitle: "All Orders" },
@@ -39,7 +48,7 @@ const Profile = async () => {
               borderRadius={8}
               alignItems="center"
             >
-              <Avatar src={user.avatar} size={64} />
+              <Avatar src={user?.avatar} size={64} />
 
               <Box ml="12px" flex="1 1 0">
                 <FlexBox
@@ -48,7 +57,7 @@ const Profile = async () => {
                   alignItems="center"
                 >
                   <div>
-                    <H5 my="0px">{`${user.name.firstName} ${user.name.lastName}`}</H5>
+                    <H5 my="0px">{`${user?.name?.firstName} ${user?.name?.lastName}`}</H5>
 
                     <FlexBox alignItems="center">
                       <Typography fontSize="14px" color="text.hint">
@@ -107,7 +116,7 @@ const Profile = async () => {
             First Name
           </Small>
 
-          <span>{user.name.firstName}</span>
+          <span>{user?.name?.firstName}</span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -115,7 +124,7 @@ const Profile = async () => {
             Last Name
           </Small>
 
-          <span>{user.name.lastName}</span>
+          <span>{user?.name?.lastName}</span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -123,7 +132,7 @@ const Profile = async () => {
             Email
           </Small>
 
-          <span>{user.email}</span>
+          <span>{user?.email}</span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -131,7 +140,7 @@ const Profile = async () => {
             Phone
           </Small>
 
-          <span>{user.phone}</span>
+          <span>{user?.phone}</span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -140,7 +149,9 @@ const Profile = async () => {
           </Small>
 
           <span className="pre">
-            {format(new Date(user.dateOfBirth), "dd MMM, yyyy")}
+            {user?.dateOfBirth && !isNaN(Date.parse(user.dateOfBirth)) 
+              ? format(new Date(user.dateOfBirth), "dd MMM, yyyy")
+              : "Fecha no disponible"}
           </span>
         </FlexBox>
       </TableRow>

@@ -15,9 +15,9 @@ const Section3: FC<Props> = ({ bannerData }) => {
         <Grid item md={6} xs={12}>
           <Card2
             productUrl="/"
-            title={bannerData[0].title}
-            imgUrl={bannerData[0].thumbnail}
-            subtitle={bannerData[0].description}
+            title={bannerData[0]?.title}
+            imgUrl={bannerData[0]?.thumbnail}
+            subtitle={bannerData[0]?.description}
           />
         </Grid>
 
@@ -27,9 +27,9 @@ const Section3: FC<Props> = ({ bannerData }) => {
             productUrl="/"
             bg="text.muted"
             subtitleColor="gray.400"
-            title={bannerData[1].title}
-            imgUrl={bannerData[1].thumbnail}
-            subtitle={bannerData[1].description}
+            title={bannerData[1]?.title}
+            imgUrl={bannerData[1]?.thumbnail}
+            subtitle={bannerData[1]?.description}
           />
         </Grid>
       </Grid>

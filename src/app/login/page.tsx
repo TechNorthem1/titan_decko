@@ -1,3 +1,4 @@
+"use client"
 import FlexBox from "@component/FlexBox";
 import Login from "@component/sessions/Login";
 

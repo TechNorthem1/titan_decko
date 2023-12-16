@@ -1,5 +1,6 @@
+"use client"
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { format } from "date-fns";
 import Box from "@component/Box";
 import { Chip } from "@component/Chip";
@@ -13,8 +14,15 @@ import Typography, { SemiSpan, Small } from "@component/Typography";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import SupportPagination from "@component/support-ticket/SupportPagination";
 
-const TicketList = async () => {
-  const ticketList = await api.getTicketList();
+const TicketList = () => {
+  const [ticketList, setTicketList] = useState<any>([]);
+
+  useEffect(() => {getData();}, []);
+
+  const getData = async () => {
+    let ticketList:any = await api.getTicketList();
+    setTicketList(ticketList);
+  }
 
   return (
     <Fragment>

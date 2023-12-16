@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client";
+import { Fragment, useEffect, useState } from "react";
 import { format } from "date-fns";
 import Box from "@component/Box";
 import Card from "@component/Card";
@@ -14,8 +15,15 @@ import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import OrderStatus from "@component/orders/OrderStatus";
 import WriteReview from "@component/orders/WriteReview";
 
-const OrderDetails = async ({ params }: { params: { id: string } }) => {
-  const order = await api.getOrder(String(params.id));
+const OrderDetails = ({ params }: { params: { id: string } }) => {
+  const [order, setOrder] = useState<any>([]);
+
+  useEffect(() => {getData()}, []);
+
+  const getData = async () => {
+    let order = await api.getOrder(String(params.id));
+    setOrder(order);
+  }
 
   return (
     <Fragment>

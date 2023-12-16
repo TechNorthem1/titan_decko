@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import Hidden from "@component/hidden";
 import api from "@utils/__api__/orders";
 import TableRow from "@component/TableRow";
@@ -7,8 +8,14 @@ import OrderRow from "@component/orders/OrderRow";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import OrdersPagination from "@component/orders/OrdersPagination";
 
-const OrderList = async () => {
-  const orderList = await api.getOrders();
+const OrderList = () => {
+  const [orderList, setOrderList] = useState<any>([]);
+  useEffect(() => {getData();}, []);
+
+  const getData = async () => {
+    let orderList = await api.getOrders();
+    setOrderList(orderList);
+  }
 
   return (
     <Fragment>

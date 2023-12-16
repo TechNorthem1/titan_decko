@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import Box from "@component/Box";
 import api from "@utils/__api__/fashion-1";
 import Container from "@component/Container";
@@ -13,13 +14,34 @@ import Section7 from "@sections/fashion-1/Section7";
 import Section8 from "@sections/fashion-1/Section8";
 import Section9 from "@sections/fashion-1/Section9";
 
-const FashionOne = async () => {
-  const hotDealList = await api.getHotDealList();
-  const serviceList = await api.getServiceList();
-  const flashDealsData = await api.getFlashDeals();
-  const trendingItems = await api.getTrendingItems();
-  const newArrivalsData = await api.getNewArrivals();
-  const dealOfTheWeek = await api.getDealOfTheWeekList();
+const FashionOne = () => {
+  const [hotDealList, setHotDealList] = useState<any[]>([]);
+  const [serviceList, setServiceList] = useState<any[]>([]);
+  const [flashDealsData, setFlashDealsData] = useState<any[]>([]);
+  const [trendingItems, setTrendingItems] = useState<any[]>([]);
+  const [newArrivalsData, setNewArrivalsData] = useState<any[]>([]);
+  const [dealOfTheWeek, setDealOfTheWeek] = useState<any[]>([]);
+
+  useEffect(() => {
+    getDataContent();
+  }, [])
+
+  const getDataContent = async () => {
+    let hotDealList = await api.getHotDealList();
+    let serviceList = await api.getServiceList();
+    let flashDealsData = await api.getFlashDeals();
+    let trendingItems = await api.getTrendingItems();
+    let newArrivalsData = await api.getNewArrivals();
+    let dealOfTheWeek = await api.getDealOfTheWeekList();
+
+    setHotDealList(hotDealList);
+    setServiceList(serviceList);
+    setFlashDealsData(flashDealsData);
+    setTrendingItems(trendingItems);
+    setNewArrivalsData(newArrivalsData);
+    setDealOfTheWeek(dealOfTheWeek);
+  }
+  
 
   return (
     <Fragment>

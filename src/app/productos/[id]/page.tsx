@@ -3,7 +3,10 @@ import SearchResult from "@component/search/SearchResult";
 import api from "@utils/__api__/productos";
 
 const ProductSearchResult = async({params}) => {
-  const {products, totalPage} = await api.getProductsByCategories(`products/?category=${params.id}&per_page=30&order=desc&orderby=price`);
+  
+  let search:any = isNaN(params.id) ? `products/?search=${params.id}&per_page=30&order=desc&orderby=price` : `products/?category=${params.id}&per_page=30&order=desc&orderby=price`; 
+  
+  const {products, totalPage} = await api.getProductsByCategories(search);
   
   return (
     <Box pt="20px" className="content-box">

@@ -1,3 +1,4 @@
+"use client"
 import FlexBox from "@component/FlexBox";
 import Signup from "@component/sessions/Signup";
 

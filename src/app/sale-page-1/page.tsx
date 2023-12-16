@@ -1,3 +1,4 @@
+"use client"
 import axios from "axios";
 import Box from "@component/Box";
 import FlexBox from "@component/FlexBox";
@@ -7,13 +8,22 @@ import SaleNavbar from "@component/sale-page-1/SaleNavbar";
 import SaleCategory from "@component/sale-page-1/SaleCategory";
 import SaleProducts from "@component/sale-page-1/SaleProducts";
 import { SearchParams } from "interfaces";
+import { useEffect, useState } from "react";
 
-const SalePage1 = async ({ searchParams }: SearchParams) => {
+const SalePage1 = ({ searchParams }: SearchParams) => {
   const PAGE_SIZE = 28;
   const PAGE = searchParams?.page ? Number(searchParams.page) : 1;
-  const { data } = await axios.get("/api/products", {
-    params: { page: PAGE, pageSize: PAGE_SIZE },
-  });
+  const [data, setData] = useState<any>();
+
+  useEffect(() => {getData();}, [])
+
+  const getData = async () => {
+    const { data } = await axios.get("/api/products", {
+      params: { page: PAGE, pageSize: PAGE_SIZE },
+    });
+
+    setData(data);
+  }
 
   const saleCategoryList = [
     { icon: "women-dress", title: "Women" },

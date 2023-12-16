@@ -36,12 +36,12 @@ const StyledProductCard = styled.div`
 
 // ===================================================
 type ProductCard11Props = {
-  slug: string;
+  slug?: any;
   off?: number;
-  title: string;
-  price: number;
-  imgUrl: string;
-  rating: number;
+  title?: string;
+  price?: number;
+  imgUrl?: string;
+  rating?: number;
 };
 // ===================================================
 

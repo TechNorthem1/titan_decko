@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import api from "@utils/__api__/furniture";
 import Container from "@component/Container";
 import Navbar from "@component/navbar/Navbar";
@@ -7,12 +8,31 @@ import Section3 from "@sections/furniture-shop/Section3";
 import Section4 from "@sections/furniture-shop/Section4";
 import ContentBox from "@sections/furniture-shop/ContentBox";
 
-const FurnitureShop = async () => {
-  const topNewProducts = await api.getTopNewProducts();
-  const mainCarouselData = await api.getMainCarouselData();
-  const furnitureProducts = await api.getFurnitureProducts();
-  const sidebarNavList = await api.getFurnitureShopNavList();
-  const topSellingProducts = await api.getTopSellingProducts();
+const FurnitureShop = () => {
+  const [topNewProducts, setTopNewProducts] = useState<any>([]);
+  const [mainCarouselData, setMainCarouselData] = useState<any>([]);
+  const [furnitureProducts, setFurnitureProducts] = useState<any>([]);
+  const [sidebarNavList, setSidebarNavList] = useState<any>([]);
+  const [topSellingProducts, setTopSellingProducts] = useState<any>([]);
+
+  useEffect(() => {
+    getData();
+  })
+
+  const getData = async () => {
+    let topNewProducts = await api.getTopNewProducts();
+    let mainCarouselData = await api.getMainCarouselData();
+    let furnitureProducts = await api.getFurnitureProducts();
+    let sidebarNavList = await api.getFurnitureShopNavList();
+    let topSellingProducts = await api.getTopSellingProducts();
+
+
+    setTopNewProducts(topNewProducts);
+    setMainCarouselData(mainCarouselData);
+    setFurnitureProducts(furnitureProducts);
+    setSidebarNavList(sidebarNavList);
+    setTopSellingProducts(topSellingProducts);
+  }
 
   return (
     <Fragment>

@@ -13,6 +13,10 @@ const StyledSearchBox = styled.div`
     z-index: 1;
   }
 
+  .search-icon-responsive {
+    left: 95% !important;
+  }
+
   .search-field {
     flex: 1 1 0;
     padding-left: 3rem;
@@ -20,6 +24,11 @@ const StyledSearchBox = styled.div`
     height: 44px;
     border-radius: 300px;
   }
+
+  .search-field-responsive {
+    padding-left: 1rem !important;
+  }
+
   .search-button {
     position: absolute;
     height: 100%;

@@ -37,7 +37,6 @@ const Section4: FC<Props> = ({ title, products, params} ) => {
           visibleSlides={visibleSlides}
         >
           { products.map((item) => (
-          
             <Box py="0.25rem" key={item.id}>
               <ProductCard10
                 id={item.id}

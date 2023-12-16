@@ -1,4 +1,4 @@
-
+"use client"
 import Box from "@component/Box";
 import api from "@utils/__api__/grocery-2";
 import Categories from "@utils/__api__/categories";
@@ -12,19 +12,46 @@ import Section4 from "@sections/categorias/Section4";
 import Section6 from "@sections/categorias/Section6";
 import Section9 from "@sections/categorias/Section9";
 import SidenavBar from "@sections/categorias/SidenavBar";
+import { useEffect, useState } from "react";
 
 
-const GroceryTwo = async ({params}) => {
-  const serviceList = await api.getServices();
-  const categories = await Categories.getCategories(`products/categories?parent=${params.id}&per_page=6`);
-  const {products} = await Productos.getProductsByCategories(`products?category=${params.id}&order=desc&orderby=price&per_page=9`);
-  const dairyProducts = await api.getDairyProducts();
-  const navigationList = await api.getNavigationList();
-  const mainCarouselData = await api.getMainCarousel();
-  const featuredProducts = await api.getFeaturedProducts();
-  const bestHomeProducts = await api.getBestHomeProducts();
-  const bestSellProducts = await api.getBestSellProducts();
-  const discountBanners = await api.getDiscountBannerList();
+const GroceryTwo = ({params}) => {
+  const [serviceList, setServiceList] = useState<any>();
+  const [categories, setCategories] = useState<any>();
+  const [products, setProducts] = useState<any>();
+  const [sairyProducts, setSairyProducts] = useState<any>();
+  const [navigationList, setNavigationList] = useState<any>();
+  const [mainCarouselData, setMainCarouselData] = useState<any>();
+  const [featuredProducts, setFeaturedProducts] = useState<any>();
+  const [bestHomeProducts, setBestHomeProducts] = useState<any>();
+  const [bestSellProducts, setBestSellProducts] = useState<any>();
+  const [discountBanners, setDiscountBanners] = useState<any>();
+
+  useEffect(()=> {getData();}, []);
+
+  const getData = async () => {
+    const serviceList = await api.getServices();
+    const categories = await Categories.getCategories(`products/categories?parent=${params.id}&per_page=6`);
+    const {products} = await Productos.getProductsByCategories(`products?category=${params.id}&order=desc&orderby=price&per_page=9`);
+    const dairyProducts = await api.getDairyProducts();
+    const navigationList = await api.getNavigationList();
+    const mainCarouselData = await api.getMainCarousel();
+    const featuredProducts = await api.getFeaturedProducts();
+    const bestHomeProducts = await api.getBestHomeProducts();
+    const bestSellProducts = await api.getBestSellProducts();
+    const discountBanners = await api.getDiscountBannerList();
+
+    setServiceList(serviceList);
+    setCategories(categories);
+    setProducts(products);
+    setSairyProducts(dairyProducts);
+    setNavigationList(navigationList);
+    setMainCarouselData(mainCarouselData);
+    setFeaturedProducts(featuredProducts);
+    setBestHomeProducts(bestHomeProducts);
+    setBestSellProducts(bestSellProducts);
+    setDiscountBanners(discountBanners);
+  }
 
   return (
     <Wrapper>

@@ -37,11 +37,11 @@ const Section1: FC<Props> = ({ topPickList, mainCarousel }) => {
           >
             {mainCarousel.map((item) => (
               <Card1
-                key={item.id}
-                title={item.title}
-                price={item.price}
-                imgUrl={item.thumbnail}
-                discount={item.discount}
+                key={item?.id}
+                title={item?.title}
+                price={item?.price}
+                imgUrl={item?.thumbnail}
+                discount={item?.discount}
               />
             ))}
           </Carousel>
@@ -59,13 +59,13 @@ const Section1: FC<Props> = ({ topPickList, mainCarousel }) => {
             >
               {topPickList.map((item) => (
                 <ProductCard11
-                  key={item.id}
-                  slug={item.slug}
-                  price={item.price}
-                  title={item.title}
-                  off={item.discount}
-                  rating={item.rating}
-                  imgUrl={item.thumbnail}
+                  key={item?.id}
+                  slug={item?.slug}
+                  price={item?.price}
+                  title={item?.title}
+                  off={item?.discount}
+                  rating={item?.rating}
+                  imgUrl={item?.thumbnail}
                 />
               ))}
             </Carousel>
@@ -82,13 +82,13 @@ const Section1: FC<Props> = ({ topPickList, mainCarousel }) => {
           >
             {topPickList.map((item) => (
               <ProductCard11
-                key={item.id}
-                slug={item.slug}
-                price={item.price}
-                title={item.title}
-                off={item.discount}
-                rating={item.rating}
-                imgUrl={item.thumbnail}
+                key={item?.id}
+                slug={item?.slug}
+                price={item?.price}
+                title={item?.title}
+                off={item?.discount}
+                rating={item?.rating}
+                imgUrl={item?.thumbnail}
               />
             ))}
           </Carousel>

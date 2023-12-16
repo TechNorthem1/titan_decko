@@ -104,12 +104,12 @@ const Wrapper = styled(Card)`
 // =======================================================================
 interface ProductCard1Props extends CardProps {
   off?: number;
-  slug: string;
-  title: string;
-  price: number;
-  imgUrl: string;
-  rating: number;
-  images: string[];
+  slug?: string;
+  title?: string;
+  price?: number;
+  imgUrl?: string;
+  rating?: number;
+  images?: string[];
   id?: string | number;
   salePrice?:number;
 }
@@ -150,7 +150,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
     <>
       <Wrapper borderRadius={8} {...props}>
         <div className="image-holder">
-          {!!off && (
+          {off >= 0 && (
             <Chip
               top="10px"
               left="10px"

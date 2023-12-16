@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import Box from "@component/Box";
 import api from "@utils/__api__/fashion-2";
 import Navbar from "@component/navbar/Navbar";
@@ -13,18 +14,49 @@ import Section8 from "@sections/fashion-2/Section8";
 import Section9 from "@sections/fashion-2/Section9";
 import Section10 from "@sections/fashion-2/Section10";
 
-const FashionTwo = async () => {
-  const blogs = await api.getBlogs();
-  const brands = await api.getBrands();
-  const products = await api.getProducts();
-  const serviceList = await api.getServices();
-  const categories = await api.getCategories();
-  const saleProducts = await api.getSaleProducts();
-  const latestProducts = await api.getLatestProducts();
-  const popularProducts = await api.getPopularProducts();
-  const featureProducts = await api.getFeatureProducts();
-  const bestWeekProducts = await api.getBestWeekProducts();
-  const mainCarouselData = await api.getMainCarouselData();
+const FashionTwo = () => {
+  const [blogs, setBlogs] = useState<any>([]);
+  const [brands, setBrands] = useState<any>([]);
+  const [products, setProducts] = useState<any>([]);
+  const [serviceList, setServiceList] = useState<any>([]);
+  const [categories, setCategories] = useState<any>([]);
+  const [saleProducts, setSaleProducts] = useState<any>([]);
+  const [latestProducts, setLatestProducts] = useState<any>([]);
+  const [popularProducts, setPopularProducts] = useState<any>([]);
+  const [featureProducts, setFeatureProducts] = useState<any>([]);
+  const [bestWeekProducts, setBestWeekProducts] = useState<any>([]);
+  const [mainCarouselData, setMainCarouselData] = useState<any>([]);
+
+  useEffect(() => {
+    getDataContent();
+  }, []);
+
+  const getDataContent = async () => {
+    let blogs = await api.getBlogs();
+    let brands = await api.getBrands();
+    let products = await api.getProducts();
+    let serviceList = await api.getServices();
+    let categories = await api.getCategories();
+    let saleProducts = await api.getSaleProducts();
+    let latestProducts = await api.getLatestProducts();
+    let popularProducts = await api.getPopularProducts();
+    let featureProducts = await api.getFeatureProducts();
+    let bestWeekProducts = await api.getBestWeekProducts();
+    let mainCarouselData = await api.getMainCarouselData();
+
+    setBlogs(blogs);
+    setBrands(brands);
+    setProducts(products);
+    setServiceList(serviceList);
+    setCategories(categories);
+    setSaleProducts(saleProducts);
+    setLatestProducts(latestProducts);
+    setPopularProducts(popularProducts);
+    setFeatureProducts(featureProducts);
+    setBestWeekProducts(bestWeekProducts);
+    setMainCarouselData(mainCarouselData);
+  }
+
 
   return (
     <Fragment>

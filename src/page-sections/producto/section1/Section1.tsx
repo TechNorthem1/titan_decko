@@ -13,12 +13,19 @@ import UserLoginDialog from "@component/header/LoginDialog";
 import { Button } from "@component/buttons";
 import {colors as color} from "@utils/themeColors";
 import Login from "@component/sessions/Login";
+import { useAppContext } from "@context/AppContext";
+import useForm from "@hook/useForm";
+import { colors as Colors } from "@utils/themeColors";
+
+
 
 const Section1 = ({params, url, isAuthenticated}) => {
     const [product, setProduct] = useState<any>({});
+    const {form, changed} = useForm();
     useEffect(()=> {getProduct()}, []);
     useEffect(()=> {}, [product]);
-
+    const { state, dispatch } = useAppContext();
+    const cartItem = state.cart.find((item) => item.id === product.id);
     const getProduct = async () => {
         let data = await api.getProduct(`products/${params.id}`);
         setProduct(data)
@@ -38,6 +45,17 @@ const Section1 = ({params, url, isAuthenticated}) => {
         </Button>
     );
 
+    
+    const handleCartAmountChange = (qty: number) => {
+        let quantity = Object.keys(form).length == 0 ? qty : Number(form["quantity"]);
+        let imgUrl:any = product.images[0].src;
+        dispatch({
+          type: "CHANGE_CART_AMOUNT",
+          payload: { price: product.price, imgUrl, id:product.id, qty: quantity, slug:product.slug, name: product.name },
+        });
+    };
+
+
     return (
         <Container className="container-product" style={{background:colors.gray.gray}}>
             <Grid container spacing={3} >
@@ -46,7 +64,6 @@ const Section1 = ({params, url, isAuthenticated}) => {
                         {images != undefined && images.map((image:any) => (
                             <img key={image.id} src={image.src} alt={image.name} />
                         ))}
-
                     </div>
                 </Grid>
 
@@ -88,11 +105,21 @@ const Section1 = ({params, url, isAuthenticated}) => {
                         </div>
 
                         <div className="btns-actions">
-                            <select name="quantity" id="quantity" className="quantity">
+                            <select name="quantity" id="quantity" className="quantity" onChange={changed}>
                                 <option value="">Seleccione la cantidad...</option>
                                 {quantitys}
                             </select>
-                            <a href="" className="btn-add-cart">Añadir Al Carrito</a>
+
+                            <Button
+                                size="none"
+                                padding="10px 0"
+                                style={{color: Colors.titan.dark, backgroundColor: Colors.titan.yellow_light, border: "none", textAlign: "center", width: "100%", fontWeight: "bold", fontFamily: "18px !important", height: "47px", margin: "10px 0"}}
+                                variant="outlined"
+                                onClick={() => handleCartAmountChange((cartItem?.qty || 0) + 1)}
+                                >
+                                Añadir Al Carrito
+                            </Button>
+
                             <Whatsapp title={product.name} price={price} url={url}/>
                             
                             {!isAuthenticated && <Link href={"/comprar-ahora"} className="btn-buy-now">Comprar Ahora</Link>}
@@ -134,6 +161,7 @@ const Section1 = ({params, url, isAuthenticated}) => {
                 </Grid>
             </Grid>
             <hr />
+            
         </Container>
     )
 }

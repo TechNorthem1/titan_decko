@@ -3,14 +3,16 @@ import Authentication from "./Autentication";
 class Helpers {
 
     static disscount = (sale_price:number, regular_price:number):number => {
-        let disscount = (sale_price/regular_price-1) * 100;
+        let price = String(sale_price) == "" ? regular_price : sale_price;
+        let disscount = (price/regular_price-1) * 100;
         disscount = Math.ceil(disscount);
         disscount = Math.abs(disscount);
         return disscount;
     }
 
     static totalDisscount = (sale_price:number, regular_price:number):number => {
-        let disscount = (sale_price/regular_price-1) * 100;
+        let price = String(sale_price) == "" ? regular_price : sale_price;
+        let disscount = (price/regular_price-1) * 100;
         disscount = Math.ceil(disscount);
         disscount = Math.abs(disscount);
         let off = disscount / 100;

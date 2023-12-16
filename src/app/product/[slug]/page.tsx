@@ -1,13 +1,29 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import api from "@utils/__api__/products";
 import ProductIntro from "@component/products/ProductIntro";
 import ProductView from "@component/products/ProductView";
 
-const ProductDetails = async ({ params }: { params: { slug: string } }) => {
-  const shops = await api.getAvailableShop();
-  const relatedProducts = await api.getRelatedProducts();
-  const frequentlyBought = await api.getFrequentlyBought();
-  const product: any = await api.getProduct(params.slug as string);
+const ProductDetails = ({ params }: { params: { slug: string } }) => {
+  const [shops, setShops] = useState<any>();
+  const [relatedProducts, setRelatedProducts] = useState<any>();
+  const [frequentlyBought, setFrequentlyBought] = useState<any>();
+  const [product, setProduct] = useState<any>();
+
+  useEffect(() => {getData();}, []);
+
+  const getData = async () => {
+    let shops = await api.getAvailableShop();
+    let relatedProducts = await api.getRelatedProducts();
+    let frequentlyBought = await api.getFrequentlyBought();
+    let product: any = await api.getProduct(params.slug as string);
+
+    setShops(shops);
+    setRelatedProducts(relatedProducts);
+    setFrequentlyBought(frequentlyBought);
+    setProduct(product);
+  }
+
 
   return (
     <Fragment>

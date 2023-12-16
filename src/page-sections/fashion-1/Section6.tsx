@@ -66,7 +66,7 @@ const Section6: FC<Props> = ({ list }) => {
           currentSlide={currentSlide}
         >
           {list.map((item) => (
-            <Box py="0.35rem" key={item.id}>
+            <Box py="0.35rem" key={item?.id}>
               <Card
                 p="1rem"
                 bg="secondary.100"
@@ -75,7 +75,7 @@ const Section6: FC<Props> = ({ list }) => {
               >
                 <Grid container alignItems="center" spacing={6}>
                   <Grid item md={6} xs={12}>
-                    <Image mx="auto" maxWidth="100%" src={item.imgUrl} />
+                    <Image mx="auto" maxWidth="100%" src={item?.imgUrl} />
                   </Grid>
 
                   <Grid item md={6} xs={12}>
@@ -109,7 +109,7 @@ const Section6: FC<Props> = ({ list }) => {
                     </H3>
 
                     <H3 mb="0.5rem" fontSize="25px" lineHeight="1.2">
-                      {item.productName}
+                      {item?.productName}
                     </H3>
 
                     <Paragraph mb="2rem" color="text.muted" maxWidth="400px">

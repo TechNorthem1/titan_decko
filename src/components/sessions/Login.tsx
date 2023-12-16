@@ -75,8 +75,9 @@ const Login: FC<LoginProps> = ({redirect}) => {
   const handleFacebookLogin = async () => {
     const provider = new FacebookAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
-      router.push("/perfil");
+      let data:any = await signInWithPopup(auth, provider);
+      console.log(data)
+      // router.push("/perfil");
     } catch (error) {
       console.error(error);
       // Manejar errores aquí

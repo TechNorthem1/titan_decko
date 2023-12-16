@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import Box from "@component/Box";
 import api from "@utils/__api__/fashion-3";
 import Navbar from "@component/navbar/Navbar";
@@ -11,12 +12,31 @@ import Section6 from "@sections/fashion-3/Section6";
 import Section7 from "@sections/fashion-3/Section7";
 import Section8 from "@sections/fashion-3/Section8";
 
-const FashionThree = async () => {
-  const blogs = await api.getBlogs();
-  const products = await api.getProducts();
-  const services = await api.getServices();
-  const featureProducts = await api.getFeatureProducts();
-  const mainCarouselData = await api.getMainCarouselData();
+const FashionThree = () => {
+  const [blogs, setBlogs] = useState<any>([]);
+  const [products, setProducts] = useState<any>([]);
+  const [services, setServices] = useState<any>([]);
+  const [featureProducts, setFeatureProducts] = useState<any>([]);
+  const [mainCarouselData, setMainCarouselData] = useState<any>([]);
+
+  useEffect(() => {
+    getData();
+  },[])
+
+  const getData = async () => {
+    let blogs = await api.getBlogs();
+    let products = await api.getProducts();
+    let services = await api.getServices();
+    let featureProducts = await api.getFeatureProducts();
+    let mainCarouselData = await api.getMainCarouselData();
+
+    setBlogs(blogs);
+    setProducts(products);
+    setServices(services);
+    setFeatureProducts(featureProducts);
+    setMainCarouselData(mainCarouselData);
+  }
+
 
   return (
     <Fragment>

@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import Box from "@component/Box";
 import api from "@utils/__api__/market-2";
 import Navbar from "@component/navbar/Navbar";
@@ -14,15 +15,37 @@ import Section9 from "@sections/market-2/Section9";
 import Section10 from "@sections/market-2/Section10";
 import { PruebaComponent } from "@component/prueba";
 
-const MarketTwo = async () => {
-  const brands = await api.getBrands();
-  const products = await api.getProducts();
-  const serviceList = await api.getServices();
-  const categories = await api.getCategories();
-  const mainCarouselData = await api.getMainCarouselData();
-  const menFashionProducts = await api.getMenFashionProducts();
-  const electronicsProducts = await api.getElectronicsProducts();
-  const womenFashionProducts = await api.getWomenFashionProducts();
+const MarketTwo = () => {
+  const [brands, setBrands] = useState<any>();
+  const [products, setProducts] = useState<any>();
+  const [serviceList, setServiceList] = useState<any>();
+  const [categories, setCategories] = useState<any>();
+  const [mainCarouselData, setMainCarouselData] = useState<any>();
+  const [menFashionProducts, setMenFashionProducts] = useState<any>();
+  const [electronicsProducts, setElectronicsProducts] = useState<any>();
+  const [womenFashionProducts, setWomenFashionProducts] = useState<any>();
+
+  useEffect(() => {getData();}, []);
+
+  const getData = async () => {
+    let brands = await api.getBrands();
+    let products = await api.getProducts();
+    let serviceList = await api.getServices();
+    let categories = await api.getCategories();
+    let mainCarouselData = await api.getMainCarouselData();
+    let menFashionProducts = await api.getMenFashionProducts();
+    let electronicsProducts = await api.getElectronicsProducts();
+    let womenFashionProducts = await api.getWomenFashionProducts();
+
+    setBrands(brands);
+    setProducts(products);
+    setServiceList(serviceList);
+    setCategories(categories);
+    setMainCarouselData(mainCarouselData);
+    setMenFashionProducts(menFashionProducts);
+    setElectronicsProducts(electronicsProducts);
+    setWomenFashionProducts(womenFashionProducts);
+  }
 
 
   return (

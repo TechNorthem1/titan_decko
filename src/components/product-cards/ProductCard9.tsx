@@ -137,7 +137,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
       <Grid container spacing={1}>
         <Grid item md={3} sm={4} xs={12}>
           <Box position="relative">
-            {!!off && (
+            {off >= 0 && (
               <Chip
                 top="10px"
                 left="10px"

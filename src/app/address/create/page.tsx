@@ -1,3 +1,4 @@
+"use client"
 import { Fragment } from "react";
 import { Card1 } from "@component/Card1";
 import AddressForm from "@component/address/AddressForm";

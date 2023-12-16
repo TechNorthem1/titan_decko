@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import Box from "@component/Box";
 import api from "@utils/__api__/gadget";
 import Navbar from "@component/navbar/Navbar";
@@ -10,14 +11,38 @@ import Section5 from "@sections/gadget-shop/Section5";
 import Section6 from "@sections/gadget-shop/Section6";
 import Section7 from "@sections/gadget-shop/Section7";
 
-const GadgetShop = async () => {
-  const twoBanner = await api.getTwoBanner();
-  const blogLists = await api.getBlogLists();
-  const topPickList = await api.getTopPicksList();
-  const newArrivalsData = await api.getNewArrival();
-  const mostViewedList = await api.getMostViewedList();
-  const mainCarouselData = await api.getMainCarousel();
-  const featuredCategories = await api.getFeaturedCategories();
+const GadgetShop = () => {
+  const [twoBanner, setTwoBanner] = useState<any[]>([]);
+  const [blogLists, setBlogLists] = useState<any[]>([]);
+  const [topPickList, setTopPickList] = useState<any[]>([]);
+  const [newArrivalsData, setNewArrivalsData] = useState<any[]>([]);
+  const [mostViewedList, setMostViewedList] = useState<any[]>([]);
+  const [mainCarouselData, setMainCarouselData] = useState<any[]>([]);
+  const [featuredCategories, setFeaturedCategories] = useState<any[]>([]);
+
+  useEffect(() => {
+    getData();
+  }, [])
+
+  const getData = async () => {
+    let twoBanner = await api.getTwoBanner();
+    let blogLists = await api.getBlogLists();
+    let topPickList = await api.getTopPicksList();
+    let newArrivalsData = await api.getNewArrival();
+    let mostViewedList = await api.getMostViewedList();
+    let mainCarouselData = await api.getMainCarousel();
+    let featuredCategories = await api.getFeaturedCategories();
+
+    
+    setTwoBanner(twoBanner);
+    setBlogLists(blogLists);
+    setTopPickList(topPickList);
+    setNewArrivalsData(newArrivalsData);
+    setMostViewedList(mostViewedList);
+    setFeaturedCategories(mainCarouselData);
+    setFeaturedCategories(featuredCategories);
+  }
+
 
   return (
     <Fragment>

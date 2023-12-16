@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import api from "@utils/__api__/grocery-3";
 import Container from "@component/Container";
 import Section1 from "@sections/grocery-3/Section1";
@@ -6,11 +7,27 @@ import Section2 from "@sections/grocery-3/Section2";
 import Section3 from "@sections/grocery-3/Section3";
 import Section4 from "@sections/grocery-3/Section4";
 
-const GroceryThree = async () => {
-  const offerCards = await api.getOfferCards();
-  const allProducts = await api.getAllProducts();
-  const mainCarouselData = await api.getMainCarousel();
-  const topSailedProducts = await api.getTopSailedProducts();
+const GroceryThree = () => {
+  const [offerCards , setOfferCards] = useState<any>([]);
+  const [allProducts , setAllProducts] = useState<any>([]);
+  const [mainCarouselData , setMainCarouselData] = useState<any>([]);
+  const [topSailedProducts , setTopSailedProducts] = useState<any>([]);
+
+  useEffect(() => {
+    getData();
+  }, [])
+
+  const getData = async() => {
+    let offerCards = await api.getOfferCards();
+    let allProducts = await api.getAllProducts();
+    let mainCarouselData = await api.getMainCarousel();
+    let topSailedProducts = await api.getTopSailedProducts();
+
+    setOfferCards(offerCards);
+    setAllProducts(allProducts);
+    setMainCarouselData(mainCarouselData);
+    setTopSailedProducts(topSailedProducts);
+  }
 
   return (
     <Fragment>

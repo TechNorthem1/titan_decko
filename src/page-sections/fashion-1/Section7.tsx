@@ -25,30 +25,30 @@ const Section7: FC<Props> = ({ products }) => {
       <Grid container spacing={6}>
         <GridOne item md={4} xs={12}>
           <ProductCard1
-            id={products[0].title}
-            slug={products[0].slug}
-            title={products[0].title}
-            price={products[0].price}
-            off={products[0].discount}
-            rating={products[0].rating}
-            images={products[0].images as string[]}
-            imgUrl={products[0].thumbnail}
+            id={products[0]?.title}
+            slug={products[0]?.slug}
+            title={products[0]?.title}
+            price={products[0]?.price}
+            off={products[0]?.discount}
+            rating={products[0]?.rating}
+            images={products[0]?.images as string[]}
+            imgUrl={products[0]?.thumbnail}
           />
         </GridOne>
 
         <Grid item md={8} xs={12}>
           <Grid container spacing={6}>
             {trendings.map((item, ind) => (
-              <Grid item lg={4} sm={6} xs={12} key={item.id}>
+              <Grid item lg={4} sm={6} xs={12} key={item?.id}>
                 <ProductCard1
-                  id={item.id}
+                  id={item?.id}
                   off={ind * 10}
-                  slug={item.slug}
-                  title={item.title}
-                  price={item.price}
-                  rating={item.rating}
-                  images={item.images as string[]}
-                  imgUrl={item.thumbnail}
+                  slug={item?.slug}
+                  title={item?.title}
+                  price={item?.price}
+                  rating={item?.rating}
+                  images={item?.images as string[]}
+                  imgUrl={item?.thumbnail}
                 />
               </Grid>
             ))}

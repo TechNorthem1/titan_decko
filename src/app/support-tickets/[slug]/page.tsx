@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import { format } from "date-fns";
 import Box from "@component/Box";
 import Avatar from "@component/avatar";
@@ -10,8 +11,16 @@ import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import BackToSupport from "@component/support-ticket/BackToSupport";
 import MessageSubmit from "@component/support-ticket/MessageSubmit";
 
-const TicketDetails = async ({ params }: { params: { slug: string } }) => {
-  const ticket = await api.getTicket(String(params.slug));
+const TicketDetails = ({ params }: { params: { slug: string } }) => {
+  const [ticket, setTicket] = useState<any>();
+
+  useEffect(()=> {getData();}, []);
+
+  const getData = async () => {
+    let ticket = await api.getTicket(String(params.slug));
+    setTicket(ticket);
+
+  }
 
   return (
     <Fragment>

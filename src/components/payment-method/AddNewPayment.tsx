@@ -11,7 +11,7 @@ const AddNewPayment = () => {
       px="2rem"
       onClick={() => push("/payment-methods/add")}
     >
-      Add New Payment Method
+      Añadir nuevo metodo de pago
     </Button>
   );
 };

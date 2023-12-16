@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import Grid from "@component/grid/Grid";
 import FlexBox from "@component/FlexBox";
 import Pagination from "@component/pagination";
@@ -6,8 +7,15 @@ import ShopCard1 from "@sections/shop/ShopCard1";
 import { H2, SemiSpan } from "@component/Typography";
 import api from "@utils/__api__/shops";
 
-const ShopList = async () => {
-  const shopList = await api.getShopList();
+const ShopList = () => {
+  const [shopList, setShopList] = useState<any[]>([]);
+
+  useEffect(() => {getData()}, []);
+
+  const getData = async () => {
+    let shopList = await api.getShopList();
+    setShopList(shopList);
+  }
 
   return (
     <Fragment>

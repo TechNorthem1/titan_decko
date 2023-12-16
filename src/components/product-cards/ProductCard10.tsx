@@ -139,11 +139,12 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
       payload: { price, imgUrl, id, qty, slug, name: title },
     });
   };
-  
+
+
   return (
     <Wrapper borderRadius={8}>
       <div className="image-holder">
-        {off && (
+        {off >= 0 && (
           <Chip
             top="10px"
             left="10px"

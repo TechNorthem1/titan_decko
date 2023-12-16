@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import api from "@utils/__api__/grocery-1";
 import { Footer2 } from "@component/footer";
 import Section1 from "@sections/grocery-1/Section1";
@@ -9,13 +10,31 @@ import Section5 from "@sections/grocery-1/Section5";
 import SideNavbar from "@component/sidenav/SideNavbar";
 import SidenavContainer from "@component/SidenavContainer";
 
-const GroceryOne = async () => {
+const GroceryOne = () => {
   const FIXED_ID = "services-area";
-  const products = await api.getProducts();
-  const serviceList = await api.getServices();
-  const popularProducts = await api.getPopularProducts();
-  const trendingProducts = await api.getTrendingProducts();
-  const grocery1NavList = await api.getGrocery1Navigation();
+  const [products, setProducts] = useState<any>([]);
+  const [serviceList, setServiceList] = useState<any>([]);
+  const [popularProducts, setPopularProducts] = useState<any>([]);
+  const [trendingProducts, setTrendingProducts] = useState<any>([]);
+  const [grocery1NavList, setGrocery1NavList] = useState<any>([]);
+
+  useEffect(() => {
+    getData();
+  }, [])
+
+  const getData = async () => {
+    let products = await api.getProducts();
+    let serviceList = await api.getServices();
+    let popularProducts = await api.getPopularProducts();
+    let trendingProducts = await api.getTrendingProducts();
+    let grocery1NavList = await api.getGrocery1Navigation();
+
+    setProducts(products);
+    setServiceList(serviceList);
+    setPopularProducts(popularProducts);
+    setTrendingProducts(trendingProducts);
+    setGrocery1NavList(grocery1NavList);
+  }
 
   return (
     <Fragment>

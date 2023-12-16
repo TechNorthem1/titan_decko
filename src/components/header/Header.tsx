@@ -13,7 +13,7 @@ import Sidenav from "@component/sidenav/Sidenav";
 import { SearchInputWithCategory } from "@component/search-box";
 import { useAppContext } from "@context/AppContext";
 import StyledHeader from "./styles";
-import Navbar from "@component/navbar/Navbar";import Method from "@helpers/Method";
+import Navbar from "@component/navbar/Navbar";
 import CategoriesApi from "@utils/__api__/categories"
 import Authentication from "@helpers/Autentication";
 import {  useRouter } from "next/navigation";
@@ -21,12 +21,11 @@ import Helpers from "@helpers/Helpers";
 import FirebaseService from "@services/FirebaseService";
 
 
-
 // ====================================================================
-type HeaderProps = { isFixed?: boolean; className?: string };
+type HeaderProps = { isFixed?: boolean; className?: string, isResponsive?: boolean};
 // =====================================================================
 
-const Header: FC<HeaderProps> = ({ isFixed, className }) => {
+const Header: FC<HeaderProps> = ({ isFixed, className, isResponsive }) => {
   const { state } = useAppContext();
   const [open, setOpen] = useState(false);
   const toggleSidenav = () => setOpen(!open);
@@ -34,6 +33,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
   const [categories, setCategories] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
+  
   
 
   useEffect(()=> {
@@ -130,14 +130,14 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
         justifyContent="space-between"
         height="100%"
       >
-        <FlexBox className="logo" alignItems="center" mr="1rem">
+        <FlexBox className="logo" alignItems="center" mr="1rem" style={{display:"block"}}>
           <Link href={"/"}>
             <Image src="/assets/images/logo.webp" alt="logo" />
           </Link>
         </FlexBox>
           <FlexBox justifyContent="center" flex="1 1 0">
             {viewElementHeader &&  
-              <SearchInputWithCategory />
+              <SearchInputWithCategory isResposive={isResponsive}/>
             }
           </FlexBox>
 
@@ -174,8 +174,10 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
             }
           </FlexBox>
       </Container>
-      {viewElementHeader && <Navbar categories={categories} isAuthenticated={!isAuthenticated}/>
-        }
+      {viewElementHeader && 
+        <Navbar categories={categories} isAuthenticated={!isAuthenticated} />
+      }
+
     </StyledHeader>
   );
 };

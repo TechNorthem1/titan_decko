@@ -9,10 +9,10 @@ import { currency } from "@utils/utils";
 
 // ==========================================================
 type Props = {
-  title: string;
-  price: number;
-  imgUrl: string;
-  discount: number;
+  title?: string;
+  price?: number;
+  imgUrl?: string;
+  discount?: number;
 };
 // ==========================================================
 

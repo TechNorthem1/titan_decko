@@ -1,3 +1,4 @@
+"use client"
 import Grid from "@component/grid/Grid";
 import PaymentForm from "@sections/payment/PaymentForm";
 import PaymentSummary from "@sections/payment/PaymentSummary";

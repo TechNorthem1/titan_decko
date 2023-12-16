@@ -1,5 +1,6 @@
+"use client"
 import axios from "axios";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Hidden from "@component/hidden";
 import FlexBox from "@component/FlexBox";
 import TableRow from "@component/TableRow";
@@ -7,10 +8,19 @@ import { H5 } from "@component/Typography";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import ProductsList from "@component/vendor/products/ProductsList";
 
-const Products = async ({ params }: { params: { page: string } }) => {
-  const { data } = await axios.get("/api/products", {
-    params: { pageSize: 10, page: params.page ? parseInt(params.page) : 1 },
-  });
+const Products = ({ params }: { params: { page: string } }) => {
+  const [data, setData] = useState<any>([]);
+
+  useEffect(() => {getData();}, [])
+
+  const getData = async () => {
+    let { data }:any = await axios.get("/api/products", {
+      params: { pageSize: 10, page: params.page ? parseInt(params.page) : 1 },
+    });
+
+    setData(data);
+  }
+
 
   return (
     <Fragment>
@@ -41,7 +51,7 @@ const Products = async ({ params }: { params: { page: string } }) => {
         </TableRow>
       </Hidden>
 
-      <ProductsList products={data.result} meta={data.meta} />
+      <ProductsList products={data?.result} meta={data?.meta} />
     </Fragment>
   );
 };

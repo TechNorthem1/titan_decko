@@ -1,3 +1,4 @@
+"use client";
 import { Fragment, useEffect, useState } from "react";
 import Box from "@component/Box";
 import api from "@utils/__api__/market-2";
@@ -16,7 +17,15 @@ import Section9 from "@sections/market-2/Section9";
 import Section10 from "@sections/market-2/Section10";
 
 export default async function Home() {
-  const mainCarouselData = await api.getMainCarouselData();
+  const [mainCarouselData, setMainCarouselData] = useState<any>([]);
+
+  useEffect(() => {getData();}, []);
+
+  const getData = async() => {
+    let mainCarouselData = await api.getMainCarouselData();
+    setMainCarouselData(mainCarouselData);
+  }
+
 
   return (
     <Fragment>

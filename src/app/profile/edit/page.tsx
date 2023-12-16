@@ -1,12 +1,20 @@
-import { Fragment } from "react";
+"use client"
+import { Fragment, useEffect, useState } from "react";
 import api from "@utils/__api__/users";
 import { Card1 } from "@component/Card1";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import BackToProfileButton from "@component/profile/BackToProfileButton";
 import ProfileEditForm from "@component/profile/ProfileEditForm";
 
-const ProfileEditor = async () => {
-  const user = await api.getUser();
+const ProfileEditor = () => {
+  const [user, setUser] = useState<any>({});
+  
+  useEffect(() => {getData();}, [])
+
+  const getData = async () => {
+    let user: any = await api.getUser();
+    setUser(user);
+  }
 
   return (
     <Fragment>

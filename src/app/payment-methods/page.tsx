@@ -1,3 +1,4 @@
+"use client"
 import { Fragment } from "react";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import AddNewPayment from "@component/payment-method/AddNewPayment";

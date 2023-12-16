@@ -1,4 +1,5 @@
-import { FC, useCallback, useEffect, useState } from "react";
+"use client"
+import { FC, useCallback, useEffect, useState, KeyboardEvent } from "react";
 import Link from "next/link";
 import { debounce } from "lodash";
 import Box from "../Box";
@@ -9,24 +10,19 @@ import { Span } from "../Typography";
 import TextField from "../text-field";
 import StyledSearchBox from "./styled";
 import Products from "@utils/__api__/productos"
+import { useRouter } from "next/navigation";
+import useForm from "@hook/useForm";
 
+interface SearchInputWithCategoryProps {
+  isResposive?: boolean;
+}
 
-const SearchInputWithCategory: FC = () => {
+const SearchInputWithCategory: FC<SearchInputWithCategoryProps> = ({isResposive}) => {
   const [resultList, setResultList] = useState<any[]>([]);
+  const {form, changed} = useForm({});
   const [category, setCategory] = useState("Categorias");
   const handleCategoryChange = (cat: string) => () => setCategory(cat);
-  const search = debounce(async (e) => {
-    const value = e.target?.value;
-    const products = await Products.productsBySearched(`products?search=${value}&per_page=9`);
-    if (!value) setResultList(products);
-    else setResultList(products);
-  }, 200);
-
-  const hanldeSearch = useCallback((event: any) => {
-    event.persist();
-    search(event);
-  }, []);
-
+  const router = useRouter();
   const handleDocumentClick = () => setResultList([]);
 
   useEffect(() => {
@@ -34,19 +30,34 @@ const SearchInputWithCategory: FC = () => {
     return () => window.removeEventListener("click", handleDocumentClick);
   }, []);
 
+  const handleKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
+    let search:any = form["search-field"];
+    if (event.key === 'Enter') {
+      router.push(`/productos/${search}`);
+    }else{
+      const products = await Products.productsBySearched(`products?search=${search}&per_page=9`);
+      if (!search) setResultList(products);
+      else setResultList(products);
+    }
+  };
+
   return (
     <Box style={{position: "relative", flex: "1 1 0", maxWidth: "670px"}} mx="auto">
       <StyledSearchBox>
-        <Icon className="search-icon" size="18px" style={{color: "black"}}>
+
+        <Icon className={isResposive? "search-icon" : "search-icon search-icon-responsive"} size="18px" style={{color: "black"}}>
           search
         </Icon>
 
         <TextField
           fullwidth
-          onChange={hanldeSearch}
-          className="search-field"
+          onChange={changed}
+          className={isResposive ? "search-field" : "search-field search-field-responsive"}
           placeholder="Buscar en titandecko.com"
+          name="search-field"
+          onKeyDown={handleKeyDown}
         />
+
       </StyledSearchBox>
 
       {!!resultList.length && (

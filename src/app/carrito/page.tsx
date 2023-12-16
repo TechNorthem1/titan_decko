@@ -6,7 +6,6 @@ import { currency } from "@utils/utils";
 import { useAppContext } from "@context/AppContext";
 import { ProductCard7 } from "@component/product-cards";
 import Link from "next/link";
-
 import Select from "@component/Select";
 import Grid from "@component/grid/Grid";
 import Divider from "@component/Divider";

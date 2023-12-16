@@ -21,14 +21,14 @@ const Section8: FC<Props> = ({ serviceList }) => {
       borderColor="gray.400"
     >
       {serviceList.map((item) => (
-        <FlexBox alignItems="center" p="1rem" mx="auto" key={item.title}>
+        <FlexBox alignItems="center" p="1rem" mx="auto" key={item?.title}>
           <Icon size="42px" mr="0.87rem">
             {item.icon}
           </Icon>
 
           <Box>
-            <H3 lineHeight="1.3">{item.title}</H3>
-            <SemiSpan color="text.muted">{item.description}</SemiSpan>
+            <H3 lineHeight="1.3">{item?.title}</H3>
+            <SemiSpan color="text.muted">{item?.description}</SemiSpan>
           </Box>
         </FlexBox>
       ))}

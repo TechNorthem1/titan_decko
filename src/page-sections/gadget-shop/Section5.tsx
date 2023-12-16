@@ -23,12 +23,12 @@ const Section5: FC<Props> = ({ products }) => {
     <CategorySectionCreator title="New Arrivals">
       <Carousel totalSlides={products.length} visibleSlides={visibleSlides}>
         {products.map((item) => (
-          <Box key={item.id}>
+          <Box key={item?.id}>
             <ProductCard2
-              slug={item.slug}
-              price={item.price}
-              title={item.title}
-              imgUrl={item.thumbnail}
+              slug={item?.slug}
+              price={item?.price}
+              title={item?.title}
+              imgUrl={item?.thumbnail}
             />
           </Box>
         ))}

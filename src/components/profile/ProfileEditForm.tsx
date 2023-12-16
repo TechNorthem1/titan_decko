@@ -9,11 +9,16 @@ import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
 import Grid from "@component/grid/Grid";
 import TextField from "@component/text-field";
+import useForm from "@hook/useForm";
+import FirebaseService from "@services/FirebaseService";
+import Client from "@models/Client.model";
 
 interface ProfileEditFormProps {
-  user:any
+  user?:any
+  setUser?:any
 }
-const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user }) => {
+const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user, setUser }) => {
+  const {form, changed} = useForm({});
 
   const INITIAL_VALUES = {
     name: user?.lastname?.stringValue?.length === 0 ? "" : user?.name?.stringValue,
@@ -35,6 +40,17 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user }) => {
   const handleFormSubmit = async (values: typeof INITIAL_VALUES) => {
     console.log(values);
   };
+
+  const saveProfile = async (e:any) => {
+    e.preventDefault();
+    let client:Client = new Client(form["name"], form["lastname"],form["document"], user.email?.stringValue, form["phone"], form["address"]);
+    console.log(client)
+    let updateUser:any = await FirebaseService.updatedUser(client, user.email?.stringValue);
+    if (updateUser){
+      let dataUser:any = await FirebaseService.getUser(user.email?.stringValue);
+      setUser(dataUser[0]._document.data.value.mapValue.fields)
+    }
+  }
 
   return (
     <>
@@ -72,86 +88,79 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user }) => {
         initialValues={INITIAL_VALUES}
         validationSchema={VALIDATION_SCHEMA}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-        }) => (
-          <form onSubmit={handleSubmit}>
-            <Box mb="30px">
-              <Grid container horizontal_spacing={6} vertical_spacing={4}>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullwidth
-                    name="name"
-                    label="Nombres"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={INITIAL_VALUES.name}
-                    errorText={touched.name && errors.name}
-                  />
-                </Grid>
-
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullwidth
-                    name="lastname"
-                    label="Apellidos"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={INITIAL_VALUES.lastname}
-                    errorText={touched.lastname && errors.lastname}
-                  />
-                </Grid>
-
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullwidth
-                    name="email"
-                    type="email"
-                    label="Correo Electronico"
-                    onBlur={handleBlur}
-                    value={INITIAL_VALUES.email}
-                    onChange={handleChange}
-                    errorText={touched.email && errors.email}
-                  />
-                </Grid>
-
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullwidth
-                    label="Telefono"
-                    name="phone"
-                    onBlur={handleBlur}
-                    value={INITIAL_VALUES.phone}
-                    onChange={handleChange}
-                    errorText={touched.phone && errors.phone}
-                  />
-                </Grid>
-
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullwidth
-                    type="text"
-                    name="address"
-                    label="Direccion"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={INITIAL_VALUES.address}
-                    errorText={touched.address && errors.address}
-                  />
-                </Grid>
+        
+        <form onSubmit={saveProfile}>
+          <Box mb="30px">
+            <Grid container horizontal_spacing={6} vertical_spacing={4}>
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullwidth
+                  name="name"
+                  label="Nombres"
+                  onChange={changed}
+                  defaultValue={INITIAL_VALUES.name}
+                />
               </Grid>
-            </Box>
 
-            <Button type="submit" variant="contained" color="primary">
-              Guardar cambios
-            </Button>
-          </form>
-        )}
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullwidth
+                  name="lastname"
+                  label="Apellidos"
+                  onChange={changed}
+                  defaultValue={INITIAL_VALUES.lastname}
+                />
+              </Grid>
+
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullwidth
+                  label="Documento"
+                  name="document"
+                  defaultValue={INITIAL_VALUES.document}
+                  onChange={changed}
+                />
+              </Grid>
+
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullwidth
+                  name="email"
+                  type="email"
+                  label="Correo Electronico"
+                  defaultValue={INITIAL_VALUES.email}
+                  disabled
+                />
+              </Grid>
+
+
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullwidth
+                  label="Telefono"
+                  name="phone"
+                  defaultValue={INITIAL_VALUES.phone}
+                  onChange={changed}
+                />
+              </Grid>
+
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullwidth
+                  type="text"
+                  name="address"
+                  label="Direccion"
+                  onChange={changed}
+                  defaultValue={INITIAL_VALUES.address}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+
+          <Button type="submit" variant="contained" color="primary">
+            Guardar cambios
+          </Button>
+        </form>
       </Formik>
     </>
   );

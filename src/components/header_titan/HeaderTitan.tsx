@@ -1,14 +1,23 @@
 "use client"
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Sticky from "@component/sticky";
 import { Header } from "@component/header";
 import Head from "next/head";
 import "./style.css"
+import useResponsive from '@hook/useResposive';
 
 
 export const HeaderTitan = () => {
+  const {width, height} = useResponsive();
+  const [isResponsive, setResponsive] = useState<any>();
+  useEffect(() => {
+    let responsive = width < 901;
+    setResponsive(responsive);
+  }, [width]); 
 
-    return (
+
+
+  return (
     <Fragment>
       <Head>
         <meta charSet="utf-8" />
@@ -25,7 +34,7 @@ export const HeaderTitan = () => {
       </Head>
 
       <Sticky fixedOn={0}>
-        <Header />
+        <Header isResponsive={isResponsive}/>
       </Sticky>
       {/* NAVBAR AREA */}
     </Fragment>
