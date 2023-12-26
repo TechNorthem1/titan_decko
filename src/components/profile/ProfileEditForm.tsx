@@ -12,13 +12,14 @@ import TextField from "@component/text-field";
 import useForm from "@hook/useForm";
 import FirebaseService from "@services/FirebaseService";
 import Client from "@models/Client.model";
+import SerializerForm from "@hook/SerializerForm";
 
 interface ProfileEditFormProps {
   user?:any
   setUser?:any
 }
 const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user, setUser }) => {
-  const {form, changed} = useForm({});
+  const {form, changed}:any = useForm({});
 
   const INITIAL_VALUES = {
     name: user?.lastname?.stringValue?.length === 0 ? "" : user?.name?.stringValue,
@@ -43,8 +44,8 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user, setUser }) => {
 
   const saveProfile = async (e:any) => {
     e.preventDefault();
-    let client:Client = new Client(form["name"], form["lastname"],form["document"], user.email?.stringValue, form["phone"], form["address"]);
-    console.log(client)
+    const formData = SerializerForm(e.target);
+    let client:Client = new Client(formData["name"], formData["lastname"],formData["document"], user.email?.stringValue,  user?.email_send?.stringValue,formData["phone"], formData["address"]);
     let updateUser:any = await FirebaseService.updatedUser(client, user.email?.stringValue);
     if (updateUser){
       let dataUser:any = await FirebaseService.getUser(user.email?.stringValue);
@@ -97,7 +98,6 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user, setUser }) => {
                   fullwidth
                   name="name"
                   label="Nombres"
-                  onChange={changed}
                   defaultValue={INITIAL_VALUES.name}
                 />
               </Grid>
@@ -107,7 +107,6 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user, setUser }) => {
                   fullwidth
                   name="lastname"
                   label="Apellidos"
-                  onChange={changed}
                   defaultValue={INITIAL_VALUES.lastname}
                 />
               </Grid>
@@ -118,7 +117,6 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user, setUser }) => {
                   label="Documento"
                   name="document"
                   defaultValue={INITIAL_VALUES.document}
-                  onChange={changed}
                 />
               </Grid>
 
@@ -140,7 +138,6 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user, setUser }) => {
                   label="Telefono"
                   name="phone"
                   defaultValue={INITIAL_VALUES.phone}
-                  onChange={changed}
                 />
               </Grid>
 
@@ -150,7 +147,6 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user, setUser }) => {
                   type="text"
                   name="address"
                   label="Direccion"
-                  onChange={changed}
                   defaultValue={INITIAL_VALUES.address}
                 />
               </Grid>

@@ -36,11 +36,11 @@ const Signup: FC = () => {
   };
 
   const getDataForm = (e:any, values:any) => {
-    let client = Authentication.register(e, values);
+    let client:any = Authentication.register(e, values);
     handleEmailPasswordSignup(client);
   }
 
-  const handleEmailPasswordSignup = async (client:Client) => {
+  const handleEmailPasswordSignup = async (client:Client|any) => {
     try {
       let user = await FirebaseService.getUser(client.email);
       if (user.length >= 1){

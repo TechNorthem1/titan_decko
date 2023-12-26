@@ -5,10 +5,10 @@ import systemCss from "@styled-system/css";
 import { colorOptions } from "interfaces";
 
 export interface RadioProps {
-  color?: colorOptions;
-  labelColor?: colorOptions;
-  labelPlacement?: "start" | "end";
-  label?: string | React.ReactChild;
+  color?: colorOptions | any;
+  labelColor?: colorOptions  | any;
+  labelPlacement?: "start" | "end" | any;
+  label?: string | React.ReactChild  | any;
   id?: any;
 }
 
@@ -19,7 +19,7 @@ interface WrapperProps extends ColorProps, SpaceProps {
 const SyledRadio = styled.input<
   InputHTMLAttributes<HTMLInputElement> & RadioProps
 >(
-  (props) =>
+  (props:any) =>
     systemCss({
       /* remove standard background appearance */
       // "-webkit-appearance": "none",
@@ -78,10 +78,10 @@ const SyledRadio = styled.input<
 const Wrapper = styled.div<WrapperProps>`
   display: flex;
   align-items: center;
-  flex-direction: ${(props) =>
+  flex-direction: ${(props:any) =>
     props.labelPlacement !== "end" ? "row" : "row-reverse"};
   input {
-    ${(props) =>
+    ${(props:any) =>
       props.labelPlacement !== "end"
         ? "margin-right: 0.5rem"
         : "margin-left: 0.5rem"};
@@ -111,9 +111,9 @@ const Radio: FC<
   const [radioId, setRadioId] = useState(id);
 
   // extract spacing props
-  let spacingProps: any = {};
+  let spacingProps: any | {} = {};
   for (const key in props) {
-    const propKey = key as "color";
+    const propKey:string = key as "color";
     if (key.startsWith("m") || key.startsWith("p"))
       spacingProps[propKey] = props[propKey];
   }

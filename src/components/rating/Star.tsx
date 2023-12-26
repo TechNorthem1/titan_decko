@@ -3,10 +3,10 @@ import { colors } from "@utils/themeColors";
 import { colorOptions } from "interfaces";
 
 export interface StarProps {
-  value?: number;
-  outof?: number;
-  color?: colorOptions;
-  onClick?: () => void;
+  outof?: number| any;
+  value?: number| any;
+  color?: colorOptions| any;
+  onClick?: () => void | any;
 }
 
 const Star: FC<StarProps> = ({

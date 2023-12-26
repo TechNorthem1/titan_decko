@@ -10,12 +10,11 @@ import Link from "next/link";
 import Helpers from "@helpers/Helpers";
 
 // =======================================================
-type Props = { title: string; products: any[], params?: any };
+type Props = { title: string; products?: any | [], params?: any };
 // =======================================================
 
-const Section4: FC<Props> = ({ title, products, params} ) => {
+const Section4: FC<Props> = ({ title, products = [], params} ) => {
   const { visibleSlides } = useVisibleSlide();
-
   
   return (
     <Box>
@@ -36,7 +35,7 @@ const Section4: FC<Props> = ({ title, products, params} ) => {
           totalSlides={products.length}
           visibleSlides={visibleSlides}
         >
-          { products.map((item) => (
+          { products.map((item:any) => (
             <Box py="0.25rem" key={item.id}>
               <ProductCard10
                 id={item.id}

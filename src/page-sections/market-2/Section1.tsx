@@ -46,7 +46,7 @@ const CardWrapper = styled(Box)({
 });
 
 // ======================================================
-type Props = { carouselData: MainCarouselItem[] };
+type Props = { carouselData: MainCarouselItem[]|[]|any };
 // ======================================================
 
 const Section1: FC<Props> = ({ carouselData }) => {
@@ -63,9 +63,9 @@ const Section1: FC<Props> = ({ carouselData }) => {
               autoPlay={false}
               visibleSlides={1}
               showArrow={false}
-              totalSlides={carouselData.length}
+              totalSlides={carouselData?.length}
             >
-              {carouselData.map((item, index) => (
+              {carouselData?.map((item:any, index:any) => (
                 <CarouselCard3
                   key={index}
                   img={item.imgUrl}

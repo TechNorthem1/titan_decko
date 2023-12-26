@@ -38,6 +38,8 @@ const Footer1: FC = () => {
                     alt="logo"
                     mb="1.25rem"
                     src="/assets/images/logo.webp"
+                    width={200}
+                    height={74}
                   />
                 </Link>
 
@@ -110,6 +112,7 @@ const Footer1: FC = () => {
                       target="_blank"
                       key={item.iconName}
                       rel="noreferrer noopenner"
+                      aria-label={item.aria_label}
                     >
                       <Box
                         m="5px"
@@ -151,14 +154,15 @@ const customerCareLinks = [
 ];
 
 const iconList = [
-  { iconName: "facebook", url: "https://www.facebook.com/TitanDeckoColombia/" },
-  { iconName: "twitter", url: "/" },
+  { iconName: "facebook", url: "https://www.facebook.com/TitanDeckoColombia/", aria_label: "facebook" },
+  { iconName: "twitter", url: "/", aria_label: "twitter" },
   {
     iconName: "youtube",
     url: "https://www.youtube.com/@titandecko/videos",
+    aria_label: "youtube"
   },
-  { iconName: "google", url: "/" },
-  { iconName: "instagram", url: "https://www.instagram.com/titandecko.com.co/" },
+  { iconName: "google", url: "/", aria_label: "google" },
+  { iconName: "instagram", url: "https://www.instagram.com/titandecko.com.co/", aria_label: "instagram" },
 ];
 
 export default Footer1;

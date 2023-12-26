@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 const useResponsive = () => {
     // Inicializamos el estado con un valor por defecto que no dependa de window
-  const [windowSize, setWindowSize] = useState({
+  const [windowSize, setWindowSize]:any = useState({
     width: undefined,
     height: undefined,
   });

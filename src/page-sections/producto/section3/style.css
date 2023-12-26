@@ -91,3 +91,10 @@
         overflow-y: visible;
     }
 }
+
+@media screen and (width < 1025px) {
+    .container-description {
+        margin: 0 16px 0;
+        padding: 0 15px;
+    }
+}

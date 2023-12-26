@@ -8,10 +8,10 @@ import { colors } from "@utils/themeColors";
 
 
 // ==========================================================
-type Props = { products: any[], totalPage:string };
+type Props = { products: any[], totalPage:string|any, page?:number, setPage?:any, getProduct?:any};
 // ==========================================================
 
-const ProductCard9List: FC<Props> = ({ products, totalPage }) => {
+const ProductCard9List: FC<Props> = ({ products, totalPage, page, setPage, getProduct }) => {
 
   return (
     <Fragment>
@@ -24,7 +24,7 @@ const ProductCard9List: FC<Props> = ({ products, totalPage }) => {
           slug={item.slug}
           title={item.name}
           price={item.regular_price}
-          imgUrl={item.images[0].src}
+          imgUrl={item.images[0]?.src}
           images={item.images}
           rating={item.rating}
           salePrice={item.sale_price}
@@ -38,8 +38,8 @@ const ProductCard9List: FC<Props> = ({ products, totalPage }) => {
           alignItems="center"
           mt="32px"
         >
-          <SemiSpan color={colors.titan.dark}>Mostrando 1-{Math.ceil(parseInt(totalPage)/30)} de {products.length} Productos</SemiSpan>
-          <Pagination pageCount={Math.ceil(parseInt(totalPage)/30)} />
+          <SemiSpan color={colors.titan.dark}>Mostrando {page}-{Math.ceil(parseInt(totalPage)/30)} de {products.length} Productos</SemiSpan>
+          <Pagination pageCount={Math.ceil(parseInt(totalPage)/30)} pagination={page} setPage={setPage} getProduct={getProduct} />
         </FlexBox>
       )}
     </Fragment>

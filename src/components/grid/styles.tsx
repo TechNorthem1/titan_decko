@@ -16,7 +16,7 @@ const StyledGrid = styled.div<GridProps>(
     xs,
     containerHeight,
   }) => {
-    let mediaProps = { xl, lg, md, sm, xs };
+    let mediaProps:any = { xl, lg, md, sm, xs };
     let style: any = {};
 
     if (container) {
@@ -65,7 +65,7 @@ const StyledGrid = styled.div<GridProps>(
   compose(flexbox)
 );
 
-const mediaSize = {
+const mediaSize:any = {
   xs: 0,
   sm: 426,
   md: 769,

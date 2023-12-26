@@ -31,7 +31,7 @@ const Profile = () => {
 
   const loadUser = async () => {
     let data:any = User.getUser("dataUser");
-    let user:any = await FirebaseService.getUser(data.email);
+    let user:any = await FirebaseService.getUser(data?.email);
     if (data === null){
       router.push("/");
     }else{
@@ -135,7 +135,7 @@ const Profile = () => {
       <TableRow p="0.75rem 1.5rem">
         <FlexBox flexDirection="column" p="0.5rem">
           <Small color={`${colors.titan.salmon}`} mb="4px" textAlign="left">
-            First Name
+            Nombres
           </Small>
 
           {user && <span style={{color:colors.titan.dark}}>{INITIAL_VALUES.name}</span>}
@@ -143,7 +143,7 @@ const Profile = () => {
 
         <FlexBox flexDirection="column" p="0.5rem">
           <Small color={`${colors.titan.salmon}`} mb="4px" textAlign="left">
-            Last Name
+            Apellidos
           </Small>
 
           {user && <span style={{color:colors.titan.dark}}>{INITIAL_VALUES.lastname}</span>}
@@ -151,7 +151,7 @@ const Profile = () => {
 
         <FlexBox flexDirection="column" p="0.5rem">
           <Small color={`${colors.titan.salmon}`} mb="4px" textAlign="left">
-            Email
+            Correo
           </Small>
 
           { user &&<span style={{color:colors.titan.dark}}>{INITIAL_VALUES.email}</span>}
@@ -159,7 +159,7 @@ const Profile = () => {
 
         <FlexBox flexDirection="column" p="0.5rem">
           <Small color={`${colors.titan.salmon}`} mb="4px" textAlign="left">
-            Phone
+            Telefono
           </Small>
 
           {user && <span style={{color:colors.titan.dark}}>{INITIAL_VALUES.phone}</span>}

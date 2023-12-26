@@ -1,7 +1,7 @@
 "use client";
 import { Fragment, useEffect, useState } from "react";
 import Box from "@component/Box";
-import api from "@utils/__api__/market-2";
+import {mainCarouselData as carrousel} from "@server/__db__/market-2/data"
 import Section1 from "@sections/market-2/Section1";
 import { PruebaComponent } from "@component/prueba";
 import { HeaderTitan } from "@component/header_titan";
@@ -15,22 +15,26 @@ import Section7 from "@sections/market-2/Section7";
 import Section8 from "@sections/market-2/Section8";
 import Section9 from "@sections/market-2/Section9";
 import Section10 from "@sections/market-2/Section10";
+import MobileNavigationBar from "@component/mobile-navigation";
+import Helpers from "@helpers/Helpers";
 
-export default async function Home() {
+const Home = () => {
   const [mainCarouselData, setMainCarouselData] = useState<any>([]);
+  const [isAuthenticated, setIsAuthenticated]:any = useState<boolean>(false);
 
-  useEffect(() => {getData();}, []);
+  useEffect(() => {getData();}, [isAuthenticated]);
 
-  const getData = async() => {
-    let mainCarouselData = await api.getMainCarouselData();
-    setMainCarouselData(mainCarouselData);
+  const getData = () => {
+    let authenticated = Helpers.isAuthenticated("dataUser");
+    setIsAuthenticated(authenticated);
+    setMainCarouselData(carrousel);
   }
 
 
   return (
     <Fragment>
 
-      <HeaderTitan />
+      <HeaderTitan isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
       
       <Box className="content-box">
         {/* HERO CAROUSEL AREA */}
@@ -70,8 +74,10 @@ export default async function Home() {
         {/* SELECTED PRODUCTS AREA */}
         {/* <Section10 products={products} /> */}
       </Box>
-
+      <MobileNavigationBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
       <Footer1 />
     </Fragment>
   );
 }
+
+export default Home;

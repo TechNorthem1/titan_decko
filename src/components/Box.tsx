@@ -35,7 +35,7 @@ interface BoxProps
 }
 
 const Box = styled.div<BoxProps>(
-  ({ shadow = 0, cursor = "unset", transition, theme }) => ({
+  ({ shadow = 0, cursor = "unset", transition, theme, marginTop= "76px" }) => ({
     cursor,
     transition,
     boxShadow: theme.shadows[shadow as number],

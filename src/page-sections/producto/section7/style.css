@@ -1,0 +1,120 @@
+:root{
+    --salmon: #FF5D5D;
+    --black: #000000;
+    --white: white;
+    --yellow: #FFCF00;
+    --green: #25D366;
+    --yellow-light: #FFEB94;
+    --blue: #3861FF;
+    --gray: #CFCFCF;
+}
+
+@media screen and (width > 900px) {
+    .content-shared {
+        display: none;
+    }
+}
+
+@media screen and (width < 901px) {
+
+    .content-shared{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        min-height: 210px;
+        width: 100%;
+        border-radius: 5px;
+        display: flex;
+        align-items: flex-end;
+        background-color: rgba(0, 0, 0, .5);
+        padding: 0 10px;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .popup{
+        width: 100%;
+        min-height: 210px;
+        background-color: white;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        padding: 10px 20px;
+        transform: translateY(200px);
+        transition: .5s ease all;
+    }
+
+    .popup .popup__header{
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--gray);
+    }
+
+    .popup .popup__header h4{
+        color: var(--black);
+        font-size: 1.3rem;
+    }
+
+    .popup .popup__header i {
+        color: var(--black);
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: ease all .5s;
+    }
+
+    .popup .popup__header i:hover{
+        font-size: 1.3rem;
+        border-radius: 50%;
+        padding: 5px;
+        background-color: var(--salmon);
+        color: var(--white);
+    }
+
+    .popup_activate{
+        transform: translateY(0);
+    }
+
+
+    .activate{
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .popup .popup__body{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 20px;
+    }
+
+    .popup .popup__body a{
+        padding: 13px 20px;
+        border-radius: 50%;
+        background-color: #000000;
+        font-size: 1.1rem;
+        transition: transform .4s ease all;   
+    }
+
+    .popup .popup__body a:hover{
+        font-size: 1.3rem;
+        transform: translateY(-10px);
+    }
+
+    .popup .popup__body .facebook {
+        background-color: #1877f2 !important;
+        color: var(--white)
+    }
+    .popup .popup__body .whatsapp {
+        background-color: #25d366 !important;
+        color: var(--white)
+    }
+    .popup .popup__body .instagram {
+        background: linear-gradient(45deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%) !important;
+        color: var(--white)
+    }
+
+}

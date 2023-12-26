@@ -31,7 +31,7 @@ const ProductDetails = ({ shop }: Props) => {
         </Sidenav>
       )}
 
-      <ProductCardList products={shop.products?.slice(0, 9) as Product[]} />
+      <ProductCardList products={shop.products?.slice(0, 9) as []} />
     </Grid>
   );
 };

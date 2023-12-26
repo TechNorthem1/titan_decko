@@ -7,6 +7,7 @@ import Client from '@models/Client.model';
 import FirebaseService from '@services/FirebaseService';
 import Authentication from '@helpers/Autentication';
 import { useRouter } from "next/navigation";
+import SerializerForm from '@hook/SerializerForm';
 
 const Section1 = ({ user, setUser }) => {
   const {form, changed } = useForm({});
@@ -24,14 +25,14 @@ const Section1 = ({ user, setUser }) => {
   
   const saveUser = async (e:any) => {
     e.preventDefault();
-    let client = new Client(form["name"], form["lastname"], form["citizenshipCard"], form["email"], form["phone"], "", ""); 
-
+    const formData = SerializerForm(e.target);
+    let client = new Client(formData["name"], formData["lastname"], formData["citizenshipCard"], user?.email?.stringValue, formData["email_send"], formData["phone"], user?.address?.stringValue, ""); 
     if(Object.keys(form).length !== 0){
-      let updateUser = await FirebaseService.updatedUser(client, user.email?.stringValue);
+      let updateUser = await FirebaseService.updatedUser(client, user?.email?.stringValue);
       if(updateUser){
         let {key, param} = Authentication.encryp("dataSend", JSON.stringify(client));
         localStorage.setItem(key, param)
-        let dataUser:any = await FirebaseService.getUser(form["email"]);
+        let dataUser:any = await FirebaseService.getUser(user?.email?.stringValue);
         setUser(dataUser[0]._document?.data?.value?.mapValue?.fields)
       }
       setVisible(updateUser)
@@ -49,6 +50,7 @@ const Section1 = ({ user, setUser }) => {
     lastname: user?.lastname?.stringValue.length == 0 ? "" : user?.lastname?.stringValue,
     document: user?.lastname?.stringValue.length == 0 ? "" : user?.document?.stringValue,
     email: user?.lastname?.stringValue.length == 0 ? "" : user?.email?.stringValue,
+    email_send: user?.lastname?.stringValue.length == 0 ? "" : user?.email_send?.stringValue,
     phone: user?.lastname?.stringValue.length == 0 ? "" : user?.phone?.stringValue
     
   }
@@ -77,12 +79,12 @@ const Section1 = ({ user, setUser }) => {
       {!isVisible && 
       <form className='form-data_person' onSubmit={saveUser}>
         <div className="form-control email">
-          <label htmlFor="email">Correo <span className='required'>*</span></label>
+          <label htmlFor="email_send">Correo <span className='required'>*</span></label>
           <input
             type="email" 
-            name="email" 
-            id="email"
-            defaultValue={InitialValues.email}
+            name="email_send" 
+            id="email_send"
+            defaultValue={InitialValues.email_send}
             onChange={changed}
           />
         </div>
@@ -140,7 +142,7 @@ const Section1 = ({ user, setUser }) => {
       {isVisible && 
         <div className="info_personal activate">
           <div className="data_sent">
-            <span>correo: {InitialValues.email}</span>
+            <span>correo: {InitialValues.email_send}</span>
             <span>nombre: {InitialValues.name} {InitialValues.lastname}</span>
             <span>telefono / movil: {InitialValues.phone}</span>
           </div>

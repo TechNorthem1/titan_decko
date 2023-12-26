@@ -29,7 +29,7 @@ const Rating: FC<RatingProps> = ({
   let fullStar = parseInt(state.toString());
   let halfStar = Math.ceil(state - fullStar);
   let emptyStar = (outof as number) - Math.ceil(state);
-  let starList = [];
+  let starList:JSX.Element[] = [];
 
   const handleStarClick = (inputValue: any) => {
     if (!readonly) {

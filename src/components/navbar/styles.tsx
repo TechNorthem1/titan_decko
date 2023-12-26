@@ -47,7 +47,7 @@ const StyledNavbar = styled.div`
     color: ${getTheme("colors.text.secondary")};
   }
   @media only screen and (max-width: 900px) {
-    display: none;
+    display: block;
   }
 `;
 

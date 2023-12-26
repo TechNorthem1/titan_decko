@@ -5,10 +5,10 @@ import { StyledCategoryMenuItem } from "./styles";
 
 // ===============================================================
 type CategoryMenuItemProps = {
-  href: string;
-  title: string;
+  href?: string|any;
+  title?: string;
   caret?: boolean;
-  children: any;
+  children?: any;
   icon?: any;
 };
 // ===============================================================

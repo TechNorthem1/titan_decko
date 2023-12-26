@@ -8,7 +8,7 @@ import StyledNavLink from "./styles";
 
 interface NavLinkProps extends SpaceProps, ColorProps {
   as?: string;
-  href: string;
+  href?: string;
   className?: string;
   children: ReactNode;
   style?: CSSProperties;

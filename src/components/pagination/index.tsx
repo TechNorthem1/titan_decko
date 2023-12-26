@@ -11,6 +11,9 @@ export interface PaginationProps extends SpaceProps {
   pageRangeDisplayed?: number;
   marginPagesDisplayed?: number;
   onChange?: (data: number) => void;
+  pagination?:number;
+  setPage?:any;
+  getProduct?:any;
 }
 
 const Pagination: FC<PaginationProps> = ({
@@ -18,10 +21,15 @@ const Pagination: FC<PaginationProps> = ({
   pageCount,
   pageRangeDisplayed,
   marginPagesDisplayed,
+  pagination,
+  setPage,
+  getProduct,
   ...props
 }) => {
   const handlePageChange = async (page: any) => {
     if (onChange) onChange(page.selected);
+    setPage(page.selected+1);
+    getProduct();
   };
 
   const PREVIOUS_BUTTON = (

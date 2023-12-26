@@ -10,7 +10,7 @@ import { currency } from "@utils/utils";
 // ==========================================================
 type Props = {
   title?: string;
-  price?: number;
+  price?: number|any;
   imgUrl?: string;
   discount?: number;
 };

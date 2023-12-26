@@ -22,12 +22,12 @@ class Authentication {
         }
     }
 
-    static encriptKey = (keyUser?:string) => {
+    static encriptKey = (keyUser?:string|any) => {
         return Crypto.SHA256(keyUser).toString();
     }
 
 
-    static encriptToken = (keyUser?:string, token?:string) => {
+    static encriptToken = (keyUser?:string|any, token?:string|any) => {
         let keyAuthentication = Authentication.encriptKey(Authentication.KEY);
         let keyToken:string = Authentication.encriptKey(keyUser);
         let tokenEcrypt:string = Crypto.AES.encrypt(token, keyAuthentication).toString();

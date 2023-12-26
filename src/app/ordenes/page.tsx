@@ -49,7 +49,7 @@ const OrderList = async () => {
         </TableRow>
       </Hidden>
 
-      {orderList.map((item) => (
+      {orderList.map((item:any) => (
         <OrderRow order={item} key={item.id} />
       ))}
 

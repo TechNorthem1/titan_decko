@@ -13,18 +13,28 @@ import { useRouter } from 'next/navigation'
 import User from '@utils/__api__/user'
 import FirebaseService from '@services/FirebaseService'
 import { setDefaultResultOrder } from 'dns/promises'
+import { useAppContext } from '@context/AppContext'
+import Helpers from '@helpers/Helpers'
+import MobileNavigationBar from '@component/mobile-navigation'
+
 
 
 
 
 const page = () => {
     const [user, setUser] = useState<any>();
+    const {state, dispatch} =  useAppContext();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     
     useEffect(() => {
         getUser();
     }, [])
 
-    useEffect(()=> {}, [user]);
+    useEffect(() => {
+        let authenticated = Helpers.isAuthenticated("dataUser");
+        setIsAuthenticated(authenticated)
+    }, [isAuthenticated, user])
+
     
 
     const getUser = async () => {
@@ -35,35 +45,36 @@ const page = () => {
 
     return (
         <Fragment>
-            <HeaderTitan />
+            <HeaderTitan isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
 
             <Box className='content-box'>
-                <Container style={{"flex": "1"}}>
+                <Container style={{"flex": "1", padding: "0 20px"}}>
                     <Grid container spacing={4} style={{"marginBottom": "30px"}}>
                         <Grid item lg={8} xs={12}>
 
-                            {user && <Section1 
+                            <Section1 
                                 user={user}
                                 setUser={setUser}
-                            />}
+                            />
 
-                           {user && 
-                                <Section2 
-                                    user={user} 
-                                    setUser={setUser}
-                                />
-                            }
+                            
+                            <Section2 
+                                user={user} 
+                                setUser={setUser}
+
+                            />
+                    
 
                             <Section3 />
                         </Grid>
                         <Grid item lg={4} xs={12}>
-                            <Section4 />
+                            <Section4 state={state} />
                         </Grid>
                     </Grid>
 
                 </Container>
             </Box>
-
+            <MobileNavigationBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
             <Footer1 />
         </Fragment>
         )

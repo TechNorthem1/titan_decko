@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { space } from "styled-system";
+import { color, space } from "styled-system";
 import { getTheme } from "@utils/utils";
+import { colors } from "@utils/themeColors";
 
 export const StyledPagination = styled.div`
   .pagination {
@@ -24,8 +25,9 @@ export const StyledPagination = styled.div`
         margin: 0px 5px;
         border-radius: 5px;
         outline: none;
-        border: 1px solid transparent;
+        border: 1px solid #6f6d6d;
         border-radius: 50%;
+        color: #6f6d6d !important;
         @media only screen and (max-width: 450px) {
           margin: 4px;
         }
@@ -33,8 +35,8 @@ export const StyledPagination = styled.div`
 
       &:not(.active):hover {
         a {
-          color: ${getTheme("colors.primary.main")};
-          border: 1px solid ${getTheme("colors.primary.main")};
+          color: ${colors.titan.dark} important;
+          border: 1px solid ${colors.titan.dark};
         }
       }
     }
@@ -42,16 +44,16 @@ export const StyledPagination = styled.div`
     .active {
       cursor: none;
       a {
-        border: 1px solid ${getTheme("colors.primary.main")};
-        color: ${getTheme("colors.primary.main")};
+        border: 1px solid ${colors.titan.dark};
+        color: ${colors.titan.dark} !important;
       }
     }
 
     .disabled {
       .control-button {
         cursor: none;
-        border: 1px solid ${getTheme("colors.primary.light")};
-        color: ${getTheme("colors.primary.light")};
+        border: 1px solid ${colors.titan.dark};
+        color: ${colors.titan.dark};
       }
     }
   }
@@ -60,7 +62,8 @@ export const StyledPagination = styled.div`
     height: 32px;
     width: 32px;
     min-width: 32px;
-    border: 1px solid ${getTheme("colors.primary.main")};
+    border: 1px solid ${colors.titan.dark};
+    color: ${colors.titan.dark};
   }
 
   ${space}

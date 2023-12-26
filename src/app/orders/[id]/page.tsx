@@ -68,7 +68,7 @@ const OrderDetails = ({ params }: { params: { id: string } }) => {
         </TableRow>
 
         <Box py="0.5rem">
-          {order.items.map((item, ind) => (
+          {order.items.map((item:any, ind:any) => (
             <WriteReview item={item} />
           ))}
         </Box>

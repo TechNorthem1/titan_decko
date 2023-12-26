@@ -9,9 +9,12 @@ import "../__server__";
 const openSans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  title: "Titan Decko",
   authors: [{name: "Titan decko"}],
   icons: "/assets/images/icons/icon_titan.webp",
-  title: "Titan Decko",
+  description : "somos una tienda de e-commerce de productos para el hogar",
+  keywords: "titan, hogar, tienda, e-commerce",
+  robots: "index, follow"
 };
 
 export default function RootLayout({
@@ -20,7 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="ES-co">
+
       <body className={openSans.className}>
         <StyledComponentsRegistry>
           <AppProvider>

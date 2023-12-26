@@ -34,7 +34,7 @@ const CheckoutForm2: FC = () => {
   const toggleHasVoucher = () => setHasVoucher((has) => !has);
 
   useEffect(() => {
-    let list = [];
+    let list: any = [];
     let today = new Date();
     let dateCount = today.getDate();
 

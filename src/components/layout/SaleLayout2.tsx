@@ -16,8 +16,6 @@ type Props = { title?: string; children: ReactNode };
 const SaleLayout2: FC<Props> = ({ children, title = "Multivendor Ecommerce | Sale" }) => {
   return (
     <StyledAppLayout>
-      <Head>
-      </Head>
 
 
       <Header />

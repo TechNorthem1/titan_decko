@@ -1,16 +1,46 @@
+"use client"
 import Box from "@component/Box";
 import SearchResult from "@component/search/SearchResult";
-import api from "@utils/__api__/productos";
+import { useEffect, useState } from "react";
+import Method from "@helpers/Method";
+import Loading from "@component/loading/Loading";
 
-const ProductSearchResult = async({params}) => {
-  
-  let search:any = isNaN(params.id) ? `products/?search=${params.id}&per_page=30&order=desc&orderby=price` : `products/?category=${params.id}&per_page=30&order=desc&orderby=price`; 
-  
-  const {products, totalPage} = await api.getProductsByCategories(search);
+const ProductSearchResult = ({params}:any) => {
+  useEffect(() => { getProduct() }, []);
+  const [products, setProducts ]:any[] = useState([]);
+  const [totalPage, setTotalPage] = useState(1);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+  let search:string = isNaN(params.id) ? `products/?search=${params.id}&page=${page}&per_page=30&order=desc&orderby=price&stock_status=instock` : `products/?category=${params.id}&page=${page}&per_page=30&order=desc&orderby=price&stock_status=instock`; 
+
+  const getProduct = async () =>{
+    try{
+      let response = await fetch(`${Method.woocommerce}${search}`, {method: "GET", headers: {Authorization: `${Method.token}`}});
+      let products:[] = await response.json();
+      let totalPage = response.headers.get("X-WP-Total");
+      setProducts(products);
+      setTotalPage(Number(totalPage));
+      setLoading(false);
+    }catch(error){
+      error;
+    }
+  } 
+
   
   return (
     <Box pt="20px" className="content-box">
-      <SearchResult sortOptions={sortOptions} products={products} totalPage={totalPage}/>
+      {loading ? (
+        <Loading active={loading} setActivate={setLoading} classCss={""}/>
+      ):(
+        <SearchResult 
+          sortOptions={sortOptions} 
+          products={products} 
+          totalPage={totalPage} 
+          page={page} 
+          setPage={setPage}
+          getProduct={getProduct}
+        />
+      )}
     </Box>
   );  
 };

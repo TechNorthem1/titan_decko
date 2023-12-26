@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Whatsapp = ({title = null, price = null, url = null}) => {
+const Whatsapp = ({title = null, price = null, url = null}:any) => {
     const numeroWhatsApp = "3203764679";
 
     const encodeMessage = (title: string, price: number, url: string) => {

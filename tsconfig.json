@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
-    "target": "es5",
+    "target": "ES2015",
+    "downlevelIteration": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -18,6 +19,7 @@
     "incremental": true,
     "plugins": [{ "name": "next" }],
     "paths": {
+      "@server/*": ["__server__/*"],
       "@lib/*": ["lib/*"],
       "@data/*": ["data/*"],
       "@hook/*": ["hooks/*"],
@@ -30,6 +32,7 @@
       "@helpers/*": ["helpers/*"],
       "@hooks/*": ["hooks/*"],
       "@services/*": ["services/*"],
+      "@assets/*": ["../public/assets/images/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

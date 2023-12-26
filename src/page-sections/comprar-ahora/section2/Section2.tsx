@@ -6,6 +6,7 @@ import useForm from '@hooks/useForm';
 import Authentication from '@helpers/Autentication';
 import Client from '@models/Client.model';
 import FirebaseService from '@services/FirebaseService';
+import SerializerForm from '@hook/SerializerForm';
 
 
 
@@ -14,9 +15,9 @@ const Section2 = ({user, setUser}) => {
   const [isVisible, setVisible] = useState(false)
 
   useEffect(()=>{
-    if(user.lastname?.stringValue?.length === 0){
+    if(user?.lastname?.stringValue?.length === 0){
       setVisible(false)
-    }else if(user.departament?.stringValue?.length > 0){
+    }else if(user?.departament?.stringValue?.length > 0){
       setVisible(false)
     }
     else{
@@ -26,10 +27,11 @@ const Section2 = ({user, setUser}) => {
 
   const save = async (e:any) => {
     e.preventDefault();
+    const formData = SerializerForm(e.target);
     let client:Client = new Client(
-      user.name?.stringValue, user.lastname?.stringValue, user.document?.stringValue, user.email?.stringValue, user.phone?.stringValue, user.address?.stringValue, "", 
-      form["departament"], form["municipaly"], form["avenue"], form["address1"], form["address2"], form["address3"], form["method"], form["complement_information"], 
-      form["information_aditional"], form["neighborhood"]
+      user?.name?.stringValue, user?.lastname?.stringValue, user?.document?.stringValue, user?.email?.stringValue, user?.phone?.stringValue, user?.address?.stringValue, "", 
+      formData["departament"], formData["municipaly"], formData["avenue"], formData["address1"], formData["address2"], formData["address3"], formData["method"], formData["complement_information"], 
+      formData["information_aditional"], formData["neighborhood"]
     );
     let updateuser:boolean = await FirebaseService.updatedUserAddress(client, user?.email?.stringValue);
     if(updateuser){
@@ -41,18 +43,18 @@ const Section2 = ({user, setUser}) => {
   }
   
   const INITIAL_VALUE = {
-    departament: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.departament?.stringValue,
-    municipaly: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.municipaly?.stringValue,
-    avenue: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.avenue?.stringValue,
-    address1: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.address1?.stringValue,
-    address2: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.address2?.stringValue,
-    address3: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.address3?.stringValue,
-    method: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "1" : user.method?.stringValue,
-    method2: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "2" : user.method?.stringValue,
-    method3: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "3" : user.method?.stringValue,
-    complement_information: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.complement_information?.stringValue,
-    information_aditional: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.information_aditional?.stringValue,
-    neighborhood: user.departament?.stringValue.length == 0 || user.departament?.stringValue == undefined ? "" : user.neighborhood?.stringValue
+    departament: user?.departament?.stringValue.length == 0 || user?.departament?.stringValue == undefined ? "" : user?.departament?.stringValue,
+    municipaly: user?.departament?.stringValue.length == 0 || user?.departament?.stringValue == undefined ? "" : user?.municipaly?.stringValue,
+    avenue: user?.departament?.stringValue.length == 0 || user?.departament?.stringValue == undefined ? "" : user?.avenue?.stringValue,
+    address1: user?.departament?.stringValue.length == 0 || user?.departament?.stringValue == undefined ? "" : user?.address1?.stringValue,
+    address2: user?.departament?.stringValue.length == 0 || user?.departament?.stringValue == undefined ? "" : user?.address2?.stringValue,
+    address3: user?.departament?.stringValue.length == 0 || user?.departament?.stringValue == undefined ? "" : user?.address3?.stringValue,
+    method: user?.departament?.stringValue.length == 0 || user?.departament?.stringValue == undefined ? "1" : user?.method?.stringValue,
+    method2: user?.departament?.stringValue.length == 0 || user?.departament?.stringValue == undefined ? "2" : user?.method?.stringValue,
+    method3: user?.departament?.stringValue.length == 0 || user?.departament?.stringValue == undefined ? "3" : user?.method?.stringValue,
+    complement_information: user?.departament?.stringValue.length == 0 || user?.departament?.stringValue == undefined ? "" : user?.complement_information?.stringValue,
+    information_aditional: user?.departament?.stringValue.length == 0 || user?.departament?.stringValue == undefined ? "" : user?.information_aditional?.stringValue,
+    neighborhood: user?.departament?.stringValue.length == 0 || user?.departament?.stringValue == undefined ? "" : user?.neighborhood?.stringValue
   }
 
   useEffect(() => {}, [isVisible, user])
@@ -152,7 +154,7 @@ const Section2 = ({user, setUser}) => {
                 id="method1"
                 onChange={changed}
                 value={INITIAL_VALUE.method}
-                defaultChecked={INITIAL_VALUE.method === user.method?.stringValue}
+                defaultChecked={INITIAL_VALUE.method === user?.method?.stringValue}
               />
               <label htmlFor='method1'>
                 <span>recibe hoy</span>
@@ -168,7 +170,7 @@ const Section2 = ({user, setUser}) => {
                 id="method2"
                 onChange={changed}
                 value={INITIAL_VALUE.method2}
-                defaultChecked={INITIAL_VALUE.method2 === user.method?.stringValue}
+                defaultChecked={INITIAL_VALUE.method2 === user?.method?.stringValue}
               />
               <label htmlFor='method2'>
                 <span>recibe hoy</span>
@@ -184,7 +186,7 @@ const Section2 = ({user, setUser}) => {
                 name="method" 
                 onChange={changed}
                 value={INITIAL_VALUE.method3}
-                defaultChecked={INITIAL_VALUE.method3 === user.method?.stringValue}
+                defaultChecked={INITIAL_VALUE.method3 === user?.method?.stringValue}
               />
               <label htmlFor='method3'>
                 <span>recibe hoy</span>

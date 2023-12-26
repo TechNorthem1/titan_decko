@@ -1,4 +1,4 @@
-export const deviceSize = {
+export const deviceSize:any = {
   xs: 425,
   sm: 768,
   md: 1024,

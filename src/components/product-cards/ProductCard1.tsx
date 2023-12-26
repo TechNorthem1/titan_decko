@@ -103,15 +103,15 @@ const Wrapper = styled(Card)`
 
 // =======================================================================
 interface ProductCard1Props extends CardProps {
-  off?: number;
-  slug?: string;
-  title?: string;
-  price?: number;
-  imgUrl?: string;
-  rating?: number;
-  images?: string[];
-  id?: string | number;
-  salePrice?:number;
+  off?: number|any;
+  slug?: string|any;
+  title?: string|any;
+  price?: number|any;
+  imgUrl?: string|any;
+  rating?: number|any;
+  images?: string[]|any;
+  id?: string | number|any;
+  salePrice?:number|any;
 }
 // =======================================================================
 
@@ -161,6 +161,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
               position="absolute"
               color="primary.text"
               zIndex={1}
+              aria-label="cantidad del descuento"
             >
               {off}% Descuento
             </Chip>
@@ -190,6 +191,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
               objectFit="cover"
               layout="responsive"
               priority
+              loading="lazy"
             />
           </Link>
         </div>
@@ -197,7 +199,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
         <div className="details">
           <FlexBox>
             <Box flex="1 1 0" minWidth="0px" mr="0.5rem">
-              <Link href={`/producto/${slug}/${id}`}>
+              <Link href={`/producto/${slug}/${id}`} aria-label="enlace para mostrar detalle del producto">
                 <H3
                   mb="10px"
                   title={title}
@@ -206,6 +208,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
                   fontWeight="600"
                   className="title"
                   color="text.secondary"
+                  aria-label={title}
                 >
                   {title}
                 </H3>
@@ -239,6 +242,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
                 variant="outlined"
                 borderColor="primary.light"
                 onClick={handleCartAmountChange((cartItem?.qty || 0) + 1)}
+                aria-label="add"
               >
                 <Icon variant="small">plus</Icon>
               </Button>
@@ -256,6 +260,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
                     variant="outlined"
                     borderColor="primary.light"
                     onClick={handleCartAmountChange(cartItem.qty - 1)}
+                    aria-label="remove"
                   >
                     <Icon variant="small">minus</Icon>
                   </Button>

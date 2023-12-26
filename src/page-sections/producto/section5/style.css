@@ -47,13 +47,15 @@
 
 .container_tips .carts-tips .cart-tip .mask img{
     width: 100%;
+    height: 200px;
 }
 
 
 .container_tips .carts-tips .cart-tip img.user {
     position: absolute;
+    width: 60px !important;
     border-radius: 50%;
-    height: 60px;
+    height: 60px !important;
     top: 166px;
     left: 30px;
 }

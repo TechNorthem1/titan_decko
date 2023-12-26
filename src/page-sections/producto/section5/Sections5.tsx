@@ -1,84 +1,62 @@
 import Container from '@component/Container';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./style.css"
+import Method from '@helpers/Method';
+import Image from "next/image";
+import Loading from '@component/loading/Loading';
 
-const Section5 = () => {
+interface Section5Props { activate?:boolean; setActivate?: (active?:boolean) => void}
+
+const Section5 = ({activate, setActivate}) => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {getPosts();}, [])
+
+  const getPosts = async () => {
+    let response = await Method.allPosts("posts/?per_page=8");
+    setPosts(response);
+  }
+
   return (
     <Container className='container_tips'>
         <hr />
         <h2>Dejamos algunos concejos para ti</h2>
-        <div className="carts-tips">
-          <div className="cart-tip">
-            <div className="mask">
-              <img src="/assets/images/titan/TIENDA-VIRTUAL-CATALOGO-DE-RODAPE-Molduras-Adhesivas-3D-Para-Paredes-12.webp" alt="molduras" />
-            </div>
-            <img src="/assets/images/titan/user.webp" className='user' alt="" />
-            <div className="content-tip">
-              <h1>¿como elegir los colores para pintar mi casa?</h1>
-              <p>
-                Al elegir los colores para pintar su 
-                casa, piense en lo que desea que su
-                hogar transmita y en cómo desea que 
-                se sienta. ¿Quieres
-              </p>
-              <a href="">leer mas {">>"}</a>
-            </div>
-          </div>
+        
+        {activate? <Loading classCss={""} active={activate} setActivate={setActivate} />  :(<div className="carts-tips">
+          {posts.map((item:any) => (
+            <div className="cart-tip" key={item.id}>
+              <div className="mask">
+                <Image 
+                  src={item.yoast_head_json.og_image[0].url}
+                  alt="blogs"
+                  height={200}
+                  width={200}
+                  layout="responsive"
+                  loading='lazy'
+                />
+                
+              </div>
+              <Image 
+                src="/assets/images/titan/user.webp"
+                alt="user"
+                height={60}
+                width={60}
+                layout="responsive"
+                className='user'
+                loading='lazy'
+              />
+              <div className="content-tip">
+                <h1>¿{item.title.rendered}?</h1>
+                <p>
+                  {item.yoast_head_json.description}
+                </p>
 
-          <div className="cart-tip">
-            <div className="mask">
-              <img src="/assets/images/titan/TIENDA-VIRTUAL-CATALOGO-DE-RODAPE-Molduras-Adhesivas-3D-Para-Paredes-12.webp" alt="molduras" />
+                <a href="#">leer mas {">>"}</a>
+              </div>
             </div>
-            <img src="/assets/images/titan/user.webp" className='user' alt="" />
-            <div className="content-tip">
-              <h1>¿como elegir los colores para pintar mi casa?</h1>
-              <p>
-                Al elegir los colores para pintar su 
-                casa, piense en lo que desea que su
-                hogar transmita y en cómo desea que 
-                se sienta. ¿Quieres
-              </p>
-              <a href="">leer mas {">>"}</a>
-            </div>
-          </div>
 
-
-          <div className="cart-tip">
-            <div className="mask">
-              <img src="/assets/images/titan/TIENDA-VIRTUAL-CATALOGO-DE-RODAPE-Molduras-Adhesivas-3D-Para-Paredes-12.webp" alt="molduras" />
-            </div>
-            <img src="/assets/images/titan/user.webp" className='user' alt="" />
-            <div className="content-tip">
-              <h1>¿como elegir los colores para pintar mi casa?</h1>
-              <p>
-                Al elegir los colores para pintar su 
-                casa, piense en lo que desea que su
-                hogar transmita y en cómo desea que 
-                se sienta. ¿Quieres
-              </p>
-              <a href="">leer mas {">>"}</a>
-            </div>
-          </div>
-
-
-          <div className="cart-tip">
-            <div className="mask">
-              <img src="/assets/images/titan/TIENDA-VIRTUAL-CATALOGO-DE-RODAPE-Molduras-Adhesivas-3D-Para-Paredes-12.webp" alt="molduras" />
-            </div>
-            <img src="/assets/images/titan/user.webp" className='user' alt="" />
-            <div className="content-tip">
-              <h1>¿como elegir los colores para pintar mi casa?</h1>
-              <p>
-                Al elegir los colores para pintar su 
-                casa, piense en lo que desea que su
-                hogar transmita y en cómo desea que 
-                se sienta. ¿Quieres
-              </p>
-              <a href="">leer mas {">>"}</a>
-            </div>
-          </div>
-
-        </div>
+          ))}
+        </div>)}
     </Container>
   )
 }

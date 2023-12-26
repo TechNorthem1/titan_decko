@@ -94,7 +94,7 @@ const Wrapper = styled(Card)`
 
 // ============================================================================
 type ProductCard9Props = {
-  off?: number;
+  off?: number|any;
   slug: string;
   title: string;
   price: number;

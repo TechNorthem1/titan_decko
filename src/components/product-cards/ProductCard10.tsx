@@ -155,6 +155,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
             position="absolute"
             color={colors.titan.white}
             zIndex={1000}
+            aria-label="porcentaje del descuento"
           >
             {off}% Descuento
           </Chip>
@@ -194,7 +195,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
       <div className="details" style={{"backgroundColor": colors.titan.bg, "border": `1px solid ${colors.titan.gray}`}}>
         <FlexBox>
           <Box flex="1 1 0" minWidth="0px" mr="0.5rem">
-            <Link href={`/producto/${title}/${id}`}>
+            <Link href={`/producto/${title}/${id}`} aria-label="ver detalle del producto">
               <H3
                 mb="6px"
                 title={title}
@@ -204,21 +205,22 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
                 className="title"
                 color={colors.titan.dark}
                 style={{textTransform: "capitalize"}}
+                aria-label={title}
               >
                 {title}
               </H3>
             </Link>
 
-            <SemiSpan style={{"color": colors.titan.dark}}>Cantidad: {unit || "300ml"}</SemiSpan>
+            <SemiSpan style={{"color": colors.titan.dark}} aria-label="cantidad disponible">Cantidad: {unit || "300ml"}</SemiSpan>
 
             <FlexBox alignItems="center" mt="6px">
-              <SemiSpan pr="0.5rem" fontWeight="600" style={{"color": colors.titan.dark}}>
+              <SemiSpan pr="0.5rem" fontWeight="600" style={{"color": colors.titan.dark}} aria-label="precio con descuento">
                 {discountPrice}
               </SemiSpan>
 
               {off && (
-                <SemiSpan style={{"color": colors.primary.dark}} fontWeight="600">
-                  <del>$ {price}</del>
+                <SemiSpan style={{"color": colors.primary.dark}} fontWeight="600" aria-label="precio sin descuento">
+                  <del aria-label="precio">$ {price}</del>
                 </SemiSpan>
               )}
             </FlexBox>
@@ -237,13 +239,15 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
               variant="outlined"
               borderColor="primary.salmon"
               onClick={handleCartAmountChange((cartItem?.qty || 0) + 1)}
+              name="btn-add"
+              aria-label="add"
             >
               <Icon variant="small">plus</Icon>
             </Button>
 
             {cartItem?.qty && (
               <Fragment>
-                <SemiSpan style={{"color": colors.titan.dark}} fontWeight="600">
+                <SemiSpan style={{"color": colors.titan.dark}} fontWeight="600" aria-label="productos agregados al carrito">
                   {cartItem.qty}
                 </SemiSpan>
 
@@ -254,6 +258,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
                   variant="outlined"
                   borderColor="primary.light"
                   onClick={handleCartAmountChange(cartItem.qty - 1)}
+                  aria-label="remove"
                 >
                   <Icon variant="small">minus</Icon>
                 </Button>

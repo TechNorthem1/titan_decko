@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { FC, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import Box from "@component/Box";
 import Image from "@component/Image";
 import Icon from "@component/icon/Icon";
@@ -22,19 +22,18 @@ import FirebaseService from "@services/FirebaseService";
 
 
 // ====================================================================
-type HeaderProps = { isFixed?: boolean; className?: string, isResponsive?: boolean};
+
+type HeaderProps = { isFixed?: boolean; className?: string, isResponsive?: boolean, isAuthenticated?: boolean, setIsAuthenticated?: Function ;};
 // =====================================================================
 
-const Header: FC<HeaderProps> = ({ isFixed, className, isResponsive }) => {
+const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAuthenticated, isResponsive }) => {
   const { state } = useAppContext();
   const [open, setOpen] = useState(false);
   const toggleSidenav = () => setOpen(!open);
   const [viewElementHeader, setViewElementHeader] = useState(true);
-  const [categories, setCategories] = useState([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [categories, setCategories] = useState<any>([]);
   const router = useRouter();
-  
-  
+
 
   useEffect(()=> {
     let url = window.location.href;
@@ -117,7 +116,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isResponsive }) => {
 
   const LOGOUT_HANDLE = ( 
     <IconButton ml="1rem" bg="gray.black" p="8px">
-      <Icon size="28px">closed</Icon>
+      <Icon size="28px">arrow-right-to-bracket-solid2</Icon>
     </IconButton>
   );
 
@@ -132,7 +131,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isResponsive }) => {
       >
         <FlexBox className="logo" alignItems="center" mr="1rem" style={{display:"block"}}>
           <Link href={"/"}>
-            <Image src="/assets/images/logo.webp" alt="logo" />
+            <Image src="/assets/images/logo.webp" alt="logo" width={200} height={74} style={{objectFit: "cover"}} loading="lazy"/>
           </Link>
         </FlexBox>
           <FlexBox justifyContent="center" flex="1 1 0">

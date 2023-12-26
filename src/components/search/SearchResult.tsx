@@ -20,10 +20,13 @@ type Props = {
     label: string;
     value: string;
   }[],
-  products?:any[],
-  totalPage?:string
+  products?:[],
+  totalPage?:number,
+  page?:number,
+  setPage?:any,
+  getProduct?:any
 };
-const SearchResult = ({ sortOptions, products, totalPage }: Props) => {
+const SearchResult = ({ sortOptions, products, totalPage, page, setPage, getProduct }: Props) => {
   const width: any = useWindowSize();
   const [view, setView] = useState<"grid" | "list">("grid");
   const isTablet = width < 1025;
@@ -43,7 +46,7 @@ const SearchResult = ({ sortOptions, products, totalPage }: Props) => {
       >
         <div>
           <H5>Resultados para “ mobile phone ”</H5>
-          <Paragraph color="text.muted">{products.length} Productos encontrados</Paragraph>
+          <Paragraph color="text.muted">{products?.length} Productos encontrados</Paragraph>
         </div>
 
         <FlexBox alignItems="center" flexWrap="wrap">
@@ -56,6 +59,7 @@ const SearchResult = ({ sortOptions, products, totalPage }: Props) => {
               placeholder="Short by"
               defaultValue={sortOptions[0]}
               options={sortOptions}
+              aria-label="ordenar los productos"
             />
           </Box>
 
@@ -68,6 +72,7 @@ const SearchResult = ({ sortOptions, products, totalPage }: Props) => {
               variant="small"
               defaultcolor="auto"
               color={view === "grid" ? "primary" : "inherit"}
+              aria-label="mostrar los productos por tarjetas"
             >
               grid
             </Icon>
@@ -78,6 +83,7 @@ const SearchResult = ({ sortOptions, products, totalPage }: Props) => {
               variant="small"
               defaultcolor="auto"
               color={view === "list" ? "primary" : "inherit"}
+              aria-label="mostrar los productos por lista"
             >
               menu
             </Icon>
@@ -106,9 +112,9 @@ const SearchResult = ({ sortOptions, products, totalPage }: Props) => {
 
         <Grid item lg={9} xs={12}>
           {view === "grid" ? (
-            <ProductCard1List products={products} totalPage={totalPage}/>
+            <ProductCard1List products={products} totalPage={totalPage} page={page} setPage={setPage} getProduct={getProduct}/>
           ) : (
-            <ProductCard9List products={products} totalPage={totalPage}/>
+            <ProductCard9List products={products} totalPage={totalPage} page={page} setPage={setPage} getProduct={getProduct}/>
           )}
         </Grid>
       </Grid>

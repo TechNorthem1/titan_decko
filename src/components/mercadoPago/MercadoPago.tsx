@@ -11,7 +11,7 @@ const MercadoPago = () => {
         // script.setAttribute('data-preference-id', idPreferencia);
     
         // Agregar el script al DOM
-        document.getElementById('boton-pago').appendChild(script);
+        document?.getElementById('boton-pago')?.appendChild(script);
     });
     
     return <div id="boton-pago" />;

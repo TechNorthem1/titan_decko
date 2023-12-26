@@ -14,7 +14,7 @@ import AddressPagination from "@sections/address/AddressPagination";
 import AddressItem from "@sections/address/AddressItem";
 
 const AddressList = () => {
-  const [addressList,  setAddressList] = useState([]);
+  const [addressList,  setAddressList] = useState<any>([]);
   
   useEffect(() => {
     getAddresList();
@@ -22,7 +22,7 @@ const AddressList = () => {
 
   const getAddresList = async() => {
 
-    let addressList = await api.getAddressList();
+    let addressList:any = await api.getAddressList();
     setAddressList(addressList);
   }
 
@@ -34,7 +34,7 @@ const AddressList = () => {
         button={<AddNewAddress />}
       />
 
-      {addressList.map((item) => (
+      {addressList.map((item:any) => (
         <AddressItem item={item} />
       ))}
 

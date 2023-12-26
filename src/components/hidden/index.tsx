@@ -6,9 +6,9 @@ import { deviceOptions } from "../../interfaces";
 import { deviceSize } from "@utils/constants";
 
 export interface HiddenProps extends SpaceProps {
-  down?: number | deviceOptions;
-  up?: number | deviceOptions;
-  [key: string]: unknown;
+  down?: number | deviceOptions| any;
+  up?: number | deviceOptions | any;
+  [key: string]: unknown|any;
   children: ReactElement;
 }
 

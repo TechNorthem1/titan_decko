@@ -68,13 +68,9 @@ class FirebaseService {
             // realizar la actualizacion con los nuevos datos
             await updateDoc(document, client.toFirestore());            
             return true;
-
         } catch (error) {
-            return false;
+            return false
         }
-
-
-        return true;
     }
 
     static updatedUserAddress = async (client:Client, email:string) => {

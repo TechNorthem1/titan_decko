@@ -46,7 +46,6 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
     });
   };
 
-
   return (
     <Box overflow="hidden">
       <Grid container justifyContent="center" spacing={16}>
@@ -61,7 +60,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
               <Image
                 width={300}
                 height={300}
-                src={images[selectedImage].src}
+                src={images[selectedImage].src || images[selectedImage] }
                 style={{ display: "block", width: "100%", height: "auto" }}
               />
             </FlexBox>
@@ -86,7 +85,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
                   }
                   onClick={handleImageClick(ind)}
                 >
-                  <Avatar src={url.src} borderRadius="10px" size={65} />
+                  <Avatar src={url.src || url} borderRadius="10px" size={65} />
                 </Box>
               ))}
             </FlexBox>

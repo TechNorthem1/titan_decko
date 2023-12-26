@@ -16,26 +16,23 @@ import Login from "@component/sessions/Login";
 import { useAppContext } from "@context/AppContext";
 import useForm from "@hook/useForm";
 import { colors as Colors } from "@utils/themeColors";
+import  Image from "next/image";
 
 
 
-const Section1 = ({params, url, isAuthenticated}) => {
-    const [product, setProduct] = useState<any>({});
+const Section1 = ({params, url, isAuthenticated, message, product, images}) => {
     const {form, changed} = useForm();
-    useEffect(()=> {getProduct()}, []);
-    useEffect(()=> {}, [product]);
+    const [image, setImage] = useState<number>(0);
     const { state, dispatch } = useAppContext();
-    const cartItem = state.cart.find((item) => item.id === product.id);
-    const getProduct = async () => {
-        let data = await api.getProduct(`products/${params.id}`);
-        setProduct(data)
-    }
+    const cartItem = state.cart.find((item) => item.id === product?.id);
+    const off = Helpers.disscount(product?.sale_price, product?.regular_price);
+    const price = calculateDiscount(product?.regular_price, off);
+    const quantitys: JSX.Element[] = []
 
-    const off = Helpers.disscount(product.sale_price, product.regular_price);
-    const price = calculateDiscount(product.regular_price, off);
-    const images = product.images;
-    const quantitys = []
-    for (let index = 1; index <= product.stock_quantity; index++) {
+    
+    useEffect(()=> {}, [product]);
+
+    for (let index = 1; index <= product?.stock_quantity; index++) {
         quantitys.push(<option key={index} value={index}>{index}</option>);
     }
 
@@ -48,12 +45,16 @@ const Section1 = ({params, url, isAuthenticated}) => {
     
     const handleCartAmountChange = (qty: number) => {
         let quantity = Object.keys(form).length == 0 ? qty : Number(form["quantity"]);
-        let imgUrl:any = product.images[0].src;
+        let imgUrl:any = product?.images[0].src;
         dispatch({
           type: "CHANGE_CART_AMOUNT",
-          payload: { price: product.price, imgUrl, id:product.id, qty: quantity, slug:product.slug, name: product.name },
+          payload: { price: product?.price, imgUrl, id:product?.id, qty: quantity, slug:product?.slug, name: product?.name },
         });
     };
+
+    const changedImage =  (indice:number) => {
+        setImage(indice)
+    }
 
 
     return (
@@ -61,20 +62,46 @@ const Section1 = ({params, url, isAuthenticated}) => {
             <Grid container spacing={3} >
                 <Grid className="container_images" item lg={2} xs={0}>
                     <div className="container_images">
-                        {images != undefined && images.map((image:any) => (
-                            <img key={image.id} src={image.src} alt={image.name} />
+                        {images != undefined && images.map((item:any, indice:number) => (
+                            <Image 
+                                src={item?.src}
+                                alt={item?.name}
+                                width={130}
+                                height={130}
+                                layout="responsive"
+                                onClick={() => changedImage(indice)}
+                                style={{objectFit: "cover"}}
+                                loading="lazy"
+                            />
                         ))}
                     </div>
                 </Grid>
 
                 <Grid item lg={6} xs={12}>
-                    <div className="product_image">
-                        {images !== undefined && <img key={images[0].id} src={images[0].src} alt={images[0].name} />}
+                    <div className="product-image">
+                        <div className="mask">
+                            <Image 
+                                src={images[image]?.src}
+                                alt={images[image]?.name}
+                                width={500}
+                                height={500}
+                                layout="responsive"
+                                style={{objectFit: "cover"}}
+                                loading="lazy"
+                            />
+                            <ul>
+                                {
+                                    images.map((item:any, indice:any) => (
+                                        <li key={indice} className={indice == image && "selected"} onClick={() => changedImage(indice)}></li>
+                                    ))
+                                }
+                            </ul>
+                        </div>    
                     </div>
                 </Grid>
                 <Grid item lg={4} xs={12}>
                     <div className="information-product" style={{color: colors.gray.black}}>
-                        <h1 style={{color:colors.gray.black}}>{product.name}</h1>
+                        <h1 style={{color:colors.gray.black}}>{product?.name}</h1>
                         <div className="califications">
                             <i className="fa-solid fa-star"></i>
                             <i className="fa-solid fa-star"></i>
@@ -87,12 +114,11 @@ const Section1 = ({params, url, isAuthenticated}) => {
                             <p style={{color:colors.blue.blue}}>Te llega hasta en 48 Horas</p>
                         </div>
                         <div className="price">
-                            <span className="price-before">$ {product.regular_price}</span>
+                            <span className="price-before">$ {product?.regular_price}</span>
                             <span className="price-after">{price}</span>
                         </div>
                         <div className="info-send">
-                            <span className="send-free">Envio Gratis</span>
-                            <span className="order-text">Tu Pedido Sera Despachado el dia de hoy</span>
+                            <span className="order-text">{message}</span>
                             <span className="">Descuento: -{off}%</span>
                         </div>
 
@@ -101,12 +127,12 @@ const Section1 = ({params, url, isAuthenticated}) => {
                         </div>
 
                         <div className="count">
-                            <span>{product.stock_quantity} Displonibles</span>
+                            <span>{product?.stock_quantity} Displonibles</span>
                         </div>
 
                         <div className="btns-actions">
-                            <select name="quantity" id="quantity" className="quantity" onChange={changed}>
-                                <option value="">Seleccione la cantidad...</option>
+                            <select name="quantity" id="quantity" defaultValue={form["quantity"]} onChange={changed}>
+                                <option selected disabled>-- Seleccione la cantidad --</option>
                                 {quantitys}
                             </select>
 
@@ -119,10 +145,7 @@ const Section1 = ({params, url, isAuthenticated}) => {
                                 >
                                 Añadir Al Carrito
                             </Button>
-
-                            <Whatsapp title={product.name} price={price} url={url}/>
-                            
-                            {!isAuthenticated && <Link href={"/comprar-ahora"} className="btn-buy-now">Comprar Ahora</Link>}
+                            {!isAuthenticated && <Link href={"/comprar-ahora"} className="btn-buy-now" onClick={() => handleCartAmountChange((cartItem?.qty || 0) + 1)}>Comprar Ahora</Link>}
                             {isAuthenticated &&  
                                 <UserLoginDialog handle={LOGIN_HANDLE}>
                                 <div>
@@ -130,6 +153,9 @@ const Section1 = ({params, url, isAuthenticated}) => {
                                 </div>
                                 </UserLoginDialog>
                             }
+
+                            <Whatsapp title={product?.name} price={price} url={url}/>
+                            
                         </div>
 
                         <div className="pay-security">

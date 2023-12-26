@@ -9,7 +9,7 @@ import api from "@utils/__api__/gift";
 import ContentBox from "@sections/gift-shop/ContentBox";
 import Category from "@models/category.model";
 
-const GiftShop = async () => {
+const GiftShop = () => {
   const [allProducts, setAllProducts] = useState<any>([]);  
   const [serviceList, setServiceList] = useState<any>([]);
   const [topCategories, setTopCategories] = useState<any>([]);

@@ -144,7 +144,7 @@ const renderDots = ({
   totalSlides,
   carouselStore,
 }: any) => {
-  const dots = [];
+  const dots:JSX.Element[] = [];
   const total = totalSlides - visibleSlides + 1;
 
   for (let i = 0; i < total; i += step) {
@@ -155,7 +155,7 @@ const renderDots = ({
         onClick={() =>
           carouselStore.setStoreState({ currentSlide: i, autoPlay: false })
         }
-      />
+      ></div> 
     );
 
     if (total - i - 1 < step && total - i - 1 !== 0) {

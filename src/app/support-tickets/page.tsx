@@ -28,7 +28,7 @@ const TicketList = () => {
     <Fragment>
       <DashboardPageHeader title="Support Ticket" iconName="support" />
 
-      {ticketList.map((item) => (
+      {ticketList.map((item:any) => (
         <Link href={`/support-tickets/${item.slug}`} key={item.id} passHref>
           <TableRow as="a" my="1rem" padding="15px 24px">
             <Box>

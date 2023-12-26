@@ -5,10 +5,11 @@ class Client extends Authentication{
         public name?:string,
         public lastname?:string,
         public document?:string,
-        public email?:string,
+        public email?:string|any,
+        public email_send?:string,
         public phone?:string,
         public address?:string,
-        public password?:string,
+        public password?:string|any,
         public departament?:string,
         public municipaly?:string,
         public avenue?:string,
@@ -32,6 +33,7 @@ class Client extends Authentication{
             lastname: this.lastname,
             document: this.document,
             email: this.email,
+            email_send: this.email_send,
             phone: this.phone,
             address: this.address
         }

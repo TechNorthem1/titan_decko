@@ -6,6 +6,7 @@ import Modal from "@component/Modal";
 import Icon from "@component/icon/Icon";
 import ProductIntro from "./ProductIntro";
 import Helpers from "@helpers/Helpers";
+import { colors } from "@utils/themeColors";
 
 // ===================================================
 type Props = {
@@ -18,13 +19,14 @@ type Props = {
     images: string[];
     id: string | number;
   };
-  salePrice?: number;
+  salePrice?: number|any;
 };
 // ===================================================
 
 const ProductQuickView: FC<Props> = (props) => {
   const { open, onClose, product, salePrice } = props;
   
+
   return (
     <Modal open={open} onClose={onClose}>
       <Card
@@ -44,7 +46,7 @@ const ProductQuickView: FC<Props> = (props) => {
         <Box position="absolute" top="0.75rem" right="0.75rem" cursor="pointer">
           <Icon
             className="close"
-            color="primary"
+            style={{color: colors.titan.white}}
             variant="small"
             onClick={onClose}
           >

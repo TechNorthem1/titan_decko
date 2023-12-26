@@ -28,7 +28,7 @@ const getBrands = async (): Promise<Brand> => {
 
 
 const getMainCarouselData = async (): Promise<MainCarouselItem[]> => {
-  const response = await axios.get("/api/market-2/main-carousel");
+  const response = await axios.get("http://localhost:3000/api/market-2/main-carousel");
   return response.data;
 };
 
