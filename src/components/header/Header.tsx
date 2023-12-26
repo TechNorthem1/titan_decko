@@ -19,6 +19,7 @@ import Authentication from "@helpers/Autentication";
 import {  useRouter } from "next/navigation";
 import Helpers from "@helpers/Helpers";
 import FirebaseService from "@services/FirebaseService";
+import { useHash } from "@hook/useHash";
 
 
 // ====================================================================
@@ -33,6 +34,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
   const [viewElementHeader, setViewElementHeader] = useState(true);
   const [categories, setCategories] = useState<any>([]);
   const router = useRouter();
+  
 
 
   useEffect(()=> {
@@ -54,7 +56,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
     };
     fetchCategories();
     getDataUser();
-    let routePrivate = Helpers.routesPrivates();
+    let routePrivate = Helpers.routesPrivates("dataUser");
     if (routePrivate){
       router.push("/");
     }
@@ -73,10 +75,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
 
   const close = () => {
     FirebaseService.logout();
-    let keyUser:string = Authentication.encriptKey("dataUser");
-    let keyToken:string = Authentication.encriptKey("token_user");
-    localStorage.removeItem(keyUser);
-    localStorage.removeItem(keyToken);
+    Authentication.removeItem();
     setIsAuthenticated(true);
     router.push("/");
   }

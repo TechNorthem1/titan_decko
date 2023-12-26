@@ -30,8 +30,7 @@ const Section1 = ({ user, setUser }) => {
     if(Object.keys(form).length !== 0){
       let updateUser = await FirebaseService.updatedUser(client, user?.email?.stringValue);
       if(updateUser){
-        let {key, param} = Authentication.encryp("dataSend", JSON.stringify(client));
-        localStorage.setItem(key, param)
+        let user = Authentication.getItem("dataUser");
         let dataUser:any = await FirebaseService.getUser(user?.email?.stringValue);
         setUser(dataUser[0]._document?.data?.value?.mapValue?.fields)
       }
@@ -57,10 +56,7 @@ const Section1 = ({ user, setUser }) => {
 
   const close = () => {
     FirebaseService.logout();
-    let keyUser:string = Authentication.encriptKey("dataUser");
-    let keyToken:string = Authentication.encriptKey("token_user");
-    localStorage.removeItem(keyUser);
-    localStorage.removeItem(keyToken);
+    Authentication.removeItem();
     router.push("/");
   }
 

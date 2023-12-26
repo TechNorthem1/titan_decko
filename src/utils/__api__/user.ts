@@ -1,8 +1,10 @@
 import Authentication from "@helpers/Autentication";
+
+
 class User {
 
     static getUser = (keyUser:string) => {
-        let user = Authentication.desencrypt(keyUser);
+        let user = Authentication.getItem(keyUser);
         return user;
     }
 }

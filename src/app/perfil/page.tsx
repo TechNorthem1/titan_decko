@@ -1,9 +1,7 @@
 "use client"
 import { Fragment, useEffect, useState } from "react";
 import Box from "@component/Box";
-import { format } from "date-fns";
 import Card from "@component/Card";
-import Avatar from "@component/avatar";
 import User from "@utils/__api__/user"
 import Grid from "@component/grid/Grid";
 import FlexBox from "@component/FlexBox";
@@ -14,6 +12,8 @@ import EditProfileButton from "@component/profile/EditProfileButton";
 import { useRouter } from "next/navigation";
 import { colors } from "@utils/themeColors";
 import FirebaseService from "@services/FirebaseService";
+import Authentication from "@helpers/Autentication";
+import { useHash } from "@hook/useHash";
 
 const Profile = () => {
   const [user, setUser] = useState<any>();
@@ -30,7 +30,7 @@ const Profile = () => {
   }, [])
 
   const loadUser = async () => {
-    let data:any = User.getUser("dataUser");
+    let data = JSON.parse(Authentication.getItem("dataUser"));
     let user:any = await FirebaseService.getUser(data?.email);
     if (data === null){
       router.push("/");

@@ -25,6 +25,7 @@ import Authentication from "@helpers/Autentication";
 import Image from "@component/Image";
 import FirebaseService from "@services/FirebaseService";
 import Client from "@models/Client.model";
+import { useHash } from "@hook/useHash";
 
 interface LoginProps {
   redirect?: any;
@@ -58,10 +59,10 @@ const Login: FC<LoginProps> = ({redirect}) => {
       
       let request:any = await signInWithEmailAndPassword(auth, values.email, values.password);
       let data = JSON.stringify(request._tokenResponse);
-      let {key, param} = Authentication.encryp("dataUser", data);
-      localStorage.setItem(key, param);
+      Authentication.setItem("dataUser", data);
       router.push(redirect);
     }catch(e){
+      console.log(e)
       setVisibility(true);
       setMessage("Las credenciales son incorrectas");
       setColor(colors.titan.salmon)
@@ -93,10 +94,8 @@ const Login: FC<LoginProps> = ({redirect}) => {
       FirebaseService.createUser(client);
     }
     let user:any = JSON.stringify(response._tokenResponse);
-    let {key, param} = Authentication.encryp("dataUser", user);
-    localStorage.setItem(key, param);
+    Authentication.setItem("dataUser", user);
     router.push(redirect)
-  
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =

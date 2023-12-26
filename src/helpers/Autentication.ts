@@ -1,40 +1,41 @@
 import Client from "@models/Client.model";
-import Crypto from "crypto-js";
+import SecureLS from "secure-ls";
+import aes256 from "crypto-js/sha256";
+import crypto from "crypto";
+
 
 class Authentication {
     static KEY:string = "userAuthenticated"
+    static ls:SecureLS;
 
-    static encryp = (keyUser:string, authenticatedUser:any) => {
-        let keyAuthentication = Authentication.encriptKey(Authentication.KEY);
-        let key:string = Authentication.encriptKey(keyUser);
-        let param:string =  Crypto.AES.encrypt(authenticatedUser, keyAuthentication).toString();
-        return { key, param }
-    }
-
-    static desencrypt = (keyUser?:string) => {
-        try{
-            let keyAuthentication = Authentication.encriptKey(Authentication.KEY);
-            let key:string = Authentication.encriptKey(keyUser);
-            let user = localStorage.getItem(key) === undefined ? null : localStorage.getItem(key);
-            return  user === null ? null : JSON.parse(Crypto.AES.decrypt(user, keyAuthentication).toString(Crypto.enc.Utf8));
-        }catch(error){
-            console.log(error);
+    static init() {
+        if (typeof window !== 'undefined' && !Authentication.ls) {
+            Authentication.ls = new SecureLS({ encodingType: 'aes', isCompression: false });
         }
     }
 
-    static encriptKey = (keyUser?:string|any) => {
-        return Crypto.SHA256(keyUser).toString();
+    static hashKey (key:string) {
+        return aes256(key).toString();
     }
 
 
-    static encriptToken = (keyUser?:string|any, token?:string|any) => {
-        let keyAuthentication = Authentication.encriptKey(Authentication.KEY);
-        let keyToken:string = Authentication.encriptKey(keyUser);
-        let tokenEcrypt:string = Crypto.AES.encrypt(token, keyAuthentication).toString();
-        return {
-            keyToken,
-            tokenEcrypt
-        }
+    static setItem = (keyUser:string, authenticatedUser:any) => {
+        Authentication.init();
+        const key = Authentication.hashKey(keyUser);
+        Authentication.ls.set(key, authenticatedUser);
+    }
+
+    static getItem = (dataUser?:any) => {
+        Authentication.init();
+        const key = Authentication.hashKey(dataUser);
+        let data = Authentication.ls.get(key);
+        return data === ""? null : data;
+    } 
+
+    static removeItem(){
+        Authentication.init();
+        // const key = Authentication.hashKey(dataUser);
+        Authentication.ls.clear();
     }
 
     static register = (e:any, values:any):Client => {
@@ -49,9 +50,6 @@ class Authentication {
         client.address = "";
         return client;
     }
-
-
-    
 }
 
 export default Authentication;

@@ -69,8 +69,7 @@ const MobileNavigationBar: FC<MobileNavigationBarProps> = ({isAuthenticated, set
 
   const closed = () => {
     FirebaseService.logout();
-    let dataUser = Authentication.encriptKey("dataUser");
-    localStorage.removeItem(dataUser);
+    Authentication.removeItem();
     router.push("/")
     setIsAuthenticated(true)
   }

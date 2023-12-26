@@ -20,16 +20,16 @@ class Helpers {
         return  total;
     }
 
-    static isAuthenticated = (keyUser:string) => {
-        let data = Authentication.desencrypt(keyUser);
+    static isAuthenticated = (keyUser:any) => {
+        let data = Authentication.getItem(keyUser);
         return data === null;
     }
 
-    static routesPrivates = () => {
+    static routesPrivates = (hash) => {
         let validate = true;
         const routesPrivates = ["perfil", "ordenes", "wishlist", "support ticket", "direcciones", "metodos de pago", "edit", "comprar-ahora"];
         const url = window.location.href;
-        const isAuthenticated = Helpers.isAuthenticated("dataUser");
+        const isAuthenticated = Helpers.isAuthenticated(hash);
         for (let i = 0; i < routesPrivates.length; i++) {
            
             if(url.includes(routesPrivates[i]) && isAuthenticated){
