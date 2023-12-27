@@ -27,7 +27,7 @@ const Section3: FC<Props> = ({ categories }) => {
           {(categories.map((item) => (
           
             <Grid item md={4} sm={6} xs={12} key={item.id}>
-              <Link href={`/productos/${item.id}`}>
+              <Link href="/productos/[link]" as={`/productos/${item.id}`}>
                 <FlexBox
                   as={Card}
                   px="2rem"

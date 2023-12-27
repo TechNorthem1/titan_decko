@@ -4,7 +4,7 @@ import { currency } from '@utils/utils';
 import { colors } from "@utils/themeColors";
 import Login from "@component/sessions/Login";
 import UserLoginDialog from "@component/header/LoginDialog";
-import NavLink from '@component/nav-link';
+import Link from "next/link"
 import "./style.css"
 
 
@@ -51,11 +51,11 @@ const Section1 = ({isAuthenticated, total}) => {
                     }
 
                     {!isAuthenticated && 
-                        <NavLink href={"/comprar-ahora"} >
+                        <Link href="/comprar-ahora" >
                             <Button ml="1rem" bg="gray.black" p="8px" style={{width: "100%",backgroundColor:colors.titan.yellow, color: colors.titan.dark, marginLeft: "0"}}>
                                 Comprar Ahora
                             </Button>
-                        </NavLink>
+                        </Link>
                     }
                 </div>
             </div>

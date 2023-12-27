@@ -1,6 +1,6 @@
 import Container from '@component/Container';
 import React, { useEffect, useState } from 'react';
-import NavLink from '@component/nav-link';
+import Link from 'next/link';
 import { currency } from '@utils/utils';
 import shopping from "/public/assets/images/logos/shopping-bag.svg";
 import "./style.css";
@@ -48,7 +48,7 @@ const Section4 = ({state}) => {
         <p className="total">total</p>
         <p className="price_total">{currency(total)}</p>
       </div>
-      <NavLink href={"/carrito"} className="back">volver al carrito</NavLink>
+      <Link href="/carrito" className="back">volver al carrito</Link>
     </Container>
   )
 }

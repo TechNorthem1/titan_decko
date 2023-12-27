@@ -145,17 +145,15 @@ const Section1 = ({params, url, isAuthenticated, message, product, images}) => {
                                 >
                                 Añadir Al Carrito
                             </Button>
-                            
+
                             {!isAuthenticated && 
-                                <Link href='/[link]' as={"/comprar-ahora"} className="btn-buy-now"> 
-                                    <a style={{textDecoration:"none"}} onClick={() => handleCartAmountChange((cartItem?.qty || 0) + 1)}>Comprar Ahora</a>
-                                </Link>
+                                <Link href='/comprar-ahora' className="btn-buy-now" onClick={() => handleCartAmountChange((cartItem?.qty || 0) + 1)}> Comprar Ahora </Link>
                             }
 
                             {isAuthenticated &&  
                                 <UserLoginDialog handle={LOGIN_HANDLE}>
                                 <div>
-                                    <Login redirect="/comprar-ahora"/>
+                                    <Login redirect={"/comprar-ahora"}/>
                                 </div>
                                 </UserLoginDialog>
                             }

@@ -99,7 +99,7 @@ const Section6 = ({params, url, isAuthenticated, setShared, message, product, im
 
             
             
-            {!isAuthenticated && <Link href={"/comprar-ahora"} onClick={() => handleCartAmountChange((cartItem?.qty || 0) + 1)} className="btn-buy-now_section">Comprar Ahora</Link>}
+            {!isAuthenticated && <Link href="/comprar-ahora" onClick={() => handleCartAmountChange((cartItem?.qty || 0) + 1)} className="btn-buy-now_section">Comprar Ahora</Link>}
             {isAuthenticated &&  
                 <UserLoginDialog handle={LOGIN_HANDLE}>
                 <div>
