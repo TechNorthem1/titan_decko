@@ -1,6 +1,5 @@
 "use client";
 import * as yup from "yup";
-import Link from "next/link";
 import Box from "@component/Box";
 import { useFormik } from "formik";
 import Icon from "@component/icon/Icon";
@@ -25,7 +24,8 @@ import Authentication from "@helpers/Autentication";
 import Image from "@component/Image";
 import FirebaseService from "@services/FirebaseService";
 import Client from "@models/Client.model";
-import { useHash } from "@hook/useHash";
+import NavLink from "@component/nav-link";
+
 
 interface LoginProps {
   redirect?: any;
@@ -60,7 +60,7 @@ const Login: FC<LoginProps> = ({redirect}) => {
       let request:any = await signInWithEmailAndPassword(auth, values.email, values.password);
       let data = JSON.stringify(request._tokenResponse);
       Authentication.setItem("dataUser", data);
-      router.push(redirect);
+      router.replace(redirect);
     }catch(e){
       console.log(e)
       setVisibility(true);
@@ -78,7 +78,7 @@ const Login: FC<LoginProps> = ({redirect}) => {
     try {
       let data:any = await signInWithPopup(auth, provider);
       console.log(data)
-      // router.push("/perfil");
+      router.replace(redirect);
     } catch (error) {
       console.error(error);
       // Manejar errores aquí
@@ -95,7 +95,7 @@ const Login: FC<LoginProps> = ({redirect}) => {
     }
     let user:any = JSON.stringify(response._tokenResponse);
     Authentication.setItem("dataUser", user);
-    router.push(redirect)
+    router.replace(redirect);
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -120,9 +120,9 @@ const Login: FC<LoginProps> = ({redirect}) => {
           </H5>
         }
         <FlexBox className="logo" alignItems="center" justifyContent="center">
-          <Link href={"/"}>
+          <NavLink href={"/"}>
             <Image src="/assets/images/logo.webp" alt="logo" />
-          </Link>
+          </NavLink>
         </FlexBox>
         <H3 textAlign="center" mb="0.5rem">
           Te damos la bienvenida a Titan Decko
@@ -233,21 +233,21 @@ const Login: FC<LoginProps> = ({redirect}) => {
 
         <FlexBox justifyContent="center" mb="1.25rem">
           <SemiSpan>Aun no tienes una cuenta?</SemiSpan>
-          <Link href="/signup">
+          <NavLink href="/signup">
             <H6 ml="0.5rem" borderBottom="1px solid" borderColor="gray.900">
               Registarme
             </H6>
-          </Link>
+          </NavLink>
         </FlexBox>
       </form>
 
       <FlexBox justifyContent="center" bg="gray.200" py="19px">
         <SemiSpan>Olvidaste tu contraseña?</SemiSpan>
-        <Link href="/">
+        <NavLink href="/">
           <H6 ml="0.5rem" borderBottom="1px solid" borderColor="gray.900">
             Recuperar contraseña
           </H6>
-        </Link>
+        </NavLink>
       </FlexBox>
     </StyledSessionCard>
   );

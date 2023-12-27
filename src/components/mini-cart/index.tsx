@@ -1,5 +1,6 @@
 import { FC, Fragment } from "react";
-import Link from "next/link";
+// import Link from "next/link";
+import NavLink from "@component/nav-link";
 import NextImage from "next/legacy/image";
 import Icon from "@component/icon/Icon";
 import Divider from "@component/Divider";
@@ -113,21 +114,21 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
                 </Button>
               </FlexBox>
 
-              <Link href={`/product/${item.slug}`}>
+              <NavLink href={`/product/${item.slug}`}>
                 <Avatar
                   size={76}
                   mx="1rem"
                   alt={item.name}
                   src={item.imgUrl || "/assets/images/products/iphone-x.png"}
                 />
-              </Link>
+              </NavLink>
 
               <div className="product-details">
-                <Link href={`/product/${item.id}`}>
+                <NavLink href={`/product/${item.id}`}>
                   <H5 className="title" fontSize="14px">
                     {item.name}
                   </H5>
-                </Link>
+                </NavLink>
 
                 <Tiny color="text.muted">
                   {currency(item.price, 0)} x {item.qty}
@@ -160,7 +161,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
       {!!state.cart.length && (
         <Fragment>
           {!isAuthenticated &&
-            <Link href={"/comprar-ahora"}>
+            <NavLink href={"/comprar-ahora"}>
               <Button
                 color="primary"
                 variant="contained"
@@ -172,7 +173,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
                     Pagar ({currency(getTotalPrice())})
                   </Typography>
               </Button>
-            </Link>
+            </NavLink>
           }
 
           {isAuthenticated &&
@@ -185,7 +186,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
           }
 
 
-          <Link href={"/carrito"}>
+          <NavLink href={"/carrito"}>
             <Button
               color="primary"
               variant="outlined"
@@ -194,7 +195,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
             >
               <Typography fontWeight={600}>Ver Carrito</Typography>
             </Button>
-          </Link>
+          </NavLink>
         </Fragment>
       )}
     </StyledMiniCart>
