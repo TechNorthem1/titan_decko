@@ -54,7 +54,7 @@ const GroceryTwo = ({params}:any) => {
     <Wrapper>
       {/* SIDEBAR NAVIGATION AREA */}
       <Box className="sidenav" pt="1.5rem">
-    <SidenavBar isFixedNave={true} navList={navigationList} />
+        <SidenavBar isFixedNave={true} />
       </Box>
 
       <Box className="content" pt="1.5rem">

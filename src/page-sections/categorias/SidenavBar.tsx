@@ -24,10 +24,10 @@ const AccordionHeaderText = styled(FlexBox)({
 });
 
 // ======================================================================================
-type Props = { isFixedNave?: boolean; navList: CategoryItem[] };
+type Props = { isFixedNave?: boolean; navList?: CategoryItem[] };
 // =======================================================================================
 
-const SidenavBar: FC<Props> = ({ isFixedNave, navList }) => {
+const SidenavBar: FC<Props> = ({ isFixedNave, navList = [] }) => {
   const { isFixed } = useScroll();
 
   const renderChild = (childList: NavWithChild[], type = "parent") => {
