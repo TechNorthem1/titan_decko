@@ -55,13 +55,10 @@ const page = () => {
                                 setUser={setUser}
                             />
 
-                            
                             <Section2 
                                 user={user} 
                                 setUser={setUser}
-
                             />
-                    
 
                             <Section3 />
                         </Grid>

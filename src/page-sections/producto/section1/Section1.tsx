@@ -145,7 +145,7 @@ const Section1 = ({params, url, isAuthenticated, message, product, images}) => {
                                 >
                                 Añadir Al Carrito
                             </Button>
-                            {!isAuthenticated && <Link href={"/comprar-ahora"} className="btn-buy-now" onClick={() => handleCartAmountChange((cartItem?.qty || 0) + 1)}>Comprar Ahora</Link>}
+                            {!isAuthenticated && <><Link href={"/comprar-ahora"} className="btn-buy-now" onClick={() => handleCartAmountChange((cartItem?.qty || 0) + 1)}>Comprar Ahora</Link></>}
                             {isAuthenticated &&  
                                 <UserLoginDialog handle={LOGIN_HANDLE}>
                                 <div>
