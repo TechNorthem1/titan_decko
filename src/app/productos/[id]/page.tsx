@@ -28,7 +28,7 @@ const ProductSearchResult = ({params}:any) => {
 
   
   return (
-    <Box pt="20px" className="content-box">
+    <Box pt="20px">
       {loading ? (
         <Loading active={loading} setActivate={setLoading} classCss={""}/>
       ):(

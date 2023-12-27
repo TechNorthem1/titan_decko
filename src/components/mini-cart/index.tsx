@@ -160,7 +160,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
       {!!state.cart.length && (
         <Fragment>
           {!isAuthenticated &&
-            <Link href="/comprar-ahora">
+            <Link href={"/comprar-ahora"}>
               <Button
                 color="primary"
                 variant="contained"
@@ -185,7 +185,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
           }
 
 
-          <Link href="/carrito">
+          <Link href={"/carrito"}>
             <Button
               color="primary"
               variant="outlined"

@@ -190,7 +190,6 @@ const ProductCard1: FC<ProductCard1Props> = ({
               height={100}
               objectFit="cover"
               layout="responsive"
-              priority
               loading="lazy"
             />
           </Link>

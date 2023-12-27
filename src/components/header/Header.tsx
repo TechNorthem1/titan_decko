@@ -1,25 +1,25 @@
 "use client";
+import {  useRouter } from "next/navigation";
+import { FC, useEffect, useState } from "react";
+import { Tiny } from "@component/Typography";
+import { IconButton } from "@component/buttons";
+import { SearchInputWithCategory } from "@component/search-box";
+import { useAppContext } from "@context/AppContext";
 import Link from "next/link";
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import Box from "@component/Box";
 import Image from "@component/Image";
 import Icon from "@component/icon/Icon";
 import FlexBox from "@component/FlexBox";
 import MiniCart from "@component/mini-cart";
 import Container from "@component/Container";
-import { Tiny } from "@component/Typography";
-import { IconButton } from "@component/buttons";
 import Sidenav from "@component/sidenav/Sidenav";
-import { SearchInputWithCategory } from "@component/search-box";
-import { useAppContext } from "@context/AppContext";
 import StyledHeader from "./styles";
 import Navbar from "@component/navbar/Navbar";
 import CategoriesApi from "@utils/__api__/categories"
 import Authentication from "@helpers/Autentication";
-import {  useRouter } from "next/navigation";
 import Helpers from "@helpers/Helpers";
 import FirebaseService from "@services/FirebaseService";
-import { useHash } from "@hook/useHash";
+
 
 
 // ====================================================================
@@ -162,7 +162,6 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
 
 
             {!isAuthenticated && 
-
               <Sidenav
                 width={380}
                 handle={LOGOUT_HANDLE}

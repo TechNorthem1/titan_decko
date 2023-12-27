@@ -9,10 +9,8 @@ import Section1 from "@sections/comprar-ahora/section1/"
 import Section2 from "@sections/comprar-ahora/section2/"
 import Section3 from "@sections/comprar-ahora/section3/"
 import Section4 from "@sections/comprar-ahora/section4/"
-import { useRouter } from 'next/navigation'
 import User from '@utils/__api__/user'
 import FirebaseService from '@services/FirebaseService'
-import { setDefaultResultOrder } from 'dns/promises'
 import { useAppContext } from '@context/AppContext'
 import Helpers from '@helpers/Helpers'
 import MobileNavigationBar from '@component/mobile-navigation'
@@ -38,7 +36,7 @@ const page = () => {
     
 
     const getUser = async () => {
-        let data = User.getUser("dataUser"); 
+        let data = JSON.parse(User.getUser("dataUser")); 
         const dataUser:any = await FirebaseService.getUser(data.email);
         setUser(dataUser[0]._document?.data?.value.mapValue.fields);
     }

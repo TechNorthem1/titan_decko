@@ -15,7 +15,7 @@ const ProfileEditor = () => {
   }, [])
 
   const loadUser = async () => {
-    let data = User.getUser("dataUser");
+    let data = JSON.parse(User.getUser("dataUser"));
     let user:any = await FirebaseService.getUser(data.email);
     setUser(user[0]._document.data.value.mapValue.fields);
   }
