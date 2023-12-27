@@ -131,9 +131,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
       >
         <FlexBox className="logo" alignItems="center" mr="1rem" style={{display:"block"}}>
           <Link href="/">
-            <a>
-              <Image src="/assets/images/logo.webp" alt="logo" width={200} height={74} style={{objectFit: "cover"}} loading="lazy"/>
-            </a>
+            <Image src="/assets/images/logo.webp" alt="logo" width={200} height={74} style={{objectFit: "cover"}} loading="lazy"/>
           </Link>
         </FlexBox>
           <FlexBox justifyContent="center" flex="1 1 0">

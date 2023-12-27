@@ -162,7 +162,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
       {!!state.cart.length && (
         <Fragment>
           {!isAuthenticated &&
-            <Link href={"/comprar-ahora"}>
+            <Link href="/comprar-ahora">
               <Button
                 color="primary"
                 variant="contained"
@@ -187,17 +187,15 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
           }
 
 
-          <Link href={"/carrito"} replace>
-            <a style={{textDecoration: "none"}}>
-              <Button
-                color="primary"
-                variant="outlined"
-                m="0px 1rem 0.75rem"
-                onClick={toggleSidenav}
-              >
-                <Typography fontWeight={600}>Ver Carrito</Typography>
-              </Button>
-            </a>
+          <Link href="/carrito" replace>
+            <Button
+              color="primary"
+              variant="outlined"
+              m="0px 1rem 0.75rem"
+              onClick={toggleSidenav}
+            >
+              <Typography fontWeight={600}>Ver Carrito</Typography>
+            </Button>
           </Link>
         </Fragment>
       )}

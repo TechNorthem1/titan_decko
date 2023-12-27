@@ -9,6 +9,7 @@ import FlexBox from "@component/FlexBox";
 import { H3, H5, Tiny } from "@component/Typography";
 import Category from "@models/category.model";
 import { colors } from "@utils/themeColors";
+import Image from "next/image";
 
 // ===========================================================
 type Props = { categories: Category[] };
@@ -24,8 +25,7 @@ const Section3: FC<Props> = ({ categories }) => {
       )}
       { categories.length >= 1 && (
         <Grid container spacing={6}>
-          {(categories.map((item) => (
-          
+          {(categories.map((item:any) => (
             <Grid item md={4} sm={6} xs={12} key={item.id}>
               <Link href="/productos/[link]" as={`/productos/${item.id}`}>
                 <FlexBox
@@ -45,8 +45,9 @@ const Section3: FC<Props> = ({ categories }) => {
                     alt="bonik"
                   /> */}
 
-                  <Box ml="2rem" flex={1} overflow="hidden">
-                    <Tiny color="primary.main">{item.description}</Tiny>
+                  <Box ml="2rem" flex={1} overflow="hidden" style={{marginLeft: "0", display:"flex", alignItems:"center", justifyContent:"flex-start", gap:"15px"}}>
+                    {/* <Tiny color="primary.main">{item.description}</Tiny> */}
+                    <Image src={item.image?.src} alt={item.slug} width={80} height={80} objectFit="contain" loading="lazy"/>
                     <H5 ellipsis>{item.name}</H5>
                   </Box>
                 </FlexBox>

@@ -15,13 +15,13 @@ type Props = { children: ReactNode };
 const CustomerDashboardLayout: FC<Props> = ({ children }) => {
   return (
     <AppLayout >
-      <Container my="2rem" marginTop={"20px"}>
-        <Grid container spacing={6}>
-          <Hidden as={Grid} item lg={3} xs={12} down={1024}>
+      <Container my="2rem" marginTop={"20px"} marginBottom={"100px"}>
+        <Grid container spacing={6} containerHeight="500px">
+          {/* <Hidden as={Grid} item lg={3} xs={12} down={1024}>
             <DashboardNavigation />
-          </Hidden>
+          </Hidden> */}
 
-          <Grid item lg={9} xs={12}>
+          <Grid item lg={12} xs={12}>
             {children}
           </Grid>
         </Grid>

@@ -1,25 +1,22 @@
 "use client"
 import Box from "@component/Box";
-import { categoryNavigation as navigation  } from "@server/__db__/grocery-2/data";
 import { mainCarouselData as main } from "@server/__db__/grocery-2/data";
 import { serviceList as service  } from "@server/__db__/grocery-2/data";
 import { Footer1 } from "@component/footer";
-import Wrapper from "@sections/categorias/Wrapper";
 import Section1 from "@sections/categorias/Section1";
 import Section2 from "@sections/categorias/Section2";
 import Section3 from "@sections/categorias/Section3";
 import Section4 from "@sections/categorias/Section4";
-import SidenavBar from "@sections/categorias/SidenavBar";
 import { useEffect, useState } from "react";
 import Method from "@helpers/Method";
 import Loading from "@component/loading/Loading";
+import Container from "@component/Container";
 
 
 const GroceryTwo = ({params}:any) => {
   const [serviceList, setServiceList] = useState<any[]>(service);
   const [categories, setCategories] = useState<any[]>([]);
   const [products, setProducts] = useState<any[]>([]);
-  const [navigationList, setNavigationList] = useState<any[]>(navigation);
   const [mainCarouselData, setMainCarouselData] = useState<any[]>(main);
   const [activate, setActivate] = useState<boolean>(true);
   
@@ -51,11 +48,7 @@ const GroceryTwo = ({params}:any) => {
 
   return (
     
-    <Wrapper>
-      {/* SIDEBAR NAVIGATION AREA */}
-      <Box className="sidenav" pt="1.5rem">
-        <SidenavBar isFixedNave={true} />
-      </Box>
+    <Container>
 
       <Box className="content" pt="1.5rem">
         {/* HERO CAROUSEL AREA */}
@@ -84,7 +77,7 @@ const GroceryTwo = ({params}:any) => {
         {/* FOOTER AREA */}
         <Footer1 />
       </Box>
-    </Wrapper>
+    </Container>
   );
 };
 

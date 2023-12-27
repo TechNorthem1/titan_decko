@@ -60,77 +60,7 @@ const Profile = () => {
         />
       }
 
-      <Box mb="30px">
-        <Grid container spacing={6}>
-          <Grid item lg={6} md={6} sm={12} xs={12}>
-            <FlexBox
-              as={Card}
-              p="14px 32px"
-              height="100%"
-              borderRadius={8}
-              alignItems="center"
-            >
-              {/* <Avatar src={user.avatar} size={64} /> */}
-
-              <Box ml="12px" flex="1 1 0">
-                <FlexBox
-                  flexWrap="wrap"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <div>
-                    {user && <H5 my="0px">{`${INITIAL_VALUES.name} ${INITIAL_VALUES.lastname}`}</H5>}
-
-                    <FlexBox alignItems="center">
-                      <Typography fontSize="14px" color="text.hint">
-                        Balance:
-                      </Typography>
-
-                      <Typography ml="4px" fontSize="14px" color="primary.main">
-                        $500
-                      </Typography>
-                    </FlexBox>
-                  </div>
-
-                  <Typography
-                    ontSize="14px"
-                    color="text.hint"
-                    letterSpacing="0.2em"
-                  >
-                    SILVER USER
-                  </Typography>
-                </FlexBox>
-              </Box>
-            </FlexBox>
-          </Grid>
-
-          <Grid item lg={6} md={6} sm={12} xs={12}>
-            <Grid container spacing={4}>
-              {infoList.map((item) => (
-                <Grid item lg={3} sm={6} xs={6} key={item.subtitle}>
-                  <FlexBox
-                    as={Card}
-                    height="100%"
-                    p="1rem 1.25rem"
-                    borderRadius={8}
-                    alignItems="center"
-                    flexDirection="column"
-                    justifyContent="center"
-                  >
-                    <H3 color="primary.main" my="0px" fontWeight="600">
-                      {item.title}
-                    </H3>
-
-                    <Small color="text.muted" textAlign="center">
-                      {item.subtitle}
-                    </Small>
-                  </FlexBox>
-                </Grid>
-              ))}
-            </Grid>
-          </Grid>
-        </Grid>
-      </Box>
+      
 
       <TableRow p="0.75rem 1.5rem">
         <FlexBox flexDirection="column" p="0.5rem">

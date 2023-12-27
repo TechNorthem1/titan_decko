@@ -13,6 +13,8 @@ import useForm from "@hook/useForm";
 import FirebaseService from "@services/FirebaseService";
 import Client from "@models/Client.model";
 import SerializerForm from "@hook/SerializerForm";
+import { H3 } from "@component/Typography";
+import { colors } from "@utils/themeColors";
 
 interface ProfileEditFormProps {
   user?:any
@@ -55,7 +57,7 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user, setUser }) => {
 
   return (
     <>
-      <FlexBox alignItems="flex-end" mb="22px">
+      {/* <FlexBox alignItems="flex-end" mb="20px">
         <Avatar src="/assets/images/faces/ralph.png" size={64} />
 
         <Box ml="-20px" zIndex={1}>
@@ -83,7 +85,9 @@ const ProfileEditForm:React.FC<ProfileEditFormProps> = ({ user, setUser }) => {
             onChange={(e) => console.log(e.target.files)}
           />
         </Hidden>
-      </FlexBox>
+      </FlexBox> */}
+
+      <H3 style={{color: colors.titan.white, marginBottom: "15px"}}>Actualizar Datos</H3>
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={INITIAL_VALUES}

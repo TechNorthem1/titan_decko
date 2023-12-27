@@ -26,11 +26,11 @@ const ProfileEditor = () => {
     <Fragment>
       <DashboardPageHeader
         iconName="user_filled"
-        title="Edit Profile"
+        title="Editar Perfil"
         button={<BackToProfileButton />}
       />
 
-      {user && <Card1 borderRadius={8}>
+      {user && <Card1 borderRadius={8} style={{marginBottom: "40px"}}>
         <ProfileEditForm user={user as any} setUser={setUser}/>
       </Card1>}
     </Fragment>

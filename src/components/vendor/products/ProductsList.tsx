@@ -32,7 +32,7 @@ const ProductsList = ({ meta, products }: Props) => {
 
   return (
     <>
-      {products?.map((item) => (
+      {products?.map((item:any) => (
         <Link href={`/vendor/products/${item?.slug}`} key={item?.id} passHref>
           <TableRow my="1rem" padding="6px 18px">
             <FlexBox alignItems="center" m="6px" flex="2 2 220px !important">

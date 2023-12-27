@@ -113,7 +113,7 @@ const Signup: FC = () => {
         )}
 
         <FlexBox className="logo" alignItems="center" justifyContent="center">
-          <Link href={"/"}>
+          <Link href="/">
             <Image src="/assets/images/logo.webp" alt="logo" />
           </Link>
         </FlexBox>

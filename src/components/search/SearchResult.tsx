@@ -10,7 +10,7 @@ import useWindowSize from "@hook/useWindowSize";
 import { IconButton } from "@component/buttons";
 import Sidenav from "@component/sidenav/Sidenav";
 import { H5, Paragraph } from "@component/Typography";
-import ProductFilterCard from "@component/products/ProductFilterCard";
+import ProductFilterCard2 from "@component/products/ProductFilterCard2";
 import ProductCard1List from "@component/products/ProductCard1List";
 import ProductCard9List from "@component/products/ProductCard9List";
 import Card from "@component/Card";
@@ -99,7 +99,7 @@ const SearchResult = ({ sortOptions, products, totalPage, page, setPage, getProd
                 </IconButton>
               }
             >
-              <ProductFilterCard />
+              <ProductFilterCard2 getProduct={getProduct}/>
             </Sidenav>
           )}
         </FlexBox>
@@ -107,7 +107,7 @@ const SearchResult = ({ sortOptions, products, totalPage, page, setPage, getProd
 
       <Grid container spacing={6}>
         <Hidden as={Grid} item lg={3} xs={12} down={1024}>
-          <ProductFilterCard />
+          <ProductFilterCard2 getProduct={getProduct}/>
         </Hidden>
 
         <Grid item lg={9} xs={12}>
