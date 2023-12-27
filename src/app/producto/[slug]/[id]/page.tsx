@@ -98,8 +98,8 @@ const Producto = ({params}:any) => {
               message={message} 
               product={product}
               images={images} 
-            />
-}
+            />}
+            
             {!loading && <Section2 producstRelated={productRelated}/>}
             <Section3 />
             <Section4 />
