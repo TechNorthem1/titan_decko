@@ -1,6 +1,6 @@
 import { FC, Fragment } from "react";
-// import Link from "next/link";
-import NavLink from "@component/nav-link";
+import Link from "next/link"
+// import NavLink from "@component/nav-link";
 import NextImage from "next/legacy/image";
 import Icon from "@component/icon/Icon";
 import Divider from "@component/Divider";
@@ -114,21 +114,21 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
                 </Button>
               </FlexBox>
 
-              <NavLink href={`/product/${item.slug}`}>
+              <Link href={`/product/${item.slug}`}>
                 <Avatar
                   size={76}
                   mx="1rem"
                   alt={item.name}
                   src={item.imgUrl || "/assets/images/products/iphone-x.png"}
                 />
-              </NavLink>
+              </Link>
 
               <div className="product-details">
-                <NavLink href={`/product/${item.id}`}>
+                <Link href={`/product/${item.id}`}>
                   <H5 className="title" fontSize="14px">
                     {item.name}
                   </H5>
-                </NavLink>
+                </Link>
 
                 <Tiny color="text.muted">
                   {currency(item.price, 0)} x {item.qty}
@@ -161,7 +161,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
       {!!state.cart.length && (
         <Fragment>
           {!isAuthenticated &&
-            <NavLink href={"/comprar-ahora"}>
+            <Link href={"/comprar-ahora"}>
               <Button
                 color="primary"
                 variant="contained"
@@ -173,7 +173,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
                     Pagar ({currency(getTotalPrice())})
                   </Typography>
               </Button>
-            </NavLink>
+            </Link>
           }
 
           {isAuthenticated &&
@@ -186,16 +186,18 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
           }
 
 
-          <NavLink href={"/carrito"}>
-            <Button
-              color="primary"
-              variant="outlined"
-              m="0px 1rem 0.75rem"
-              onClick={toggleSidenav}
-            >
-              <Typography fontWeight={600}>Ver Carrito</Typography>
-            </Button>
-          </NavLink>
+          <Link href={"/carrito"} passHref>
+            <a style={{textDecoration: "none"}}>
+              <Button
+                color="primary"
+                variant="outlined"
+                m="0px 1rem 0.75rem"
+                onClick={toggleSidenav}
+              >
+                <Typography fontWeight={600}>Ver Carrito</Typography>
+              </Button>
+            </a>
+          </Link>
         </Fragment>
       )}
     </StyledMiniCart>
