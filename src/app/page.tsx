@@ -36,7 +36,7 @@ const Home = () => {
 
       <HeaderTitan isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
       
-      <Box className="">
+      <Box className="content-box">
         {/* HERO CAROUSEL AREA */}
         <Section1 carouselData={mainCarouselData} />
         <PruebaComponent />
