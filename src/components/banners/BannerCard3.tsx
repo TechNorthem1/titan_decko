@@ -1,3 +1,4 @@
+"use client"
 import Box from "@component/Box";
 import Image from "@component/Image";
 import { FC, ReactNode } from "react";

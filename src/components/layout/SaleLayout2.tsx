@@ -1,3 +1,4 @@
+"use client"
 import { FC, ReactNode } from "react";
 import Head from "next/head";
 // import Topbar from "@component/topbara";

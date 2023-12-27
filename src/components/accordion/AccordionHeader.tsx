@@ -1,3 +1,4 @@
+"use client"
 import { FC, ReactNode } from "react";
 import styled from "styled-components";
 import { FlexboxProps, SpaceProps } from "styled-system";

@@ -1,3 +1,4 @@
+"use client"
 import { cloneElement, FC, Fragment, ReactElement, useState } from "react";
 import Modal from "../Modal";
 

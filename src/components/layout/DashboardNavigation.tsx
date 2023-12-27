@@ -1,3 +1,4 @@
+"use client"
 import { Fragment } from "react";
 import Box from "@component/Box";
 import Card from "@component/Card";

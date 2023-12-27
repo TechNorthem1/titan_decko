@@ -1,3 +1,4 @@
+"use client"
 import { FC, Fragment } from "react";
 import Link from "next/link"
 // import NavLink from "@component/nav-link";
@@ -186,7 +187,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
           }
 
 
-          <Link href={"/carrito"} passHref>
+          <Link href={"/carrito"} replace>
             <a style={{textDecoration: "none"}}>
               <Button
                 color="primary"

@@ -2,7 +2,7 @@
 import React, { Dispatch, FC, Fragment, SetStateAction, useEffect, useState } from 'react'
 import Sticky from "@component/sticky";
 import { Header } from "@component/header";
-import Head from "next/head";
+"use client"
 import "./style.css"
 import useResponsive from '@hook/useResposive';
 

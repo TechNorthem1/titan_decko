@@ -1,3 +1,4 @@
+"use client"
 import { Children, FC, Fragment } from "react";
 import clsx from "clsx";
 import { CSSProperties } from "styled-components";

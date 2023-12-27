@@ -1,3 +1,4 @@
+"use client"
 import Box from "@component/Box";
 import Divider from "@component/Divider";
 import Image from "@component/Image";

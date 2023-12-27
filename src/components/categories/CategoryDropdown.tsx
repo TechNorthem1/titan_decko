@@ -1,3 +1,4 @@
+"use client"
 import { FC } from "react";
 import navigations from "@data/navigations";
 import MegaMenu1 from "./mega-menu/MegaMenu1";
