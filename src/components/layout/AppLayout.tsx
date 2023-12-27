@@ -35,7 +35,7 @@ const AppLayout: FC<Props> = ({
       {navbar ? <div className="section-after-sticky">{navbar}</div> : null}
 
       {!navbar ? (
-        <div className="section-after-sticky content-box">{children}</div>
+        <div className="section-after-sticky">{children}</div>
       ) : (
         children
       )}

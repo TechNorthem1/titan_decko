@@ -1,4 +1,3 @@
-"use client";
 import {  useRouter } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 import { Tiny } from "@component/Typography";
