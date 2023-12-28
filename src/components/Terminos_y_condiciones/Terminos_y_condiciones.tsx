@@ -1,9 +1,10 @@
+import { colors } from "@utils/themeColors";
 import React from "react";
 
 export const Terminos_y_condiciones = () => {
   return (
-    <div>
-      <h2 className="has-large-font-size">Información General</h2>
+    <div style={{color: colors.titan.dark}}>
+      <h2>Información General</h2>
       {/* <!-- /wp:heading --> */}
 
       {/* <!-- wp:paragraph --> */}

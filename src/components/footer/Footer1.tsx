@@ -23,6 +23,7 @@ const StyledLink = styled(Link)`
   :hover {
     color: ${getTheme("colors.gray.100")};
   }
+  text-transform: capitalize;
 `;
 
 const Footer1: FC = () => {
@@ -61,7 +62,7 @@ const Footer1: FC = () => {
                 <div>
                   {aboutLinks.map((item, ind) => (
                     
-                    <StyledLink href={`market-2/${item}`} key={ind}>
+                    <StyledLink href={`/${item}`} key={ind}>
                       {item}
                     </StyledLink>
                   ))}
@@ -140,7 +141,7 @@ const Footer1: FC = () => {
 const aboutLinks = [
   "Jobs",
   "Nuestra historia",
-  "Terminos y condiciones",
+  "terminos-y-condiciones",
   "Politica de privacidad",
 ];
 
@@ -150,7 +151,7 @@ const customerCareLinks = [
   "Seguir mi orden",
   "Compras corporativas B2B",
   "Devoluciones",
-  "Terminos y condiciones",
+  "terminos-y-condiciones",
 ];
 
 const iconList = [

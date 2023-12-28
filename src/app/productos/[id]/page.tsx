@@ -24,7 +24,6 @@ const ProductSearchResult = ({params}:any) => {
       let totalPage = productsRes.headers.get("X-WP-Total");
       let products:[] = await productsRes.json();
       let categories:[] = await categoriesRes.json(); 
-
       setTotalPage(Number(totalPage));
       setProducts(products);
       setCategories(categories);

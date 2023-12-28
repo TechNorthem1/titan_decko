@@ -52,7 +52,7 @@ const ProductFilterCard2: FC<ProductFilterCard2Props> = ({getProduct, categories
   }
 
   return (
-    <Card p="18px 27px" elevation={5}>
+    <Card p="18px 27px" elevation={5} borderRadius={10}>
       <H6 mb="10px">Categorías</H6>
 
       {categories.length < 1 && 

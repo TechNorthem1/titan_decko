@@ -5,18 +5,10 @@ import {mainCarouselData as carrousel} from "@server/__db__/market-2/data"
 import Section1 from "@sections/market-2/Section1";
 import { HeaderTitan } from "@component/header_titan";
 import { Footer1 } from "@component/footer";
-import Section2 from "@sections/market-2/Section2";
 import Section3 from "@sections/categorias/Section3";
 import Section4 from "@sections/market-2/Section4";
-import Section5 from "@sections/market-2/Section5";
-import Section6 from "@sections/market-2/Section6";
-import Section7 from "@sections/market-2/Section7";
-import Section8 from "@sections/market-2/Section8";
-import Section9 from "@sections/market-2/Section9";
-import Section10 from "@sections/market-2/Section10";
 import MobileNavigationBar from "@component/mobile-navigation";
 import Helpers from "@helpers/Helpers";
-import { method } from "lodash";
 import Method from "@helpers/Method";
 import Container from "@component/Container";
 
@@ -57,43 +49,13 @@ const Home = () => {
         {/* HERO CAROUSEL AREA */}
         <Section1 carouselData={mainCarouselData} />
 
-        {/* SERVICE LIST AREA */}
-        {/* <Section2 serviceList={serviceList} /> */}
-
         {/* TOP CATEGORIES AREA */}
-        <Container >
+        <Container marginTop={50}>
           <Section3 categories={categories} />
         </Container>
-        {/* <Section4 title="Elementos Destacados" products={products} /> */}
-
-
-        {/* DEAL OF THE DAY PRODUCTS AREA */}
 
         <Section4 title="Elementos Destacados" products={products} />
 
-        {/* NEW ARRIVALS AND BEST SELLER OFFER BANNER AREA */}
-        {/* <Section5 />  */}
-
-        {/* ELECTRONICS CATEGORY BASED PRODUCTS AREA */}
-        {/* <Section6 data={carrousel} /> */}
-
-        {/* SALES OFFER BANNERS AREA */}
-        {/* <Section7 /> */}
-
-        {/* MEN'S CATEGORY BASED PRODUCTS AREA */}
-        {/* <Section6 data={menFashionProducts} /> */}
-
-        {/* DISCOUNT OFFER BANNER AREA */}
-        {/* <Section8 /> */}
-
-        {/* WOMEN'S CATEGORY BASED PRODUCTS AREA */}
-        {/* <Section6 data={womenFashionProducts} /> */}
-
-        {/* FEATURES BRAND LIST AREA */}
-        {/* <Section9 brands={brands as any} /> */}
-
-        {/* SELECTED PRODUCTS AREA */}
-        {/* <Section10 products={products} /> */}
       </Box>
       <MobileNavigationBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
       <Footer1/>

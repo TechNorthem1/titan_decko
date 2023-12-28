@@ -71,7 +71,7 @@ const Pagination: FC<PaginationProps> = ({
   return (
     <StyledPagination {...props}>
       <ReactPaginate
-        pageCount={pageCount}
+        pageCount={Number(pageCount)}
         nextLabel={NEXT_BUTTON}
         breakLabel={BREAK_LABEL}
         activeClassName="active"
@@ -79,9 +79,8 @@ const Pagination: FC<PaginationProps> = ({
         containerClassName="pagination"
         previousLabel={PREVIOUS_BUTTON}
         onPageChange={handlePageChange}
-        pageRangeDisplayed={pageRangeDisplayed}
-        marginPagesDisplayed={marginPagesDisplayed}
-        // subContainerClassName="pages pagination"
+        // pageRangeDisplayed={pageRangeDisplayed}
+        // marginPagesDisplayed={marginPagesDisplayed}
       />
     </StyledPagination>
   );

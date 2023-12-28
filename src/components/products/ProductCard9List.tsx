@@ -38,8 +38,8 @@ const ProductCard9List: FC<Props> = ({ products, totalPage, page, setPage, getPr
           alignItems="center"
           mt="32px"
         >
-          <SemiSpan color={colors.titan.dark}>Mostrando {page}-{Math.ceil(parseInt(totalPage)/30)} de {products.length} Productos</SemiSpan>
-          <Pagination pageCount={Math.ceil(parseInt(totalPage)/30)} pagination={page} setPage={setPage} getProduct={getProduct} />
+          <SemiSpan color={colors.titan.dark}>Mostrando {page}-{Math.ceil(totalPage/30)} de {products.length} Productos</SemiSpan>
+          <Pagination pageCount={Math.ceil(totalPage/30)} pagination={page} setPage={setPage} getProduct={getProduct} />
         </FlexBox>
       )}
     </Fragment>

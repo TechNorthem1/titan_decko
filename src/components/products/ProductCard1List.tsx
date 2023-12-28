@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import FlexBox from "@component/FlexBox";
 import Grid from "@component/grid/Grid";
 import Pagination from "@component/pagination";
@@ -7,12 +7,18 @@ import { SemiSpan } from "@component/Typography";
 import Helpers from "@helpers/Helpers"
 
 import { colors } from "@utils/themeColors";
+import { Paginate } from "@component/paginate";
 
 // ==========================================================
-type Props = { products?: [], totalPage?:string|any, page?:number, setPage?:any, getProduct?:any };
+type Props = { products?: [], totalPage?:number|any, page?:number, setPage?:any, getProduct?:any };
 // ==========================================================
 
 const ProductCard1List: FC<Props> = ({ products, totalPage, page, setPage, getProduct }) => {
+  const [pageCount, setPageCount] = useState(0);
+  useEffect(() => {
+    let quantityPage:number = Math.ceil(totalPage/30); 
+    setPageCount(quantityPage)
+  }, [])
   return (
     <div>
       <Grid container spacing={6}>
@@ -32,15 +38,15 @@ const ProductCard1List: FC<Props> = ({ products, totalPage, page, setPage, getPr
           </Grid>
         ))}
       </Grid>
-      {parseInt(totalPage)/30 > 1 && (
+      {Math.ceil(totalPage/30) > 1 && (
         <FlexBox
           flexWrap="wrap"
           justifyContent="space-between"
           alignItems="center"
           mt="32px"
         >
-          <SemiSpan color={colors.titan.dark}>Mostrando {page}-{Math.ceil(parseInt(totalPage)/30)} de {products.length} Productos</SemiSpan>
-          <Pagination pageCount={Math.ceil(parseInt(totalPage)/30)} pagination={page}  setPage={setPage} getProduct={getProduct}/>
+          <SemiSpan color={colors.titan.dark}>Mostrando {page}-{pageCount} de {products.length} Productos</SemiSpan>
+          <Paginate pageCount={pageCount} pagination={page} setPage={setPage} getProduct={getProduct} />
         </FlexBox>
       )}
     </div>

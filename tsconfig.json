@@ -18,6 +18,7 @@
     "jsx": "preserve",
     "incremental": true,
     "plugins": [{ "name": "next" }],
+    "sourceMap": true,
     "paths": {
       "@server/*": ["__server__/*"],
       "@lib/*": ["lib/*"],

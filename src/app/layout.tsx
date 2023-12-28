@@ -32,6 +32,10 @@ export default function RootLayout({
           </AppProvider>
         </StyledComponentsRegistry>
         <script src="https://kit.fontawesome.com/b13e9656a1.js" crossOrigin="anonymous"></script>
+        <script src="/assets/js/Hotjar.js"></script>
+        <script src="/assets/js/TagManager.js"></script>
+        <script src="/assets/js/Titok.js"></script>
+        <script src="/assets/js/GoogleAnalitics.js"></script>
       </body>
     </html>
   );
