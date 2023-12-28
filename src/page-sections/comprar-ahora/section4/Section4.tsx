@@ -5,7 +5,7 @@ import { currency } from '@utils/utils';
 import shopping from "/public/assets/images/logos/shopping-bag.svg";
 import "./style.css";
 
-const Section4 = ({state}) => {
+const Section4 = ({state, sendLocalStorage}) => {
   const [total, setTotal] = useState(0);
   useEffect(() => getPrice(), []);
 
@@ -48,7 +48,7 @@ const Section4 = ({state}) => {
         <p className="total">total</p>
         <p className="price_total">{currency(total)}</p>
       </div>
-      <Link href="/carrito" className="back">volver al carrito</Link>
+      <Link onClick={sendLocalStorage} href="/carrito" className="back">volver al carrito</Link>
     </Container>
   )
 }

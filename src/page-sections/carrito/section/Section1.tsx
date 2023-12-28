@@ -8,7 +8,7 @@ import Link from "next/link"
 import "./style.css"
 
 
-const Section1 = ({isAuthenticated, total}) => {
+const Section1 = ({isAuthenticated, total, sendLocalStorage}) => {
     const LOGIN_HANDLE = (
         <Button ml="1rem" bg="gray.black" p="8px" style={{width: "100%",backgroundColor:colors.titan.yellow, color: colors.titan.dark, marginLeft: "0"}}>
           Comprar Ahora
@@ -51,7 +51,7 @@ const Section1 = ({isAuthenticated, total}) => {
                     }
 
                     {!isAuthenticated && 
-                        <Link href="/comprar-ahora" >
+                        <Link href="/comprar-ahora" onClick={sendLocalStorage}>
                             <Button ml="1rem" bg="gray.black" p="8px" style={{width: "100%",backgroundColor:colors.titan.yellow, color: colors.titan.dark, marginLeft: "0"}}>
                                 Comprar Ahora
                             </Button>

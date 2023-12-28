@@ -25,7 +25,8 @@ import Image from "@component/Image";
 import FirebaseService from "@services/FirebaseService";
 import Client from "@models/Client.model";
 import NavLink from "@component/nav-link";
-
+import SecureLS from "secure-ls";
+import { useAppContext } from "@context/AppContext";
 
 interface LoginProps {
   redirect?: any;
@@ -38,6 +39,8 @@ const Login: FC<LoginProps> = ({redirect}) => {
   const [message, setMessage] = useState("");
   const [visibility, setVisibility] = useState(false);
   const [color, setColor] = useState("");
+  const {state, dispatch} = useAppContext();
+  
 
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
@@ -59,8 +62,10 @@ const Login: FC<LoginProps> = ({redirect}) => {
       
       let request:any = await signInWithEmailAndPassword(auth, values.email, values.password);
       let data = JSON.stringify(request._tokenResponse);
+      let cart = JSON.stringify(state.cart);
       Authentication.setItem("dataUser", data);
-      router.replace(redirect);
+      Authentication.setItem("cart", cart);
+      router.push(redirect);
     }catch(e){
       console.log(e)
       setVisibility(true);
@@ -94,7 +99,9 @@ const Login: FC<LoginProps> = ({redirect}) => {
       FirebaseService.createUser(client);
     }
     let user:any = JSON.stringify(response._tokenResponse);
+    let cart = JSON.stringify(state.cart);
     Authentication.setItem("dataUser", user);
+    Authentication.setItem("cart", cart);
     router.replace(redirect);
   };
 

@@ -6,6 +6,8 @@ import Grid from "@component/grid/Grid";
 import Section1 from "@sections/carrito/section";
 import Helpers from "@helpers/Helpers";
 import shopping from "/public/assets/images/logos/shopping-bag.svg";
+import Authentication from "@helpers/Autentication";
+import { stat } from "fs";
 
 
 const Cart = () => {
@@ -16,14 +18,27 @@ const Cart = () => {
   useEffect(() => {
     let Authenticated = Helpers.isAuthenticated("dataUser");
     setIsAuthenticated(Authenticated);
+    getCart();
+    
+  }, []);
+
+  const getCart = () => {
+    let cart = Authentication.getItem("cart");
+    state.cart = cart;
     getPrice();
-  }, [state.cart])
+  }
 
   const getPrice = () => {
     let total:number = 0;
     state.cart.map((item:any) => total += item.price * item.qty);
     setTotal(total);
   }
+
+  const sendLocalStorage = () => {
+    let cart = JSON.stringify(state.cart);
+    Authentication.setItem("cart", cart);
+  }
+
 
   return (
     <Fragment>
@@ -49,7 +64,7 @@ const Cart = () => {
         </Grid>
 
         <Grid item lg={4} md={4} xs={12}>
-          <Section1 isAuthenticated={isAuthenticated} total={total} />
+          <Section1 isAuthenticated={isAuthenticated} total={total} sendLocalStorage={sendLocalStorage}/>
         </Grid>
       </Grid>
     </Fragment>

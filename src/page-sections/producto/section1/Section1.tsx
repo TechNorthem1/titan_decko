@@ -20,7 +20,7 @@ import  Image from "next/image";
 
 
 
-const Section1 = ({params, url, isAuthenticated, message, product, images}) => {
+const Section1 = ({params, url, isAuthenticated, message, product, images, sendLocalStorage}) => {
     const {form, changed} = useForm();
     const [image, setImage] = useState<number>(0);
     const { state, dispatch } = useAppContext();
@@ -50,6 +50,7 @@ const Section1 = ({params, url, isAuthenticated, message, product, images}) => {
           type: "CHANGE_CART_AMOUNT",
           payload: { price: product?.price, imgUrl, id:product?.id, qty: quantity, slug:product?.slug, name: product?.name },
         });
+        sendLocalStorage();
     };
 
     const changedImage =  (indice:number) => {

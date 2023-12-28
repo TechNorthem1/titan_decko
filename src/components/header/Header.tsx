@@ -5,7 +5,6 @@ import { Tiny } from "@component/Typography";
 import { IconButton } from "@component/buttons";
 import { SearchInputWithCategory } from "@component/search-box";
 import { useAppContext } from "@context/AppContext";
-// import Link from "next/link";
 import Link from "next/link"
 import Box from "@component/Box";
 import Image from "@component/Image";
@@ -57,6 +56,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
     };
     fetchCategories();
     getDataUser();
+    getCart();
     let routePrivate = Helpers.routesPrivates("dataUser");
     if (routePrivate){
       router.push("/");
@@ -120,6 +120,15 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
     </IconButton>
   );
 
+  const getCart = () => {
+    let cart = Authentication.getItem("cart") == null ? [] : Authentication.getItem("cart");
+    state.cart = cart;
+  }
+
+  const sendLocalStorage = () => {
+    let cart = JSON.stringify(state.cart);
+    Authentication.setItem("cart", cart);
+  }
 
   return (
     <StyledHeader className={className}>
@@ -130,7 +139,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
         height="100%"
       >
         <FlexBox className="logo" alignItems="center" mr="1rem" style={{display:"block"}}>
-          <Link href="/">
+          <Link href="/" onClick={sendLocalStorage}>
             <Image src="/assets/images/logo.webp" alt="logo" width={200} height={74} style={{objectFit: "cover"}} loading="lazy"/>
           </Link>
         </FlexBox>
@@ -142,7 +151,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
 
           <FlexBox className="header-right" alignItems="center">
             {viewElementHeader && isAuthenticated &&
-              <Link href="/login">{LOGIN_HANDLE}</Link>
+              <Link href="/login" onClick={sendLocalStorage}>{LOGIN_HANDLE}</Link>
             }
 
             {viewElementHeader && 
@@ -158,7 +167,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
             }
 
             {!viewElementHeader && 
-              <Link href="/" >Seguir Comprando</Link>
+              <Link href="/" onClick={sendLocalStorage}>Seguir Comprando</Link>
             }
 
 

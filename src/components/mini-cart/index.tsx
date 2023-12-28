@@ -16,6 +16,7 @@ import Helper from "@helpers/Helpers";
 import UserLoginDialog from "@component/header/LoginDialog";
 import Login from "@component/sessions/Login";
 import { colors } from "@utils/themeColors";
+import Authentication from "@helpers/Autentication";
 
 
 type MiniCartProps = { toggleSidenav?: () => void };
@@ -44,6 +45,11 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
       Comprar Ahora
     </Button>
   );
+
+  const sendLocalStorage = () => {
+    let cart = JSON.stringify(state.cart);
+    Authentication.setItem("cart", cart);
+  }
 
   return (
     <StyledMiniCart>
@@ -162,7 +168,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
       {!!state.cart.length && (
         <Fragment>
           {!isAuthenticated &&
-            <Link href="/comprar-ahora">
+            <Link href="/comprar-ahora" onClick={sendLocalStorage}>
               <Button
                 color="primary"
                 variant="contained"
@@ -170,9 +176,9 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
                 onClick={toggleSidenav}
               >
                 
-                  <Typography fontWeight={600}>
-                    Pagar ({currency(getTotalPrice())})
-                  </Typography>
+                <Typography fontWeight={600}>
+                  Pagar ({currency(getTotalPrice())})
+                </Typography>
               </Button>
             </Link>
           }
@@ -187,7 +193,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
           }
 
 
-          <Link href="/carrito" replace>
+          <Link href="/carrito" onClick={sendLocalStorage} replace>
             <Button
               color="primary"
               variant="outlined"

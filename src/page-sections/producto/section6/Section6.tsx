@@ -14,7 +14,7 @@ import "./style.css";
 import Whatsapp from "@component/whatsapp";
 import Image from "next/image";
 
-const Section6 = ({params, url, isAuthenticated, setShared, message, product, images}) => {
+const Section6 = ({params, url, isAuthenticated, setShared, message, product, images, sendLocalStorage}) => {
    
     const {form, changed} = useForm();
     const { state, dispatch } = useAppContext();
@@ -47,6 +47,7 @@ const Section6 = ({params, url, isAuthenticated, setShared, message, product, im
           type: "CHANGE_CART_AMOUNT",
           payload: { price: product?.price, imgUrl, id:product?.id, qty: quantity, slug:product?.slug, name: product?.name },
         });
+        sendLocalStorage();
     };
 
     const changedShared = () => {

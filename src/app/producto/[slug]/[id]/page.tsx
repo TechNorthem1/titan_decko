@@ -18,6 +18,8 @@ import Method from "@helpers/Method";
 import { colors } from "@utils/themeColors";
 import { method } from "lodash";
 import Loading from "@component/loading/Loading";
+import { useAppContext } from "@context/AppContext";
+import Authentication from "@helpers/Autentication";
 
 
 
@@ -32,6 +34,7 @@ const Producto = ({params}:any) => {
   const [loading, setLoading] = useState(true);
   const [productRelated, setProductRelated] = useState([]);
   const url = `http://localhost:3000/producto/${params.slug}/${params.id}`;
+  const {state, dispatch} = useAppContext();
 
   useEffect(() => {
     let authenticated = Helpers.isAuthenticated("dataUser");
@@ -71,7 +74,11 @@ const Producto = ({params}:any) => {
       error;
     }
   }
-
+  
+  const sendLocalStorage = () => {
+    let cart = state.cart;
+    Authentication.setItem("cart", cart)
+  }
  
   return (
     <Fragment>
@@ -86,7 +93,8 @@ const Producto = ({params}:any) => {
               isAuthenticated={isAuthenticated} 
               message={message} 
               product={product}
-              images={images}  
+              images={images}
+              sendLocalStorage={sendLocalStorage}
             />}
 
 
@@ -97,7 +105,8 @@ const Producto = ({params}:any) => {
               setShared={setShared} 
               message={message} 
               product={product}
-              images={images} 
+              images={images}
+              sendLocalStorage={sendLocalStorage}
             />}
             
             {!loading && <Section2 producstRelated={productRelated}/>}

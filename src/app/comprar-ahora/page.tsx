@@ -14,6 +14,8 @@ import FirebaseService from '@services/FirebaseService'
 import { useAppContext } from '@context/AppContext'
 import Helpers from '@helpers/Helpers'
 import MobileNavigationBar from '@component/mobile-navigation'
+import Authentication from '@helpers/Autentication'
+
 
 
 
@@ -37,8 +39,15 @@ const page = () => {
 
     const getUser = async () => {
         let data = JSON.parse(User.getUser("dataUser")); 
+        let cart = JSON.parse(Authentication.getItem("cart"));
+        state.cart = cart;
         const dataUser:any = await FirebaseService.getUser(data.email);
         setUser(dataUser[0]._document?.data?.value.mapValue.fields);
+    }
+
+    const sendLocalStorage = () => {
+        let cart = state.cart;
+        Authentication.setItem("cart", cart);
     }
 
     return (
@@ -63,7 +72,7 @@ const page = () => {
                             <Section3 />
                         </Grid>
                         <Grid item lg={4} xs={12}>
-                            <Section4 state={state} />
+                            <Section4 state={state} sendLocalStorage={sendLocalStorage}/>
                         </Grid>
                     </Grid>
 

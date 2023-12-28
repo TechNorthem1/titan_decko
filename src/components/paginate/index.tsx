@@ -19,7 +19,6 @@ export const Paginate:FC<indexProps> = ({pagination, pageCount, setPage, getProd
     }
     
     const nextPage = () => {
-        console.log(pagination)
         setPage(pagination+1);
         getProduct();
     }
