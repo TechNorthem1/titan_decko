@@ -56,7 +56,7 @@ const CheckoutNavLayout: FC<Props> = ({ children }) => {
   return (
     <AppLayout>
         <Container my="2rem">
-          <Box className="">
+          <Box className="" minHeight={500}>
             {children}
           </Box>
         </Container>

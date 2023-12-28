@@ -1,19 +1,17 @@
 "use client";
 import { FC, useEffect } from "react";
 import Card from "@component/Card";
-import Avatar from "@component/avatar";
-import Rating from "@component/rating";
 import Divider from "@component/Divider";
 import FlexBox from "@component/FlexBox";
-import CheckBox from "@component/CheckBox";
 import TextField from "@component/text-field";
-import { Accordion, AccordionHeader } from "@component/accordion";
 import { H5, H6, Paragraph, SemiSpan } from "@component/Typography";
-import useForm from "@hook/useForm";
+import useForm from "@hooks/useForm";
+import Link from "next/link";
+import Select from "@component/Select";
 
-type ProductFilterCard2Props = {getProduct?: (url:string) => void}
+type ProductFilterCard2Props = {getProduct?: (url:string) => void, categories?:any[]}
 
-const ProductFilterCard2: FC<ProductFilterCard2Props> = ({getProduct}) => {
+const ProductFilterCard2: FC<ProductFilterCard2Props> = ({getProduct, categories = []}) => {
   const {form, changed} = useForm({});
   const render = (items: string[]) =>
     items.map((name) => (
@@ -31,13 +29,25 @@ const ProductFilterCard2: FC<ProductFilterCard2Props> = ({getProduct}) => {
     
   useEffect(() => {updateUrl}, [form]);
 
-  const updateUrl = () => {
-    const minPrice = form["minPrice"];
-    const maxPrice = form["maxPrice"];
-    let url = (minPrice !== undefined && maxPrice !== undefined ) ? `&min_price=${minPrice}000&max_price=${maxPrice}000`
-            : (minPrice === undefined && maxPrice !== undefined) ? `&min_price=6000&max_price=${maxPrice}000` 
-            : (minPrice !== undefined && maxPrice === undefined) ? `&min_price=${minPrice}000&max_price=500000` 
-            : "";
+  const updateUrl = ({target}) => {
+    const value = target.value;
+    let url = "";
+    if(value !== "all"){
+    
+      // Expresión regular para extraer números con puntos
+      const regex = /\d+\.\d+|\d+/g;
+
+      // Extraer los números como cadenas
+      const numerosComoCadenas = value.match(regex);
+      
+      // Convertir a números enteros
+      const numerosComoEnteros = numerosComoCadenas?.map(num => parseInt(num.replace(/\./g, ''), 10));
+      let minPrice = numerosComoEnteros[0];
+      let maxPrice = numerosComoEnteros[1];
+      
+      // estructurando la url
+      url = `&min_price=${minPrice}&max_price=${maxPrice}`;
+    }
     getProduct(url)
   }
 
@@ -45,68 +55,50 @@ const ProductFilterCard2: FC<ProductFilterCard2Props> = ({getProduct}) => {
     <Card p="18px 27px" elevation={5}>
       <H6 mb="10px">Categorías</H6>
 
-      {categroyList.map((item) =>
-        item.child ? (
-          <Accordion key={item.title} expanded>
-            <AccordionHeader px="0px" py="6px" color="text.muted">
-              <SemiSpan className="cursor-pointer" mr="9px">
-                {item.title}
-              </SemiSpan>
-            </AccordionHeader>
+      {categories.length < 1 && 
+        <Paragraph
+          py="6px"
+          fontSize="14px"
+          key="1"
+          color="text.muted"
+          className="cursor-pointer"
+        >
+          No se encontraron categorias
+        </Paragraph>
+      }
 
-            {render(item.child)}
-          </Accordion>
-        ) : (
+      {categories.length >= 1 && categories.map((item:any) => (
+        <Link href={`/productos/${item.id}`} >
           <Paragraph
             py="6px"
             fontSize="14px"
-            key={item.title}
+            key={item.name}
             color="text.muted"
             className="cursor-pointer"
           >
-            {item.title}
+            {item.name}
           </Paragraph>
-        )
-      )}
+        </Link>
+        ))}
 
       <Divider mt="18px" mb="24px" />
 
       {/* PRICE RANGE FILTER */}
       <H6 mb="16px">Precio</H6>
       <FlexBox justifyContent="space-between" alignItems="center">
-        <TextField placeholder="0" type="number" name="minPrice" fullwidth onChange={changed} onKeyUp={updateUrl}/>
-
-        <H5 color="text.muted" px="0.5rem">
-          -
-        </H5>
-
-        <TextField placeholder="250" type="number" name="maxPrice" fullwidth onChange={changed} onKeyUp={updateUrl}/>
+        <select name="searchByPrice" id="searchByPrice" className="searchByPrice" aria-label="buscar productos por precios" onClick={updateUrl}>
+          <option disabled>Filtrar por precios</option>
+          <option value="all" selected>Todos los productos</option>
+          <option value="0 - 100.000">$0 - $100.000</option>
+          <option value="100.000 - 200.000">$100.000 - $200.000</option>
+          <option value="200.000 - 300.000">$200.000 - $300.000</option>
+          <option value="300.000 - 500.000">$300.000 - $500.000</option>
+        </select>
       </FlexBox>
-
       <Divider my="24px" />
     </Card>
   );
 };
 
-const categroyList = [
-  {
-    title: "Bath Preparations",
-    child: ["Bubble Bath", "Bath Capsules", "Others"],
-  },
-  { title: "Eye Makeup Preparations" },
-  { title: "Fragrance" },
-  { title: "Hair Preparations" },
-];
-
-const otherOptions = ["On Sale", "In Stock", "Featured"];
-const brandList = ["Maccs", "Karts", "Baars", "Bukks", "Luasis"];
-const colorList = [
-  "#1C1C1C",
-  "#FF7A7A",
-  "#FFC672",
-  "#84FFB5",
-  "#70F6FF",
-  "#6B7AFF",
-];
 
 export default ProductFilterCard2;

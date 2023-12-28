@@ -191,6 +191,14 @@ const GlobalStyles = createGlobalStyle`
   border-radius: 0; 
 }
 
+select#searchByPrice {
+  width: 100%;
+  padding: 8px;
+  appearance: none;
+  border-radius: 3px;
+  outline: none;
+}
+
 .euBaoC + .section-after-sticky {
   padding-top: inherit;
   margin-top: 6rem;

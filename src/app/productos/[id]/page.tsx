@@ -11,21 +11,30 @@ const ProductSearchResult = ({params}:any) => {
   const [totalPage, setTotalPage] = useState(1);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState<any[]>([]);
   let search:string = isNaN(params.id) ? `products/?search=${params.id}&page=${page}&per_page=30&order=desc&orderby=price&stock_status=instock` : `products/?category=${params.id}&page=${page}&per_page=30&order=desc&orderby=price&stock_status=instock`; 
 
   const getProduct = async (filterByPrice:string = "") =>{
     try{
-      let response = await fetch(`${Method.woocommerce}${search}${filterByPrice}`, {method: "GET", headers: {Authorization: `${Method.token}`}});
-      let products:[] = await response.json();
-      let totalPage = response.headers.get("X-WP-Total");
-      setProducts(products);
+      let [productsRes, categoriesRes] = await Promise.all([
+        await fetch(`${Method.woocommerce}${search}${filterByPrice}`, {method: "GET", headers: {Authorization: `${Method.token}`}}),
+        await fetch(`${Method.woocommerce}products/categories?parent=${params.id}`, {method: "GET", headers: {Authorization: `${Method.token}`}})
+      ]);
+      
+      let totalPage = productsRes.headers.get("X-WP-Total");
+      let products:[] = await productsRes.json();
+      let categories:[] = await categoriesRes.json(); 
+
       setTotalPage(Number(totalPage));
+      setProducts(products);
+      setCategories(categories);
       setLoading(false);
     }catch(error){
       error;
     }
-  } 
+  }
 
+  
   
   return (
     <Box pt="20px">
@@ -39,6 +48,7 @@ const ProductSearchResult = ({params}:any) => {
           page={page} 
           setPage={setPage}
           getProduct={getProduct}
+          categories={categories}
         />
       )}
     </Box>
