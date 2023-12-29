@@ -16,6 +16,7 @@ import { calculateDiscount, currency, getTheme } from "@utils/utils";
 import { FC, Fragment, useCallback, useEffect, useState } from "react";
 import { colors } from "@utils/themeColors";
 import { disconnect } from "process";
+import Authentication from "@helpers/Autentication";
 
 // styled component
 const Wrapper = styled(Card)`
@@ -118,18 +119,28 @@ type ProductCard10Props = {
 
 const ProductCard10: FC<ProductCard10Props> = (props) => {
   const { id, off, unit, slug, title, price, imgUrl, images, salePrice} = props;
-
+  const { state, dispatch } = useAppContext();
   const [open, setOpen] = useState(false);
   const [discountPrice, setDiscountPrice] = useState<string>("");
   const [discountAmount, setDiscountAmount] = useState<string>("");
+  const [cartItem, setCartItem] = useState<any>();
 
   useEffect(() => {
+    getCart();
     setDiscountPrice(() => calculateDiscount(price, off));
     setDiscountAmount(() => currency(off));
   }, []);
 
-  const { state, dispatch } = useAppContext();
-  const cartItem:any = state.cart.find((item) => item.id === id);
+  const getCart = () => {
+    let cart = Authentication.getItem("cart") === null || Authentication.getItem("cart") === "" ? [] : Authentication.getItem("cart");
+    state.cart = cart;
+
+    let cartItem = state.cart.find((item) => item.id === id);
+    setCartItem(cartItem)
+  }
+
+  
+  
 
   const toggleDialog = useCallback(() => setOpen((open) => !open), []);
 

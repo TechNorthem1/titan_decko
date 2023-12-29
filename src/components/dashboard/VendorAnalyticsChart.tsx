@@ -39,7 +39,6 @@ const options: ChartOptions = {
     tooltip: {
       callbacks: {
         label: function (context) {
-          console.log(context.element.y);
           let label = context.dataset.label || "";
 
           if (label) {

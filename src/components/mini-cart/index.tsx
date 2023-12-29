@@ -23,7 +23,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
   const { state, dispatch } = useAppContext();
   const isAuthenticated = Helper.isAuthenticated("dataUser");
 
-  useEffect(() => {getCart()}, [])
+
 
   const handleCartAmountChange = (amount: number, product: any) => () => {
     dispatch({
@@ -31,12 +31,6 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
       payload: { ...product, qty: amount },
     });
   };
-
-  const getCart = () => {
-    let cart = JSON.parse(Authentication.getItem("cart"));
-    console.log(cart)
-    state.cart = cart;
-  }
 
   const getTotalPrice = () => {
     return (
@@ -47,16 +41,24 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
     );
   };
 
+  const sendLocalStorage = () => {
+    let cart = state.cart;
+    Authentication.setItem("cart", cart);
+  }
+
   const LOGIN_HANDLE = (
-    <Button ml="1rem" bg="gray.black" p="8px" style={{width:"50%", backgroundColor:colors.titan.yellow, color: colors.titan.dark, marginBottom: "10px"}}>
+    <Button 
+      ml="1rem" 
+      bg="gray.black" 
+      p="8px" 
+      style={{width:"50%", backgroundColor:colors.titan.yellow, color: colors.titan.dark, marginBottom: "10px"}}
+      
+    >
       Comprar Ahora
     </Button>
   );
 
-  const sendLocalStorage = () => {
-    let cart = JSON.stringify(state.cart);
-    Authentication.setItem("cart", cart);
-  }
+  
 
   return (
     <StyledMiniCart>
@@ -192,7 +194,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
 
           {isAuthenticated &&
               <UserLoginDialog handle={LOGIN_HANDLE}>
-               <div>
+               <div onClick={sendLocalStorage}>
                  <Login  redirect="/comprar-ahora"/>
                </div>
              </UserLoginDialog>

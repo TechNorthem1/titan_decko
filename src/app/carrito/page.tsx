@@ -7,7 +7,7 @@ import Section1 from "@sections/carrito/section";
 import Helpers from "@helpers/Helpers";
 import shopping from "/public/assets/images/logos/shopping-bag.svg";
 import Authentication from "@helpers/Autentication";
-import { stat } from "fs";
+
 
 
 const Cart = () => {
@@ -19,12 +19,12 @@ const Cart = () => {
     let Authenticated = Helpers.isAuthenticated("dataUser");
     setIsAuthenticated(Authenticated);
     getCart();
-    getPrice();
   }, []);
 
   const getCart = () => {
-    let cart = JSON.parse(Authentication.getItem("cart")) == null ? [] : JSON.parse(Authentication.getItem("cart"));
+    let cart = Authentication.getItem("cart") == null ? [] : Authentication.getItem("cart");
     state.cart = cart;
+    getPrice();
   }
 
   const getPrice = () => {
@@ -35,7 +35,7 @@ const Cart = () => {
   }
 
   const sendLocalStorage = () => {
-    let cart = JSON.stringify(state.cart);
+    let cart = state.cart;
     Authentication.setItem("cart", cart);
   }
 

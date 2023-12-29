@@ -68,12 +68,12 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
   useEffect(() => {}, [isAuthenticated, state]);
 
   const getCart = () => {
-    let cart = JSON.parse(Authentication.getItem("cart")) === null ? [] : JSON.parse(Authentication.getItem("cart"));
+    let cart = Authentication.getItem("cart");
     state.cart = cart;
   }
 
   const sendLocalStorage = () => {
-    let cart = JSON.stringify(state.cart);
+    let cart = state.cart;
     Authentication.setItem("cart", cart);
   }
 

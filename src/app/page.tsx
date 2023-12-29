@@ -11,12 +11,14 @@ import MobileNavigationBar from "@component/mobile-navigation";
 import Helpers from "@helpers/Helpers";
 import Method from "@helpers/Method";
 import Container from "@component/Container";
+import Loading from "@component/loading/Loading";
 
 const Home = () => {
   const [mainCarouselData, setMainCarouselData] = useState<any>([]);
   const [isAuthenticated, setIsAuthenticated]:any = useState<boolean>(false);
   const [categories, setCategories] = useState<any[]>([]);
   const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {getData(); getDataInfo();}, []);
   // useEffect(() => {getData(); getDataInfo();}, [isAuthenticated, categories, products]);
@@ -38,6 +40,7 @@ const Home = () => {
     
     setCategories(categories);
     setProducts(products);
+    setLoading(false)
   }
 
   return (
@@ -47,14 +50,16 @@ const Home = () => {
       
       <Box className="content-box" style={{marginBottom: "30px"}}>
         {/* HERO CAROUSEL AREA */}
-        <Section1 carouselData={mainCarouselData} />
+        <Section1 carouselData={mainCarouselData}/>
+
 
         {/* TOP CATEGORIES AREA */}
         <Container marginTop={50}>
+          <Loading active={loading} setActivate={setLoading} classCss={""} />
           <Section3 categories={categories} />
         </Container>
 
-        <Section4 title="Elementos Destacados" products={products} />
+        {!loading && <Section4 title="Elementos Destacados" products={products} />}
 
       </Box>
       <MobileNavigationBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />

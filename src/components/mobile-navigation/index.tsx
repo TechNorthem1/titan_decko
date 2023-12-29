@@ -63,6 +63,8 @@ const MobileNavigationBar: FC<MobileNavigationBarProps> = ({isAuthenticated, set
   
   const getData = () => {
     let authenticated = Helpers.isAuthenticated("dataUser");
+    let cart = Authentication.getItem("cart") === null ? [] : Authentication.getItem("cart");
+    state.cart = cart;
     setIsAuthenticated(authenticated)
   }
  
@@ -72,6 +74,11 @@ const MobileNavigationBar: FC<MobileNavigationBarProps> = ({isAuthenticated, set
     Authentication.removeItem();
     router.push("/")
     setIsAuthenticated(true)
+  }
+
+  const sendLocalStorage = () => {
+    let cart = state.cart;
+    Authentication.setItem("cart", cart)
   }
 
   return (
@@ -86,7 +93,7 @@ const MobileNavigationBar: FC<MobileNavigationBarProps> = ({isAuthenticated, set
           Inicio
         </NavLink>
 
-        <NavLink className="link" href={"/carrito"}>
+        <NavLink className="link" href={"/carrito"} onClick={sendLocalStorage}>
           <Icon className="icon" variant="small">
             bag
           </Icon>

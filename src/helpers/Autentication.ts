@@ -19,17 +19,19 @@ class Authentication {
     }
 
 
-    static setItem = (keyUser:string, authenticatedUser:any) => {
+    static setItem = (keyUser:string, dataItem:any) => {
         Authentication.init();
         const key = Authentication.hashKey(keyUser);
-        Authentication.ls.set(key, authenticatedUser);
+        let item = JSON.stringify(dataItem)
+        Authentication.ls.set(key, item);
     }
 
-    static getItem = (dataUser?:any) => {
+    static getItem = (keyItem?:any) => {
         Authentication.init();
-        const key = Authentication.hashKey(dataUser);
-        let data = Authentication.ls.get(key);
-        return data === ""? null : data;
+        const key = Authentication.hashKey(keyItem);
+        let item = Authentication.ls.get(key);
+        
+        return item === null || item == "" ? null : JSON.parse(item);
     } 
 
     static removeItem(){

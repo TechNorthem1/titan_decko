@@ -30,7 +30,7 @@ const Profile = () => {
   }, [])
 
   const loadUser = async () => {
-    let data = JSON.parse(Authentication.getItem("dataUser"));
+    let data = Authentication.getItem("dataUser");
     let user:any = await FirebaseService.getUser(data?.email);
     if (data === null){
       router.push("/");

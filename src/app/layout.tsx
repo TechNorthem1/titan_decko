@@ -24,7 +24,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ES-co">
-
       <body className={openSans.className}>
         <StyledComponentsRegistry>
           <AppProvider>

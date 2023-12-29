@@ -17,10 +17,6 @@ import MobileNavigationBar from '@component/mobile-navigation'
 import Authentication from '@helpers/Autentication'
 
 
-
-
-
-
 const page = () => {
     const [user, setUser] = useState<any>();
     const {state, dispatch} =  useAppContext();
@@ -36,8 +32,8 @@ const page = () => {
     }, [isAuthenticated, user])
 
     const getUser = async () => {
-        let data = JSON.parse(User.getUser("dataUser")); 
-        let cart = JSON.parse(Authentication.getItem("cart"));
+        let data = User.getUser("dataUser");
+        let cart = Authentication.getItem("cart");
         state.cart = cart;
         const dataUser:any = await FirebaseService.getUser(data.email);
         setUser(dataUser[0]._document?.data?.value.mapValue.fields);
@@ -74,7 +70,6 @@ const page = () => {
                             <Section4 cart={state.cart} sendLocalStorage={sendLocalStorage}/>
                         </Grid>
                     </Grid>
-
                 </Container>
             </Box>
             <MobileNavigationBar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />

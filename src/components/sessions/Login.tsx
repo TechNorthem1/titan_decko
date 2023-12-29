@@ -59,10 +59,9 @@ const Login: FC<LoginProps> = ({redirect}) => {
         }, 3000);
         return false;
       }
-      
       let request:any = await signInWithEmailAndPassword(auth, values.email, values.password);
-      let data = JSON.stringify(request._tokenResponse);
-      let cart = JSON.stringify(state.cart);
+      let data = request._tokenResponse;
+      let cart = state.cart;
       Authentication.setItem("dataUser", data);
       Authentication.setItem("cart", cart);
       router.push(redirect);
@@ -82,7 +81,6 @@ const Login: FC<LoginProps> = ({redirect}) => {
     const provider = new FacebookAuthProvider();
     try {
       let data:any = await signInWithPopup(auth, provider);
-      console.log(data)
       router.replace(redirect);
     } catch (error) {
       console.error(error);
@@ -98,8 +96,8 @@ const Login: FC<LoginProps> = ({redirect}) => {
       let client = new Client(response.user.displayName, "","", response.user.email, "", "", "");
       FirebaseService.createUser(client);
     }
-    let user:any = JSON.stringify(response._tokenResponse);
-    let cart = JSON.stringify(state.cart);
+    let user:any = response._tokenResponse;
+    let cart = state.cart;
     Authentication.setItem("dataUser", user);
     Authentication.setItem("cart", cart);
     router.replace(redirect);
