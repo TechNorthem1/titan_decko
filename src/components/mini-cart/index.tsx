@@ -1,5 +1,5 @@
 "use client"
-import { FC, Fragment } from "react";
+import { FC, Fragment, useEffect } from "react";
 import Link from "next/link"
 import NextImage from "next/legacy/image";
 import Icon from "@component/icon/Icon";
@@ -23,12 +23,20 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
   const { state, dispatch } = useAppContext();
   const isAuthenticated = Helper.isAuthenticated("dataUser");
 
+  useEffect(() => {getCart()}, [])
+
   const handleCartAmountChange = (amount: number, product: any) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
       payload: { ...product, qty: amount },
     });
   };
+
+  const getCart = () => {
+    let cart = JSON.parse(Authentication.getItem("cart"));
+    console.log(cart)
+    state.cart = cart;
+  }
 
   const getTotalPrice = () => {
     return (
@@ -205,6 +213,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
         </Fragment>
       )}
     </StyledMiniCart>
+    
   );
 };
 

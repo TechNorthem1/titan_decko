@@ -19,16 +19,16 @@ const Cart = () => {
     let Authenticated = Helpers.isAuthenticated("dataUser");
     setIsAuthenticated(Authenticated);
     getCart();
-    
+    getPrice();
   }, []);
 
   const getCart = () => {
-    let cart = Authentication.getItem("cart");
+    let cart = JSON.parse(Authentication.getItem("cart")) == null ? [] : JSON.parse(Authentication.getItem("cart"));
     state.cart = cart;
-    getPrice();
   }
 
   const getPrice = () => {
+    
     let total:number = 0;
     state.cart.map((item:any) => total += item.price * item.qty);
     setTotal(total);

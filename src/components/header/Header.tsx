@@ -63,10 +63,19 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
     }
   }, [])
 
-
   // Separate effect to log categories when it updates
   useEffect(() => {}, [categories]);
-  useEffect(() => {}, [isAuthenticated]);
+  useEffect(() => {}, [isAuthenticated, state]);
+
+  const getCart = () => {
+    let cart = JSON.parse(Authentication.getItem("cart")) === null ? [] : JSON.parse(Authentication.getItem("cart"));
+    state.cart = cart;
+  }
+
+  const sendLocalStorage = () => {
+    let cart = JSON.stringify(state.cart);
+    Authentication.setItem("cart", cart);
+  }
 
   // obtain data of the localstorage
   const getDataUser = ()=> {
@@ -87,9 +96,9 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
       <IconButton bg="gray.black" p="12px" size="small">
         <Icon size="20px">bag</Icon>
       </IconButton>
-
-      {!!state.cart.length && (
-        <FlexBox
+      
+      {!!state?.cart?.length && (
+        <FlexBox 
           top={-5}
           right={-5}
           height={20}
@@ -119,16 +128,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
       <Icon size="28px">arrow-right-to-bracket-solid2</Icon>
     </IconButton>
   );
-
-  const getCart = () => {
-    let cart = Authentication.getItem("cart") == null ? [] : Authentication.getItem("cart");
-    state.cart = cart;
-  }
-
-  const sendLocalStorage = () => {
-    let cart = JSON.stringify(state.cart);
-    Authentication.setItem("cart", cart);
-  }
+  
 
   return (
     <StyledHeader className={className}>
