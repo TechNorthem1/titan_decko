@@ -5,13 +5,13 @@ import { currency } from '@utils/utils';
 import shopping from "/public/assets/images/logos/shopping-bag.svg";
 import "./style.css";
 
-const Section4 = ({state, sendLocalStorage}) => {
+const Section4 = ({cart= [], sendLocalStorage}) => {
   const [total, setTotal] = useState(0);
   useEffect(() => getPrice(), []);
 
   const getPrice = () => {
     let price_total:number = 0;
-    state.cart.map((item:any) => {
+    cart.map((item:any) => {
       price_total += item.price * item.qty;
     })
 
@@ -24,7 +24,7 @@ const Section4 = ({state, sendLocalStorage}) => {
 
       <div className="content-product">
         <ul>
-          {state.cart.length > 0 ? (state.cart.map((item:any) => (
+          {cart?.length > 0 ? (cart?.map((item:any) => (
             <li key={item.id}>
               <span className='quantity'>{item.qty}</span>
               <img src={item.imgUrl} className='image_product' alt="image_product" />

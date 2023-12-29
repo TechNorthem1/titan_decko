@@ -129,7 +129,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
   }, []);
 
   const { state, dispatch } = useAppContext();
-  const cartItem = state.cart.find((item) => item.id === id);
+  const cartItem:any = state.cart.find((item) => item.id === id);
 
   const toggleDialog = useCallback(() => setOpen((open) => !open), []);
 

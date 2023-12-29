@@ -1,7 +1,6 @@
 "use client"
 import { FC, Fragment } from "react";
 import Link from "next/link"
-// import NavLink from "@component/nav-link";
 import NextImage from "next/legacy/image";
 import Icon from "@component/icon/Icon";
 import Divider from "@component/Divider";

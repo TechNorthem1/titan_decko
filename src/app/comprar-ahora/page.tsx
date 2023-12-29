@@ -35,8 +35,6 @@ const page = () => {
         setIsAuthenticated(authenticated)
     }, [isAuthenticated, user])
 
-    
-
     const getUser = async () => {
         let data = JSON.parse(User.getUser("dataUser")); 
         let cart = JSON.parse(Authentication.getItem("cart"));
@@ -44,11 +42,12 @@ const page = () => {
         const dataUser:any = await FirebaseService.getUser(data.email);
         setUser(dataUser[0]._document?.data?.value.mapValue.fields);
     }
-
+    
     const sendLocalStorage = () => {
         let cart = state.cart;
         Authentication.setItem("cart", cart);
     }
+
 
     return (
         <Fragment>
@@ -72,7 +71,7 @@ const page = () => {
                             <Section3 />
                         </Grid>
                         <Grid item lg={4} xs={12}>
-                            <Section4 state={state} sendLocalStorage={sendLocalStorage}/>
+                            <Section4 cart={state.cart} sendLocalStorage={sendLocalStorage}/>
                         </Grid>
                     </Grid>
 
