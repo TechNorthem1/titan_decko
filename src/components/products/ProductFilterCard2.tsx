@@ -9,9 +9,9 @@ import useForm from "@hooks/useForm";
 import Link from "next/link";
 import Select from "@component/Select";
 
-type ProductFilterCard2Props = {getProduct?: (url:string) => void, categories?:any[]}
+type ProductFilterCard2Props = {getProduct?: (url:string) => void, categories?:any[], setFilterPrice: (value:string) => void}
 
-const ProductFilterCard2: FC<ProductFilterCard2Props> = ({getProduct, categories = []}) => {
+const ProductFilterCard2: FC<ProductFilterCard2Props> = ({getProduct, categories = [], setFilterPrice}) => {
   const {form, changed} = useForm({});
   const render = (items: string[]) =>
     items.map((name) => (
@@ -48,7 +48,8 @@ const ProductFilterCard2: FC<ProductFilterCard2Props> = ({getProduct, categories
       // estructurando la url
       url = `&min_price=${minPrice}&max_price=${maxPrice}`;
     }
-    getProduct(url)
+    setFilterPrice(url);
+    getProduct();
   }
 
   return (

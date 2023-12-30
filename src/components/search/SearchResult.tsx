@@ -24,14 +24,22 @@ type Props = {
   totalPage?:number,
   page?:number,
   setPage?:any,
-  getProduct?:any
+  getProduct?: () => void
   categories?:any[]
+  setFilterPrice: (value:string) => void,
+  setOrder: (value:string) => void,
 };
-const SearchResult = ({ sortOptions, products, totalPage, page, setPage, getProduct, categories = [] }: Props) => {
+const SearchResult = ({ sortOptions, products, totalPage, page, setPage, getProduct, categories = [], setFilterPrice, setOrder }: Props) => {
   const width: any = useWindowSize();
   const [view, setView] = useState<"grid" | "list">("grid");
   const isTablet = width < 1025;
   const toggleView = useCallback((v: any) => () => setView(v), []);
+
+  const getOrder = ({value}) => {
+    console.log(value)
+    setOrder(value)
+    getProduct();
+  }
 
   return (
     <>
@@ -60,6 +68,7 @@ const SearchResult = ({ sortOptions, products, totalPage, page, setPage, getProd
               defaultValue={sortOptions[0]}
               options={sortOptions}
               aria-label="ordenar los productos"
+              onChange={getOrder}
             />
           </Box>
 
@@ -99,7 +108,7 @@ const SearchResult = ({ sortOptions, products, totalPage, page, setPage, getProd
                 </IconButton>
               }
             >
-              <ProductFilterCard2 getProduct={getProduct} categories={categories}/>
+              <ProductFilterCard2 getProduct={getProduct} categories={categories} setFilterPrice={setFilterPrice}/>
             </Sidenav>
           )}
         </FlexBox>
@@ -107,7 +116,7 @@ const SearchResult = ({ sortOptions, products, totalPage, page, setPage, getProd
 
       <Grid container spacing={6}>
         <Hidden as={Grid} item lg={3} xs={12} down={1024}>
-          <ProductFilterCard2 getProduct={getProduct} categories={categories}/>
+          <ProductFilterCard2 getProduct={getProduct} categories={categories} setFilterPrice={setFilterPrice}/>
         </Hidden>
 
         <Grid item lg={9} xs={12}>

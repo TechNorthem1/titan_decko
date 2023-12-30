@@ -12,12 +12,16 @@ const ProductSearchResult = ({params}:any) => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<any[]>([]);
-  let search:string = isNaN(params.id) ? `products/?search=${params.id}&page=${page}&per_page=30&order=desc&orderby=price&stock_status=instock` : `products/?category=${params.id}&page=${page}&per_page=30&order=desc&orderby=price&stock_status=instock`; 
+  const [order, setOrder] = useState("desc");
+  const [filterPrice, setFilterPrice] = useState("");
 
-  const getProduct = async (filterByPrice:string = "") =>{
+  let search:string = isNaN(params.id) ? `products/?search=${params.id}&page=${page}&per_page=30&order=${order}&orderby=price&stock_status=instock${filterPrice}`
+                                       : `products/?category=${params.id}&page=${page}&per_page=30&order=${order}&orderby=price&stock_status=instock${filterPrice}`;
+
+  const getProduct = async () =>{
     try{
       let [productsRes, categoriesRes] = await Promise.all([
-        await fetch(`${Method.woocommerce}${search}${filterByPrice}`, {method: "GET", headers: {Authorization: `${Method.token}`}}),
+        await fetch(`${Method.woocommerce}${search}`, {method: "GET", headers: {Authorization: `${Method.token}`}}),
         await fetch(`${Method.woocommerce}products/categories?parent=${params.id}`, {method: "GET", headers: {Authorization: `${Method.token}`}})
       ]);
       
@@ -48,6 +52,8 @@ const ProductSearchResult = ({params}:any) => {
           setPage={setPage}
           getProduct={getProduct}
           categories={categories}
+          setFilterPrice={setFilterPrice}
+          setOrder={setOrder}
         />
       )}
     </Box>
@@ -55,13 +61,9 @@ const ProductSearchResult = ({params}:any) => {
 };
 
 const sortOptions = [
-  { label: "Relevancia", value: "Relevance" },
-  { label: "Fecha", value: "Date" },
-  { label: "Precio de menor a mayor", value: "Price Low to High" },
-  { label: "Precio de mayor q menor", value: "Price High to Low" },
+  { label: "mayor a menor", value: "desc" },
+  { label: "menor a mayor", value: "asc" },
 ];
-
-
 
 
 export default ProductSearchResult;

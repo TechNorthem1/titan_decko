@@ -43,7 +43,7 @@ const Select: FC<SelectProps> = ({
   return (
     <Box {...spacingProps}>
       {label && (
-        <Typography fontSize="0.875rem" mb="6px">
+        <Typography fontSize="0.875rem" mb="6px" color={colors.titan.dark}>
           {label}
         </Typography>
       )}
@@ -60,12 +60,13 @@ const Select: FC<SelectProps> = ({
             primary: colors.primary.main,
             neutral20: colors.text.disabled,
           },
+          
         })}
         {...props}
       />
 
       {errorText && (
-        <Typography color="error.main" ml="0.25rem" mt="0.25rem" as="small">
+        <Typography color={colors.titan.dark} ml="0.25rem" mt="0.25rem" as="small">
           {errorText}
         </Typography>
       )}
@@ -77,8 +78,9 @@ const customStyles = {
   input: (styles) => ({ ...styles, height: 30 }),
   option: (provided, state) => ({
     ...provided,
-    color: "inherit",
+    color: colors.titan.dark,
     cursor: "pointer",
+    zIndex: "1000",
     backgroundColor: state.isFocused ? "rgba(0,0,0, 0.015)" : "inherit",
   }),
 };
