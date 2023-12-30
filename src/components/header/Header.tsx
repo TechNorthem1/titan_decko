@@ -69,6 +69,8 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
 
   const getCart = () => {
     let cart = Authentication.getItem("cart") == null ? [] : Authentication.getItem("cart");
+    console.log("Helper Authentication: ", Authentication.getItem("cart"))
+    console.log("Cart: ", cart);
     state.cart = cart;
   }
 

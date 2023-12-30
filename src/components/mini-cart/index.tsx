@@ -52,14 +52,12 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav = () => {} }) => {
       bg="gray.black" 
       p="8px" 
       style={{width:"50%", backgroundColor:colors.titan.yellow, color: colors.titan.dark, marginBottom: "10px"}}
-      
     >
       Comprar Ahora
     </Button>
   );
 
   
-
   return (
     <StyledMiniCart>
       <div className="cart-list">
