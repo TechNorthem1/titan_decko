@@ -47,7 +47,7 @@ const Section3: FC<Props> = ({ categories }) => {
 
                   <Box ml="2rem" flex={1} overflow="hidden" style={{marginLeft: "0", display:"flex", alignItems:"center", justifyContent:"flex-start", gap:"15px"}}>
                     {/* <Tiny color="primary.main">{item.description}</Tiny> */}
-                    <Image src={item.image?.src} alt={item.slug} width={80} height={80} objectFit="contain" loading="lazy"/>
+                    <Image src={item.image?.src} alt={item.slug} width={80} height={80} objectFit="contain" loading="lazy" style={{borderRadius: "50%"}}/>
                     <H5 ellipsis>{item.name}</H5>
                   </Box>
                 </FlexBox>
