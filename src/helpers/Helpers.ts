@@ -11,7 +11,7 @@ class Helpers {
     }
 
     static totalDisscount = (sale_price:number, regular_price:number):number => {
-        let price = String(sale_price) == "" ? regular_price : sale_price;
+        let price = String(sale_price) == "" || String(sale_price) == "0.0" ? regular_price : sale_price;
         let disscount = (price/regular_price-1) * 100;
         disscount = Math.ceil(disscount);
         disscount = Math.abs(disscount);
