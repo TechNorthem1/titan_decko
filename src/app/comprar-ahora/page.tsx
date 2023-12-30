@@ -33,7 +33,7 @@ const page = () => {
 
     const getUser = async () => {
         let data = User.getUser("dataUser");
-        let cart = Authentication.getItem("cart");
+        let cart = Authentication.getItem("cart") === null ? [] : Authentication.getItem("cart");
         state.cart = cart;
         const dataUser:any = await FirebaseService.getUser(data.email);
         setUser(dataUser[0]._document?.data?.value.mapValue.fields);

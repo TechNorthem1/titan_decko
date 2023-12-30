@@ -43,11 +43,11 @@ const Profile = () => {
   useEffect(() => {}, [user])
   
   const INITIAL_VALUES = {
-    name: user?.lastname.stringValue.length === 0 ? "" : user?.name?.stringValue,
-    lastname: user?.lastname.stringValue.length === 0 ? "" : user?.lastname?.stringValue,
-    email: user?.lastname.stringValue.length === 0 ? "" : user?.email?.stringValue,
-    phone: user?.lastname.stringValue.length === 0 ? "" : user?.phone?.stringValue,
-    address: user?.lastname.stringValue.length === 0 ? "" : user?.address?.stringValue
+    name: user?.lastname?.stringValue.length === 0 ? "" : user?.name?.stringValue,
+    lastname: user?.lastname?.stringValue.length === 0 ? "" : user?.lastname?.stringValue,
+    email: user?.lastname?.stringValue.length === 0 ? "" : user?.email?.stringValue,
+    phone: user?.lastname?.stringValue.length === 0 ? "" : user?.phone?.stringValue,
+    address: user?.lastname?.stringValue.length === 0 ? "" : user?.address?.stringValue
   }
 
   return (

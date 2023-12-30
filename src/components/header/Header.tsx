@@ -68,7 +68,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, isAuthenticated, setIsAut
   useEffect(() => {}, [isAuthenticated, state]);
 
   const getCart = () => {
-    let cart = Authentication.getItem("cart");
+    let cart = Authentication.getItem("cart") == null ? [] : Authentication.getItem("cart");
     state.cart = cart;
   }
 
