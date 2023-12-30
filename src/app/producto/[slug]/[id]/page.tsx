@@ -20,6 +20,7 @@ import { method } from "lodash";
 import Loading from "@component/loading/Loading";
 import { useAppContext } from "@context/AppContext";
 import Authentication from "@helpers/Autentication";
+import Container from "@component/Container";
 
 
 
@@ -35,6 +36,8 @@ const Producto = ({params}:any) => {
   const [productRelated, setProductRelated] = useState([]);
   const url = `http://localhost:3000/producto/${params.slug}/${params.id}`;
   const {state, dispatch} = useAppContext();
+
+
 
   useEffect(() => {
     let authenticated = Helpers.isAuthenticated("dataUser");
@@ -85,7 +88,11 @@ const Producto = ({params}:any) => {
         <HeaderTitan isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
           <Box>
             
-            <Loading classCss={"content-box"} active={loading} setActivate={loading} />
+            {loading && 
+              <Container>
+                <Loading classCss={"content-box"} active={loading} setActivate={loading} />
+              </Container>
+            }
 
             {!loading && <Section1 
               params={params} 
