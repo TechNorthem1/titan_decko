@@ -9,7 +9,7 @@ import useForm from "@hooks/useForm";
 import Link from "next/link";
 import Select from "@component/Select";
 
-type ProductFilterCard2Props = {getProduct?: (url:string) => void, categories?:any[], setFilterPrice: (value:string) => void}
+type ProductFilterCard2Props = {getProduct?: () => void, categories?:any[], setFilterPrice: (value:string) => void}
 
 const ProductFilterCard2: FC<ProductFilterCard2Props> = ({getProduct, categories = [], setFilterPrice}) => {
   const {form, changed} = useForm({});

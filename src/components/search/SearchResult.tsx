@@ -36,7 +36,6 @@ const SearchResult = ({ sortOptions, products, totalPage, page, setPage, getProd
   const toggleView = useCallback((v: any) => () => setView(v), []);
 
   const getOrder = ({value}) => {
-    console.log(value)
     setOrder(value)
     getProduct();
   }
