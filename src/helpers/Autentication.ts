@@ -30,7 +30,6 @@ class Authentication {
         Authentication.init();
         const key = Authentication.hashKey(keyItem);
         let item = Authentication.ls.get(key);
-        console.log(item)
         return item === null || item === "" ? null : JSON.parse(item);
     } 
 
