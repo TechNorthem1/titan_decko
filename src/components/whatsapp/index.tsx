@@ -10,7 +10,7 @@ const Whatsapp = ({title = null, price = null, url = null}:any) => {
 
     const mensajeWhatsApp = encodeMessage(title, price, url);
     const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensajeWhatsApp}`;
-
+    
     return (
         <a href={urlWhatsApp} target="_blank" rel="noopener noreferrer" className="btn-whatsapp">
             Compra este producto por Whatsapp

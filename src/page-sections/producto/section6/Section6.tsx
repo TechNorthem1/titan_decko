@@ -1,18 +1,18 @@
 "use client"
-import Container from "@component/Container";
-import Grid from "@component/grid/Grid";
-import { colors } from "theme/colors";
 import React, { useEffect, useState } from 'react'
-import Link from "next/link";
+import { calculateDiscount } from "@utils/utils";
 import { Button } from "@component/buttons";
-import Login from '@component/sessions/Login';
-import UserLoginDialog from "@component/header/LoginDialog";
 import { colors as color } from "@utils/themeColors";
 import { useAppContext } from "@context/AppContext";
+import Link from "next/link";
+import UserLoginDialog from "@component/header/LoginDialog";
+import Login from '@component/sessions/Login';
 import useForm from "@hook/useForm";
-import "./style.css";
 import Whatsapp from "@component/whatsapp";
 import Image from "next/image";
+import Helpers from '@helpers/Helpers';
+import "./style.css";
+
 
 const Section6 = ({params, url, isAuthenticated, setShared, message, product, images, sendLocalStorage}) => {
    
@@ -20,6 +20,8 @@ const Section6 = ({params, url, isAuthenticated, setShared, message, product, im
     const { state, dispatch } = useAppContext();
     const cartItem = state.cart.find((item) => item.id === product?.id);
     const [image, setImage] = useState(0);
+    const off = Helpers.disscount(product?.sale_price, product?.regular_price);
+    const price = calculateDiscount(product?.regular_price, off);
 
     useEffect( () => { }, [product, images]);
 
@@ -109,7 +111,7 @@ const Section6 = ({params, url, isAuthenticated, setShared, message, product, im
                 </UserLoginDialog>
             }
 
-            <Whatsapp />
+            <Whatsapp title={product?.name} price={price} url={url}/>
 
             <div className="pay-security">
                 <div className="pay">

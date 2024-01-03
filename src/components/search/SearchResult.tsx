@@ -86,30 +86,19 @@ const SearchResult = ({ sortOptions, products, totalPage, page, setPage, getProd
             </Icon>
           </IconButton>
 
-          <IconButton onClick={toggleView("list")}>
-            <Icon
-              variant="small"
-              defaultcolor="auto"
-              color={view === "list" ? "primary" : "inherit"}
-              aria-label="mostrar los productos por lista"
-            >
-              menu
-            </Icon>
-          </IconButton>
+         {!isTablet && 
+            <IconButton onClick={toggleView("list")}>
+              <Icon
+                variant="small"
+                defaultcolor="auto"
+                color={view === "list" ? "primary" : "inherit"}
+                aria-label="mostrar los productos por lista"
+              >
+                menu
+              </Icon>
+            </IconButton>
+          }
 
-          {isTablet && (
-            <Sidenav
-              position="left"
-              scroll={true}
-              handle={
-                <IconButton>
-                  <Icon>Optiones</Icon>
-                </IconButton>
-              }
-            >
-              <ProductFilterCard2 getProduct={getProduct} categories={categories} setFilterPrice={setFilterPrice}/>
-            </Sidenav>
-          )}
         </FlexBox>
       </FlexBox>
 
