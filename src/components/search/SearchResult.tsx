@@ -51,8 +51,8 @@ const SearchResult = ({ sortOptions, products, totalPage, page, setPage, getProd
         alignItems="center"
         justifyContent="space-between"
       >
-        <div>
-          <H5>Resultados para “ mobile phone ”</H5>
+        <div className="title_search">
+          <H5>Resultados para tu busqueda</H5>
           <Paragraph color="text.muted">{products?.length} Productos encontrados</Paragraph>
         </div>
 

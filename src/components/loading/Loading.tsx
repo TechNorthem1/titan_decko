@@ -17,14 +17,12 @@ declare module 'react' {
 }
 
 const Loading = ({active, setActivate, classCss}) => {
-    return (
-    <div className={active ? `${classCss} content-loading activate` : "content-loading"}>
-      <div className="titan"></div>
-      <ul className='titan-loading'>
-        <li style={{ "--delay" : "-1.4s"}}></li>
-        <li style={{ "--delay": "-1.2s" }}></li>
-        <li style={{ "--delay" : "-1s" }}></li>
-      </ul>
+  return (
+    <div className={active ? "body active" : "body"}>
+      <div className="center">
+        <div className="ring"></div>
+        <span>Cargando...</span>
+      </div>
     </div>
   )
 }

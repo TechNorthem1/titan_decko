@@ -212,6 +212,29 @@ select#searchByPrice {
   padding-top: 20px !important;
 }
 
+@media screen and (width < 501px){
+  .title_search {
+    display: block;
+    width: 100%;
+  }
+
+  .cMyVxP {
+    justify-content: space-between;
+  }
+
+  .Box-sc-cded154d-0.FlexBox-sc-f2642c76-0.iVVhMW.cMyVxP p {
+    margin-bottom: 0 !important;
+    display: block;
+    width: 100%;
+    margin-top: 10px !important;
+    margin-right: 0 !important;
+  }
+
+  .Box-sc-cded154d-0.lglHuG{
+    margin-right: 0 !important;
+  }
+} 
+
 
 `;
 

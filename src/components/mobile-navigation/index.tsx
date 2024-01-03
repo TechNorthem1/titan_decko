@@ -64,8 +64,6 @@ const MobileNavigationBar: FC<MobileNavigationBarProps> = ({isAuthenticated, set
   const getData = () => {
     let authenticated = Helpers.isAuthenticated("dataUser");
     let cart = Authentication.getItem("cart") === null ? [] : Authentication.getItem("cart");
-    console.log("Helper Authentication: ", Authentication.getItem("cart"))
-    console.log("Cart: ", cart);
     state.cart = cart;
     setIsAuthenticated(authenticated);
   }

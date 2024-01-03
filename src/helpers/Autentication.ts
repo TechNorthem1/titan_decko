@@ -35,7 +35,6 @@ class Authentication {
 
     static removeItem(){
         Authentication.init();
-        // const key = Authentication.hashKey(dataUser);
         Authentication.ls.clear();
     }
 

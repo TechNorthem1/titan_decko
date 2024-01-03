@@ -15,6 +15,7 @@ import { H3, SemiSpan } from "@component/Typography";
 import { calculateDiscount, currency, getTheme } from "@utils/utils";
 import { deviceSize } from "@utils/constants";
 import ProductQuickView from "@component/products/ProductQuickView";
+import { colors } from "@utils/themeColors";
 
 // styled component
 const Wrapper = styled(Card)`
@@ -150,7 +151,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
     <>
       <Wrapper borderRadius={8} {...props}>
         <div className="image-holder">
-          {off >= 0 && (
+          {off > 0 && (
             <Chip
               top="10px"
               left="10px"
@@ -169,7 +170,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
 
           <FlexBox className="extra-icons">
             <Icon
-              color="secondary"
+              style={{color: colors.titan.yellow}}
               variant="small"
               mb="0.5rem"
               onClick={toggleDialog}
@@ -177,9 +178,9 @@ const ProductCard1: FC<ProductCard1Props> = ({
               eye-alt
             </Icon>
 
-            <Icon className="favorite-icon outlined-icon" variant="small">
+            {/* <Icon className="favorite-icon outlined-icon" variant="small">
               heart
-            </Icon>
+            </Icon> */}
           </FlexBox>
 
           <Link href={`/producto/${slug}/${id}`}>
