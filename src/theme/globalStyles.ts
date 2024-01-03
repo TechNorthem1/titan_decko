@@ -219,7 +219,7 @@ select#searchByPrice {
     margin-
   }
 
-  .cMyVxP {
+  .content-search {
     justify-content: space-between;
   }
 
@@ -231,7 +231,7 @@ select#searchByPrice {
     margin-right: 0 !important;
   }
 
-  .Box-sc-cded154d-0.lglHuG{
+  .content-search .jkfdmy{
     margin-right: 0 !important;
   }
 } 
