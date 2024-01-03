@@ -43,7 +43,6 @@ const Producto = ({params}:any) => {
     setMessage(message);
     setIsAuthenticated(authenticated);
     getProduct();
-    getProductsRelated();
   }, [])
 
   useEffect(() => {
@@ -55,22 +54,17 @@ const Producto = ({params}:any) => {
 
   const getProduct = async () => {
     try{
-      let response:any = await fetch(`${Method.woocommerce}products/${params.id}`, {method: "GET", headers: {Authorization: Method.token}});
-      let product = await response.json()
-      setProduct(product)
-      setImages(product.images)
-      setLoading(false);
-    }catch(error){
-      error;
-    }
-  }
-  
+      let [productRes, productRelatedRes] = await Promise.all([
+        await fetch(`${Method.woocommerce}products/${params.id}`, {method: "GET", headers: {Authorization: Method.token}}),
+        await fetch(`${Method.woocommerce}products/${params.id}/related`, {method: "GET", headers: {Authorization: Method.token}})
+      ]);
 
-  const getProductsRelated = async () => {
-    try{
-      let response:any = await fetch(`${Method.woocommerce}products/${params.id}/related`, {method: "GET", headers: {Authorization: Method.token}});
-      let product_related = await response.json();
+      let product = await productRes.json();
+      let product_related = await productRelatedRes.json();
+      setProduct(product);
+      setImages(product.images);
       setProductRelated(product_related);
+      setLoading(false);
     }catch(error){
       error;
     }
