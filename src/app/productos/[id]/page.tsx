@@ -41,21 +41,19 @@ const ProductSearchResult = ({params}:any) => {
   
   return (
     <Box pt="20px">
-      {loading ? (
-        <Loading active={loading} setActivate={setLoading} classCss={""}/>
-      ):(
-        <SearchResult 
-          sortOptions={sortOptions} 
-          products={products} 
-          totalPage={totalPage} 
-          page={page} 
-          setPage={setPage}
-          getProduct={getProduct}
-          categories={categories}
-          setFilterPrice={setFilterPrice}
-          setOrder={setOrder}
-        />
-      )}
+
+      <Loading active={loading} setActivate={setLoading} classCss={""}/>
+      <SearchResult 
+        sortOptions={sortOptions} 
+        products={products} 
+        totalPage={totalPage} 
+        page={page} 
+        setPage={setPage}
+        getProduct={getProduct}
+        categories={categories}
+        setFilterPrice={setFilterPrice}
+        setOrder={setOrder}
+      />
     </Box>
   );  
 };

@@ -21,7 +21,7 @@ const Loading = ({active, setActivate, classCss}) => {
     <div className={active ? "body active" : "body"}>
       <div className="center">
         <div className="ring"></div>
-        <span>Cargando...</span>
+        <span></span>
       </div>
     </div>
   )
