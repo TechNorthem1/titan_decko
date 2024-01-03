@@ -155,7 +155,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
   return (
     <Wrapper borderRadius={8}>
       <div className="image-holder">
-        {off >= 0 && (
+        {off > 0 && (
           <Chip
             top="10px"
             left="10px"

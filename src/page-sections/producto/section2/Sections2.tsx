@@ -1,13 +1,12 @@
 "use client";
-import Container from '@component/Container';
-import Grid from '@component/grid/Grid';
 import React, { FC } from 'react'
-import "./style.css"
-import { ProductCard10 } from '@component/product-cards';
-import Box from '@component/Box';
 import { Carousel } from '@component/carousel';
+import { ProductCard10 } from '@component/product-cards';
+import Container from '@component/Container';
+import Box from '@component/Box';
 import useVisibleSlide from "../../categorias/hooks/useVisibleSlide";
 import Helpers from '@helpers/Helpers';
+import "./style.css"
 
 // =====================================
 interface Section2Props {producstRelated?:any[]}
@@ -40,7 +39,7 @@ const Sections2:FC<Section2Props> = ({producstRelated}) => {
                                 off={Helpers.disscount(item.sale_price, item.regular_price)}
                                 rating={5}
                                 images={item.images as string[]}
-                                imgUrl={item.images[0]}
+                                imgUrl={item?.images[0]}
                                 salePrice={item.sale_price}
                             />
                         </Box>

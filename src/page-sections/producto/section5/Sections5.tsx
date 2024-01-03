@@ -1,21 +1,12 @@
 import Container from '@component/Container';
-import React, { useEffect, useState } from 'react'
-import "./style.css"
-import Method from '@helpers/Method';
+import React, { FC } from 'react'
 import Image from "next/image";
 import Loading from '@component/loading/Loading';
+import "./style.css"
 
-interface Section5Props { activate?:boolean; setActivate?: (active?:boolean) => void}
+interface Section5Props {posts?:any[], activate?:boolean; setActivate?: (active?:boolean) => void}
 
-const Section5 = ({activate, setActivate}) => {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {getPosts();}, [])
-
-  const getPosts = async () => {
-    let response = await Method.allPosts("posts/?per_page=8");
-    setPosts(response);
-  }
+const Section5:FC<Section5Props> = ({posts, activate, setActivate}) => {
 
   return (
     <Container className='container_tips'>

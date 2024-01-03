@@ -1,15 +1,17 @@
 "use client";
-import Container from '@component/Container';
-import Grid from '@component/grid/Grid';
-import React from 'react'
-import "./style.css"
-import Card from '@component/Card';
-import { ProductCard10, ProductCard4 } from '@component/product-cards';
-import Link from 'next/link';
-import Box from '@component/Box';
+import React, {FC} from 'react'
 import { Carousel } from '@component/carousel';
+import { ProductCard10 } from '@component/product-cards';
+import Container from '@component/Container';
+import Box from '@component/Box';
+import Helpers from '@helpers/Helpers';
+import useVisibleSlide from "../../categorias/hooks/useVisibleSlide";
+import "./style.css"
 
-const Section4 = () => {
+type Section4Props = {productsPopular: any[]}
+
+const Section4:FC<Section4Props> = ({productsPopular}) => {
+    const { visibleSlides } = useVisibleSlide();
     return (
         <Container className='product_relations'>
             <hr />
@@ -20,78 +22,25 @@ const Section4 = () => {
                 step={3}
                 showArrowOnHover={true}
                 arrowButtonColor="inherit"
-                totalSlides={2}
-                visibleSlides={1}
+                totalSlides={productsPopular.length}
+                visibleSlides={visibleSlides}
             >
-                <Box py="0.25rem" key={1} >
-                    <ProductCard10
-                        id={1}
-                        slug={"panel adesivo"}
-                        unit={"5"}
-                        title={"panel adesivo"}
-                        price={420200}
-                        off={6}
-                        rating={5}
-                        images={["kasdaklsjl"] as string[]}
-                        imgUrl={"https://titandecko.com.co/wp-content/uploads/2022/12/tienda-PANELAUTOADHESIVO-EASYWALL-PAREDESADHESIVAS-PANELADHESIVO-TITANDECKO-VIINILODECORATIVO-PANEL3D-PAREDES3D-PANELES3D-ADHESIVO3D-MURALES3D-MUROS3D_3_08bcefec-6a10-4b8b-bf64-4680771f9097-400x400.jpg"}
-                    />
-                </Box>
-
-                <Box py="0.25rem" key={1} >
-                    <ProductCard10
-                        id={1}
-                        slug={"panel adesivo"}
-                        unit={"5"}
-                        title={"panel adesivo"}
-                        price={420200}
-                        off={6}
-                        rating={5}
-                        images={["kasdaklsjl"] as string[]}
-                        imgUrl={"https://titandecko.com.co/wp-content/uploads/2022/12/tienda-PANELAUTOADHESIVO-EASYWALL-PAREDESADHESIVAS-PANELADHESIVO-TITANDECKO-VIINILODECORATIVO-PANEL3D-PAREDES3D-PANELES3D-ADHESIVO3D-MURALES3D-MUROS3D_3_08bcefec-6a10-4b8b-bf64-4680771f9097-400x400.jpg"}
-                    />
-                </Box>
-
-                <Box py="0.25rem" key={1} >
-                    <ProductCard10
-                        id={1}
-                        slug={"panel adesivo"}
-                        unit={"5"}
-                        title={"panel adesivo"}
-                        price={420200}
-                        off={6}
-                        rating={5}
-                        images={["kasdaklsjl"] as string[]}
-                        imgUrl={"https://titandecko.com.co/wp-content/uploads/2022/12/tienda-PANELAUTOADHESIVO-EASYWALL-PAREDESADHESIVAS-PANELADHESIVO-TITANDECKO-VIINILODECORATIVO-PANEL3D-PAREDES3D-PANELES3D-ADHESIVO3D-MURALES3D-MUROS3D_3_08bcefec-6a10-4b8b-bf64-4680771f9097-400x400.jpg"}
-                    />
-                </Box>
-
-                <Box py="0.25rem" key={1} >
-                    <ProductCard10
-                        id={1}
-                        slug={"panel adesivo"}
-                        unit={"5"}
-                        title={"panel adesivo"}
-                        price={420200}
-                        off={6}
-                        rating={5}
-                        images={["kasdaklsjl"] as string[]}
-                        imgUrl={"https://titandecko.com.co/wp-content/uploads/2022/12/tienda-PANELAUTOADHESIVO-EASYWALL-PAREDESADHESIVAS-PANELADHESIVO-TITANDECKO-VIINILODECORATIVO-PANEL3D-PAREDES3D-PANELES3D-ADHESIVO3D-MURALES3D-MUROS3D_3_08bcefec-6a10-4b8b-bf64-4680771f9097-400x400.jpg"}
-                    />
-                </Box>
-
-                <Box py="0.25rem" key={1} >
-                    <ProductCard10
-                        id={1}
-                        slug={"panel adesivo"}
-                        unit={"5"}
-                        title={"panel adesivo"}
-                        price={420200}
-                        off={6}
-                        rating={5}
-                        images={["kasdaklsjl"] as string[]}
-                        imgUrl={"https://titandecko.com.co/wp-content/uploads/2022/12/tienda-PANELAUTOADHESIVO-EASYWALL-PAREDESADHESIVAS-PANELADHESIVO-TITANDECKO-VIINILODECORATIVO-PANEL3D-PAREDES3D-PANELES3D-ADHESIVO3D-MURALES3D-MUROS3D_3_08bcefec-6a10-4b8b-bf64-4680771f9097-400x400.jpg"}
-                    />
-                </Box>
+                {productsPopular.map((item:any) =>(
+                    <Box py="0.25rem" key={1} >
+                        <ProductCard10
+                            id={item.id}
+                            slug={item.slug}
+                            unit={item.stock_quantity}
+                            title={item.name}
+                            price={item.regular_price}
+                            off={Helpers.disscount(item.sale_price, item.regular_price)}
+                            rating={5}
+                            images={item.images as string[]}
+                            imgUrl={item.images[0]}
+                            salePrice={item.sale_price}
+                        />
+                    </Box>
+                ))}
 
             </Carousel>
                 
