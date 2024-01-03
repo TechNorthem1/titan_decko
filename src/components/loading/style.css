@@ -56,12 +56,12 @@
 }
 
 .center span{
-    color: white;
-    font-size: 20px;
-    text-transform: capitalize;
-    letter-spacing: 1px;
-    line-height: 200px;
-    animation: text 1.6s ease-in-out linear;
+    background-image: url(/assets/images/icons/titan-logo-white.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 120px;
+    background-size: 100%;
 }
 
 @keyframes text {
