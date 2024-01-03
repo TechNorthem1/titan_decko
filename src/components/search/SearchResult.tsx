@@ -56,7 +56,7 @@ const SearchResult = ({ sortOptions, products, totalPage, page, setPage, getProd
           <Paragraph color="text.muted">{products?.length} Productos encontrados</Paragraph>
         </div>
 
-        <FlexBox alignItems="center" flexWrap="wrap">
+        <FlexBox alignItems="center" flexWrap="wrap" className="content-search">
           <Paragraph color="text.muted" mr="1rem">
             Ordenar por:
           </Paragraph>

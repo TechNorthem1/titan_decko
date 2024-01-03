@@ -216,13 +216,14 @@ select#searchByPrice {
   .title_search {
     display: block;
     width: 100%;
+    margin-
   }
 
   .cMyVxP {
     justify-content: space-between;
   }
 
-  .Box-sc-cded154d-0.FlexBox-sc-f2642c76-0.iVVhMW.cMyVxP p {
+  .content-search p {
     margin-bottom: 0 !important;
     display: block;
     width: 100%;
