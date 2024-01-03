@@ -34,10 +34,8 @@ const Producto = ({params}:any) => {
   const [images, setImages] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [productRelated, setProductRelated] = useState([]);
-  const url = `http://localhost:3000/producto/${params.slug}/${params.id}`;
   const {state, dispatch} = useAppContext();
-
-
+  const url = window.location.href;
 
   useEffect(() => {
     let authenticated = Helpers.isAuthenticated("dataUser");
