@@ -8,7 +8,7 @@ type Section1Props = {blog:any}
 
 const Section1:FC<Section1Props> = ({blog}) => {
     return (
-        <div style={{minHeight: "300px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
+        <div style={{marginTop:"70px", minHeight: "300px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
            <H1 style={{color: colors.titan.dark}}>{blog.title?.rendered}</H1> 
 
            <Image 
