@@ -39,6 +39,8 @@
 
 .content-image button{
     border-radius: 50%;
+    height: 40px;
+    width: 40px;
     padding: 10px;
     color: black;
     background-color: #FFCF00;
@@ -148,5 +150,49 @@ select{
     .content-responsive{
         display: flex;
         margin-top: 40px;
+    }
+
+    .arrows-changed {
+        height: 50px;
+        width: 100%;
+        position: absolute;
+        top: calc(100% - 275px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .arrows-changed div{
+        position: relative;
+        height: 40px;
+        width: 40px;
+        
+    }
+
+    .arrows-changed button{
+        top: calc(100% - 50px);
+        height: 40px;
+        width: 40px;
+        left: 0;
+        background-color: rgb(207, 207, 207);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .arrows-changed button i{
+        color: white;
+        width: 50px;
+        height: 50px;
+    }
+
+    .arrow-right button {
+        left: calc(100% - 39px);
+    }
+
+    .arrows-changed div button div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }

@@ -4,6 +4,7 @@ import { calculateDiscount } from "@utils/utils";
 import { Button } from "@component/buttons";
 import { colors as color } from "@utils/themeColors";
 import { useAppContext } from "@context/AppContext";
+import { colors } from "@utils/themeColors";
 import Link from "next/link";
 import UserLoginDialog from "@component/header/LoginDialog";
 import Login from '@component/sessions/Login';
@@ -11,6 +12,14 @@ import useForm from "@hook/useForm";
 import Whatsapp from "@component/whatsapp";
 import Image from "next/image";
 import Helpers from '@helpers/Helpers';
+import Icon from '@component/icon/Icon';
+import {
+    ButtonBack,
+    ButtonNext,
+    DotGroup,
+    Slide,
+    Slider,
+  } from "pure-react-carousel";
 import "./style.css";
 
 
@@ -39,7 +48,8 @@ const Section6 = ({params, url, isAuthenticated, setShared, message, product, im
     );
 
     const changeImage = (indice:number) => {
-        setImage(indice)
+        let index = (indice >= images.length ) ? 0: (indice == -1)? indice + images.length : indice;
+        setImage(index);
     }
 
     const handleCartAmountChange = (qty: number) => {
@@ -63,15 +73,19 @@ const Section6 = ({params, url, isAuthenticated, setShared, message, product, im
             <div className="content-image">
                 <div className="mask">
                     <Image 
-                        src={product?.images[image].src}
-                        alt={product?.images[image].name}
+                        src={product?.images[image]?.src}
+                        alt={product?.images[image]?.name}
                         height={500}
                         width={500}
                         layout="responsive"
                         style={{objectFit: "cover"}}
                         loading="lazy"
                     />
-                    <button type="button" onClick={changedShared} name="btn-shared" aria-label="compartir producto"><i className="fa-solid fa-share-nodes"></i></button>
+                    <button type="button" onClick={changedShared} name="btn-shared" aria-label="compartir producto">
+                        <Icon variant="small" style={{color:colors.titan.white}}>
+                            share-nodes-solid
+                        </Icon>
+                    </button>
                     <ul>
                         {
                             images.map((item:any, indice:any) => (
@@ -79,6 +93,23 @@ const Section6 = ({params, url, isAuthenticated, setShared, message, product, im
                             ))
                         }
                    </ul>
+                   <div className="arrows-changed">
+                        <div className="arrow-left">
+                            <button onClick={() => changeImage(image - 1)}>
+                                <Icon variant="small" style={{color: colors.titan.white}} >
+                                    arrow-left
+                                </Icon>
+                            </button>
+                        </div>
+
+                        <div className="arrow-right">
+                            <button onClick={() => changeImage(image + 1)}>
+                                <Icon variant="small" style={{color:colors.titan.white}}>
+                                    arrow-right
+                                </Icon>
+                            </button>
+                        </div>
+                   </div>
                 </div>    
             </div>
 

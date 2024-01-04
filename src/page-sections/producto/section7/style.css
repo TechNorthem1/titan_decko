@@ -94,9 +94,14 @@
     .popup .popup__body a{
         padding: 13px 20px;
         border-radius: 50%;
+        height: 40px;
+        width: 40px;
         background-color: #000000;
         font-size: 1.1rem;
-        transition: transform .4s ease all;   
+        transition: transform .4s ease all;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .popup .popup__body a:hover{

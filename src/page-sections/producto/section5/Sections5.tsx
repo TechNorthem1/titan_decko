@@ -3,6 +3,7 @@ import React, { FC } from 'react'
 import Image from "next/image";
 import Loading from '@component/loading/Loading';
 import "./style.css"
+import Link from 'next/link';
 
 interface Section5Props {posts?:any[], activate?:boolean; setActivate?: (active?:boolean) => void}
 
@@ -42,7 +43,7 @@ const Section5:FC<Section5Props> = ({posts, activate, setActivate}) => {
                   {item.yoast_head_json.description}
                 </p>
 
-                <a href="#">leer mas {">>"}</a>
+                <Link href={`/blog/${item.id}`}>leer mas {">>"}</Link>
               </div>
             </div>
 
