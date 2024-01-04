@@ -7,6 +7,8 @@ import Section1 from "@sections/carrito/section";
 import Helpers from "@helpers/Helpers";
 import shopping from "/public/assets/images/logos/shopping-bag.svg";
 import Authentication from "@helpers/Autentication";
+import Link from "next/link";
+import { colors } from "@utils/themeColors";
 
 
 
@@ -58,7 +60,7 @@ const Cart = () => {
           ))): (
             <div className="shop-notFound" style={{display: "flex", alignItems: "center", flexDirection:"column", justifyContent: "center", height: "394px", padding: "12px"}}>
               <img src={shopping.src} alt="shopping" />
-              <p style={{color: "black"}}>Tu bolsa de compras está vacía. Empieza a comprar</p>
+              <p style={{color: "black"}}>Tu bolsa de compras está vacía. Empieza a comprar, <Link href={"/"} style={{color: colors.titan.salmon}} onClick={sendLocalStorage}>Ir al incio</Link> </p>
             </div>
           )}
         </Grid>
