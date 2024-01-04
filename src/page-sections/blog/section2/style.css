@@ -28,3 +28,10 @@
 .blog_text p br{
     display: none;
 }
+
+@media screen and (width < 500) {
+    .ksyOci{
+        height: max-content;
+        min-height: 500px;
+    }
+}
