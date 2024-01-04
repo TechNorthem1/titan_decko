@@ -5,7 +5,7 @@ import Login from "@component/sessions/Login";
 const LoginPage = () => {
   return (
     <FlexBox minHeight="100vh" alignItems="center" flexDirection="column" justifyContent="center">
-      <Login redirect={"/perfil"}/>
+      <Login redirect={"/perfil"} displayCss="none"/>
     </FlexBox>
   );
 };

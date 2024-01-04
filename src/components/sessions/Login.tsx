@@ -32,9 +32,10 @@ import { useAppContext } from "@context/AppContext";
 
 interface LoginProps {
   redirect?: any;
+  displayCss?:string;
 }
 
-const Login: FC<LoginProps> = ({redirect}) => {
+const Login: FC<LoginProps> = ({redirect, displayCss = "flex"}) => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const router = useRouter();
   const auth = getAuth(App); // Inicializa la autenticación de Firebase.
@@ -85,7 +86,7 @@ const Login: FC<LoginProps> = ({redirect}) => {
       let data:any = await signInWithPopup(auth, provider);
       router.replace(redirect);
     } catch (error) {
-      console.error(error);
+      error;
       // Manejar errores aquí
     }
   };
@@ -112,8 +113,28 @@ const Login: FC<LoginProps> = ({redirect}) => {
       validationSchema: formSchema,
     });
 
+  const closeForm = () => {
+    let modal_root = document.querySelector("#modal-root");
+    let close_form = modal_root.querySelector(".Box-sc-cded154d-0.FlexBox-sc-f2642c76-0.Modal__StyledModal-sc-a82a3802-0.gIudMd.cKBNvI.iftNTa") ||  modal_root.querySelector(".sc-cded154d-0.sc-f2642c76-0.sc-a82a3802-0.bnvrZN.dTsPKy.eOZEQc") || modal_root.querySelector(".sc-70ffb4e0-0 sc-df2fee75-0.sc-4ce65b65-0.LILpj.cfNivg.hynrff");
+    if (close_form instanceof HTMLElement) {
+      close_form.style.visibility = "hidden";
+      close_form.style.opacity = "0";
+      close_form.style.backgroundColor = "transparent";
+    }else{
+      console.log("no se ha encontrado el elemento")
+    }
+  }
+
+
+
   return (
     <StyledSessionCard mx="auto" my="2rem" boxShadow="large" borderRadius={8}>
+      <div className="form_close" style={{width: "100%", height: "30px", display: displayCss, cursor: "pointer", alignItems: "center", justifyContent: "flex-end", paddingRight: "10px"}} >
+        <Icon variant="small" style={{color: colors.titan.white}} onClick={closeForm}>
+          circle-xmark-regular
+        </Icon>
+      </div>
+
       <form className="content" onSubmit={handleSubmit}>
         { visibility &&
           <H5
