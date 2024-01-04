@@ -38,20 +38,18 @@ class FirebaseService {
             const user = querySnapshot.docs;
             return user;
         } catch (error) {
-            console.log(error)
             throw new Error("se ha generado un error al obtener los usuarios");
         }
-        console.log(email)
     }
 
     static createUser = async (client:Client) => {
-       try {
-        const db = FirebaseService.initialize();
-        const docRef = await addDoc(collection(db, "users"), client.toFirestore());
-        return docRef;
-       } catch (error) {
-        console.log(error)
-       }
+        try {
+            const db = FirebaseService.initialize();
+            const docRef = await addDoc(collection(db, "users"), client.toFirestore());
+            return docRef;
+        } catch (error) {
+            error;
+        }
     }
 
     static updatedUser = async (client:Client, email:string) => {

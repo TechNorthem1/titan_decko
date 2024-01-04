@@ -1,14 +1,17 @@
 "use client";
+import { Button, IconButton } from 
+
+
+"@component/buttons";
+import { FC, useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useFormik } from "formik";
 import * as yup from "yup";
 import Box from "@component/Box";
-import { useFormik } from "formik";
+import TextField from "@component/text-field";
 import Icon from "@component/icon/Icon";
 import Divider from "@component/Divider";
 import FlexBox from "@component/FlexBox";
-import { useRouter } from "next/navigation";
-import TextField from "@component/text-field";
-import { FC, useCallback, useEffect, useState } from "react";
-import { Button, IconButton } from "@component/buttons";
 import { H3, H5, H6, SemiSpan, Small, Span } from "@component/Typography";
 import { StyledSessionCard } from "./styles";
 import App from "@models/firebaseConfig";
@@ -25,7 +28,6 @@ import Image from "@component/Image";
 import FirebaseService from "@services/FirebaseService";
 import Client from "@models/Client.model";
 import NavLink from "@component/nav-link";
-import SecureLS from "secure-ls";
 import { useAppContext } from "@context/AppContext";
 
 interface LoginProps {
@@ -100,7 +102,7 @@ const Login: FC<LoginProps> = ({redirect}) => {
     let cart = state.cart;
     Authentication.setItem("dataUser", user);
     Authentication.setItem("cart", cart);
-    router.replace(redirect);
+    router.push(redirect);
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =

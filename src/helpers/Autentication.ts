@@ -45,6 +45,7 @@ class Authentication {
         client.lastname = values.lastname;
         client.document = "";
         client.email = values.email;
+        client.email_send = "";
         client.phone = values.phone;
         client.password = values.password;
         client.address = "";
