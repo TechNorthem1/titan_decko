@@ -1,0 +1,12 @@
+@media screen and (width < 501px) {
+    .jBCKq{
+        height: max-content !important;
+        min-height: 500px !important;
+    }
+    
+    .image_blog{
+        width: 100%;
+        height: 340px;
+    }
+    
+}

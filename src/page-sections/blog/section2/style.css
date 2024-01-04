@@ -30,6 +30,12 @@
 }
 
 @media screen and (width < 500) {
+
+    .image_blog{
+        width: 500px;
+        height: 400px;
+    }
+
     .ksyOci{
         height: max-content;
         min-height: 500px;
