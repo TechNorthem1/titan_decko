@@ -115,7 +115,7 @@ const Login: FC<LoginProps> = ({redirect, displayCss = "flex"}) => {
 
   const closeForm = () => {
     let modal_root = document.querySelector("#modal-root");
-    let close_form = modal_root.querySelector(".Box-sc-cded154d-0.FlexBox-sc-f2642c76-0.Modal__StyledModal-sc-a82a3802-0.gIudMd.cKBNvI.iftNTa") ||  modal_root.querySelector(".sc-cded154d-0.sc-f2642c76-0.sc-a82a3802-0.bnvrZN.dTsPKy.eOZEQc") || modal_root.querySelector(".sc-70ffb4e0-0 sc-df2fee75-0.sc-4ce65b65-0.LILpj.cfNivg.hynrff");
+    let close_form = modal_root.querySelector(".Box-sc-cded154d-0.FlexBox-sc-f2642c76-0.Modal__StyledModal-sc-a82a3802-0.gIudMd.cKBNvI.iftNTa") ||  modal_root.querySelector(".sc-cded154d-0.sc-f2642c76-0.sc-a82a3802-0.bnvrZN.dTsPKy.eOZEQc") || modal_root.querySelector(".sc-70ffb4e0-0.sc-df2fee75-0.sc-4ce65b65-0.LILpj.cfNivg.hynrff");
     if (close_form instanceof HTMLElement) {
       close_form.style.visibility = "hidden";
       close_form.style.opacity = "0";
